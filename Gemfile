@@ -1,9 +1,5 @@
-source "https://rubygems.org"
+# frozen_string_literal: true
 
-gem "kramdown"
-gem "kramdown-parser-gfm"
-gem "rouge"
-gem "jekyll"
-gem "jekyll-paginate"
-gem "jekyll-paginate-content"
-gem "json"
+source "https://rubygems.org"
+gemspec
+

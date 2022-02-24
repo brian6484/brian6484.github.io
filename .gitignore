@@ -1,8 +1,5 @@
-.idea
-.DS_Store
+*.gem
+.bundle
 .sass-cache
-Gemfile.lock
-package-json.lock
 _site
-node_modules
-_drafts
+Gemfile.lock
