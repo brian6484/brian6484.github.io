@@ -1,0 +1,826 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="/jekyll-theme-yat/feed.xml" rel="self" type="application/atom+xml" /><link href="/jekyll-theme-yat/" rel="alternate" type="text/html" /><updated>2022-07-19T06:21:09+00:00</updated><id>/jekyll-theme-yat/feed.xml</id><title type="html">Your awesome title</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><author><name>GitHub User</name></author><entry><title type="html">Spring Dependency Injection</title><link href="/jekyll-theme-yat/java/2022/07/17/SpringDI.html" rel="alternate" type="text/html" title="Spring Dependency Injection" /><published>2022-07-17T14:35:23+00:00</published><updated>2022-07-17T14:35:23+00:00</updated><id>/jekyll-theme-yat/java/2022/07/17/SpringDI</id><content type="html" xml:base="/jekyll-theme-yat/java/2022/07/17/SpringDI.html"><![CDATA[<ol>
+  <li>Dependency Injection in Spring</li>
+</ol>
+
+<ul>
+  <li>Various methods like setter method are used in DI. But DI through constructor is most recommended.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberService</span> <span class="o">{</span>
+
+        <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberRepository</span> <span class="n">memberRepository</span><span class="o">;</span>
+
+        <span class="nd">@Autowired</span>
+        <span class="kd">public</span> <span class="nf">MemberService</span><span class="o">(</span><span class="nc">MemberRepository</span> <span class="n">memberRepository</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">memberRepository</span> <span class="o">=</span> <span class="n">memberRepository</span><span class="o">;</span>
+        <span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>And then when you want to DI:</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">public</span> <span class="nf">WebConfig</span><span class="o">(){</span>
+        <span class="nc">MemberService</span> <span class="n">memberService</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MemberService</span><span class="o">(</span><span class="n">bitchMemberRepository</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>But a better way is remembering that @Autowired can be omitted if there is <strong>only one constructor</strong> and using Lombok’s @AllArgsConstructor:</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@AllArgsConstructor</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberService</span> <span class="o">{</span>
+
+        <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberRepository</span> <span class="n">memberRepository</span><span class="o">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Best way is using @RequiredArgsConstructor, which creates constructor only for @final or @NonNull field:</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@RequiredArgsConstructor</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberService</span> <span class="o">{</span>
+
+        <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberRepository</span> <span class="n">memberRepository</span><span class="o">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Another example of DI:
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Repository</span>
+<span class="nd">@RequiredArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberRepository</span> <span class="o">{</span>
+
+<span class="c1">//    @PersistenceContext</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">EntityManager</span> <span class="n">em</span><span class="o">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>which is same as:
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Repository</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberRepository</span> <span class="o">{</span>
+
+    <span class="nd">@Autowired</span> <span class="nd">@PersistenceContext</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">EntityManager</span> <span class="n">em</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">MemberRepository</span><span class="o">(</span><span class="nc">EntityManager</span> <span class="n">em</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">em</span> <span class="o">=</span> <span class="n">em</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>]]></content><author><name>Jeonghwan Lee</name></author><category term="Java" /><category term="Java" /><category term="Spring" /><summary type="html"><![CDATA[Spring]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg" /><media:content medium="image" url="https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Basic JPA 1</title><link href="/jekyll-theme-yat/java/2022/07/04/BasicJPA1.html" rel="alternate" type="text/html" title="Basic JPA 1" /><published>2022-07-04T14:35:23+00:00</published><updated>2022-07-04T14:35:23+00:00</updated><id>/jekyll-theme-yat/java/2022/07/04/BasicJPA1</id><content type="html" xml:base="/jekyll-theme-yat/java/2022/07/04/BasicJPA1.html"><![CDATA[<ol>
+  <li>Basic JPA 1
+    <ul>
+      <li>If a business logic can be implemented in an entity class (e.g.implement in Item.java), then it is best case. This is called Domain Model Pattern.</li>
+    </ul>
+  </li>
+</ol>
+
+<ul>
+  <li>
+    <p>In ORM, it is not good to use @Setter to set values of variables but rather, using validation methods (usually business logic?) that set those values</p>
+  </li>
+  <li></li>
+</ul>]]></content><author><name>Jeonghwan Lee</name></author><category term="Java" /><category term="Java" /><category term="Spring" /><category term="JPA" /><summary type="html"><![CDATA[JPA]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg" /><media:content medium="image" url="https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">JPA’s @Transactional</title><link href="/jekyll-theme-yat/java/2022/06/29/@Transactional.html" rel="alternate" type="text/html" title="JPA’s @Transactional" /><published>2022-06-29T14:35:23+00:00</published><updated>2022-06-29T14:35:23+00:00</updated><id>/jekyll-theme-yat/java/2022/06/29/@Transactional</id><content type="html" xml:base="/jekyll-theme-yat/java/2022/06/29/@Transactional.html"><![CDATA[<ol>
+  <li>JPA’s @Transactional:
+    <ul>
+      <li>When declared at class level, @Transactional(readOnly = true) applies to every method in that class. But we don’t want to readOnly for saveItem, so we declare an exception to that method with @Transactional
+        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nd">@Service</span>
+  <span class="nd">@Transactional</span><span class="o">(</span><span class="n">readOnly</span> <span class="o">=</span> <span class="kc">true</span><span class="o">)</span>
+  <span class="nd">@RequiredArgsConstructor</span>
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">ItemService</span> <span class="o">{</span>
+<span class="kd">private</span> <span class="kd">final</span> <span class="nc">ItemRepository</span> <span class="n">itemRepository</span><span class="o">;</span>
+
+<span class="nd">@Transactional</span> <span class="c1">//this makes it readOnly=false for this saveItem method</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">saveItem</span><span class="o">(</span><span class="nc">Item</span> <span class="n">item</span><span class="o">){</span>
+    <span class="n">itemRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">item</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ol>]]></content><author><name>Jeonghwan Lee</name></author><category term="Java" /><category term="Java" /><category term="Spring" /><category term="JPA" /><summary type="html"><![CDATA[JPA]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg" /><media:content medium="image" url="https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Java’s Lambda</title><link href="/jekyll-theme-yat/java/2022/06/25/Lambda.html" rel="alternate" type="text/html" title="Java’s Lambda" /><published>2022-06-25T14:35:23+00:00</published><updated>2022-06-25T14:35:23+00:00</updated><id>/jekyll-theme-yat/java/2022/06/25/Lambda</id><content type="html" xml:base="/jekyll-theme-yat/java/2022/06/25/Lambda.html"><![CDATA[<ol>
+  <li>Java Lambda
+    <ul>
+      <li>hewy!
+        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getTotalPrice</span><span class="o">(){</span>
+  <span class="kt">int</span> <span class="n">totalPrice</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+  <span class="k">for</span> <span class="o">(</span><span class="nc">OrderItem</span> <span class="nl">orderItem:</span> <span class="n">orderItems</span><span class="o">){</span>
+      <span class="n">totalPrice</span> <span class="o">+=</span> <span class="n">orderItem</span><span class="o">.</span><span class="na">getTotalPrice</span><span class="o">();</span>
+  <span class="o">}</span>
+  <span class="k">return</span> <span class="n">totalPrice</span><span class="o">;</span>
+ <span class="o">}</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<ul>
+  <li>Using Lambda:
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span> <span class="nf">getTotalPrice</span><span class="o">(){</span>
+    <span class="kt">int</span> <span class="n">totalPrice</span><span class="o">=</span> <span class="n">orderItems</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">mapToInt</span><span class="o">(</span><span class="nl">OrderItem:</span><span class="o">:</span><span class="n">getTotalPrice</span><span class="o">).</span><span class="na">sum</span><span class="o">();</span>
+    <span class="k">return</span> <span class="n">totalPrice</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li></li>
+</ul>]]></content><author><name>Jeonghwan Lee</name></author><category term="Java" /><category term="Java" /><summary type="html"><![CDATA[Java Lambda hewy! public int getTotalPrice(){ int totalPrice=0; for (OrderItem orderItem: orderItems){ totalPrice += orderItem.getTotalPrice(); } return totalPrice; }]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg" /><media:content medium="image" url="https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Protected</title><link href="/jekyll-theme-yat/jpa/2022/06/23/protected.html" rel="alternate" type="text/html" title="Protected" /><published>2022-06-23T14:35:23+00:00</published><updated>2022-06-23T14:35:23+00:00</updated><id>/jekyll-theme-yat/jpa/2022/06/23/protected</id><content type="html" xml:base="/jekyll-theme-yat/jpa/2022/06/23/protected.html"><![CDATA[<ol>
+  <li>Protected
+    <ul>
+      <li>JPA allows Protected as constructor of entity to prevent other ways of creating new object. This can be replaced with Lombok’s @NoArgsConstructor</li>
+    </ul>
+  </li>
+</ol>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@NoArgsConstructor</span><span class="o">(</span><span class="n">access</span> <span class="o">=</span> <span class="nc">AccessLevel</span><span class="o">.</span><span class="na">PROTECTED</span><span class="o">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li></li>
+</ul>]]></content><author><name>Jeonghwan Lee</name></author><category term="JPA" /><category term="Java" /><category term="Spring" /><category term="JPA" /><summary type="html"><![CDATA[Protected JPA allows Protected as constructor of entity to prevent other ways of creating new object. This can be replaced with Lombok’s @NoArgsConstructor]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg" /><media:content medium="image" url="https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">JPA cascade</title><link href="/jekyll-theme-yat/jpa/2022/06/23/cascade.html" rel="alternate" type="text/html" title="JPA cascade" /><published>2022-06-23T14:35:23+00:00</published><updated>2022-06-23T14:35:23+00:00</updated><id>/jekyll-theme-yat/jpa/2022/06/23/cascade</id><content type="html" xml:base="/jekyll-theme-yat/jpa/2022/06/23/cascade.html"><![CDATA[<ol>
+  <li>JPA cascade
+    <ul>
+      <li>cascade = CascadeType.ALL declared for orderItems and delivery, which means when order is persisted, its collection which includes orderItems and delivery entity are also persisted into database. So there is no need to create those 2 repositories.</li>
+    </ul>
+  </li>
+</ol>
+
+<ul>
+  <li>
+    <p>cascade = CascadeType.ALL should be used when entity is called only by one final entity like order. If it is called by more than 1 entity, then should not be used.</p>
+  </li>
+  <li></li>
+</ul>]]></content><author><name>Jeonghwan Lee</name></author><category term="JPA" /><category term="Java" /><category term="Spring" /><category term="JPA" /><summary type="html"><![CDATA[JPA cascade cascade = CascadeType.ALL declared for orderItems and delivery, which means when order is persisted, its collection which includes orderItems and delivery entity are also persisted into database. So there is no need to create those 2 repositories.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg" /><media:content medium="image" url="https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Spring JAR vs WAR</title><link href="/jekyll-theme-yat/java/2022/06/03/WarJar.html" rel="alternate" type="text/html" title="Spring JAR vs WAR" /><published>2022-06-03T14:35:23+00:00</published><updated>2022-06-03T14:35:23+00:00</updated><id>/jekyll-theme-yat/java/2022/06/03/WarJar</id><content type="html" xml:base="/jekyll-theme-yat/java/2022/06/03/WarJar.html"><![CDATA[<ol>
+  <li>Jar vs War</li>
+</ol>
+
+<ul>
+  <li>
+    <p>Jar always utilises internal server like Tomcat and does not use webapp. War can use internal server and is mostly used to deploy to external servers.</p>
+  </li>
+  <li>
+    <p>If Jar is used, index.html in /resources/static serves as the Welcome page</p>
+  </li>
+  <li>
+    <p>s</p>
+  </li>
+</ul>]]></content><author><name>Jeonghwan Lee</name></author><category term="Java" /><category term="Java" /><category term="Spring" /><summary type="html"><![CDATA[Jar vs War]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg" /><media:content medium="image" url="https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Spring MVC Part 1</title><link href="/jekyll-theme-yat/java/2022/05/17/SpringMVC1.html" rel="alternate" type="text/html" title="Spring MVC Part 1" /><published>2022-05-17T14:35:23+00:00</published><updated>2022-05-17T14:35:23+00:00</updated><id>/jekyll-theme-yat/java/2022/05/17/SpringMVC1</id><content type="html" xml:base="/jekyll-theme-yat/java/2022/05/17/SpringMVC1.html"><![CDATA[<ol>
+  <li>Web Application Server WAS
+    <ul>
+      <li>
+        <p>includes Web server functionalites and static resource managing</p>
+      </li>
+      <li>
+        <p>Difference between web server and WAS is web server is mainly for static resource while WAS can have application logic</p>
+      </li>
+      <li>
+        <p>Servlet does all except business logic</p>
+      </li>
+      <li>
+        <p>Contact switching cost is when CPU switches between its threads to do tasks.</p>
+      </li>
+      <li>
+        <p>WAS takes care of multi-threading so we developers no need care code about multi-threading</p>
+      </li>
+      <li>
+        <p>Server Side Rendering SSR - generates and renders final HTML page and delivers to client</p>
+      </li>
+      <li>
+        <p>Client Side Rendering CSR - front-end</p>
+      </li>
+      <li>
+        <p>View Template - generates HTML easily</p>
+      </li>
+    </ul>
+  </li>
+  <li>Servlet
+    <ul>
+      <li>
+        <p>In resources -&gt; application.properties -&gt; logging.level.org.apache.coyote.http11=debug  this helps debugging much better but only in developmenmt server, not actual server cuz it will decrease performance</p>
+      </li>
+      <li>
+        <p>Ctrl + O and select service method with lock sign on it for HttpServlet</p>
+      </li>
+      <li>
+        <p>HTTP메소드에서 GET방식은 value=text 형식으로 보내지고 body가 없기 떄문에 Content-Type은 필요없다. HTTP메소드에 POST, PUT처럼 Body에 data를 보낼때 Content-Type이 필요하다. Content-type describes what kind of data is in body for humans to easily understand.</p>
+      </li>
+      <li>
+        <p>request.getParameterNames gets the key(paramName) while request.getParameter(paramName) gets the value of the key</p>
+      </li>
+      <li>
+        <p>Lombok library implements getter and setter automatically. We just need to add @Getter @Setter on top of the class</p>
+      </li>
+      <li>
+        <p>Instead of directly setting the response erro code by resp.setStatus(200); it is better to resp.setStatus(HttpServletResponse.SC_OK)</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Servlet, JSP, MVC</p>
+
+    <ul>
+      <li>Declare singleton</li>
+    </ul>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">MemberRepository</span> <span class="n">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MemberRepository</span><span class="o">();</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>Then, create a <strong>private</strong> constructor to prevent making new instances of it</li>
+    </ul>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">private</span> <span class="nf">MemberRepository</span><span class="o">()</span> <span class="o">{</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>Lastly, create method getInstance() that always return this singleton instance</li>
+    </ul>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">private</span> <span class="kd">static</span> <span class="nc">MemberRepository</span> <span class="nf">getInstance</span><span class="o">(){</span>
+     <span class="k">return</span> <span class="n">instance</span><span class="o">;</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p>Once it is singleton, cannot create another instance of it via MemberRepository memberRepository = new MemberRepository(), we should call the already-made single instance via MemberRepository memberRepository = MemberRepository.getInstance()</p>
+      </li>
+      <li>
+        <p>@AfterEach resets whatever test has done to variable after each test for the next test to be done on that variable</p>
+      </li>
+      <li>
+        <p>ol element in HTML lists items with numbers (ordered) like 1,2,3, but ul element lists items with just bullet points (unordered)</p>
+      </li>
+      <li>
+        <p>If status code is grey instead of black, it means it is cached</p>
+      </li>
+      <li>
+        <p>In MVC, Controller(controller logic) is like servlet , View(View logic) is like JSP and Service/Repository does business logic and data</p>
+      </li>
+      <li>
+        <p><strong>Very Important</strong> It is the controller that calls the view like</p>
+      </li>
+    </ul>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nd">@WebServlet</span><span class="o">(</span><span class="n">name</span><span class="o">=</span><span class="s">"mvcMemberFormServlet"</span><span class="o">,</span><span class="n">urlPatterns</span> <span class="o">=</span> <span class="s">"/servlet-mvc/members/new-form"</span><span class="o">)</span>
+ <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MvcMemberFormServlet</span> <span class="kd">extends</span> <span class="nc">HttpServlet</span> <span class="o">{</span>
+     <span class="nd">@Override</span>
+     <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">service</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">ServletException</span><span class="o">,</span> <span class="nc">IOException</span> <span class="o">{</span>
+         <span class="nc">String</span> <span class="n">viewPath</span> <span class="o">=</span> <span class="s">"/WEB-INF/views/new-form.jsp"</span><span class="o">;</span>
+         <span class="nc">RequestDispatcher</span> <span class="n">dispatcher</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getRequestDispatcher</span><span class="o">(</span><span class="n">viewPath</span><span class="o">);</span>
+         <span class="n">dispatcher</span><span class="o">.</span><span class="na">forward</span><span class="o">(</span><span class="n">request</span><span class="o">,</span><span class="n">response</span><span class="o">);</span>
+     <span class="o">}</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p>In JSP, if action=”/save”, (절대경로 absolute path, better than relative path) URL is localhost:8080/save but if it is action=”save”, (상대경로 relative path) it starts from current directory localhost:8080/servlet-mvc/members/save from localhost:8080/servlet-mvc/members/new-form.jsp</p>
+      </li>
+      <li>
+        <p>/WEB-INF restricts external calling, resource under /WEB-INF always goes through Controller and cannot be called externally like going to URL/some-resource.html &lt;- this is not allowed</p>
+      </li>
+      <li>
+        <p>서블릿을 컨트롤러로 사용하고, JSP를 뷰로 사용해서 MVC 패턴을 적용해보자. Model은 HttpServletRequest 객체를 사용한다. request는 내부에 데이터 저장소를 가지고 있는데, request.setAttribute() , request.getAttribute() 를 사용하면 데이터를 보관하고, 조회할 수 있다.</p>
+      </li>
+      <li>
+        <p>Instead of saving user variables in request.setAttribute(), store them in a model</p>
+      </li>
+      <li>
+        <p>Since handler is object to be flexibly used in v5 MVC pattern, cast it to a different type via (ControllerV3) handler;</p>
+      </li>
+      <li>
+        <p>either @Controller or @Component with @RequestMapping works</p>
+      </li>
+      <li>
+        <p>Instead of @RequestMapping(value=”/new-form”,method= RequestMethod.GET), do @GetMapping(“/new-form”)</p>
+      </li>
+      <li>
+        <p>@Controller returns View so cannot directly return string but @RestController returns whatever the method type returns like string and inputs directly into HTTP message. Or use @ResponseBody that puts it straight into HTTP message body</p>
+      </li>
+    </ul>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/mapping/{userId}"</span><span class="o">)</span>
+ <span class="kd">public</span> <span class="nc">String</span> <span class="nf">mappingPath</span><span class="o">(</span><span class="nd">@PathVariable</span><span class="o">(</span><span class="s">"userId"</span><span class="o">)</span> <span class="nc">String</span> <span class="n">data</span><span class="o">){</span>
+     <span class="c1">//    public String mappingPath(@PathVariable String userId) &lt;- if variable name is same as @PathVariable</span>
+     <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"mappingPaath userId ={}"</span><span class="o">,</span> <span class="n">data</span><span class="o">);</span>
+     <span class="k">return</span> <span class="s">"ok"</span><span class="o">;</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p>MultiValueMap is when a key gets several values</p>
+      </li>
+      <li>
+        <p>For @RequestParam(required = false) int age, Integer is object so can be null bunt int cannot be null. SO correct code is @RequestParam(required = false) Integer age. Primitive type (int). Different for @ModelAttribute so search up</p>
+      </li>
+      <li>
+        <p>For @ModelAttribute HelloData helloData, if the object has methods like getUsername(), it has username property.</p>
+      </li>
+      <li>
+        <p>@RequestBody Hellodata hellodata &lt;-cant put your already-made object</p>
+      </li>
+      <li>
+        <p>can add @ResponseBody at the public class level, which adds @ResponseBody for all the classes inside it. ResponseEntity is not affected but there are few tricky exceptions. So just use @RestController, which adds @ResponseBody and @Controlelr together</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Webpage</p>
+
+    <ul>
+      <li>
+        <p>In multi-thread environment, cannot use HashMap, use ConcurrentHashMap. cannot use long sequence, use automic long? sequence</p>
+      </li>
+      <li></li>
+      <li>
+        <p>2 ways to view static content: either copy absolute path of that html file and google without running server or run server and go to that file location via localhost:etc</p>
+      </li>
+      <li>
+        <p>Only GET and not POST works for viewing static content?</p>
+      </li>
+      <li>
+        <p>@Autowired, which is for Dependency injection, can be omitted if there is only 1 constructor</p>
+      </li>
+      <li>
+        <p>@RequiredArgsConstructor substitutes need to write constructor</p>
+      </li>
+      <li>
+        <p>for th:action=”some_url”, the url can be omitted and it is nesured that url method is POST</p>
+      </li>
+      <li>
+        <p>@ModelAttribute(“item”) Item item automatically adds attribute so no need to add this line model.addAttribute(“item”, item);</p>
+      </li>
+      <li>
+        <p>If no name is assigned with @ModelAttribute, it automatically takes the class that it is going to create object with and make it lowercase and name it like Item -&gt; item or HelloData -&gt; helloData</p>
+      </li>
+      <li>
+        <p>HTTP session is maintaing user’s details until he quits the browser but HTTP request deletes details once that request has been fulfilled</p>
+      </li>
+      <li>
+        <p>th:field= “${item.itemName}” automatates declaration of id=”itemName” name=”itemName” so can delete that</p>
+      </li>
+      <li>
+        <p>hidden field to prevent open from coming out null -&gt; input type=”hidden” name=”_open” value=”_on”/</p>
+      </li>
+      <li>
+        <p>LinkedHashMap guarantees 순서 in which stuff go in, unlike HashMap</p>
+      </li>
+      <li>
+        <p>when naming stuff to be called by Thymeleaf, be careful (e.g. “regions” instead of “region”)</p>
+      </li>
+      <li>
+        <p>th:object=”${item}” so th:field=”*{regions} means item.regions. This th:object can be very far away in form tag and asterisk * can <strong>only be used</strong> if there is th:object</p>
+      </li>
+      <li>
+        <p>no hidden field needed for radio button, unlike checkbox</p>
+      </li>
+      <li>
+        <p>Even when invalid field for price/quantity is POSTed for new item, parameter for addItem - @ModelAttribute Item item autoamtically adds model.addAttribute(“item”,item) so when redirected, we can see item’s saved variables</p>
+      </li>
+      <li>
+        <p>no need to add bindingResult to model attribute because it is automatically added to view</p>
+      </li>
+      <li>
+        <p>bindingResult.rejectValue(“price”,”range”); the error message “range” follows range.item.price where bindingResult’s object type is item. MessageCodeResolver?</p>
+      </li>
+      <li>
+        <p>WebDataBinder works for that specific controller via boolean supports that checks class</p>
+      </li>
+      <li>
+        <p>@ModelAttribute(“item”) ItemUpdateForm form &lt;-must name it as “item” because template uses “item” and if it is not renamed manually, model.addAttribute(“itemUpdateForm”,item) is done instead of model.addAttribute(“item”,item) so does not render properly unless u change th:object in thymeleaf</p>
+      </li>
+      <li>
+        <p>@RestController automatically adds @ResponseBody so it converts whatever to JSON</p>
+      </li>
+      <li>@ModelAttribute 는 HTTP 요청 파라미터(URL 쿼리 스트링, POST Form)를 다룰 때 사용한다.@RequestBody 는 HTTP Body의 데이터를 객체로 변환할때 사용한다. 주로 API JSON 요청을 다룰 때 사용한다</li>
+    </ul>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">all</span> <span class="o">=</span> <span class="n">findAll</span><span class="o">();</span>
+ <span class="k">for</span> <span class="o">(</span><span class="nc">Member</span> <span class="n">member</span> <span class="o">:</span> <span class="n">all</span><span class="o">)</span> <span class="o">{</span>
+     <span class="k">if</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">getLoginId</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">loginId</span><span class="o">)){</span>
+         <span class="k">return</span> <span class="nc">Optional</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">member</span><span class="o">);</span>
+     <span class="o">}</span>
+ <span class="o">}</span>
+ <span class="k">return</span> <span class="nc">Optional</span><span class="o">.</span><span class="na">empty</span><span class="o">();</span>
+
+ <span class="o">&lt;!--</span> <span class="n">is</span> <span class="n">same</span> <span class="n">as</span> <span class="k">this</span> <span class="n">stream</span> <span class="o">--&gt;</span>
+
+ <span class="k">return</span> <span class="nf">findAll</span><span class="o">().</span><span class="na">stream</span><span class="o">()</span>
+     <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">member</span> <span class="o">-&gt;</span> <span class="n">member</span><span class="o">.</span><span class="na">getLoginId</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">loginId</span><span class="o">))</span>
+     <span class="o">.</span><span class="na">findFirst</span><span class="o">();</span>
+    
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p>@ModelAttribute(“member”) Member member &lt;- no need to name it “member” cuz ModelAttribute automatically takes lowercase of Member object but in Thymeleaf, IDE sometimes does not detect it so name like this for now</p>
+      </li>
+      <li>
+        <p>Another example:</p>
+      </li>
+    </ul>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">public</span> <span class="nc">Member</span> <span class="nf">login</span><span class="o">(</span><span class="nc">String</span> <span class="n">loginId</span><span class="o">,</span> <span class="nc">String</span> <span class="n">password</span><span class="o">){</span>
+     <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">findMemberOptional</span> <span class="o">=</span> <span class="n">memberRepository</span><span class="o">.</span><span class="na">findByLoginId</span><span class="o">(</span><span class="n">loginId</span><span class="o">);</span>
+     <span class="nc">Member</span> <span class="n">member</span> <span class="o">=</span> <span class="n">findMemberOptional</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
+     <span class="k">if</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">getPassword</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">password</span><span class="o">)){</span>
+         <span class="k">return</span> <span class="n">member</span><span class="o">;</span>
+     <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+         <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+     <span class="o">}</span>
+
+        
+     <span class="k">return</span> <span class="n">memberRepository</span><span class="o">.</span><span class="na">findByLoginId</span><span class="o">(</span><span class="n">loginId</span><span class="o">).</span>
+             <span class="n">filter</span><span class="o">(</span><span class="n">m</span> <span class="o">-&gt;</span> <span class="n">m</span><span class="o">.</span><span class="na">getPassword</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">password</span><span class="o">))</span>
+             <span class="o">.</span><span class="na">orElse</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p>If no time info ias added to cookie, that cookie becomes session cookie which disappears upon browser exit</p>
+      </li>
+      <li>
+        <p>When there are multiple requests at same time, use <strong>ConcurrentHashMap</strong></p>
+      </li>
+      <li>
+        <p>request.getCookies are returned as an array so Cookie[] cookies = request.getCookies();</p>
+      </li>
+      <li>
+        <p>For @RequestMapping, we use HandlerMethod but for static resource, use ResourceHttpRequestHandler</p>
+      </li>
+      <li>
+        <p>log.error does not need “{}”, just “ whatever message”</p>
+      </li>
+      <li>
+        <p>Interceptor cannot set dispatcher type like filter but can include path route in excludePathPatterns</p>
+      </li>
+      <li>
+        <p>use ObjectMapper to convert to JSON for ModelAndView</p>
+      </li>
+      <li>
+        <p>server.error.include-message=always to customise error messages</p>
+      </li>
+      <li>
+        <p>for @ModelAttribute Form form, no need to model.addAttribute cuz automatically added (check this again but it is true)</p>
+      </li>
+    </ul>
+  </li>
+</ol>]]></content><author><name>Jeonghwan Lee</name></author><category term="Java" /><category term="Java" /><category term="Spring" /><summary type="html"><![CDATA[Spring MVC]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg" /><media:content medium="image" url="https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">All about HTTP</title><link href="/jekyll-theme-yat/general%20knowledge/2022/04/17/HTTP.html" rel="alternate" type="text/html" title="All about HTTP" /><published>2022-04-17T14:35:23+00:00</published><updated>2022-04-17T14:35:23+00:00</updated><id>/jekyll-theme-yat/general%20knowledge/2022/04/17/HTTP</id><content type="html" xml:base="/jekyll-theme-yat/general%20knowledge/2022/04/17/HTTP.html"><![CDATA[<ol>
+  <li>Internet Network
+    <ul>
+      <li>
+        <p>IP protocol has several fall-offs. Even if the receiver is out of service or non-existent, the packet is still delivered. Also, packet might not be delivered in sequence as intended because it is too big and so it is cut into pieces and delivered separately. Also, in the middle of this packet delivery, some nodes might be closed so it may cause a loss of packet. Finally, if there are 2 applications using the same IP address, there is no way to differentiate the 2.</p>
+      </li>
+      <li>
+        <p>There is IP, TCP (3 way handshake), UDP</p>
+      </li>
+      <li>
+        <p>IP is hotel. Port is hotel room number.</p>
+      </li>
+      <li>
+        <p>DNS solves problems of remembering long IP addresses and when IP addresses change.</p>
+      </li>
+      <li>
+        <p>Uniform Resource Locator(URL) or Uniform Resource Name(URN)</p>
+      </li>
+      <li>
+        <p>URL is made up of scheme, user info(not rly used), host (either domain name or ip address), port, resource path (hierarchial structure), ?query parameter (in key-value format) and #fragment (normally in html).</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>HTTP basic</p>
+
+    <ul>
+      <li>
+        <p>HyperText Transfer Protocol (HTTP)</p>
+      </li>
+      <li>
+        <p>Stateless means server does not contain the client’s condition/details at that point of time. Stateful is problem because each server serves a specific purpose and if one goes down, the others cannot serve the purpose that the down server was serving. Stateless is good for like when 6pm chicken discount even, thousands of people connect at same time. But still hard to resolve this issue so maybe display a static HTML page first for them to read and play around first before the event connect button.</p>
+      </li>
+      <li>
+        <p>Connectionless means cuts TCP/IP connection once client request has processed. But TCP/IP connections needs to be made again for another request, so extra time is taken for 3 way handshake. This is solved by HTTP Persistent Connections.</p>
+      </li>
+      <li>
+        <p>HTTP message is either request or response.</p>
+      </li>
+      <li>
+        <p>HTTP message structure is made up of start-line, header, empty line (CRLF) and message body.</p>
+      </li>
+      <li>
+        <p>For HTTP request by client, start-line is also called request-line. request-line = method + request-target (path) + HTTP version.</p>
+      </li>
+      <li>
+        <p>HTTP methods - GET is searching or asking for resource in server while POST is giving some data to server for server to do something about it.</p>
+      </li>
+      <li>
+        <p>Path, or absolute path, starts with / (backslash) right after the HTTP methods. absolute-path?query</p>
+      </li>
+      <li>
+        <p>For HTTP response by server, start-line is called status-line. status-line = HTTP-version + space + status-code + space + reason-phrase + CRLF</p>
+      </li>
+      <li>
+        <p>200 is success, 400 is client request is wrong, 500 is server error</p>
+      </li>
+      <li>
+        <p>reason-phrase like OK after status-code is just for humans to easily understand it better than the number status-code</p>
+      </li>
+      <li>
+        <p>HTTP header: header-field = field-name + “:” + OWS field-value OWS (OWS means allows space in between)</p>
+      </li>
+      <li>
+        <p>field-name can be caps on or off. There should <strong>not</strong> be a space between field-name and “:”</p>
+      </li>
+      <li>
+        <p>Message body can be HTML document, image, video, JSON, or basically anything byte can display</p>
+      </li>
+    </ul>
+  </li>
+  <li>HTTP method
+    <ul>
+      <li>
+        <p>For naming URI, need to differentiate resources/concepts like members. Finding members by id is not resource but member itself is a resource. The method of resource will be taken care of by HTTP methods</p>
+      </li>
+      <li>
+        <p>GET - data that client wants to get from server is through <em>?query</em></p>
+      </li>
+      <li>
+        <p>POST - data delivered through <em>message body</em>, It is for starting a new process, making new resource or changing resource</p>
+      </li>
+      <li>
+        <p>PUT is substitute resource and if there is no resource, make it (e.g. putting file in folder and if there is no such file, make it and if there is an existing file, new file substitutes/overrides 덮어버려 the old one). Diff between PUT and POST is that PUT client knows the resource location and sets the URI but for POST, client does not know. However, if there is a missing member detail like PUT id only instead of id and age, the resulting change deletes the age condition as well and only the id remains. So if certain features of resource need to be changed, PATCH is better.</p>
+      </li>
+      <li>
+        <p>PATCH is changing a part of resource (e.g. changing member’s id). But some very few servers don’t accept PATCH so in those cases, use the ultimate solution POST</p>
+      </li>
+      <li>
+        <p>DELETE is deleting a resource</p>
+      </li>
+      <li>
+        <p>Safe - resource doesn’t change when it is called like GET, not POST. Doesn’t consider overloading logs in server</p>
+      </li>
+      <li>
+        <p>Idempotent - f(f(x)) = f(x) call once or 100 times the result is the same like GET, PUT , DELETE, not POST. When client wants DELETE but server gives TIMEOUT and is unable to give a response, can the client re-request it? Yes because it is idempotent. Doesn’t consider external changes made (e.g. GET something but there is a PUT that changes that, GET will get that changed details)</p>
+      </li>
+      <li>
+        <p>Cacheable - Storing large data like images in browser cache. GET, HEAD normally used. POST, PATCH also can but caches require matching to specific keys and these 2 methods are hard to do that</p>
+      </li>
+      <li>
+        <p>Client sends data server through 2 main methods: 1) Query parameter (?query) with GET 2) Message bodies (POST,PUT,PATCH)</p>
+      </li>
+      <li>
+        <p>For static content, no need query parameter so just URL with GET works.</p>
+      </li>
+      <li>
+        <p>For non-static content, need query parameter.</p>
+      </li>
+      <li>
+        <p>HTML Form generates HTTP message via POST (GET also can) and the FORM’s data is sent through message body in key-value format (query parameter) and is url encoded (abc김 -&gt;abc%EAFSAF%&amp;)</p>
+      </li>
+      <li>
+        <p>Content-TYPE:multipart/form-data can send binary data like file upload and other forms of data</p>
+      </li>
+      <li>
+        <p>HTTP API - POST, PUT, PATCH, GET and Content-Type:application/json</p>
+      </li>
+      <li>
+        <p>In HTTP API (Collection), Resource = Collection in member system, where server takes care of resource directory. When POST, server MAKES a URL like members/100 and gives it as response to client</p>
+      </li>
+      <li>
+        <p>in HTTP API (Store), Resource = Store in file uploading system, where client takes care of the resource storage. When uploading file via PUT, client knows URL file/{filename}</p>
+      </li>
+      <li>
+        <p>Since HTML FORM can only use GET and POST, need to use controller URI like /new, /edit, /delete</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>HTTP status code</p>
+
+    <ul>
+      <li>
+        <p>1xx(Informational) - request being processed (but not rl used)</p>
+      </li>
+      <li>
+        <p>2xx(Successful) - request successful</p>
+      </li>
+      <li>
+        <p>3xx(Redirection) - Need more info by user agent (client) to complete request</p>
+      </li>
+      <li>
+        <p>4xx(Client Error) - Client error, client at fault</p>
+      </li>
+      <li>
+        <p>5xx(Server Error) - Server at fault</p>
+      </li>
+      <li>
+        <p>2xx(Successful): 200 OK, 201 Created (POST), 202 Accepted, 204 No Content. For 201, created resource is in response’s header field like Location: /members/100. For 202, request is accepted but has not been processed yet by server. For 204, saving button when editing document and server completes request successfully but does not give response of any other data cuz not needed.</p>
+      </li>
+      <li>
+        <p>3xx(Redirection): 300 Multiple Choices but not used, 301 Moved Permanently when a resource’s URI is permanently moved like /members to /users or /event to /new-event but if user uses POST, the message is lost as 301 redirects the request to GET the new page so may have to fill up the messsage again on the new page (info lost)</p>
+      </li>
+      <li>
+        <p>302 Found is like 301 that when redirects, request method may be changed to GET but in most cases, it is changed to GET</p>
+      </li>
+      <li>
+        <p>303 See Other is like 301 , but request method is ALWAYS changed to GET  instead of maybe like 302</p>
+      </li>
+      <li>
+        <p>304 Not modified (very much used) - redirects to cache stored in local PC. Tells client that resource that it is seeking is not changed so client uses the cache stored in local PC. Response does not invlove message body because it must use local cache</p>
+      </li>
+      <li>
+        <p>307 Temporary Redirect is like 302 but does not change the request method (POST remains POST), when after purchase, go to purchase details,</p>
+      </li>
+      <li>
+        <p>308 Permanent Redirect when same as 301 but POST is redirected with POST so that it conserves the client’s info/message to the new page</p>
+      </li>
+      <li>
+        <p>According to 3xx, if there is a location in the header, it redirects to that location</p>
+      </li>
+      <li>
+        <p>PRG: Post/Redirect/Get - when I made a purchase via POST and reload the web browser purchase page, browser requests POST again so may purchase double again</p>
+      </li>
+      <li>
+        <p>After purchasing with POST, the purchase result page is redirected with GET. Even after reloading, the purchase result page is displayed again with GET</p>
+      </li>
+      <li>
+        <p>400 Bad Request - Client sends wrong request parameter or API data format is wrong so client has to resend the correct one</p>
+      </li>
+      <li>
+        <p>401 Unauthorsed - Client needs to authenticate onself (login), returns this WWWW-Authenticate header that lists info of client needed for the authentication</p>
+      </li>
+      <li>
+        <p>403 Forbidden - Server understands the client request but the client is not authorised to access that particular resource</p>
+      </li>
+      <li>
+        <p>404 Not Found - That resource is not in the server or if want to hide that resource from the client but dont want to send the 403 Forbidden message</p>
+      </li>
+      <li>
+        <p>500 Internal Server Error - for general server problems</p>
+      </li>
+      <li>
+        <p>503 Service Unavailable - For temporary shut-down of server due to upgrades/work so requests cannot be carried out at that time</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>HTTP Basic Header</p>
+
+    <ul>
+      <li>
+        <p>header-field = field-name + “:” + OWS field-value OWS (OWS means space allowed)</p>
+      </li>
+      <li>
+        <p>header-field contains all info required for HTTP methods, custom header-fields can be made too</p>
+      </li>
+      <li>
+        <p>Representation = representation metadata (that describes the representation data) + representation data</p>
+      </li>
+      <li>
+        <p>Content-Type: representation data’s type</p>
+      </li>
+      <li>
+        <p>Content-Length: byte length of the representation data. Cannot use this when using Transfer-Encoding</p>
+      </li>
+      <li>
+        <p>Content Negotation: Providing what preferred representation client is requesting to server</p>
+      </li>
+      <li>
+        <p>Accept: client’s preferred media type</p>
+      </li>
+      <li>
+        <p>Quality values(q) in Content Negotiation: Value from 0 to 1 where 1 is the highest priority. If value is 1, no need write number 1 for ko-KR. E.g. Accept-Language: ko-KR,ko;q=0.9,en-US;q=0.8. Also, if q is long, it is higher in priority. (e.g.text/palin;format=flowed)</p>
+      </li>
+      <li>
+        <p>Content-Length, Content-Type, Transfer-Encoding, Content-Range</p>
+      </li>
+      <li>
+        <p>Referer - it gives the previous URL of current request (e.g. moving A to B, referer is A)</p>
+      </li>
+      <li>
+        <p>User-Agent - client application (user application)’s information like web browser</p>
+      </li>
+      <li>
+        <p>Host: this header (e.g. google.com) is a MUST to be included and if multiple domains are registered to 1 same IP address, this host header helps differentiate</p>
+      </li>
+      <li>
+        <p>Allow: this displays HTTP methods that are allowed and if a banned method is tried, 405 Method Not Allowed should be responded by server</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Cookie</p>
+
+    <ul>
+      <li>
+        <p>2 types of Cookie: Set-Cookie is cookie that server sends to client as response. Cookie is one that client gets from the server and saves it and when client requests HTTP, this cookie is sent to server.</p>
+      </li>
+      <li>
+        <p>HTTP is stateless protocol, whose connection ends when client and server is done with request and response. When client requests again, server does not remember the previous request.</p>
+      </li>
+      <li>
+        <p>Set-cookie:user=leejh and this cookie is saved in cookie storage in web browser</p>
+      </li>
+      <li>
+        <p>expires, max-age (in seconds)</p>
+      </li>
+      <li>
+        <p>Session cookie: if expires date is not inputted, this session cookie exists until browser exit</p>
+      </li>
+      <li>
+        <p>If domain is mentioned in cookie, the subdomain can also be entered. But if domain is not mentioned, only the domain can be entered.</p>
+      </li>
+      <li>
+        <p>Root path is normally assigned.</p>
+      </li>
+      <li>
+        <p>Secure,HttpOnly,SameSite = security features of cookie</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Cache</p>
+
+    <ul>
+      <li>
+        <p>Big data files like image are stored in browser cache.</p>
+      </li>
+      <li>
+        <p>Last-Modified or ETag header (both are called Validator) tells when data has last been changed by server</p>
+      </li>
+      <li>
+        <p>304 Not Modified is sent by server and there is no HTTP body, which saves a lot of data since only the HTTP header is sent by server. 304 redirection to cache</p>
+      </li>
+      <li>
+        <p>If-Modified-Since/If-Unmodified-Since is used with Last-Modified</p>
+      </li>
+      <li>
+        <p>If there indeed is data change, 200 OK with header body is sent by server</p>
+      </li>
+      <li>
+        <p>Entity Tag (ETag) stores a version instead of date into the cache data</p>
+      </li>
+      <li>
+        <p>If-None-Match/If-Match is used with ETag</p>
+      </li>
+      <li>
+        <p>Cache-Control, Pragma, Expires</p>
+      </li>
+      <li>
+        <p>Cache-Control: max-age (in seconds how long this cache will last), no-cache (can cache data but always must check with origin server (not proxy server) with Last-Modified or If-None-Match), no-store(sensitive data so save in memory and delete ASAP)</p>
+      </li>
+      <li>
+        <p>If absolutely don’t want cache, Cache-Control: no-cache, no-store, must-revalidate and Pragma:no-cache</p>
+      </li>
+      <li>
+        <p>When no-cache + ETag and checking with origin server, if the origin server is suddenly down or sudden network disconnection between proxy and origin server, the proxy server may just send Error 200 OK instead of saying origin server is down</p>
+      </li>
+      <li>
+        <p>must-revalidate + ETag prevents this by always getting the error 504 Gateway Timeout as response</p>
+      </li>
+    </ul>
+  </li>
+</ol>]]></content><author><name>Jeonghwan Lee</name></author><category term="General Knowledge" /><category term="General Knowledge" /><summary type="html"><![CDATA[Internet network]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg" /><media:content medium="image" url="https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">IntelliJ Shortcut Windows</title><link href="/jekyll-theme-yat/java/2022/03/05/IntelliJShortcut.html" rel="alternate" type="text/html" title="IntelliJ Shortcut Windows" /><published>2022-03-05T14:35:23+00:00</published><updated>2022-03-05T14:35:23+00:00</updated><id>/jekyll-theme-yat/java/2022/03/05/IntelliJShortcut</id><content type="html" xml:base="/jekyll-theme-yat/java/2022/03/05/IntelliJShortcut.html"><![CDATA[<ol>
+  <li>IntelliJ Shortcut for the cool kids using Windows</li>
+</ol>
+
+<ul>
+  <li>Code completion or going to next line instead of (right arrow) &gt; + enter : ctrl + shift + enter
+Ctrl + p to see what the method is and its parameters
+Alt + enter for static import completion (e.g. hide Assertions by importing it and can use its methods right away instead of Assertions.assertThat)
+Shift + f6 to change name of variable from copying (e.g. member1 to member2)
+Ctrl + alt + v to extract variable
+Extracting method is ctrl + alt + m
+Click on the thing you want to test and Ctrl + shift to t to create new test easily instead of creating package in test folder
+Ctlr + e to go back to what you were working on previously
+Implement methods when implementing an interface with ctrl + I 
+Replace with lambda by alt + enter
+Shift+enter to go to next line
+Alt + shift + enter to choose inline variable
+Alt + insert to generate things like constructors
+Ctrl + a to select all like create setters and getters for all variables
+shift + ctrl + enter (order is important) to auto-complete variables with semi-colon (just enter doesnt add that semi-colon)
+Type psvm to create public static void main for laziness
+Soutv copies sout with the variable you placed in sout but u can rename it 
+Windows + f2 goes to the red underlined error 
+Ctrl + e to see list of history files that you edited
+Type ‘iter’ and iterator will appear (e.g. for String i : list)
+Type ‘get’ to get getter
+Type ‘soutm’ to sout class method
+Ctrl + d to duplicate section of code like ctlr + c ctrl + v but in 1 step
+Enter shift twice to search something like class (e.g.@Configuration)
+Ctlr + b to see where this particular class is declared and used elsewhere
+Ctrl + f12 to see file structure
+Ctrl + alt + n to inline variable like int count = something.getCount() , return count =&gt; return something.getCount();
+Ctrl + o to select methods to override/implement or see what methods there are available
+Ctrl+ b or control + mouse click to see where method is declared
+Ctrl + alt + b to see where implementations of that method are
+Shift + f6 to rename variable or class names
+/** to print parameters automatically in green
+F2 goes to where the red error is 
+ Ctrl + r to rename variable in 1 file
+Ctrl + shift + r to rename variable in multiple files in 1 directory (click on that directory)
+Ctrl + alt + c to introduce constant</li>
+</ul>]]></content><author><name>Jeonghwan Lee</name></author><category term="Java" /><category term="Java" /><category term="Spring" /><category term="IntelliJ" /><summary type="html"><![CDATA[IntelliJ Shortcut for the cool kids using Windows]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg" /><media:content medium="image" url="https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
