@@ -1,5 +1,5 @@
 ---
-date: 2022-05-17 14:35:23
+date: 2022-06-29 14:35:23
 layout: post
 title: JPA's @Transactional
 subtitle: JPA
