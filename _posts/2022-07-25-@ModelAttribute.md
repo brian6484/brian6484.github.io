@@ -1,5 +1,5 @@
 ---
-date: 2022-07-17 14:35:23
+date: 2022-07-25 14:35:23
 layout: post
 title: Spring Dependency Injection
 subtitle: Spring 
@@ -45,7 +45,7 @@ author: Jeonghwan Lee
         private final MemberRepository memberRepository;
   ```
 
-  * Best way is using @RequiredArgsConstructor, which creates constructor only for @final or @NonNull field:
+  * Best way is using @RequiredArgsConstructor, which creates constructor only for @final or @NonNull field. When there is just 1 constructor, @Autowired is automatically added to that constructor for DI:
 
   ```java
     @RequiredArgsConstructor
