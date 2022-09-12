@@ -8,7 +8,8 @@ tags:
   - Java
   
 * Difference between local and instance variable: 
-* Instance variables are declared inside a class but not within a
+
+Instance variables are declared inside a class but not within a
   method.
 ```java
 class Horse {
@@ -17,13 +18,16 @@ class Horse {
   // more code...
 }
 ```
-* Local variables are declared within a method and **MUST** be in initalised.
+Local variables are declared within a method and **MUST** be in initalised.
 
-<img src="/assets/images/posts/1.png" width="90%" height="90%" title="제목" alt="아무거나"/> 
+<img src="/assets/images/posts/1.png" title="제목" alt="아무거나"/> 
+<img src="/assets/images/posts/2.png" title="제목" alt="아무거나"/> 
+
+BTW, instance variables, if unitialised, are assigned values by default to 0 and false.
 
 * How about method parameters?
 
-* Method parameters are virtually the same as local variables—they’re
+Method parameters are virtually the same as local variables—they’re
   declared inside the method (well, technically they’re declared in the
   argument list of the method rather than within the body of the method, but
   they’re still local variables as opposed to instance variables). But
@@ -35,6 +39,7 @@ class Horse {
   always initialized, because the compiler guarantees that methods are
   always called with arguments that match the parameters. The arguments
   are assigned (automatically) to the parameters
-* 
+
+
 
 
