@@ -1,7 +1,7 @@
 ---
 date: 2022-06-07 14:35:23
 layout: post
-title: @PathVariable
+title: PathVariable
 subtitle: Java
 description: 
 image: https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg
