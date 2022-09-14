@@ -1,7 +1,7 @@
 ---
 date: 2022-06-01 14:35:23
 layout: post
-title: @Controller VS @RestController
+title: Controller VS RestController
 subtitle: Java
 description: 
 image: https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg
