@@ -1,5 +1,5 @@
 ---
-date: 2022-02-01 14:35:23
+date: 2022-01-01 14:35:23
 layout: post
 title: Difference between for and while loop
 description:
@@ -13,7 +13,7 @@ It is a very fundamental question that I admit I didn't 100% know how to explain
 
 A while loop has only the boolean test; it doesn’t have a built-in initialization
 or iteration expression. The only way to initalise a counter is **outside** the while loop.
-A while loop is *good* when you don’t know how
+A while loop is *good* when you don’t know how explicitly
 many times to loop and just want to keep going while some condition is true.
 
 But if you know how many times to loop (e.g., the length of an array, 7 times,
