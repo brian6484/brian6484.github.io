@@ -6,6 +6,7 @@ description:
 category: Java
 tags:
   - Java
+  - Head First Java
   
 1) A regular array has to be declared its size upon creation. But for ArrayList, just need to 
 make an object of type ArrayList. You can actually give initial size to ArrayList too.

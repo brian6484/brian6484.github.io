@@ -6,6 +6,7 @@ description:
 category: Java
 tags:
   - Java
+  - Head First Java
   
 * ArrayList in Java:
 
@@ -13,7 +14,22 @@ Unlike the regular array, ArrayList is more flexible in that initial size need n
 Also, instead of looping through the whole array, you can ask if it contains the element you are looking for. But array is faster than arraylist when it comes
 to primitives because arraylist needs to do wrapping and unwrapping.
 
-Basically arrays don't have methods except its instance variable length but arraylists do. Here are the following: 
+Head First Java states 3 characteristics about ArrayList:
+* An ArrayList resizes dynamically to whatever size is needed. It
+  grows when objects are added, and it shrinks when objects are
+  removed.
+
+* Although an ArrayList holds objects and not primitives, the
+compiler will automatically “wrap” (and “unwrap” when you take
+it out) a primitive into an Object and place that object in the
+ArrayList instead of the primitive.
+
+* You declare the type of the array using a type parameter, which is
+  a type name in angle brackets. Example: ArrayList<Dog> means
+  the ArrayList will be able to hold only objects of type Dog (or
+  subclasses of Dog)
+
+Also, arrays don't have methods except its instance variable length but arraylists do. Here are the following: 
 
 1) add(E e) - appends specified element to the END of the list
 2) remove(int index) - removes element at specified index 
