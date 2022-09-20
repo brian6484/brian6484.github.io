@@ -11,8 +11,7 @@ tags:
   - Java
   - Spring
   - JPA
-  
-author: Jeonghwan Lee
+
 ---
 
 1. JPA's @Transactional:
