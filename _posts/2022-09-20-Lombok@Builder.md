@@ -6,7 +6,6 @@ subtitle: Spring
 description: Spring 
 category: Spring
 tags:
-  - Java
   - Spring
   
 ---
@@ -78,5 +77,12 @@ Turns out the order matters. I tried putting the second one on top
 of the first one and it worked. But I am sure there is a better way to 
 do this.
 
-to be edited once I know
+to be edited once I know:
+
+Well my constructor 
+
+Creating entity via constructor:
+```java
+
+```
 
