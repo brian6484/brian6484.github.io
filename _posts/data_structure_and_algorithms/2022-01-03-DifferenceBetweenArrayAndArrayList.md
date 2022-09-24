@@ -3,7 +3,7 @@ date: 2022-01-03 14:35:23
 layout: post
 title: Difference between Array and ArrayList
 description:
-category: Data structure & Algorithms
+category: [Data structure & Algorithms], [Head First Java]
 tags:
   - Data structure & Algorithms
   - Head First Java

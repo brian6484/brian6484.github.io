@@ -2,8 +2,9 @@
 date: 2022-01-02 14:35:23
 layout: post
 title: ArrayList
+subtitle: 
 description:
-category: Data structure & Algorithms
+category: [Data structure & Algorithms]
 tags:
   - Data structure & Algorithms
   
