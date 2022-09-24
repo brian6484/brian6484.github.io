@@ -6,7 +6,6 @@ description:
 category: Data structure & Algorithms
 tags:
   - Data structure & Algorithms
-  - Head First Java
   
 * ArrayList in Java:
 

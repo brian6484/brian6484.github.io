@@ -11,7 +11,7 @@ tags:
 
 Inheritance:
 
-##Introduction
+## Introduction
 <img src="/assets/images/posts/3_inheritance.png" title="제목" alt="아무거나"/> 
 
 Subclass (square, triangle, etc) inherits from the superclass (shape). Subclass can
@@ -30,7 +30,7 @@ relationship means that the subclass inherits the members of the superclass.
 When we say “members of a class,” we mean the *instance variables* and
 *methods*.
 
-##IS-A test:
+## IS-A test:
 
 The IS-A test should make sense when you ask any subclass  if it IS-A any of its supertypes.
 If class B extends class A, class B IS-A class A.
@@ -54,13 +54,13 @@ Superclass cannot extend subclass/inherit from subclass. There’s no reverse or
 backward inheritance. Think about it, children inherit from parents, not
 the other way around.
 
-##In subclass, use both superclass and overriding subclass version
+## In subclass, use both superclass and overriding subclass version
 
 Head First Java explains really well:
 
 <img src="/assets/images/posts/4_inheritance_super.png" title="제목" alt="아무거나"/> 
 
-##When to use inheritance?
+## When to use inheritance?
 1) When one class is a more specific type of a superclass.
    Example: Willow is a more specific type of Tree, so Willow extends Tree
    makes sense.
@@ -70,7 +70,7 @@ Head First Java explains really well:
    functionality in a superclass Shape might make sense and makes for easier
    maintenance and extensibility.
 
-##When NOT to use inheritance?
+## When NOT to use inheritance?
 1) just so that you can reuse code from another class,
    if the relationship between the superclass and subclass violate either of the
    above two rules. For example, imagine you wrote special printing code in
