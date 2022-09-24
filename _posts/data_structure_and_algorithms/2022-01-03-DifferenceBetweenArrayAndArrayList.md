@@ -3,9 +3,9 @@ date: 2022-01-03 14:35:23
 layout: post
 title: Difference between Array and ArrayList
 description:
-category: Java
+category: Data structure & Algorithms
 tags:
-  - Java
+  - Data structure & Algorithms
   - Head First Java
   
 1) A regular array has to be declared its size upon creation. But for ArrayList, just need to 

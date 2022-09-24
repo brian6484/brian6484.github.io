@@ -3,9 +3,9 @@ date: 2022-01-01 14:35:23
 layout: post
 title: Difference between for and while loop
 description:
-category: Java
+category: General programming
 tags:
-  - Java
+  - General programming
   - Head First Java
   
 * Difference between for and while loop: 

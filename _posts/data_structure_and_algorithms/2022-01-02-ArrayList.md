@@ -3,9 +3,9 @@ date: 2022-01-02 14:35:23
 layout: post
 title: ArrayList
 description:
-category: Java
+category: Data structure & Algorithms
 tags:
-  - Java
+  - Data structure & Algorithms
   - Head First Java
   
 * ArrayList in Java:
@@ -29,7 +29,7 @@ ArrayList instead of the primitive.
   the ArrayList will be able to hold only objects of type Dog (or
   subclasses of Dog)
 
-Also, arrays don't have methods except its instance variable length but arraylists do. Here are the following: 
+Also, arrays don't have methods except its instance variable - length but arraylists do. Here are the following: 
 
 1) add(E e) - appends specified element to the END of the list
 2) remove(int index) - removes element at specified index 
