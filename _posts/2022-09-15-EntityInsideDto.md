@@ -117,6 +117,24 @@ public class ProjectDto {
 }
 ```
 
+Also, why does my constructor work but not @Builder?
+
+To create object entity via constructor:
+```java
+Board entity = new Board("1번 게시글 제목", "1번 게시글 내용", "도뎡이", 0, 'N');
+```
+
+To create object via @Builder: which does not have to follow the order of 
+parameters
+```java
+Board entity = Board.builder()
+	.deleteYn('N')
+	.hits(0)
+	.writer("도뎡이")
+	.content("1번 게시글 내용")
+	.title("1번 게시글 제목")
+	.build();
+```
 
 reference:
 https://dodop-blog.tistory.com/237

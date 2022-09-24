@@ -1,7 +1,7 @@
 ---
 date: 2022-07-17 14:35:23
 layout: post
-title: @ModelAttribute
+title: ModelAttribute
 subtitle: Spring 
 description: Spring 
 image: https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg
