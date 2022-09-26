@@ -1,7 +1,7 @@
 ---
 date: 2022-09-21 14:35:23
 layout: post
-title: Error: BeanCreationException at AbstractAutowireCapableBeanFactory
+title: Error-BeanCreationException at AbstractAutowireCapableBeanFactory
 subtitle: Spring 
 description: Spring 
 category: Spring
