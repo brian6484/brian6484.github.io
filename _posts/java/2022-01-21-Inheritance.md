@@ -1,5 +1,5 @@
 ---
-date: 2022-03-06 14:35:23
+date: 2022-01-21 14:35:23
 layout: post
 title: Inheritance
 subtitle: Java 
@@ -8,11 +8,11 @@ category: Java
 tags:
   - Java
   - Head First Java
-
+---
 Inheritance:
 
 ## Introduction
-<img src="/assets/images/posts/3_inheritance.png" title="제목" alt="아무거나"/> 
+<img src="/assets/images/posts/java/Inheritance/3_inheritance.png" title="제목" alt="아무거나" width="400"/> 
 
 Subclass (square, triangle, etc) inherits from the superclass (shape). Subclass can
 override methods but instance variables are not overridden because they don’t need to be. They
@@ -58,12 +58,14 @@ the other way around.
 
 Head First Java explains really well:
 
-<img src="/assets/images/posts/4_inheritance_super.png" title="제목" alt="아무거나"/> 
+<img src="/assets/images/posts/java/Inheritance/4_inheritance_super.png" title="제목" alt="아무거나" width="400"/> 
 
 ## When to use inheritance?
 1) When one class is a more specific type of a superclass.
    Example: Willow is a more specific type of Tree, so Willow extends Tree
    makes sense.
+
+
 2) Have behavior (implemented code) that
    should be shared among multiple classes of the same general type. Example:
    Square, Circle, and Triangle all need to rotate and play sound, so putting that
@@ -79,6 +81,8 @@ Head First Java explains really well:
    printing code. That makes no sense! A Potato is not an Animal! (So the
    printing code should be in a Printer class that all printable objects can take
    advantage of via a HAS-A relationship.)
+
+
 2) DO NOT use inheritance if the subclass and superclass do not pass the IS-A
    test. Always ask yourself if the subclass IS-A more specific type of the
    superclass. Example: Tea IS-A Beverage makes sense. Beverage IS-A Tea

@@ -1,5 +1,5 @@
 ---
-date: 2022-01-05 14:35:23
+date: 2022-01-07 14:35:23
 layout: post
 title: Difference between Array and ArrayList
 description:

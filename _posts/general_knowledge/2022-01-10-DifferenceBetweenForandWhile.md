@@ -1,5 +1,5 @@
 ---
-date: 2022-01-03 14:35:23
+date: 2022-01-10 14:35:23
 layout: post
 title: Difference between for and while loop
 description:

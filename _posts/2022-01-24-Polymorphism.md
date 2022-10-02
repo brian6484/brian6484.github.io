@@ -1,5 +1,5 @@
 ---
-date: 2022-03-07 14:35:23
+date: 2022-01-24 14:35:23
 layout: post
 title: Polymorphism
 subtitle: Java 
@@ -56,7 +56,7 @@ the reference variable. This lets you do things like make polymorphic
 arrays.
 
 For example:
-<img src="/assets/images/posts/5_poly.png" title="제목" alt="아무거나"/> 
+<img src="/assets/images/posts/Polymorphism/5_poly.png" title="제목" alt="아무거나" width="400"/> 
 
 ## Polymorphic arguments(to a method) and return types
 
@@ -66,7 +66,7 @@ If you can declare a reference variable of a supertype, say, Animal, and
 assign a subclass object to it, say, Dog, think of how that might work when
 that reference is an argument to a method...
 
-<img src="/assets/images/posts/6_poly2.png" title="제목" alt="아무거나"/> 
+<img src="/assets/images/posts/java/Polymorphism/6_poly2.png" title="제목" alt="아무거나" width="400"/> 
 
 ## 3 ways to prevent a class from being subclassed
 
@@ -93,7 +93,7 @@ overridden.
 
 ## Common mistakes with poly
 
-<img src="/assets/images/posts/7_poly_mistake1.png" title="제목" alt="아무거나"/> 
+<img src="/assets/images/posts/java/Polymorphism/7_poly_mistake1.png" title="제목" alt="아무거나" width="400"/> 
 
 1) Arguments must be the same, and return types must be
    compatible.
@@ -107,7 +107,7 @@ guaranteed to be able to do anything its superclass declares, so it’s safe
 to return a subclass where the superclass is expected.
 
 
-<img src="/assets/images/posts/8_poly_mistake2.png" title="제목" alt="아무거나"/>
+<img src="/assets/images/posts/java/Polymorphism/8_poly_mistake2.png" title="제목" alt="아무거나" width="400"/>
 
 2) The method can’t be less accessible.
 
