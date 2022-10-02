@@ -7,7 +7,7 @@ category: Java
 tags:
   - Java
   - Head First Java
-  
+---
 ## Difference between local and instance variables: 
 
 Instance variables are declared inside a class but not within a
@@ -22,14 +22,14 @@ class Horse {
 ```
 Local variables are declared within a method and **MUST** be in initalised.
 
-<img src="/assets/images/posts/java/DiffBetweenLocalAndInstanceVariables/1.png" title="제목" width="200"/>
+<img src="/assets/images/posts/java/DiffBetweenLocalAndInstanceVariables/1.png" title="제목" width="400"/>
 
 BTW, instance variables, if uninitialised, are assigned values by default to 0 and false.
 So just initialise instance variables too!
 
 ## How about method parameters?
 
-<img src="/assets/images/posts/java/DiffBetweenLocalAndInstanceVariables/2.png" title="제목" width="200"/> 
+<img src="/assets/images/posts/java/DiffBetweenLocalAndInstanceVariables/2.png" title="제목" width="400"/> 
 
 Method parameters are virtually the same as local variables—they’re
   declared inside the method (well, technically they’re declared in the
