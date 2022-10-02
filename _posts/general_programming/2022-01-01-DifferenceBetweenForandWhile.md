@@ -1,5 +1,5 @@
 ---
-date: 2022-01-01 14:35:23
+date: 2022-01-03 14:35:23
 layout: post
 title: Difference between for and while loop
 description:
@@ -7,6 +7,7 @@ category: General programming
 tags:
   - General programming
   - Head First Java
+---
   
 * Difference between for and while loop: 
 
@@ -20,7 +21,7 @@ many times to loop and just want to keep going while some condition is true.
 But if you know how many times to loop (e.g., the length of an array, 7 times,
 etc.), a for loop is cleaner.
 
-<img src="/assets/images/posts/1.png" title="제목" alt="아무거나"/> 
+<img src="/assets/images/posts/general_knowledge/1.png" title="제목" alt="아무거나"/> 
 
 
 

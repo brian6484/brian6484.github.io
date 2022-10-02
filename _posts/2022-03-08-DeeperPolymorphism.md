@@ -1,5 +1,5 @@
 ---
-date: 2022-03-07 14:35:23
+date: 2022-03-08 14:35:23
 layout: post
 title: Deeper knowledge on Polymorphism
 subtitle: Java 
@@ -8,7 +8,7 @@ category: Java
 tags:
   - Java
   - Head First Java
-
+---
 Deeper knowledge on Polymorphism:
 
 ##Introduction
@@ -126,7 +126,14 @@ that is compatible with the declared return type of the abstract method. What
 you put in that method is up to you. All Java cares about is that the method is
 there, in your concrete subclass.
 
+## Important
+We are not making a new animal object. We are making a new *array* object of type animal.
+Remember that you cannot make an instance of *abstract* type, but you *can* make an 
+array object to hold that type.
 
+```java
+private Animal[] mylist= new Animal[5];
+```
 
 
 

@@ -20,7 +20,7 @@ class Horse {
 ```
 Local variables are declared within a method and **MUST** be in initalised.
 
-<img src="/assets/images/posts/1.png" title="제목" alt="아무거나"/> 
+<img src="/assets/images/posts/general%20knowledge/1.png" title="제목" alt="아무거나"/> 
 <img src="/assets/images/posts/2.png" title="제목" alt="아무거나"/> 
 
 BTW, instance variables, if unitialised, are assigned values by default to 0 and false.

@@ -7,7 +7,7 @@ category: Java
 tags:
   - Java
   - Head First Java
-
+---
 Short-Circuit Operators ( && , || ):
 
 In the case of &&, the expression will be true only if both sides of

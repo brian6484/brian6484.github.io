@@ -4,13 +4,11 @@ layout: post
 title: Encapsulation in Java
 subtitle: Java 
 description: Java
-image: https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg
-optimized_image: https://res.cloudinary.com/dm7h7e8xj/image/upload/c_scale,w_380/v1559825145/theme16_o0seet.jpg
 category: Java
 tags:
   - Java
-
-1. Encapsulation in Java
+---
+## Encapsulation in Java
 
  * Without encapsulation, we can access and manipulate instance variables.
  * Encapsulation's rule of thumb is to mark *instance variables private* and *getters and setters as public*.
