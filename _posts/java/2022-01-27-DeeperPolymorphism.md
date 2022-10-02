@@ -11,7 +11,7 @@ tags:
 ---
 Deeper knowledge on Polymorphism:
 
-##Introduction
+## Introduction
 Back in previous polymorphism article, we did:
 
 ```java
@@ -20,7 +20,7 @@ Wolf mywolf = new Wolf();
 Animal myHippo = new Hippo();
 ```
 
-But this time:
+But this time: can we do this?
 ```java
 Animal myAnimal = new Animal();
 ```
@@ -45,8 +45,7 @@ those that are specific enough to be instantiated. A concrete class just means
 that it’s OK to make objects of that type.
 
 
-e.g.
-<img src="/assets/images/posts/9_deeperpoly1.png" title="제목" alt="아무거나"/> 
+<img src="/assets/images/posts/java/Polymorphism/9_deeperpoly1.png" title="제목" alt="아무거나" width="400"/> 
 
 Abstract class is **useless**, unless it is **extended**. With an abstract class, it’s the instances of a subclass of your abstract class
 that’s doing the work at runtime. There is an exception to this—an abstract class can have static members
@@ -135,6 +134,10 @@ array object to hold that type.
 private Animal[] mylist= new Animal[5];
 ```
 
+## Summary
+>Remember, all
+abstract methods MUST be implemented by the first concrete subclass
+down the inheritance tree
 
 
 

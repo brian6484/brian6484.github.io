@@ -11,7 +11,7 @@ tags:
 ---
 Polymorphism:
 
-##Introduction
+## Introduction
 Let's first step back and look at how we declare a reference and create an object:
 
 ```java
@@ -55,8 +55,8 @@ anything that *extends* the declared reference variable type can be assigned to
 the reference variable. This lets you do things like make polymorphic
 arrays.
 
-For example:
-<img src="/assets/images/posts/java/Polymorphism/5_poly.png" title="제목" alt="아무거나" width="400"/> 
+
+<img src="/assets/images/posts/java/Polymorphism/5_poly.png" title="제목" alt="아무거나" width="400"/>
 
 ## Polymorphic arguments(to a method) and return types
 
