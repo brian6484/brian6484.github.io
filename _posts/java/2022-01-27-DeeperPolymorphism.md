@@ -135,9 +135,18 @@ private Animal[] mylist= new Animal[5];
 ```
 
 ## Summary
+
+
+> When you don’t want a class to be instantiated (in other words, you
+don’t want anyone to make a new object of that class type), mark the
+class with the abstract keyword.
+
+>An abstract class can have both abstract and non-abstract methods.
+
+>If a class has even one abstract method, the class must be marked
+abstract.
+
 >Remember, all
 abstract methods MUST be implemented by the first concrete subclass
 down the inheritance tree
-
-
 
