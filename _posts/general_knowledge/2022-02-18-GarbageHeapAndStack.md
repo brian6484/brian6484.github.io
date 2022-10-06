@@ -8,6 +8,9 @@ tags:
   - General Knowledge
   - Head First Java
 ---
+
+숨참고 love dive~
+
 ## Introduction
 When a JVM starts up, it gets
 a chunk of memory from the underlying OS and uses it to run your Java

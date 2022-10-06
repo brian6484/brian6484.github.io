@@ -11,6 +11,8 @@ tags:
   - Head First Java
 ---
 
+When to differentiate these 4:
+
 * Make a class that doesn’t extend anything (other than Object) when your
 new class doesn’t pass the IS-A test for any other type.
 
