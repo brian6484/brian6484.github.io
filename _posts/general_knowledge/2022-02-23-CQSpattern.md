@@ -1,5 +1,5 @@
 ---
-date: 2022-06-07 14:35:23
+date: 2022-02-23 14:35:23
 layout: post
 title: Command Query Separation
 description: 

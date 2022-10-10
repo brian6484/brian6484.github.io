@@ -8,7 +8,6 @@ tags:
   - General Knowledge
   - Head First Java
 ---
-
 숨참고 love dive~
 
 ## Introduction

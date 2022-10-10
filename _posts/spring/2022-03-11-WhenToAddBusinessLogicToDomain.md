@@ -1,5 +1,5 @@
 ---
-date: 2022-03-09 14:35:23
+date: 2022-03-11 14:35:23
 layout: post
 title: When to add business logic to domain class, not service
 description: 
@@ -35,7 +35,10 @@ public class ItemService{
 
 ## A new perspective
 From object-oriented perspective, it is best to implement business
-logic where the data is present in the entity.
+logic where the data is present in the entity. This is called **Domain Model Pattern**.
+
+Whereas if most of the business logic is in the Service layer, it is called
+**Transaction script pattern**.
 
 ```java
 

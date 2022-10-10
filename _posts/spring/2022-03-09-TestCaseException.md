@@ -37,6 +37,8 @@ public class MemberServiceTest {
 }
 ```
 
+Pay attention that there is this *fail* that you can add with your message 
+
 ## More on Testing annotations
 Look at [my post](https://brian6484.github.io/java/2022/09/19/JPArepo.saveNullPointerException.html)
 which explains @RunWith, @SpringBootTest, and @Transactional more closely.
