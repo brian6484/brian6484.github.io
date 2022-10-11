@@ -94,6 +94,8 @@ select
 from
     Member member0_
 ```
+The connected entity (team) is not queried.
+
 
 ## Implications
 With EAGER, when we query for member, query for 연관된 객체 team is
