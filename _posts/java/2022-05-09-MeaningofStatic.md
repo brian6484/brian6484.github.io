@@ -182,4 +182,45 @@ class ConstantInit1 {
 }
 ```
 
+## Handy example
+What would compiler print for this example?
+```java
+class StaticSuper {
+    static {
+        System.out.println("super static block");
+    }
+    
+    StaticSuper () {
+        System.out.println("super constructor");
+    }
+    
+    }
+    public class StaticTests extends StaticSuper {
+        static int rand;
+        
+        static {
+          rand = (int) (Math.random() * 6);
+          System.out.println("static block " + rand);
+        }
+        
+        StaticTests() {
+            System.out.println("constructor");
+        }
+        
+        public static void main(String[] args) {
+            System.out.println("in main");
+            StaticTests st = new StaticTests();
+    }
+}
+```
 
+Compiler prints:
+```java
+//super static block
+//static block 3
+//in main
+//super constructor
+//constructor
+```
+Notice that as the output below demonstrates, the static blocks for both classes run before
+either of the constructors run.

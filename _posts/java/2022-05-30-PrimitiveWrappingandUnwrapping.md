@@ -1,5 +1,5 @@
 ---
-date: 2022-05-26 14:35:23
+date: 2022-05-30 14:35:23
 layout: post
 title: Primitive and how to wrap and unwrap (feat. ArrayList<Object>)
 subtitle: Java 
