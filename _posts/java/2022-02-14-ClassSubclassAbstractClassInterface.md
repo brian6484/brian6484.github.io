@@ -1,8 +1,7 @@
 ---
 date: 2022-02-14 14:35:23
 layout: post
-title: How do you know whether to make a class, a subclass, an abstract class,
-or an interface?
+title: How to differentiate class, a subclass, an abstract class or an interface?
 subtitle: Java 
 description: Java
 category: Java

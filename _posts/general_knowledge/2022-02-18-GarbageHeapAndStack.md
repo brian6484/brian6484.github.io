@@ -1,7 +1,7 @@
 ---
 date: 2022-02-18 14:35:23
 layout: post
-title: The Stack and the Heap: where things live
+title: The Stack and the Heap - where things live
 description:
 category: General Knowledge
 tags:
