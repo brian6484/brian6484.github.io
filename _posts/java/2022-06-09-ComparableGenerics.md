@@ -1,5 +1,4 @@
 ---
-date: 2022-06-09 14:35:23
 layout: post
 title: Comparable, Comparator generics and Intro to Lambda
 subtitle: Java 

@@ -1,9 +1,10 @@
 ---
+date: 2022-01-01 14:35:23
 layout: post
 title: Quick markdown example
 subtitle: This is a quick markdown example
-categories: markdown
-tags: [example]
+categories: Markdown
+tags: Markdown
 ---
 
 Paragraphs are separated by a blank line.

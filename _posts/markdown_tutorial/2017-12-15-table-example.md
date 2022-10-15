@@ -1,9 +1,10 @@
 ---
+date: 2022-01-01 14:35:23
 layout: post
 title: Table example
 subtitle:
-categories: example
-tags: [table]
+categories: Markdown
+tags: Markdown
 ---
 
 ## Table example as below

@@ -1,8 +1,9 @@
 ---
+date: 2022-01-01 14:35:23
 layout: post
 title: Mermaid example
-categories: example
-tags: [mermaid]
+categories: Markdown
+tags: Markdown
 ---
 
 ### 1. Pie chart
