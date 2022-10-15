@@ -47,8 +47,8 @@ public interface Pet{
     public abstract void play();
 }
 ```
-## Implement an interface
-1) "implements" keyword with the name of the inteface
+## **Implement** an **interface**
+1) "implements" keyword with the name of the interface
 2) implement the abstract interface methods (e.g. Pet methods)
 
 ```java
