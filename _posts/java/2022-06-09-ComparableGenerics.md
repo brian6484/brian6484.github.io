@@ -80,7 +80,7 @@ public interface Comparator<T>{
 
 <img src="/assets/images/posts/java/Generics/5_generics.png" title="제목" alt="아무거나" width="400"/>
 
-As you see, a lot of repetitive code goes into this. A solution is inner class/
+As you see, a lot of repetitive code goes into this. A possible solution is inner class/
 argument-defined anonymous inner class.
 
 ```java
@@ -93,7 +93,7 @@ public int compare(SongV3 one, SongV3 two) {
 
 But still, there is a lot of code for just wanting to sort by title. 
 
-Solution: Lambda!!!
+Solution: Lambda!!! Look at my next post
 
 
 ## Differentiating comparable and comparator
