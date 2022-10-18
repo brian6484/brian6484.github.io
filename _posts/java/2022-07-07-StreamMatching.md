@@ -1,5 +1,4 @@
 ---
-date: 2022-03-03 14:35:23
 layout: post
 title: Java Stream Matching its values
 subtitle: Java 
