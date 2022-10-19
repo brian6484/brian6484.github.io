@@ -23,8 +23,9 @@ A 서비스의 a 로직 실행 -> 이벤트 발행 -> B 서비스의 b 로직 �
 
 이렇게 되면 A 서비스는 B 서비스의 변경사항과 관련없이 수정이 필요없게 됩니다.
 
-## Example
-sad
+## Example of event and listener (my toy project)
+
+
 
 ## Reference
 https://shinsunyoung.tistory.com/m/88
