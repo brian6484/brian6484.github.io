@@ -6,7 +6,7 @@ description: Java
 category: Java
 tags:
   - Java
-  - Stream
+  - Head First Java
 
 * There are 3 ways to validate elements of a sequence according to some predicate. Put it more simply,
 check elements for a specific condition.
