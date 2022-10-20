@@ -30,3 +30,5 @@ A 서비스의 a 로직 실행 -> 이벤트 발행 -> B 서비스의 b 로직 �
 ## Reference
 https://shinsunyoung.tistory.com/m/88
 https://sunghs.tistory.com/m/139
+
+important: https://sabarada.tistory.com/184
