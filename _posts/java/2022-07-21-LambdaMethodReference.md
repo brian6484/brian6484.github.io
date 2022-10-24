@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Java Stream operation methods with examples
+title: Method reference to replace lambda expressions
 subtitle: Java 
 description: Java
 category: Java
@@ -16,7 +16,29 @@ Let's look at the previous lambda expression for map operation
 Function<Song,String> getGenre = song->song.getGenre();
 ```
 
-Instead of spelling this whole thing out, you can point the compiler to a
+Instead of spelling this, you can point the compiler to a
 method that does the operation we want, using a method reference.
 
 <img src="/assets/images/posts/java/MethodReference/methodref1.png" title="제목" alt="아무거나" width="400"/>
+
+## Example of method reference
+For example, Comparator! There are a lot of helper
+methods on the Comparator interface that, when combined with a method
+reference, let you see which value is being used for sorting and in which
+direction. 
+
+To sort songs from oldest to newest with lambda:
+```java
+List<Song> result = allSongs.stream()
+  .sorted((o1,o2)->o1.getYear()-o2,getYear())
+  .collect(toList());
+```
+
+But with method reference with Comparator's **static** helper method:
+```java
+List<Song> result = allSongs.stream()
+  .sorted(Comparator.comparingInt(Song::getYear))
+  .collect(toList());
+```
+
+

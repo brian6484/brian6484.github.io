@@ -45,10 +45,25 @@ some other object, in this case a String containing the song’s genre.
 
 <img src="/assets/images/posts/java/StreamLambda/streamlambda3.png" title="제목" alt="아무거나" width="400"/>
 
-## Example with distinct()
+## Example with distinct() VS .collect(Collectors.toSet())
 Once you get the genres from Songs with map(), you may want unique
 generes and not duplicates. Just add distinct() intermediary operation
 to remove duplicates.
+
+Advantage of using collect(Collectors.toSet()) is that anything that
+uses that result *knows* it is a set by definition. But either is
+fine.
+
+## Collectors.joining
+You can create a String result from the stream. It will join together all the
+stream elements into a single String. You can optionally define the delimiter,
+the character to use to separate each element. This can be very useful if you
+want to turn your stream into a String of Comma Separated Values (CSV).
+
+
+
+
+
 
 
 
