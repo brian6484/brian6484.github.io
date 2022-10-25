@@ -7,7 +7,7 @@ category: Java
 tags:
   - Java
   - Head First Java
-
+---
 ## Intro
 Following on my [Stream post](https://brian6484.github.io/java/2022/07/04/Streams.html)
 let's create some complex pipelines with Lambda.

@@ -7,7 +7,8 @@ category: Java
 tags:
   - Java
   - Head First Java
-
+---
+  
 * There are 3 ways to validate elements of a sequence according to some predicate. Put it more simply,
 check elements for a specific condition.
 

@@ -7,7 +7,7 @@ category: Java
 tags:
   - Java
   - Head First Java
-
+---
 ## Intro
 So, how does a method tell you it might throw an exception? You find a
 **throws** clause in the risky method’s declaration.

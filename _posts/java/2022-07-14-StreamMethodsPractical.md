@@ -7,7 +7,7 @@ category: Java
 tags:
   - Java
   - Head First Java
-
+---
 ## Intro
 Let's look at some common methods
 
