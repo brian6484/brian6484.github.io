@@ -58,6 +58,19 @@ If the try or catch block has a *return* statement, finally will **still run**!
 That is surprising to me. Flow jumps to the finally, then back to the return.
 
 
-
+## Exception rules
+1) cannot have a catch/finally without a try
+2) cannot put code between try and catch
+3) try MUST be followed by either a catch or finally
+4) try with only a finally(no catch) must still declare the exception,
+which is kind of pointless bcos try without a catch does not satisfy
+**handle or delcare law**
+```java
+void go throws FooException{
+    try{
+        x.doStuff();
+  } finally{}
+  }
+```
 
 

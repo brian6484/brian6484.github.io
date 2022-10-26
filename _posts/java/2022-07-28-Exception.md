@@ -171,3 +171,18 @@ any ClothingException **subclass** like LingerieException and PantsException.
 But good practice is to write a different catch block for each exception that you need to handle
 uniquely.
 
+## Ducking (by declaring) only delays the inevitable compile error
+>If you don’t want to handle an exception, you can duck it by declaring it.
+
+There are 2 ways to satisfy compiler when you call a risky (exception-throwing)
+method.
+
+<img src="/assets/images/posts/java/Exception/exception7.png" title="제목" alt="아무거나" width="400"/>
+
+But when you duck by declaring, this means whatever invokes the
+foo() method has to follow this Handle or Declare law. If foo() ducks
+the exception, and like main() calls it, main() has to deal with
+that exception.
+
+<img src="/assets/images/posts/java/Exception/exception8.png" title="제목" alt="아무거나" width="400"/>
+
