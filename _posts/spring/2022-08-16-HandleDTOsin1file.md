@@ -17,8 +17,7 @@ Is there a way to combine all forms of DTOs into one file for
 better management? Yes, through static nested class!
 
 ## Note on nested class
-
-
+Take a look at [My posted on nested class]() before continuing.
 
 ## DTOs via static nested class
 [This reference](https://velog.io/@p4rksh/Spring-Boot%EC%97%90%EC%84%9C-%EA%B9%94%EB%81%94%ED%95%98%EA%B2%8C-DTO-%EA%B4%80%EB%A6%AC%ED%95%98%EA%B8%B0)
