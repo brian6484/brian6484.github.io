@@ -20,7 +20,9 @@ class Horse {
   // more code...
 }
 ```
-Local variables are declared within a method and **MUST** be in initalised.
+On the other hand,
+Local variables are declared within a method and **MUST** be in initalised. Think of it
+as local- local to its method. But they don't need public or private tag.
 
 <img src="/assets/images/posts/java/DiffBetweenLocalAndInstanceVariables/1.png" title="제목" width="400"/>
 

@@ -9,6 +9,9 @@ tags:
   - Head First Java
 ---
 ## Intro
+A nested class is a member of its enclosing class (OuterClass).
+In simple terms, it is a class inside a class.
+
 [This reference](https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html)
 describes well about nested classes and its 2 types - non-static and
 static.
@@ -25,8 +28,6 @@ class Outerclass{
   }
 }
 ```
-
-A nested class is a member of its enclosing class (OuterClass).
 Inner classes have access to other members of the enclosing class,
 even if they are declared private. Static nested class, on the other
 hand, cannot access other members of the enclosing class.
@@ -82,15 +83,74 @@ fields. It can also access instance methods and variables.
 Also, since it is associated with an instance, it
 **cannot define any static members itself**.
 
-An instance of InnerClass can exist only within an instance of OuterClass and has direct access to the methods and fields of its enclosing instance.
+An instance of InnerClass can exist only within an instance of 
+OuterClass and has direct access to the methods and fields of its enclosing instance,
+so it can use OuterClass members as such:
 
-To instantiate an inner class, you first must instantiate the
+```java
+public class Nick{
+    private String name = "nick";
+    
+    class Pet{
+        private String pet_name = "goldfish";
+        
+        public void display(){
+          System.out.println(name);
+          System.out.println(pet_name);
+        }
+    }
+}
+
+public class Application{
+  public static void main(String[] args) {
+      Nick nick = new Nick();
+      Nick.Pet pet = nick.new Pet();
+      pet.display();
+  }
+}
+```
+
+The Outerclass cannot use Innerclass members, **unless** you instantiate the inner 
+class. To instantiate an inner class, you first must instantiate the
 outer class. Then, create the inner object **within** the outer object
 with this syntax
 
 ```java
 Outerclass outerobject = new Outerclass();
 Outerclass.Innerclass innerobject = outerobject.new Innerclass();
+```
+
+For Outerclass to use Innerclass member:
+```java
+public class Nick{
+    private String name = "nick";
+    
+    public void display(){
+        System.out.println(name);
+      //compile error
+//      System.out.println(pet);
+
+        Pet pet = new Pet();
+        System.out.println(pet.pet_name);
+      
+    }
+    
+    class Pet{
+        private String pet_name = "goldfish";
+        
+        public void display(){
+          System.out.println(name);
+          System.out.println(pet);
+        }
+    }
+}
+
+public class Application{
+  public static void main(String[] args) {
+      Nick nick = new Nick();
+      nick.display();
+  }
+}
 ```
 
 ## Static nested class
