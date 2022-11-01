@@ -2,9 +2,9 @@
 layout: post
 title: Safe Navigation Operator (?) in Thymeleaf to prevent NullPointerException
 description: 
-category: Spring
+category: Thymeleaf
 tags:
-  - Spring
+  - Thymeleaf
 
 ---
 
