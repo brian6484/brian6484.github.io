@@ -33,6 +33,7 @@ public class Patient{
 @Entity
 public class Hospital{
     @Id @GeneratedValue
+    @Column(name = "hospital_id")
     private Long id;
     
     private String name;
@@ -41,17 +42,84 @@ public class Hospital{
 
 Without 연관관계, we need to use FK of entities.
 ```java
-Hospital hospital = new Hospital();
-hospital.setName("Hospital Hola");
-em.persist(hospital);
+EntityManagerFactory emf = Persistence.createEntityManagerFactory("hokla");
+EntityManager em = emf.createEntityManager();
 
-Patient patient = new Patient();
-patient.setName("Wally");
-patient.setHospitalId(hospital.getId());
-em.persist(patient);
+EntityTransaction tx = em.getTransaction();
+tx.begin();
+
+try{
+    Hospital hospital = new Hospital();
+    hospital.setName("Hospital Hola");
+    em.persist(hospital);
+
+    Patient patient = new Patient();
+    patient.setName("Wally");
+    patient.setHospitalId(hospital.getId());
+    em.persist(patient);
+    tx.commit();
+  } catch (Exception e){
+    tx.rollback();
+  } finally {
+    em.close();
+}
 ```
   
 This is not very object-oriented because we optimally want to 
 somehow get patient.getHosptial() like getting objects, not FKs.
 
 
+## With 연관관계
+Let's add @ManyToOne to map entities' relationship
+
+```java
+@Entity
+public class Patient{
+    @Id @GeneratedValue
+    @Column(name="patient_id")
+    private Long id;
+    
+    private String name;
+    
+    //remember JPA (latest versions) automatically changes
+    //java's camelCase name to preferred DB naming convention
+    //hospitalId -> hospital_id
+    @ManyToOne
+    private Long hospitalId;
+}
+
+@Entity
+public class Hospital{
+    @Id @GeneratedValue
+    @Column(name = "hospital_id")
+    private Long id;
+    
+    private String name;
+}
+```
+
+Then we can call it the OO way:
+
+```java
+EntityManagerFactory emf = Persistence.createEntityManagerFactory("hokla");
+EntityManager em = emf.createEntityManager();
+
+EntityTransaction tx = em.getTransaction();
+tx.begin();
+
+try{
+    Hospital hospital = new Hospital();
+    hospital.setName("Hospital Hola");
+    em.persist(hospital);
+
+    Patient patient = new Patient();
+    patient.setName("Wally");
+    patient.setHospital(hospital);
+    em.persist(patient);
+    tx.commit();
+  } catch (Exception e){
+    tx.rollback();
+  } finally {
+    em.close();
+}
+```
