@@ -74,7 +74,7 @@ where
 ```
 
 With EAGER, when it searches MEMBER, it also does a query to bring
-TEAM.
+TEAM. No proxy but the actual entity.
 
 ## EnumType.LAZY
 
@@ -96,6 +96,20 @@ from
 ```
 The connected entity (team) is not queried.
 
+This is done via querying team via proxy, not the actual entity
+object. Don't belive me? Let's try this code
+```java
+Member m = em.find(Member.class, member1.getId());
+System.out.println(m.getTeam().getClass());
+```
+
+The output will be a proxy. So the only true entity (not proxy) that is queried is
+member. 
+
+One important side-note is that when we do something like
+m.getTeam().getName() where we query some fields of Team, only then
+will the queries for Team entity be executed. This is because
+DB has been 초기화ed.
 
 ## Implications
 With EAGER, when we query for member, query for 연관된 객체 team is
