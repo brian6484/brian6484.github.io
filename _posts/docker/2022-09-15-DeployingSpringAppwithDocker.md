@@ -6,6 +6,7 @@ tags:
   - Docker
   
 ---
+Let's dive in
 
 ## Intro
 Make a Dockerfile at the root directory
