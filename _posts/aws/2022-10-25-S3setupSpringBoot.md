@@ -1,12 +1,9 @@
 ---
 layout: post
 title: How to upload files to S3 on Spring Boot project (from set-up to controller)
-subtitle: Java 
-description: Java
-category: Java
+category: AWS
 tags:
-  - Java
-  - Head First Java
+  - AWS
 ---
 
 ## Intro
@@ -42,6 +39,10 @@ This is where I unnecessarily struggle the most. As I mentioned
 in [my post regarding setting up .yml file with S3]()
 I will say it again. Please ensure name of variables exactly match!
 accessKey is different from access-key!!
+
+Also, **careful not to upload these secret keys** on github!! I 
+explained [here](https://brian6484.github.io/git/2022/10/15/gitignore.html) how to add them on .gitignore and prevent them
+from being uploaded.
 
 ```yaml
 cloud:
