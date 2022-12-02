@@ -1,11 +1,9 @@
 ---
 layout: post
 title: 2 different ways to create 2D array (List vs ArrayList?)
-subtitle: Java 
-description: Java
-category: Java
+category: Data structure & Algorithms
 tags:
-  - Java
+  - Data structure & Algorithms
   - Head First Java
 ---
 
