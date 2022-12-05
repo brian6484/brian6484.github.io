@@ -15,6 +15,11 @@ all be "apt-get".
 On the right tab of IntelliJ, click Gradle -> Build -> Build.
 Click on that grid icon and jar file will be built in the libs folder.
 
+## FileZilla to move jar file
+Once you build successfully, there will be 2 jar files. Choose
+the SNAPSHOT.jar file, NOT the SNAPSHOT-plain.jar.
+
+> SNAPSHOT.jar 는 실행가능한 아카이브이고, SNAPSHOT-plain.jar 는 실행이 불가능한 일반 아카이브이다
 
 ## Initial server configuration and downloads
 Once you access through SSH:
@@ -41,7 +46,12 @@ a directory on our EC2 server and move the built jar file in there.
 java -jar 파일이름.jar
 ```
 
-If your project is multi-module, 
+You probably wanna run the dev environment, not local. Also, if
+your project is multi-module:
+
+```yaml
+java -jar -Dspring.profiles.active=dev,member-dev,project-dev [jar file name].jar
+```
 
 ## Run server 24/7
 ```yaml
