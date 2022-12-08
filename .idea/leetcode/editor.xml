@@ -25,6 +25,17 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$USER_HOME$/AppData/Local/Temp/leetcode/editor/en/[207]Course Schedule.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$USER_HOME$/AppData/Local/Temp/leetcode/editor/en/doc/content/[207]Course Schedule.md" />
+              <option name="frontendQuestionId" value="leetcode.com207" />
+              <option name="host" value="leetcode.com" />
+              <option name="path" value="$USER_HOME$/AppData/Local/Temp/leetcode/editor/en/[207]Course Schedule.java" />
+              <option name="titleSlug" value="course-schedule" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$USER_HOME$/AppData/Local/Temp/leetcode/editor/en/[234]Palindrome Linked List.java">
           <value>
             <LeetcodeEditor>
@@ -44,6 +55,28 @@
               <option name="host" value="leetcode.com" />
               <option name="path" value="$USER_HOME$/AppData/Local/Temp/leetcode/editor/en/[328]Odd Even Linked List.java" />
               <option name="titleSlug" value="odd-even-linked-list" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/AppData/Local/Temp/leetcode/editor/en/[419]Battleships in a Board.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$USER_HOME$/AppData/Local/Temp/leetcode/editor/en/doc/content/[419]Battleships in a Board.md" />
+              <option name="frontendQuestionId" value="leetcode.com419" />
+              <option name="host" value="leetcode.com" />
+              <option name="path" value="$USER_HOME$/AppData/Local/Temp/leetcode/editor/en/[419]Battleships in a Board.java" />
+              <option name="titleSlug" value="battleships-in-a-board" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/AppData/Local/Temp/leetcode/editor/en/[872]Leaf-Similar Trees.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$USER_HOME$/AppData/Local/Temp/leetcode/editor/en/doc/content/[872]Leaf-Similar Trees.md" />
+              <option name="frontendQuestionId" value="leetcode.com872" />
+              <option name="host" value="leetcode.com" />
+              <option name="path" value="$USER_HOME$/AppData/Local/Temp/leetcode/editor/en/[872]Leaf-Similar Trees.java" />
+              <option name="titleSlug" value="leaf-similar-trees" />
             </LeetcodeEditor>
           </value>
         </entry>
