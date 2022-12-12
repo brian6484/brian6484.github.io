@@ -1,6 +1,6 @@
 ---
 layout: post
-title: docker push denied: requested access to the resource is denied
+title: docker push denied - requested access to the resource is denied
 category: Docker
 tags:
   - Docker

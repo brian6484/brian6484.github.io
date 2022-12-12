@@ -1,6 +1,6 @@
 ---
 layout: post
-title: docker push denied: requested access to the resource is denied
+title: How to deploy Spring app (jar file) with Docker
 category: Docker
 tags:
   - Docker
