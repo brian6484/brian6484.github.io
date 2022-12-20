@@ -1,11 +1,9 @@
 ---
 layout: post
-title: A MUST check when setting up AWS RDS
-subtitle: AWS
+title: A MUST check when setting up AWS RDS (or you will get Fatal Error 3000:0 - No such database found)
 category: AWS
 tags:
   - AWS
-
   
 ---
 

@@ -1,9 +1,9 @@
 ---
 layout: post
 title: SOLID principles of object-oriented design
-category: Java
+category: General Knowledge
 tags:
-  - Java
+  - General Knowledge
 ---
 ## Reason for SOLID principles
 > Design principles encourage us to create more maintainable, 
@@ -102,7 +102,7 @@ By extending the Guitar class, we can be sure that our existing application won'
 
 Oh wait, I mixed up subtype with subclass. So my analogy below is
 wrong: (pls ignore)
-So for example, if Dog (A) is a subtype of Animal (B), we should 
+So for (this is wrong) example, if Dog (A) is a subtype of Animal (B), we should 
 be able to replace Animal (B) with Dog (A) without problem.
 
 > Subclasses allow one to reuse the code inside classes - both instance variable declarations and method definitions. Thus they are useful in supporting code reuse inside a class. Subtyping on the other hand is useful in supporting reuse externally, giving rise to a form of polymorphism. That is, once a data type is determined to be a subtype of another, any function or procedure that could be applied to elements of the supertype can also be applied to elements of the subtype.

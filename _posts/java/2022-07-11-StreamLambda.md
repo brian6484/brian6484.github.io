@@ -45,6 +45,25 @@ some other object, in this case a String containing the song’s genre.
 
 <img src="/assets/images/posts/java/StreamLambda/streamlambda3.png" title="제목" alt="아무거나" width="400"/>
 
+Example:
+```java
+public int getTotalPrice(){
+    int totalPrice=0;
+    for (OrderItem orderItem: orderItems){
+        totalPrice += orderItem.getTotalPrice();
+    }
+    return totalPrice;
+}
+```
+
+Using Lambda:
+```java
+public int getTotalPrice(){
+    int totalPrice= orderItems.stream().mapToInt(OrderItem::getTotalPrice).sum();
+    return totalPrice;
+}
+```
+
 ## Example with distinct() VS .collect(Collectors.toSet())
 Once you get the genres from Songs with map(), you may want unique
 generes and not duplicates. Just add distinct() intermediary operation
