@@ -14,6 +14,7 @@ It configures logic through organic interactions between those
 objects.
 
 ## Advantages of OOP
+Through inheritance, encapsulation and polymorphism that OOP provides:
 1) Reusability of code - can import and use classes
 2) Easy to maintain - only need to modify the applicable part, whereas procedure-oriented 
 programming has to find and modify it one by one
