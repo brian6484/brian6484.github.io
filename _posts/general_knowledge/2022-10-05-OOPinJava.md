@@ -1,7 +1,6 @@
 ---
 layout: post
-title: What is Object-oriented programming (OOP)? How does it work
-in Java? (feat. abstraction, inheritance, etc)
+title: What is Object-oriented programming (OOP)?
 category: General Knowledge
 tags:
   - General Knowledge

@@ -3,6 +3,50 @@
   <component name="LeetcodeEditor">
     <option name="projectConfig">
       <map>
+        <entry key="$USER_HOME$/AppData/Local/Temp/leetcode/editor/en/[1034]Coloring A Border.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$USER_HOME$/AppData/Local/Temp/leetcode/editor/en/doc/content/[1034]Coloring A Border.md" />
+              <option name="frontendQuestionId" value="leetcode.com1034" />
+              <option name="host" value="leetcode.com" />
+              <option name="path" value="$USER_HOME$/AppData/Local/Temp/leetcode/editor/en/[1034]Coloring A Border.java" />
+              <option name="titleSlug" value="coloring-a-border" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/AppData/Local/Temp/leetcode/editor/en/[2097]Valid Arrangement of Pairs.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$USER_HOME$/AppData/Local/Temp/leetcode/editor/en/doc/content/[2097]Valid Arrangement of Pairs.md" />
+              <option name="frontendQuestionId" value="leetcode.com2097" />
+              <option name="host" value="leetcode.com" />
+              <option name="path" value="$USER_HOME$/AppData/Local/Temp/leetcode/editor/en/[2097]Valid Arrangement of Pairs.java" />
+              <option name="titleSlug" value="valid-arrangement-of-pairs" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/AppData/Local/Temp/leetcode/editor/en/[2279]Maximum Bags With Full Capacity of Rocks.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$USER_HOME$/AppData/Local/Temp/leetcode/editor/en/doc/content/[2279]Maximum Bags With Full Capacity of Rocks.md" />
+              <option name="frontendQuestionId" value="leetcode.com2279" />
+              <option name="host" value="leetcode.com" />
+              <option name="path" value="$USER_HOME$/AppData/Local/Temp/leetcode/editor/en/[2279]Maximum Bags With Full Capacity of Rocks.java" />
+              <option name="titleSlug" value="maximum-bags-with-full-capacity-of-rocks" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/AppData/Local/Temp/leetcode/editor/en/[434]Number of Segments in a String.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$USER_HOME$/AppData/Local/Temp/leetcode/editor/en/doc/content/[434]Number of Segments in a String.md" />
+              <option name="frontendQuestionId" value="leetcode.com434" />
+              <option name="host" value="leetcode.com" />
+              <option name="path" value="$USER_HOME$/AppData/Local/Temp/leetcode/editor/en/[434]Number of Segments in a String.java" />
+              <option name="titleSlug" value="number-of-segments-in-a-string" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../../Leetcode/leetcode/editor/en/[387]First Unique Character in a String.java">
           <value>
             <LeetcodeEditor>
