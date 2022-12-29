@@ -1,4 +1,4 @@
-x---
+---
 layout: post
 title: Order of operator in Java (e.g. order matters in &&)
 category: Java
