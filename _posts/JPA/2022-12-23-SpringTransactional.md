@@ -1,20 +1,19 @@
 ---
-date: 2022-06-29 14:35:23
 layout: post
-title: JPA's Transactional
-subtitle: JPA
-description: JPA
-image: https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg
-optimized_image: https://res.cloudinary.com/dm7h7e8xj/image/upload/c_scale,w_380/v1559825145/theme16_o0seet.jpg
-category: Java
+title: JPA's Transactional and precautions
+category: JPA
 tags:
-  - Java
-  - Spring
   - JPA
-
 ---
+  
+## Reference
+https://mommoo.tistory.com/92
 
-## JPA's @Transactional:
+## What does transcational do
+1) transaction begin, commit을 자동 수행해준다.
+2) 예외를 발생시키면, rollback 처리를 자동 수행해준다.
+
+## @Transactional's readOnly
 When declared at class level, @Transactional(readOnly = true) applies to every method in that class. But we don't want to readOnly for saveItem, so we declare an exception to that method with @Transactional
 ```java
   @Service

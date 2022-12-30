@@ -1,9 +1,6 @@
 ---
-date: 2022-09-16 14:35:23
 layout: post
-title: Spring ConstraintViolationException
-subtitle: Spring 
-description: Spring 
+title: Spring ConstraintViolationException error solution
 category: Spring
 tags:
   - Spring

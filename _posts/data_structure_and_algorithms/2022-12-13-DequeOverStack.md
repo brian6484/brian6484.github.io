@@ -1,7 +1,7 @@
 ---
 layout: post
-title: DFS
-category: Use Deque over Stack in Java!
+title: Use Deque over Stack in Java!
+category: Data structure & Algorithms
 tags:
   - Data structure & Algorithms
 ---

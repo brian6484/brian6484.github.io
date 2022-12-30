@@ -1,7 +1,6 @@
 ---
 layout: post
-title: Parameter 1 of constructor in Service class required a bean of type 'org.modelmapper.ModelMapper' that could not be found.
-subtitle: Spring
+title: Error with ModelMapper and solution - Parameter 1 of constructor in Service class required a bean of type 'org.modelmapper.ModelMapper' that could not be found.
 category: Spring
 tags:
   - Spring

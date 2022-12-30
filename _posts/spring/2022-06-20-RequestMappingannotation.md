@@ -6,10 +6,6 @@ tags:
   - Spring
   
 ---
-## @Controller VS @RestController
-
-If return value of @Controller is String, it is rendered as *view* but for @RestController, return value is inserted into HTTP message body. 
-
 ## @RequestMapping
 
 If no HTTP method is allocated in @RequestMapping, all HTTP methods are allowed.

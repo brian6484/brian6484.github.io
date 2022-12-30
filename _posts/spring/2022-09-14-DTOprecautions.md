@@ -1,9 +1,6 @@
 ---
-date: 2022-09-14 14:35:23
 layout: post
-title: Precautions with DTOs
-subtitle: Spring 
-description: Spring 
+title: NEVER put LocalDateTime into DTOs!
 category: Spring
 tags:
   - Spring

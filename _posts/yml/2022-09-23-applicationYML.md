@@ -1,13 +1,9 @@
 ---
-date: 2022-09-23 14:35:23
 layout: post
 title: H2 db connection with application.yml
-subtitle: Spring
-category: Spring
+category: application.yml
 tags:
-  - Spring
-
-  
+  - application.yml
 ---
 
 my .yml didnt work and my h2 db table was not created when I 

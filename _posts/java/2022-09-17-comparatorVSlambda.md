@@ -22,15 +22,15 @@ case 2 apparently. So we should put s1 in front of s2
 to get higher value.
 
 ```java
-		// Comparator to decide which string should come first in concatenation
-		Comparator<String> comp = new Comparator<String>(){
-		    @Override
-		    public int compare(String str1, String str2){
-		        String s1 = str1 + str2;
-				String s2 = str2 + str1;
-				return s2.compareTo(s1); // reverse order here, so we can do append() later
-		    }
-	     };
+// Comparator to decide which string should come first in concatenation
+Comparator<String> comp = new Comparator<String>(){
+    @Override
+    public int compare(String str1, String str2){
+        String s1 = str1 + str2;
+    String s2 = str2 + str1;
+    return s2.compareTo(s1); // reverse order here, so we can do append() later
+    }
+   };
 ```
 
 When implementing Comparator, you have to override its

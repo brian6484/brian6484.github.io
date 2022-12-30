@@ -1,7 +1,7 @@
 ---
 date: 2022-09-26 14:35:23
 layout: post
-title: JPA annotation
+title: Basic JPA annotations you should know (e.g. PersistenceContext, Transactional, etc)
 subtitle: Spring 
 description: Spring 
 category: Spring

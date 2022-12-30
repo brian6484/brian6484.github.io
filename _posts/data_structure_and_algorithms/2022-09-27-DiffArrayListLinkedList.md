@@ -1,5 +1,4 @@
 ---
-date: 2022-09-27 14:35:23
 layout: post
 title: Difference between ArrayList and LinkedList
 subtitle: Java
@@ -9,7 +8,6 @@ tags:
 
   
 ---
-
 ## Difference between ArrayList and LinkedList
 
 The LinkedList class is a collection which can contain many objects of the same type, just like the ArrayList.

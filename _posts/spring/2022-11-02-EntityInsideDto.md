@@ -1,13 +1,9 @@
 ---
-date: 2022-09-15 14:35:23
 layout: post
 title: How to handle entity inside DTO?
-subtitle: Spring 
-description: Spring 
 category: Spring
 tags:
   - Spring
-
 ---
 
 ManyToOne relationship between projects and member. I want to include
