@@ -1,9 +1,7 @@
 ---
 date: 2022-09-20 14:35:23
 layout: post
-title: Lombok's @Builder
-subtitle: Spring 
-description: Spring 
+title: Can we have 2 Lombok's @Builder in 1 class?
 category: Spring
 tags:
   - Spring
