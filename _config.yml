@@ -24,8 +24,8 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: There is no end to mastering the art of programming. You just gotta keep on learning.
-email: My Dev Blog
+title: Brian's Dev Blog
+email: There is no end to mastering the art of programming. You just gotta keep on learning.
 author: Brian
 
 # Copyright setting
