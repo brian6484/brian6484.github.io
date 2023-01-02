@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Redis
-category: Authorisation with Redis
+title: Authorisation with Redis
+category: Redis
 tags:
   - Redis
   - 
