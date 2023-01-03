@@ -50,8 +50,11 @@ You probably wanna run the dev environment, not local. Also, if
 your project is multi-module:
 
 ```yaml
-java -jar -Dspring.profiles.active=dev,member-dev,project-dev [jar file name].jar
+java -jar -Dspring.profiles.active=dev [jar file name].jar
 ```
+
+Again, like setting up configuration for running java application,
+no need to type every dev profile like dev, member-dev, project-dev, etc.
 
 ## Run server 24/7
 ```yaml

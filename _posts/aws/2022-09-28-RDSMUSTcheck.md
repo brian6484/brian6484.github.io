@@ -40,3 +40,11 @@ with the same name as DB instance identifier
 5) Remember your Master username and password when creating RDS
    (e.g. username is postgres, password is blalbal)
 
+
+## Connect RDS to IntelliJ
+Host: RDS endpoint
+
+User & password: master username and password (e.g. postgres, blabla)
+
+Database: the "initial database name" you have created in the
+additional configuration section
