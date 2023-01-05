@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How to use HashMap constructor
+title: Double brace initialisation in Java
 category: Java
 tags:
   - Java
