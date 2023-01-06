@@ -1,5 +1,4 @@
 ---
-date: 2022-07-04 14:35:23
 layout: post
 title: Good Spring practice to follow
 category: Spring
