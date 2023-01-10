@@ -1,6 +1,6 @@
 ---
 layout: post
-title: What is thread in Java? 
+title: What is thread in Java? (feat. process)
 category: Java
 tags:
   - Java
@@ -10,19 +10,21 @@ tags:
 
 ## Process
 <img src="/assets/images/posts/java/Thread/process1.png" title="제목" alt="아무거나" width="400"/> 
-An instance of program is loaded into memory and runs. Each
-process is allocated an independent memory area (code,data,
+It is an instance of program is loaded into memory and runs. 
+It is a unit of work that allocates system resources from OS.
+Each process is allocated an independent memory area (code,data,
 stack,heap) and has at least 1 thread (main thread). Each process
 also runs in a separate address space so to access variables,
-etc they need to *communicate*
+etc, they need to *communicate*
 
 ## Thread
-A unit of multiple flows runs within a process. It is a unit
-of execution that uses the resources allocated to process.
+A unit of multiple execution flows runs within a process. 
+It is a unit of execution that uses the resources allocated to a given process.
 
-Difference between process is that each thread is given only 
+Difference between process and thread is that each thread is given only 
 a separate stack within the process. Code, data and heap space are 
-shared.
+shared. So multiple processes can be executed can be executed simultaneously
+while sharing resources in 1 process
 
 ## Multi-process
 A single application consists of multiple processes.
@@ -39,7 +41,7 @@ A web server is a typical multi-threaded application.
 Advantages:
 * Increased system resource efficiency: Reduced system calls for creating processes and allocating resources.
 * Reduced system processing cost: Reduced system resource consumption (memory sharing outside of Stack). Context switching is fast because the amount of work between threads is small (only stack is processed)
-* Simple communication method: Less communication burden because threads within a process share all memory except stack
+* Simple communication method, shortened response time: Less communication burden because threads within a process share all memory except stack
 Disadvantages:
 * Debugging tricky
 * In the case of multi-threading, synchronization problems may occur
