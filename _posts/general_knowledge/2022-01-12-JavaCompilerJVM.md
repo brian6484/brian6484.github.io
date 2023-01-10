@@ -32,11 +32,15 @@ method that—for security reasons—must never be changed. I stop
 people from touching code they’re not meant to see, including code
 trying to access another class’ critical data."
 
-It then creates a new document, coded into Java **bytecode**. This compiled bytecode is platform-independent.
+When compiler finished compiling a .java file, it then
+converts this to Java a **bytecode** called .class. 
+This compiled bytecode is platform-independent.
+
 
 ## JVM (Java virtual machine):
 
-Reads and runs this bytecode
+Reads and runs this bytecode: since the byte code is not machine language, it cannot be directly executed by the operating system, and the JVM interprets it so that the operating system can understand it.
+
 
 
 

@@ -47,4 +47,8 @@ e.g.(int add() and double add()) and different types and numbers
 of parameters so that they can be called differently depending 
 on the parameters.
 
+## Instance in OOP
+From OOP view, when an object is allocated in memory and actually used, it is called an instance.
+
+
 
