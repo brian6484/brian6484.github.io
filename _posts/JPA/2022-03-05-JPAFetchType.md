@@ -111,7 +111,7 @@ m.getTeam().getName() where we query some fields of Team, only then
 will the queries for Team entity be executed. This is because
 DB has been 초기화ed.
 
-## Implications
+## N+1 issue
 With EAGER, when we query for member, query for 연관된 객체 team is
 also generated. But with LAZY, the mapped entity (team) is not
 needed so only query for member is generated.

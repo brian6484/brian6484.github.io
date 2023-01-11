@@ -22,11 +22,31 @@ To go with your analogy of your components being in a treasure chest: A system (
 
 In a DI scenario, your treasure polisher does not need to know about the existence of the treasure chest at all. All it needs to know is that at some point (preferably at creation) the polisher will be provided (injected) with an object which implements ITreasure:
 
-## How to DI
+## 3 ways of DI
 There are 3 types: field injection, setter injection, and constructor injection
 but constructor is highly recommended.
 
+### Field injection
+It cannot modify field objects. Also, to use this, we have 
+to rely on DI framework (e.g. Spring)
+```java
+@Autowired 
+private UserRepository userRepository
+```
+
 ## Dependency Injection through constructor
+Advantages:
+1) Constructor injection injects required beans at the time 
+of object creation with a constructor. Therefore, the 
+circular reference can be solved. **But it can still occur**.
+When it does occur, best solution is to 순환참조가 되지 않도록 설계.
+Last resort is putting @Lazy annotation, though it is not
+recommended at all by Spring.
+
+2) Fields can be declared final. So can make them immutable
+
+3) You can run tests more easily without using a DI container 
+
 
 Various methods like setter method are used in DI. But DI through constructor is most recommended.
 

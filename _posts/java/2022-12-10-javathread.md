@@ -32,7 +32,8 @@ Advantages:
 * Failure of one process does not affect other processes
 Disadvantages
 * Overhead in Context Switching: Each process is allocated an independent memory area (shared memory x), so when context switching occurs, all data in the cache must be reset and cache information received again.
-* Context switching: When processing while working while rotating several processes in the CPU, the running process waits and keeps the state (Context) of the process
+* Context switching: When processing while working while rotating several processes in the CPU, the running process waits and keeps the state (Context) of the process.
+Performance degradation due to context switching back and forth between multiple processes
 * Difficult and complex communication techniques between processes
 
 ## Multi-thread

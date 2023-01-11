@@ -15,8 +15,9 @@ or StringBuilder
 
 ## Difference
 StringBuffer is actually thread-safe in a multi-threaded 
-environment by supporting the synchronisation. Btw, since 
-String also has immutability, it also has stability 
+environment by supporting the synchronisation. It means
+2 threads cant call the methods of StringBufffer at the
+same time.Btw, since String also has immutability, it also has stability 
 (thread-safe) in a multi-threaded environment.
 
 Conversely, StringBuilder does not support synchronisation, 
