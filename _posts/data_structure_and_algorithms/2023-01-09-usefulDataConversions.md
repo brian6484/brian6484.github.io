@@ -8,4 +8,5 @@ tags:
 ## Character.isDigit()
 boolean isDigit(char ch) checks if this character is a digit
 
+## char c >= '0'
 
