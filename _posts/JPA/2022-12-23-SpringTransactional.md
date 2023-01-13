@@ -9,6 +9,13 @@ tags:
 ## Reference
 https://mommoo.tistory.com/92
 
+## Transaction
+First of all, what is transaction?
+
+Some 작업 needs to be executed without any error. But if an error
+does occur in the middle of execution, transaction helps roll
+back the changes right before the error occurred.
+
 ## What does transcational do
 1) transaction begin, commit을 자동 수행해준다.
 2) 예외를 발생시키면, rollback 처리를 자동 수행해준다.
