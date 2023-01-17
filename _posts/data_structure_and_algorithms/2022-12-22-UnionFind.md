@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Union Find
+title: Quick union (not quick find)
 category: Data structure & Algorithms
 tags:
   - Data structure & Algorithms
