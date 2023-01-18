@@ -1,5 +1,4 @@
 ---
-date: 2022-02-18 14:35:23
 layout: post
 title: GarbageCollection in Java (feat. stack and Heap)
 description:
