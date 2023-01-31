@@ -14,7 +14,10 @@ while(!queue.isEmpty()){
         num = num*10 + c - '0';
     }
 ```
-## char c >= '0'
+## check if char 
+```java
+char c >= '0'
+```
 
 ## s.charAt(i)-'0'
 When converting character (e.g. ‘3’) to integer to use as index in array, have to subtract ASCII value of ‘0’.
