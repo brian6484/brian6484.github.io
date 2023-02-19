@@ -125,3 +125,15 @@ int[][] dir = {{0,1},{1,0},{-1,0},{0,-1}};
 ## TreeMap.lowerKey(int key)
 It returns the **greatest key** strictly less than the key passed
 as parameter.
+
+## create 2 arraylists in 1 arraylist
+This is for questions that give 2d matrix like [2,3].
+```java
+List<List<Integer>> list = new ArrayList<>(2);
+for(int i=0;i<2;i++){
+    list[i] = new ArrayList<>();
+  }
+```
+
+## Integer.parseInt()
+converts string to int or Integer.valueOf()

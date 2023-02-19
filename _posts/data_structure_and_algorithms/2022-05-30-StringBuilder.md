@@ -34,3 +34,7 @@ public String convert(String s, int numRows) {
 }
 ```
 
+## setCharAt()
+sb.setCharAt(i,'*') where you can place something at a certain index
+You can't put an empty literal like ('') so when you set it with 
+certain pattern, use replaceAll() to put empty ("") like .replaceAll("\\*+","")
