@@ -116,10 +116,7 @@ while(!pq.isEmpty()){
 return sb.toString();
 ```
 
-## declare 2d array right away
-```java
-int[][] dir = {{0,1},{1,0},{-1,0},{0,-1}};
-```
+
 
 ## TreeMap.lowerKey(int key)
 It returns the **greatest key** strictly less than the key passed
