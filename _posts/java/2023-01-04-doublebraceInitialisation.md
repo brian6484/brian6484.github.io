@@ -13,7 +13,7 @@ map.put(0, -1);
 ```
 is same as:
 ```java
-Map<Integer, Integer> map = new HashMap<>(){{put(0,-1);}};;
+//Map<Integer, Integer> map = new HashMap<>(){{put(0,-1);}};;
 ```
 
 How?
