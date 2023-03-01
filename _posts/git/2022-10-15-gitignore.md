@@ -17,7 +17,8 @@ Thus, it is a lesson to be learnt and I will discuss how to prevent
 this.
 
 ## Just adding your file to .gitignore is insufficient
-It can still be tracked by your repo branch. So to solve this, we need
+It can still be tracked by your repo branch if you have commited
+your yml file before adding it to your gitignore file. So to solve this, we need
 to remove the cache that is being tracked. Then, we do a new commit
 and the .gitignore will be applied on a fresh new leaf.
 

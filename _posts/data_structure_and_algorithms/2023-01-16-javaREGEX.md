@@ -5,7 +5,7 @@ category: Data structure & Algorithms
 tags:
   - Data structure & Algorithms
 ---
-## \\W+
+## W
 It matches any non-word character like * or # or whatever. It can be
 used with other methods like
 ```java
@@ -13,7 +13,7 @@ used with other methods like
 String[] words = p.toLowerCase().split("\\W+");
 ```
 
-## \\s+
+## s
 It matches any whitespace character. We can use with .split() to split
 string via whitespaces like:
 ```java
