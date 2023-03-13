@@ -30,4 +30,4 @@ em.clear();
 
 These 2 commands will do the trick. Remember flush does not flush
 out saved entities but it just sends out the query to DB immediately,
-even before transaction.commit() can happen.
+even before transaction.commit() can happen. 

@@ -41,4 +41,5 @@ List<Song> result = allSongs.stream()
   .collect(toList());
 ```
 
+More on static helper method
 
