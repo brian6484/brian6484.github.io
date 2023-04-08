@@ -17,5 +17,5 @@ reference: https://stackoverflow.com/questions/5181845/git-push-existing-repo-to
 3) git remote add origin URL_TO_Your_OLD_GITHUB_REPO
 4) git push origin master
 
-To be explained more later
+To be explained more later..
 
