@@ -208,5 +208,36 @@ of dtos to a list of entities and vice versa. To do that, we use
 Java 8's stream() and map each dto with the Recruitment.toEntity() method
 that we coded earlier and collect them in a list. Same for vice versa.
 
+Go back to toEntity() and from() method in Project class. We need
+a list of recruitment entities from a list of recruitment dtos. That is
+where we use these inner static methods in Recruitment class to do the
+conversion.
+
+```java
+public static Project toEntity(ProjectDto projectDto){
+    return Project.builder()
+            .title(projectDto.getTitle())
+            .content(projectDto.getContent())
+            .startDate(projectDto.getStartDate())
+            .endDate(projectDto.getEndDate())
+            .recruitmentList(Recruitment.toEntityList(projectDto.getRecruitmentDtoList()))
+            .email(projectDto.getEmail())
+            .url(projectDto.getUrl())
+            .build();
+}
+
+public static ProjectDto from(Project project){
+    return ProjectDto.builder()
+            .title(project.getTitle())
+            .content(project.getContent())
+            .startDate(project.getStartDate())
+            .endDate(project.getEndDate())
+            .recruitmentDtoList(Recruitment.from(project.getRecruitmentList()))
+            .email(project.getEmail())
+            .url(project.getUrl())
+            .build();
+}
+```
+
 I haven't seen how do to this on google or in chatgpt so I struggled with
 this a lot. Hope this helps :)
