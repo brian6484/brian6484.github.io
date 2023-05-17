@@ -28,7 +28,6 @@ public List<UserDetailResponseDto> q_listViewExceptPassword(){
                 .fetch();
 ```
 
-
 Read this for Querydsl https://velog.io/@peppermint100/QueryDSL-%EA%B8%B0%EB%B3%B8-%EB%AC%B8%EB%B2%95 
 and especially difference between List of *tuple* and List of *dto* 
 implementation 
