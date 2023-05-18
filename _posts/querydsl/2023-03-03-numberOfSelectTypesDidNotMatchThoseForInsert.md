@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How to set up Querydsl in your Spring Boot gradle project
+title: insert number does not match select in Querydsl JPA
 category: Querydsl 
 tags:
   - Querydsl
