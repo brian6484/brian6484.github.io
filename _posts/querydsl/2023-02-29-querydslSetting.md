@@ -24,8 +24,6 @@ plugins {
     id 'java'
 }
 
-//...
-
 dependencies {
     // 3. querydsl dependencies 추가
     implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
