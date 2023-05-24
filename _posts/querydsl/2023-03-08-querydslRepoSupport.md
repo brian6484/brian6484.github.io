@@ -38,7 +38,7 @@ JpaQuery<Long> countQuery = queryFactory
 ```
 
 Now here we created a custom method to check in where condition - 
-nameEq and codeEq
+nameEq and codeEq through boolean expressions
 
 ```java
 Private BooleanExpression codeEq(String name){
