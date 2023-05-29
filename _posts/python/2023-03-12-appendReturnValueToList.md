@@ -8,60 +8,64 @@ tags:
 
   
 ---
-## Lists are mutable objects in Python
-Take a look at this example
-```python
-nums = [1,2,3]
-visited = [False for _ in range(len(nums))]
-ans = []
-path =[]
-
-def dfs(nums,path,visited):
-    for i in range(len(nums)):
-        if len(path) == len(nums):
-            # issue here
-            ans.append(path)
-            return
-        if not visited[i]:
-            visited[i]=True
-            path.append(nums[i])
-            dfs(nums,path,visited)
-            path.pop()
-            visited[i]=False
-            
-dfs(nums,path,visited)
-print(ans)
-```
-
-When I am done with DFS search, I append the path [1,2,3] to my answer list.
-But when this code runs, my ans is a list of empty lists. What happened?
-
-In python, lists are *mutable objects*, which means they can be modified 
-along the way. When I try appending a list to another list, I am not appending
-the actual copy of that list but a **reference** to the original list. 
-This means that any changes made to the original list will also be 
-reflected in the appended list since they both refer to the same object.
-
-In my code, when I append the path list to ans using ans.append(path), 
-I am appending a **reference** to the path list. Then, when I later 
-modify the path list by popping elements or backtracking, those changes 
-are also reflected in the lists already appended to ans.
-
-## Solution
-So instead of appending a **reference**, add an actual copy of the path list.
+## Appending return value to list in Python
+Let's take a look at this example where I am doing a DFS search where 
+if a certain condition is met like if node is already visited or dx dy is
+out of the grid, I want to return False. If it passes all checks, it is worthy
+to return True. I just want **one** return value for that one particular DFS search
+point.
 
 ```python
-    if len(path) == len(nums):
-        ans.append(path.copy())
-        return
+from collections import deque
+ans=[]
+
+def bfs(p, idx):
+    while queue:
+    #   if some condition
+        return False
+    return 1
+
+def solution(places):
+    for place in places:
+        for row in range(len(places[0])):
+            for col in range(len(places)):
+                if places[row][col]=='P':
+                    ans.append(bfs(place,[row,col,0]))
+    return ans
 ```
 
-To avoid this issue, you need to create a copy of the path list before 
-appending it to ans. In Python, you can create a shallow copy of a list 
-using the copy() method. The copy() method creates a new list object with 
-the same elements as the original list.
+The ans that I get is  [1,1,1,1,1,1,false,false,false,1,false,false,false,1
+,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] where as the correct answer is
+[1,0,1,1,1]. As you can see 5 values are added to my ans list but I only want
+one boolean value to check if DFS search is True or False.
 
-By using ans.append(path.copy()), you create a separate copy of the path 
-list each time it needs to be appended to ans. This ensures that each 
-list in ans is independent and unaffected by subsequent modifications 
-to the path list.
+Actually, this way appends each return value everytime it is computed. What
+we need to do is *overwrite* the return value.
+
+Update at midnight 29th.
+Actually, I was deeply mistakened
+1) it should be place[row][col] not places.
+2) As you see in the most innerloop iteration, a value is produced for 
+**each** column as dfs search is done on each grid if its value is 'P' so 
+since there are 5 'P's, 5 values are produced. If just one of these 5 
+values is False, it means BFS search return values is False and I want to mark 
+the value as False. In this case we can use a flag and see if there is just one
+value that comes in as False, we flag it. Then, according to if this flag
+has been raised or not, it shows whether BFS search is successful or not and
+we can append just 1 value at the 'place' level according to the flag.
+
+The correct way is 
+```python
+def solution(places):
+  # global ans
+  for place in places:
+    flag =1
+    for row in range(len(places[0])):
+      for col in range(len(places)):
+        if place[row][col]=='P':
+          val = bfs(place,[row,col,0])
+          if val == False:
+            flag =0
+    ans.append(1 if flag==1 else 0)
+  return ans
+```
