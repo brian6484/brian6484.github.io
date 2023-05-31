@@ -42,6 +42,26 @@ list.sort(key = lambda x:x[0])
 list.sort(key=lambda x: x[0], reverse=True)
 ```
 
+### reverse()
+```python
+bitch_list.reverse()
+```
+
+I used it when converting from base 10 to base k like
+```python
+def convert_to_base_k(n,k):
+    digits=[]
+    while n>0:
+        remainder=n%k
+        digits.append(remainder)
+        n//=k
+#     if digits is empty
+    if not digits:
+        digits.append(0)
+    digits.reverse()
+    return digits
+```
+
 
 ## Dictionary
 ### dict.keySet() = dict.items()
