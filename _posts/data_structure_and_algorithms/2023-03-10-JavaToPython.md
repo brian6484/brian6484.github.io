@@ -29,8 +29,18 @@ def solution(n):
 ### append() = append()
 Same as java, it is append() to a list
 
+### if list.isEmpty() = if not list
+An empty list [] has boolean value as False. So *if not list* means that
+if the list is empty. This applies to stack and deque too
+
+```python
+# if list.isEmpty()
+if not list:
+    
+```
+
 ### sort()
-The sort() method in Python does not accept a lambda function as a 
+The sort() method in Python **does not** accept a lambda function as a 
 positional argument. Instead, it accepts the key parameter, which 
 allows you to specify a function that generates a sorting key for each 
 element.
@@ -65,7 +75,7 @@ def convert_to_base_k(n,k):
 
 ## Dictionary
 ### dict.keySet() = dict.items()
-* Java Dictionary's keySet(), which consists of both key and value, is
+Java Dictionary's keySet(), which consists of both key and value, is
 same as .items()
 ```python
 for key,value in dict.items():
@@ -86,7 +96,7 @@ if key not in dict:
 ```
 
 ### dict[key] = set()
-* If you want to set a set for a specific key so that no duplicate values 
+If you want to set a set for a specific key so that no duplicate values 
 are allowed for that key, declare it like this
 ```python
 dict[key] = set()
@@ -100,9 +110,25 @@ dict[key].add("hi")
 
 ## String
 ### split()
-* whatever_string.split() automatically splits this string into a LIST 
+whatever_string.split() automatically splits this string into a LIST 
 of substrings based on **whitespace** characters so unlike java, no 
 need .split(“ “)
+
+### no append() or pop() method in string
+We cannot use append() or pop() method in strings because strings in 
+Python are **immutable** unlike lists. Thus, we can achieve same functionality
+via string concatentation (+) and string slicing ([start or end index 
+of string you want to slice])
+
+
+For example, if you want to remove the first char of string and append
+to the back of the string
+```python
+# wrong, this is for list
+# s.append(s.pop(0))
+
+s = s[1:] + s[-0]
+```
 
 ## Queue
 ### !queue.isEmpty() = while(queue)
@@ -163,3 +189,18 @@ def solution(places):
 solution([["POOOP", "OXXOX", "OPXPX", "OOXOX", "POXXP"], ["POOPX", "OXPXP", "PXXXO", "OXXXO", "OOOPP"], ["PXOPX", "OXOXP", "OXPOX", "OXXOP", "PXPOX"], ["OOOXX", "XOOOX", "OOOXX", "OXOOX", "OOOOO"], ["PXPXP", "XPXPX", "PXPXP", "XPXPX", "PXPXP"]])
 
 ```
+
+## Deque
+### Declare deque
+We can declare deque with no initial data, or with a starting position.
+```python
+hola = deque()
+hola = deque([start_index, end_index])
+```
+
+### .peek() = deque[-1]
+Normally before you pop it like from a stack, you need to peek at the value.
+In Python, we just do deque[-1]
+
+### pop()
+If using it as a stack, pop() removes the topmost element stored in the stack
