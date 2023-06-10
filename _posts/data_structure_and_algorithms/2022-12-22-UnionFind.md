@@ -11,6 +11,22 @@ This [virtual explanation](https://m.blog.naver.com/parkhj2416/221861837543)
 too
 
 ## Template
+```python
+def find_parent(parent,x):
+    if parent[x]!=x:
+        # path compression
+        parent[x] = find_parent(parent,parent[x])
+      
+    #   without path compression
+        return find_parent(parent, parent[x])
+    return parent[x]
+
+def union(parent,a,b):
+    a = find_parent(parent,a)
+    b = find_parent(parent,b)
+    parent[a] = b
+```
+
 ```java
 public class Union_Find {
 

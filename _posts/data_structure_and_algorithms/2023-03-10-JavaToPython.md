@@ -204,3 +204,26 @@ In Python, we just do deque[-1]
 
 ### pop()
 If using it as a stack, pop() removes the topmost element stored in the stack
+
+## Collections
+### Counter
+Counter counts the frequency of elements in an iterable. It is a subclass of
+dict class and so inherits all funtionalities of dict.
+```python
+my_list = [1, 2, 3, 1, 2, 1, 3, 4, 5, 4, 4]
+counter = Counter(my_list)
+
+print(counter)
+# Output: Counter({1: 3, 4: 3, 2: 2, 3: 2, 5: 1})
+
+print(counter[1])
+# Output: 3
+```
+
+#### Comparing Counter with dict with ==
+You can straight away compare your dict with Counter via == whether 
+```python
+for i in range(len(discount) - 9):
+    if dict_super == Counter(discount[i:i+10]):
+        answer += 1
+```
