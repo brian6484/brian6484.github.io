@@ -29,6 +29,16 @@ def solution(n):
 ### append() = append()
 Same as java, it is append() to a list
 
+### .index()
+Tells you the index of that element. Useful when instead of storing the
+index as value in a dictionary, you can just use a list and store
+the elements in sequence and use .index() method
+
+```python
+eng = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
+answer += str(eng.index(temp))
+```
+
 ### if list.isEmpty() = if not list
 An empty list [] has boolean value as False. So *if not list* means that
 if the list is empty. This applies to stack and deque too
@@ -73,62 +83,7 @@ def convert_to_base_k(n,k):
 ```
 
 
-## Dictionary
-### dict.keySet() = dict.items()
-Java Dictionary's keySet(), which consists of both key and value, is
-same as .items()
-```python
-for key,value in dict.items():
-  
-# Set<String> keySet = map.keySet();
-# for (String key : keySet) {
-#   System.out.println(key);
-# }
-```
 
-### dict.contains(key) = if key in dict
-Checking if dict contains this key can be done via
-```python
-if key in dict:
-if key not in dict:
-
-# if dict.contains(key):
-```
-
-### dict[key] = set()
-If you want to set a set for a specific key so that no duplicate values 
-are allowed for that key, declare it like this
-```python
-dict[key] = set()
-dict[key].add("hi")
-
-
-# Map<String, Set<Integer>> map = new HashMap<>();
-# map.put("key1", new HashSet<>());
-# map.put("key2", new HashSet<>());
-```
-
-## String
-### split()
-whatever_string.split() automatically splits this string into a LIST 
-of substrings based on **whitespace** characters so unlike java, no 
-need .split(“ “)
-
-### no append() or pop() method in string
-We cannot use append() or pop() method in strings because strings in 
-Python are **immutable** unlike lists. Thus, we can achieve same functionality
-via string concatentation (+) and string slicing ([start or end index 
-of string you want to slice])
-
-
-For example, if you want to remove the first char of string and append
-to the back of the string
-```python
-# wrong, this is for list
-# s.append(s.pop(0))
-
-s = s[1:] + s[-0]
-```
 
 ## Queue
 ### !queue.isEmpty() = while(queue)
@@ -204,6 +159,10 @@ In Python, we just do deque[-1]
 
 ### pop()
 If using it as a stack, pop() removes the topmost element stored in the stack
+
+### append((whatever elements in a list))
+Unlike list, deque's append is different. In list, we do .append([list of elements])
+but in deque, we don't use the square brackets. 
 
 ## Collections
 ### Counter
