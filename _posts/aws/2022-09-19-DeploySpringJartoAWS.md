@@ -5,7 +5,7 @@ category: AWS
 tags:
   - AWS
 ---
-Finally arranging this so that I don't have to google it again.
+Finally arranging this so that I don't have to google it again!!
 
 ## Intro
 We are using Ubuntu server with Spring jar. So the linux commands will
