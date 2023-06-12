@@ -73,4 +73,9 @@ and authorised BASIC users,
 </div>
 ```
 
+Btw you need 
+```yaml
+implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+```
+to use sec:authorize in thymeleaf in build.gradle
 
