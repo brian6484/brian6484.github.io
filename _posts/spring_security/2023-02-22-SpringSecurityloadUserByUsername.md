@@ -24,7 +24,7 @@ Solution: in my 회원가입 register.html, my div for userId was as such:
 ```html
 <div>
  <label for=”userId”> User Id:
- <input type =”text” id=”userId” th:field=*{userId}” >
+ <input type =”text” id=”userId” th:field="*{userId}" >
  <div class =”field-error” th:errors=”*{userId}”><div>
 </div>
 ```
@@ -35,7 +35,7 @@ worked. Like this:
 ```html
 <div>
  <label for=”username”> User Id:
- <input type =”text” id=”username” th:field=*{userId}” >
+ <input type =”text” id=”username” th:field="*{userId}" >
  <div class =”field-error” th:errors=”*{userId}”><div>
 </div>
 
