@@ -13,6 +13,7 @@ more complex logic here.
 
 
 This guide is separated to 2 parts - AWS and Spring
+
 ## AWS
 Let's get it
 ## Make S3 bucket on AWS
