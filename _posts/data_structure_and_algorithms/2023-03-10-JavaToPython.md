@@ -82,7 +82,24 @@ def convert_to_base_k(n,k):
     return digits
 ```
 
+### extend() to append a value multiple times to a list
+```python
+my_list = []
+value = 42
+times = 5
+my_list.extend([value] * times)
+print(my_list)
+```
 
+Output:
+```
+[42, 42, 42, 42, 42]
+```
+
+In this example, the `extend()` method is called on `my_list` with a 
+list containing the value `[value] * times`. This creates a new list 
+with `value` repeated `times` number of times, and then the `extend()`
+method adds those elements to `my_list`.
 
 
 ## Queue

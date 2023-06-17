@@ -52,3 +52,35 @@ dict[key].add("hi")
 # map.put("key1", new HashSet<>());
 # map.put("key2", new HashSet<>());
 ```
+
+### iterating through highest keys in descending order
+You can iterate through the highest keys in a dictionary by using the 
+`sorted()` function with the `keys()` method of the dictionary.
+
+```python
+my_dict = {'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5}
+
+# Get the highest keys in descending order
+highest_keys = sorted(my_dict.keys(), reverse=True)
+
+# Iterate through the highest keys
+for key in highest_keys:
+    value = my_dict[key]
+    print(key, value)
+```
+
+Output:
+```
+e 5
+d 4
+c 3
+b 2
+a 1
+```
+
+So you are effectively not sorting the dictionary itself, but smartly 
+sorting the keys in descending order **in a list** separately and 
+passing that key to dict to get the value.
+
+
+
