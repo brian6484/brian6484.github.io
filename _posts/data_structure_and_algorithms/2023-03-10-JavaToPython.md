@@ -101,6 +101,19 @@ list containing the value `[value] * times`. This creates a new list
 with `value` repeated `times` number of times, and then the `extend()`
 method adds those elements to `my_list`.
 
+### Improvements
+
+```python
+return [a, b]
+```
+
+Instead of 
+```python
+ans = []
+ans.append(a)
+ans.append(b)
+return ans
+```
 
 ## Queue
 ### !queue.isEmpty() = while(queue)
