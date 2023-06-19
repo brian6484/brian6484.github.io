@@ -189,6 +189,7 @@ In Python, we just do deque[-1]
 
 ### pop()
 If using it as a stack, pop() removes the topmost element stored in the stack
+But if you are using it as queue, use popleft()
 
 ### append((whatever elements in a list))
 Unlike list, deque's append is different. In list, we do .append([list of elements])

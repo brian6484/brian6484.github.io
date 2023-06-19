@@ -17,8 +17,6 @@ for i in range(len(discount)-9):
         answer += 1
 ```
 
-
-
 ### dict.keySet() = dict.items()
 Java Dictionary's keySet(), which consists of both key and value, is
 same as .items()
