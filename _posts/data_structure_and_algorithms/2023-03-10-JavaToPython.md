@@ -115,6 +115,42 @@ ans.append(b)
 return ans
 ```
 
+### How to avoid unnecessary double for loop
+I was solving https://school.programmers.co.kr/learn/courses/30/lessons/42577
+when I needed one pointer in outer loop to be stationary while I compared
+with the rest of the elements in the list with another pointer in inner loop.
+Like this
+
+```python
+def solution(phone_book):
+  phone_book.sort()
+  for i in range(len(phone_book)):
+    for j in range(i+1,len(phone_book)):
+      if phone_book[i+1].startswith(phone_book[i]):
+        return False
+  return True
+```
+
+This passes tests but not efficiency tests because double for loops is O(n^2)
+time complexity. Now how do we do this with 1 for loop? We actually
+use the same 1 pointer (i) but we give it some limits like
+
+```python
+def solution(phone_book):
+    phone_book.sort()
+    for i in range(len(phone_book)-1):
+        # for j in range(i+1,len(phone_book)):
+        if phone_book[i+1].startswith(phone_book[i]):
+            return False
+    return True
+```
+
+Notice that to avoid index going out of range, pointer i stops 1 index less
+than the final possible index of list. 
+
+[Fix 25th June] Wait actually this doesnt traverse all the rest of the elements
+in the list. It just checks the one on the right and that is it.
+
 ## Queue
 ### !queue.isEmpty() = while(queue)
 More or less the same
