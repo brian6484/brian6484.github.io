@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Dictionary useful methods and practice questions
+title: Dictionary (+Counter) and practice questions
 category: Data structure & Algorithms
 tags:
   - Data structure & Algorithms
