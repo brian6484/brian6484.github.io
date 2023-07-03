@@ -10,6 +10,8 @@ tags:
 This [virtual explanation](https://m.blog.naver.com/parkhj2416/221861837543)
 too
 
+https://techblog-history-younghunjo1.tistory.com/257 Python version
+
 ## Template
 ```python
 def find_parent(parent,x):
