@@ -215,3 +215,4 @@ def solution(stones, k):
 This is better cuz end is set more efficiently. Setting max(stones) is better
 as less iterations are needed.
 
+

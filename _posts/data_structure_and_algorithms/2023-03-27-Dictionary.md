@@ -51,7 +51,7 @@ print(cnt)
 
 
 
-### dict.keySet() = dict.items()
+### dict.items()
 Java Dictionary's keySet(), which consists of both key and value, is
 same as .items()
 ```python
@@ -61,6 +61,22 @@ for key,value in dict.items():
 # for (String key : keySet) {
 #   System.out.println(key);
 # }
+```
+
+### for x in dic.keys()
+If you want to iterate through the keys in dictionary
+```python
+for x in dicX.keys():
+    # if dicX[x]==1 is also the same
+    if dicX.get(x)==1:
+        answer.append(x)
+```
+
+### dic.get(key) is same as dic[key]
+Both are the same
+```python
+val = dic.get(key)
+val = dic[key]
 ```
 
 ### dict.contains(key) = if key in dict
