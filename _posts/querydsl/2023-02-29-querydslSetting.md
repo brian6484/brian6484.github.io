@@ -79,3 +79,8 @@ public List<UserDetailResponseDto> q_listViewExceptPassword(){
 Read this for Querydsl https://velog.io/@peppermint100/QueryDSL-%EA%B8%B0%EB%B3%B8-%EB%AC%B8%EB%B2%95 
 and especially difference between List of *tuple* and List of *dto* 
 implementation 
+
+## Building and updating QueryDSL's Qclass
+when querydsl q classes need to be updated, you need to build -> clean, 
+not querydsl -> cleanQuerydsl and initQuerydsl. I kept doing the latter 
+but didnt do the former.

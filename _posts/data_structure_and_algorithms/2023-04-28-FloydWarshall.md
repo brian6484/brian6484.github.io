@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Greedy algorithms and practice questions
+title: Floyd Warshall algorithm
 category: Data structure & Algorithms
 tags:
   - Data structure & Algorithms
