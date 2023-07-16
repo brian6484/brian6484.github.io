@@ -4,7 +4,6 @@ title: Setting up H2 database
 category: Database
 tags:
   - Database
-  - H2
 ---
 ## What is SQL trunc?
 Whilst it has many usages, SQL trunc can be used to truncate(delete) part 

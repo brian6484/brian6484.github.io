@@ -80,7 +80,25 @@ Read this for Querydsl https://velog.io/@peppermint100/QueryDSL-%EA%B8%B0%EB%B3%
 and especially difference between List of *tuple* and List of *dto* 
 implementation 
 
+## To use QClass
+To use Qclass for the first time, you call the class and its variable like
+```java
+QIarStats.iarStats
+```
+Then you can add static import on it
+
 ## Building and updating QueryDSL's Qclass
 when querydsl q classes need to be updated, you need to build -> clean, 
 not querydsl -> cleanQuerydsl and initQuerydsl. I kept doing the latter 
 but didnt do the former.
+
+## When QueryDSL classes are corrupted
+whenever some querydsl classes are corrupted, do a sweep clean via:
+Gradle on the right tab -> tasks -> querydsl -> the 2 buttons 
+(clean and initQuerydslSourcesDir).
+
+Then rebuild QClasses by Gradle on the right tab -> tasks -> other ->
+Here it is very important, I did compileJava -> compileQuerydsl 
+-> compileQuerydslJava. But you only need to do compileQuerydsl 
+(just 1, not 3)
+
