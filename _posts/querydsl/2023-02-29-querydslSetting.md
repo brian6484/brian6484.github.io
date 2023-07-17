@@ -92,6 +92,10 @@ when querydsl q classes need to be updated, you need to build -> clean,
 not querydsl -> cleanQuerydsl and initQuerydsl. I kept doing the latter 
 but didnt do the former.
 
+Goood practice to1) refresh IDE and 2) gradle -> other -> compileJava 
+to make QClass whenever you make changes. Especially refreshing IDE 
+fug spent too much time when my code was right
+
 ## When QueryDSL classes are corrupted
 whenever some querydsl classes are corrupted, do a sweep clean via:
 Gradle on the right tab -> tasks -> querydsl -> the 2 buttons 
