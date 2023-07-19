@@ -1,6 +1,6 @@
 ---
 layout: post
-title: @UniqueConstraints and for multiple column conditions(제약조건) where @Column is insufficient
+title: UniqueConstraints annotation and for multiple column conditions(제약조건) where Column annotation is insufficient
 category: JPA
 tags:
   - JPA
