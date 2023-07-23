@@ -13,7 +13,6 @@ Indexing makes columns faster to queries by creating pointers
 to where the data is stored in the database.
 
 
-
 ## Reference
 1) [how to apply indexes](https://herojoon-dev.tistory.com/142)
 2) [how indexing works](https://dataschool.com/sql-optimization/how-indexing-works/)

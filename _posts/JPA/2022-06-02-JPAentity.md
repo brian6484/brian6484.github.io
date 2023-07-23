@@ -13,6 +13,17 @@ The Entity class is a class that is mapped 1:1 with tables
 in the actual database. It should only have columns that
 exist in the DB as attributes.
 
+## How are entities mapped?
+```java
+@JoinColumn(name = “name_of_FK_joining_2_tables”)
+//Name is “team_id” or name of FK
+```
+
+If you omit this attribute, JPA finds FK via
+Field name (team) + _ + table column name reference like
+
+`(TEAM_ID) = team_TEAM_ID`
+
 ## Precautions
 ### Never use setters indiscriminately
 When creating entities, indiscriminate use of setters can change the value of an object (Entity), so object consistency cannot be guaranteed.

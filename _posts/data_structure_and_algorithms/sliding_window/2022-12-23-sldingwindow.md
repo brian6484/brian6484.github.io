@@ -10,7 +10,7 @@ at the end.
 
 ## Explanation
 Sliding is commonly used in problems that involve finding a subarray or 
-substring that satisfies specific conditions. 
+substring that satisfies specific conditions. https://learning-e.tistory.com/36
 
 1) Subarray/Substring Sum Problems: Find a subarray or substring with a 
 given sum, sum within a certain range, or the maximum/minimum sum. 

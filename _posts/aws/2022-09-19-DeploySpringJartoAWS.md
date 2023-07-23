@@ -61,6 +61,11 @@ no need to type every dev profile like dev, member-dev, project-dev, etc.
 nohup java -jar 파일이름.jar &
 ```
 
+If you have set up a profile, do
+```yaml
+nohup java -jar -Dspring.profiles.active=dev [jar file name].jar &
+```
+
 If you want to kill the server and stop it from running, first
 identify the process *number* through this command
 ```yaml
