@@ -7,75 +7,11 @@ tags:
 ---
 
 ## Binary search original template
-```java
-public int search(int[] nums, int target) {
-    int left = 0, right = nums.length-1;
-    while(left<=right){
-        int mid = left +(right-left)/2;
-        if(nums[mid]==target) return mid;
-        else if (nums[mid]>target) right = mid-1;
-        else left = mid+1;
-    }
-    return -1;
-}
-```
-
-BTW, **very important**. Since we declared right as arr.length-1,
-right is the correct 0-indexed index. So we have to do while condition
-until <= right (including the index itself), not < right.
-
-I always wondered, what is the difference between doing right = mid
-or right =mid -1? When do we differentiate?
+  
 
 
 ## Practice questions
-### 징검다리
-https://school.programmers.co.kr/learn/courses/30/lessons/43236
 
-This was my first attempt at binary search on a question that is not as
-simple as finding a value in a sorted list.
-
-Binary search is basically guessing the answer value by putting your guess
-as mid. If you say mid = 30 seconds, whatever processes need to be completed
-within that time. If there is insufficient count due to not enough time, we 
-do mid = start+1 and else, we do mid = end-1.
-
-```python
-def solution(distance, rocks, n):
-    rocks.sort()  
-    rocks.append(distance)
-    start = 0
-    end= distance
-    answer = 0
-    
-    while start<=end:
-      mid = (start+end)//2
-      prev_rock=0
-      count = 0
-      for rock in rocks:
-        if rock-prev_rock <mid:
-          count+=1
-        else:
-          prev_rock = rock
-      if count>n:
-        end=mid-1
-      else:
-        start=mid+1
-        answer=mid
-
-    print(answer)
-    return start-1
-```
-
-There are 2 points you need to know. After sorting, we append the distance
-value, which is the final end because we are gonna calculate if we can
-reach that end from our previous prev_rock position.
-
-The second point that is **really** important is that notice I returned
-start -1, not just start. start -1 is essentially mid, where mid is the
-minimum value among the distances between stones when n stones are removed.
-
-In the stone example, we return start - 1 because start represents the smallest distance that allows removing n rocks, so the maximum value for the minimum distance would be start - 1.
 
 ### 입국심사
 https://school.programmers.co.kr/learn/courses/30/lessons/43238
@@ -98,8 +34,7 @@ def solution(n, times):
             end = mid - 1
         else:
             start = mid + 1
-            answer = mid
-    print(start)
+
     return start
 ```
 
