@@ -1,6 +1,6 @@
 ---
 layout: post
-title: error no property “some_method_name” not found for type “entity”
+title: error no property "some_method_name" not found for type "entity"
 category: Querydsl 
 tags:
   - Querydsl
