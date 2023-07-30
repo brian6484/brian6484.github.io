@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Binary Search and practice questions
+title:  Binary Search explained
 category: Data structure & Algorithms
 tags:
   - Data structure & Algorithms
@@ -8,146 +8,25 @@ tags:
 
 ## Binary search original template
   
+## start vs start -1
+Ok before this lemme explain what start really means in binary search. We
+are NOT going to use end pointer cuz it is complicated and start pointer
+is sufficient. So firstly, we have the 2 common templates - start<end or
+start<=end.
 
+If you start with start<end, when that search ends, at the previous step
+start would have been incremented by value 1 (that is the reason why we
+exit out of that while loop). Now this start is the minimal value that
+satisfies the condition you have set in search. So start is the answer if
+you want to find the minimum value. But if you are required to take a step
+back and need to return a value before we reach that minimum value, it is
+start -1.
 
-## Practice questions
-
-
-### 입국심사
-https://school.programmers.co.kr/learn/courses/30/lessons/43238
-
-my correct solution. Remember I said binary search is literally guessing
-the answer value and seeing if all can be processed within that answer
-value.
-
-```python
-def solution(n, times):
-    start = 0
-    end = 1000000000000000000
-    answer = 0
-    
-    while start <= end:
-        mid = (start + end) // 2
-        peeps = sum(mid // i for i in times)
-        
-        if peeps >= n:
-            end = mid - 1
-        else:
-            start = mid + 1
-
-    return start
-```
-
-Notice here we are returning start instead of start-1 unlike our
-previous example. We return start because it represents the smallest 
-possible time that allows processing n people, which is what we were 
-searching for.
-
-### 징검다리 건너기
-https://school.programmers.co.kr/learn/courses/30/lessons/64062
-
-initial wrong solution where  I was setting wrong condition for if
-```python
-def solution(stones, k):
-    start = 0
-    end = 200000000
-
-    while start <= end:
-        mid = (start + end) // 2
-        temp = [0 if i - mid < 0 else i - mid for i in stones]
-        hola = 0
-        flag = False
-        for num in temp:
-            if num <= 0:
-                hola += 1
-                if hola > k:
-                    flag = True
-                    break
-            else:
-                hola = 0
-        if flag:
-            end = mid - 1
-        else:
-            start = mid + 1
-
-    print(start)
-    return start
-```
-
-It should be if hola >= k. This is because let's say if we have k=3,
-once we encounter 3 consecutive 0s, then our hola value is 3 and greater
-and that is condition for our flag. It is not hola>3 just look at the
-question diagram. Flag should be raised when we see k or more times of
-consecutive 0s.
-
-my question to gpt
-
-`ah ok so the way that i was count hola is that if k is 3 and hola is incremented until value 3, that means there are 3 consecutive 0s already which means we cannot continue `
-
-reply back was
-
-Yes, exactly! In this problem, `hola` represents the number of consecutive 0s encountered in `temp`. When `hola` becomes equal to or greater than `k`, it means that you have found a position where it is not possible to continue jumping `k` consecutive stones, as there are already `k` or more consecutive 0s.
-
-By checking `hola >= k`, you ensure that you detect this condition correctly and stop the loop when it is not possible to continue jumping `k` consecutive stones.
-
-my fixed solution
-```python
-def solution(stones, k):
-    start = 0
-    end = 200000000
-
-    while start <= end:
-        mid = (start + end) // 2
-        temp = [0 if i - mid < 0 else i - mid for i in stones]
-        hola = 0
-        flag = False
-        for num in temp:
-            if num <= 0:
-                hola += 1
-                if hola >= k:
-                    flag = True
-                    break
-            else:
-                hola = 0
-        if flag:
-            end = mid - 1
-        else:
-            start = mid + 1
-
-    print(start)
-    return start
-```
-
-gpt sensei solution:
-```python
-def solution(stones, k):
-    start = 1
-    end = max(stones)
-
-    while start <= end:
-        mid = (start + end) // 2
-        count = 0
-        flag = False
-
-        for stone in stones:
-            if stone - mid <= 0:
-                count += 1
-            else:
-                count = 0
-
-            if count >= k:
-                flag = True
-                break
-
-        if flag:
-            end = mid - 1
-        else:
-            start = mid + 1
-
-    return start
-```
-
-This is better cuz end is set more efficiently. Setting max(stones) is better
-as less iterations are needed.
-
-
+It is fine if you don’t get it now. Let me finish explaining start<=end.
+Now the difference is that unlike the previous start<end, the loop will
+run **one more time**. When we exit this while loop via (end= mid+1) and
+notice we are not increasing the value of start but instead shifting the
+end pointer, the value start is again the minimum value that satisfies the
+condition you have set in search. Now what is start-1? If the question
+does not ask for the minimum value but when you need to take a step back
+and return a value before we reach that minimum value, we return start-1.

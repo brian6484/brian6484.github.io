@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Dynamic Programming template and approach
+title: Dynamic Programming explained
 category: Data structure & Algorithms
 tags:
   - Data structure & Algorithms
