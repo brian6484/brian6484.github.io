@@ -45,3 +45,16 @@ StringExpression formattedDate = Expressions.stringTemplate(“TO_CHAR({0},’yy
 Return formattedDate.eq(todayDate);
 ```
 
+## Example
+I needed to build a query that join multiple tables on multiple matching conditions. One of the matching conditions had a field (clientName) that was not present in my main table (Statistics) so I needed to create a separate subquery, to be included in my main query. I implemented BooleanExpressions for the matching where conditions.
+
+```java
+public void updateCountIfMatch(String reqUrl, LocalDateTime createdAt, String statusCode, String clientName){
+    JPQLQuery<Long> subquery = JPAExpressions.select(statistics.id)
+//  blabla
+}
+```
+
+
+I thought in the JPQL subquery, I need to select client.clientName, which was the field that I want to match and it wasnt in my stats table but actually, statistics.id needs to be selected to be the primary identifier for the main query.
+
