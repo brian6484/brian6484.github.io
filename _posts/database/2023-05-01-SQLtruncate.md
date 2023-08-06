@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Setting up H2 database 
+title: What is SQL truncate? What is its use?
 category: Database
 tags:
   - Database

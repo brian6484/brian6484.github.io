@@ -35,5 +35,9 @@ vi .bash_profile
 source .bash_profile
 ```
 
+### See logs real-time
+```yaml
+tail -1000f nohup.out
+```
 
 

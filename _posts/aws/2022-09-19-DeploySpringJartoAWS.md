@@ -76,3 +76,9 @@ Once you identified the number, you can kill it via:
 ```yaml
 kill -9 the_process_number
 ```
+
+## See logs real-time
+```yaml
+tail -1000f nohup.out
+```
+
