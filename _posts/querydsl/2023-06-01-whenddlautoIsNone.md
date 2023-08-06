@@ -1,6 +1,6 @@
 ---
 layout: post
-title: OracleDatabaseException: table or view does not exist error when generate-ddl is set to none 
+title: OracleDatabaseException table or view does not exist error when generate-ddl is set to none 
 category: Querydsl 
 tags:
   - Querydsl

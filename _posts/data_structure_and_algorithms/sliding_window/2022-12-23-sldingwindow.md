@@ -4,6 +4,7 @@ title: Sliding window
 category: Data structure & Algorithms
 tags:
   - Data structure & Algorithms
+  - Sliding window
 ---
 There is a list of sliding window [question list](https://leetcode.com/problems/subarrays-with-k-different-integers/solutions/523136/java-c-python-sliding-window/?orderBy=most_votes)
 at the end.

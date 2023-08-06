@@ -28,3 +28,21 @@ of target table - a **sql trigger**.
 
 ## What is sql trigger?
 tbc
+
+## Resetting sql trigger
+you may not have permission to drop and create sequence if you see that the current value of sequence is messed up and want to reset
+
+`SELECT SEQ_IAR_STATS.NEXTVAL FROM DUAL;`
+
+If nextval is something like 256, you have to take 1 value less than that which is 255 and
+
+`ALTER SEQUENCE SEQ_IAR_STATS INCREMENT BY -235;`
+
+Check if it has been reset by doing the first command again
+
+`SELECT SEQ_IAR_STATS.NEXTVAL FROM DUAL;`
+
+Finally do
+
+`ALTER SEQUENCE SEQ_IAR_STATS INCREMENT BY 1;`
+

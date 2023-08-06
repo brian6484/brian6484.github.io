@@ -4,6 +4,7 @@ title: Dynamic Programming explained
 category: Data structure & Algorithms
 tags:
   - Data structure & Algorithms
+  - Dynamic Programming
 ---
 
 ## Approach
