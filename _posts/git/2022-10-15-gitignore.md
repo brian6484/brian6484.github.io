@@ -16,7 +16,15 @@ And there were hacking attempts by bots to use my keys.
 Thus, it is a lesson to be learnt and I will discuss how to prevent
 this.
 
-## Just adding your file to .gitignore is insufficient
+## Try adding your file to .gitignore 
+Add this in your .gitignore and see if it is visible on git repo when pushed.
+```yaml
+# yml
+*.yml
+application.yml
+```
+
+## If just adding your file to .gitignore is insufficient
 It can still be tracked by your repo branch if you have commited
 your yml file before adding it to your gitignore file. So to solve this, we need
 to remove the cache that is being tracked. Then, we do a new commit
@@ -61,6 +69,11 @@ will be highlighted in a light grey colour if properly removed.
 
 ## .gitignore when working in a team
 To be added
+
+Added on Aug 13th 23. 
+
+https://keeeeeepgoing.tistory.com/170
+https://iamkdh.tistory.com/110
 
 ## Reference
 https://velog.io/@gillog/Git-.gitignore-%EC%9E%AC%EC%A0%81%EC%9A%A9
