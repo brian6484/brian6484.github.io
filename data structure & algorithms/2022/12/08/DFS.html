@@ -1,0 +1,1612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>DFS and practice questions | Brian’s Dev Blog</title>
+<meta name="generator" content="Jekyll v4.3.2">
+<meta property="og:title" content="DFS and practice questions">
+<meta name="author" content="Brian">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="Precautions Btw if input is given like [“X591X”,”X1X5X”,”X231X”, “1XXX1”] and we should convert it to 2d graph representation like this ```python def convert_to_graph(lst): graph = [] for row in lst: graph.append(list(row)) return graph">
+<meta property="og:description" content="Precautions Btw if input is given like [“X591X”,”X1X5X”,”X231X”, “1XXX1”] and we should convert it to 2d graph representation like this ```python def convert_to_graph(lst): graph = [] for row in lst: graph.append(list(row)) return graph">
+<link rel="canonical" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/12/08/DFS.html">
+<meta property="og:url" content="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/12/08/DFS.html">
+<meta property="og:site_name" content="Brian’s Dev Blog">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2022-12-08T00:00:00+00:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="DFS and practice questions">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Brian"},"dateModified":"2022-12-08T00:00:00+00:00","datePublished":"2022-12-08T00:00:00+00:00","description":"Precautions Btw if input is given like [“X591X”,”X1X5X”,”X231X”, “1XXX1”] and we should convert it to 2d graph representation like this ```python def convert_to_graph(lst): graph = [] for row in lst: graph.append(list(row)) return graph","headline":"DFS and practice questions","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll-theme-yat/data%20structure%20&%20algorithms/2022/12/08/DFS.html"},"url":"/jekyll-theme-yat/data%20structure%20&%20algorithms/2022/12/08/DFS.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="shortcut icon" href="">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/jekyll-theme-yat/assets/css/main.css">
+  <script src="/jekyll-theme-yat/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="/jekyll-theme-yat/feed.xml" title="Brian's Dev Blog">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/jekyll-theme-yat/">
+  <img class="site-favicon" title="Brian's Dev Blog" src="" onerror="this.style.display='none'">
+  Brian's Dev Blog
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/jekyll-theme-yat/about.html">ABOUT</a><a class="page-link" href="/jekyll-theme-yat/archives.html">ARCHIVES</a><a class="page-link" href="/jekyll-theme-yat/categories.html">CATEGORIES</a><a class="page-link" href="/jekyll-theme-yat/">HOME</a><a class="page-link" href="/jekyll-theme-yat/tags.html">TAGS</a>
+
+
+
+
+
+
+
+
+
+<span class="page-link">
+
+
+
+<div id="google_translate_element" style="display: none;">
+</div>
+
+<span class="ct-language">
+  <ul class="list-unstyled ct-language-dropdown">
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="en">
+          
+          <img src="https://cdn.countryflags.com/thumbs/united-states-of-america/flag-400.png" title="English">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="fr">
+          
+          <img src="https://cdn.countryflags.com/thumbs/france/flag-400.png" title="French">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="zh-CN">
+          
+          <img src="https://cdn.countryflags.com/thumbs/china/flag-400.png" title="Chinese(Simple)">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ja">
+          
+          <img src="https://cdn.countryflags.com/thumbs/japan/flag-400.png" title="Japanese">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ko">
+          
+          <img src="https://cdn.countryflags.com/thumbs/south-korea/flag-400.png" title="Korean">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ru">
+          
+          <img src="https://cdn.countryflags.com/thumbs/russia/flag-400.png" title="Russian">
+          
+        </a>
+      </li>
+    
+  </ul>
+</span>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    autoDisplay: false,
+    layout: google.translate.TranslateElement.InlineLayout.VERTICAL
+  }, 'google_translate_element');
+
+  // Links to cross-origin destinations are unsafe
+  var gll = document.getElementsByClassName('goog-logo-link')[0];
+  if (gll) {
+    gll.setAttribute('rel', 'noopener');
+  }
+
+  function restoreLang() {
+    var iframe = document.getElementsByClassName('goog-te-banner-frame')[0];
+    if (!iframe) return;
+
+    var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+    var restore_el = innerDoc.getElementsByTagName("button");
+
+    for (var i = 0; i < restore_el.length; i++) {
+      if (restore_el[i].id.indexOf("restore") >= 0) {
+        restore_el[i].click();
+        var close_el = innerDoc.getElementsByClassName("goog-close-link");
+        close_el[0].click();
+        return;
+      }
+    }
+  }
+
+  function triggerHtmlEvent(element, eventName) {
+    var event;
+    if (document.createEvent) {
+      event = document.createEvent('HTMLEvents');
+      event.initEvent(eventName, true, true);
+      element.dispatchEvent(event);
+    } else {
+      event = document.createEventObject();
+      event.eventType = eventName;
+      element.fireEvent('on' + event.eventType, event);
+    }
+  }
+
+  var googleCombo = document.querySelector("select.goog-te-combo");
+  var langSelect = document.querySelector('.ct-language');
+  langSelect.addEventListener('click', function(event) {
+    if (!event.target) {
+      return;
+    }
+
+    var selected = document.querySelector('.ct-language .ct-language-selected');
+    if (selected) {
+      selected.classList.remove('ct-language-selected');
+    }
+
+    var target = event.target;
+    while (target && target !== langSelect ) {
+      if (target.matches('.lang-select')) {
+        break;
+      }
+      target = target.parentElement;
+    }
+
+    if (target && target.matches('.lang-select')) {
+      var lang = target.getAttribute('data-lang');
+      if (googleCombo.value == lang) {
+        restoreLang();
+      } else {
+        target.parentElement.classList.add('ct-language-selected');
+        googleCombo.value = lang;
+        triggerHtmlEvent(googleCombo, 'change');
+      }
+    }
+
+    event.preventDefault();
+  });
+}
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</span>
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">DFS and practice questions</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2022-12-08T00:00:00+00:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Dec 08, 2022
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 33 mins</span>
+  </p>
+<div class="post-tags"><a class="post-tag" href="/jekyll-theme-yat/tags.html#Data%20structure%20&amp;%20Algorithms">#Data structure &amp; Algorithms</a></div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h2 id="precautions">Precautions</h2>
+<p>Btw if input is given like [“X591X”,”X1X5X”,”X231X”, “1XXX1”] and we should
+convert it to 2d graph representation like this</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">convert_to_graph</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
+        <span class="n">graph</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">row</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">graph</span>
+
+</code></pre></div></div>
+
+<p>Also <strong>really important</strong> for the boundary check of 2x2 graph.</p>
+
+<p><code class="language-plaintext highlighter-rouge">The problem lies in the condition next_x &gt;= len(graph) when checking the bounds for next_x in the BFS loop. It should be next_x &gt;= len(graph[0]) since the length of each row in graph represents the number of columns.</code></p>
+
+<h2 id="basic-dfs-with-backtracking">basic DFS with backtracking</h2>
+<p>Let’s say we are given list [1,2,3] and want to create permutation where
+order matters so like [1,3,2], [2,1,3], [2,3,1] , etc.</p>
+
+<p>I had 2 problems.</p>
+
+<p>1) What do I iterate through in my DFS? The index of the list or the actual
+number in the list?? The way to mark index or number as visited will differ
+so I wasn’t sure</p>
+
+<p>2) I struggled with what parameters to pass in for my recursive dfs function. Should I pass
+the next index (i+1) for DFS to go to the next index? But what about list
+index out of range error? Certainly i+1 goes beyond my list and this error 
+will occur!</p>
+
+<h3 id="doubts-to-clear">Doubts to clear</h3>
+<p>1) Actually either way is fine! But the way to mark index or number as visited
+differs but that is the only difference</p>
+
+<p>With index traversal:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">nums</span><span class="p">))]</span>
+<span class="n">ans</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">path</span> <span class="o">=</span><span class="p">[]</span>
+
+<span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">visited</span><span class="p">):</span>
+    <span class="c1"># index traversal
+</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">==</span> <span class="nf">len</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+            <span class="n">ans</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">path</span><span class="p">.</span><span class="nf">copy</span><span class="p">())</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="bp">True</span>
+            <span class="n">path</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="nf">dfs</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">visited</span><span class="p">)</span>
+            <span class="n">path</span><span class="p">.</span><span class="nf">pop</span><span class="p">()</span>
+            <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="bp">False</span>
+            
+<span class="nf">dfs</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">visited</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Here, I am accessing the index of nums list and marking the <strong>index</strong> of
+visited list as true or false. Don’t worry about backtracking yet we go in 
+later.</p>
+
+<p>With number traversal:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">ans</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">path</span> <span class="o">=</span><span class="p">[]</span>
+
+<span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span><span class="n">path</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">==</span> <span class="nf">len</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+            <span class="n">ans</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">path</span><span class="p">.</span><span class="nf">copy</span><span class="p">())</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="n">num</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">path</span><span class="p">:</span>
+            <span class="n">path</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+            <span class="nf">dfs</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span><span class="n">path</span><span class="p">)</span>
+            <span class="n">path</span><span class="p">.</span><span class="nf">pop</span><span class="p">()</span>
+         
+<span class="nf">dfs</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span><span class="n">path</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>As you can see, we cannot do something like</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">nums</span><span class="p">))]</span>
+
+<span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">visited</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">==</span> <span class="nf">len</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+            <span class="n">ans</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="bp">True</span>
+            <span class="n">path</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="nf">dfs</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">visited</span><span class="p">)</span>
+            <span class="n">path</span><span class="p">.</span><span class="nf">pop</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>because I am accessing my boolean visited array with an actual number, not
+the index. So in this case, we cannot use this way of marking number as visited.
+Instead, there is a much simpler way - <strong>if num not in list</strong> ! This checks for
+any incoming iterated number if it is already present (i.e. visited) in my
+path list!</p>
+
+<p>2) Actually, I was confused at the fundamental concept of not visited[index]
+or <strong>if num not in list</strong>. We don’t need to pass in the next index or value
+and frankly we don’t need to care because the boolean list or <strong>if num not in list</strong>
+automatically checks this for us.</p>
+
+<p>Let’s say we don’t put index+1 as parameter for our recursive function. I 
+am afraid it will recur back to index and go on infinite loop. Will it actually?</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">visited</span><span class="p">):</span>
+    <span class="c1"># index traversal
+</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">==</span> <span class="nf">len</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+            <span class="n">ans</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">path</span><span class="p">.</span><span class="nf">copy</span><span class="p">())</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="bp">True</span>
+            <span class="n">path</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="nf">dfs</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">visited</span><span class="p">)</span>
+            <span class="n">path</span><span class="p">.</span><span class="nf">pop</span><span class="p">()</span>
+            <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="bp">False</span>
+</code></pre></div></div>
+<p>Let’s say i=1 and the corresponding number is 2 right. So we mark
+visited[1] = True  and append 2 to our path. Then go to dfs(nums,path,visited).
+i will go from 0 again. But it WILL NOT go on infinite loop check because 
+of our boolean check or <strong>if num not in list</strong>. So i will go to 1 and since
+it is already visited, it will go to 2.</p>
+
+<p>See? We don’t need to pass index+1 as parameter.</p>
+
+<h2 id="example">Example</h2>
+<p>Let’s take this leetcode question as <a href="https://leetcode.com/problems/battleships-in-a-board/description/">example</a></p>
+
+<p>If we encounter the X sign in 2x2 board, we do a DFS search
+on that index.</p>
+
+<p>BTW BFS is used to find SHORTEST distance.</p>
+
+<h2 id="2-conditions-for-dfs">2 conditions for DFS</h2>
+<p>1) Specify the end condition</p>
+
+<p>If DFS search goes beyond the boundary of the board +
+<strong>very important</strong> if we meet an already visited node (for
+example in this q, visited node is marked as dot while we
+are looking for X)</p>
+
+<p>2) Mark the current,visiting node as visited(true)</p>
+
+<p>Or you will get StackOverflow error, which means recursion is never-
+ending.</p>
+
+<p>To make it as visited, we can create a 2x2 boolean array.
+But try to mark on the given board itself to save space. For
+example, here we can just mark visited node the same way as
+the space not occupied by battleship, which is marked by dot.</p>
+
+<h2 id="dfs-template">DFS template</h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">countBattleships</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">board</span><span class="p">):</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">board</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+                <span class="k">if</span> <span class="n">board</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">X</span><span class="sh">'</span><span class="p">:</span>
+                    <span class="n">self</span><span class="p">.</span><span class="nf">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">board</span><span class="p">)</span>
+                    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">count</span>
+    
+    <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">board</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="nf">len</span><span class="p">(</span><span class="n">board</span><span class="p">)</span> <span class="ow">or</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="nf">len</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="n">board</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">.</span><span class="sh">'</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">board</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="sh">'</span><span class="s">.</span><span class="sh">'</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">dfs</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">board</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">dfs</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">board</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">board</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">board</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="practice-questions">Practice questions</h2>
+<h3 id="네트워크">네트워크</h3>
+<p>https://school.programmers.co.kr/learn/courses/30/lessons/43162</p>
+
+<p>First the list that is given to us needs to be processed to something like</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span> 
+<span class="n">to</span> <span class="n">graph</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="n">like</span> <span class="n">graph</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="p">,</span> <span class="n">graph</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">graph</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>We can do this like this where if value is 1, there is an edge
+connecting the 2 nodes so we add that to the list at graph[i]</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">)):</span>
+    <span class="n">graph</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">j</span> <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">computers</span><span class="p">):</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">computers</span><span class="p">)):</span>
+        <span class="n">graph</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">j</span> <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">computers</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="nf">print</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+    <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">visited</span><span class="o">=</span>  <span class="p">[</span><span class="bp">False</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">graph</span><span class="p">))]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">graph</span><span class="p">)):</span>
+      <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+        <span class="nf">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">visited</span><span class="p">,</span><span class="n">graph</span><span class="p">)</span>
+        <span class="n">ans</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="c1"># print(ans)
+</span>    <span class="k">return</span> <span class="n">ans</span>
+
+<span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">visited</span><span class="p">,</span><span class="n">graph</span><span class="p">):</span>
+  <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+  <span class="k">for</span> <span class="n">next_node</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">next_node</span><span class="p">]:</span>
+      <span class="nf">dfs</span><span class="p">(</span><span class="n">next_node</span><span class="p">,</span><span class="n">visited</span><span class="p">,</span><span class="n">graph</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="타겟-넘버">타겟 넘버</h3>
+<p>https://school.programmers.co.kr/learn/courses/30/lessons/43165</p>
+<h4 id="dfs-first">DFS first</h4>
+<p>Initial thinking is like this</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+  <span class="n">answer</span> <span class="o">=</span> <span class="mi">0</span>
+  
+  <span class="nf">dfs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">numbers</span><span class="p">,</span><span class="n">target</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+  <span class="nf">print</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">answer</span>
+  
+<span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">index</span><span class="p">,</span><span class="n">curr_sum</span><span class="p">,</span><span class="n">numbers</span><span class="p">,</span><span class="n">target</span><span class="p">):</span>
+  <span class="k">if</span> <span class="n">index</span><span class="o">==</span><span class="nf">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span> <span class="ow">and</span> <span class="n">curr_sum</span><span class="o">==</span><span class="n">target</span><span class="p">:</span>
+    <span class="n">answer</span><span class="o">+=</span><span class="mi">1</span>
+  <span class="nf">dfs</span><span class="p">(</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">curr_sum</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+  <span class="nf">dfs</span><span class="p">(</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">curr_sum</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>  
+</code></pre></div></div>
+
+<p>But how do you update answer value in python? You need to <strong>pass it to
+my dfs function as parameter</strong> for value to be updated.</p>
+
+<p>Ok so let’s pass that answer as parameter like this</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="nf">dfs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">numbers</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">answer</span>
+
+<span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">curr_sum</span><span class="p">,</span> <span class="n">numbers</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">answer</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="nf">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span> <span class="ow">and</span> <span class="n">curr_sum</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+        <span class="n">answer</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="nf">dfs</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">curr_sum</span> <span class="o">+</span> <span class="n">numbers</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">numbers</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">answer</span><span class="p">)</span>
+    <span class="nf">dfs</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">curr_sum</span> <span class="o">-</span> <span class="n">numbers</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">numbers</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">answer</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Now we get a index out of range error. But that is strange. I added a condition
+to stop recursion when index reaches the len(numbers).</p>
+
+<p>Actually, if you look carefully, my condition does not work properly.
+Let’s take index = 5 and len(numbers) is also 5. Assuming that curr_sum
+is target too, we increment answer. Then, nothing stops the code from going
+to the next line and executing those 2 dfs functions that take index+1
+as parameter, which goes beyond our list range.</p>
+
+<p>To effectively <strong>stop</strong> those recursive calls once final index is reached,
+we need to add a <code class="language-plaintext highlighter-rouge">return</code> before those dfs calls.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="nf">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">curr_sum</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+        <span class="n">answer</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span>
+</code></pre></div></div>
+
+<p>Now all seems fixed right? Until our answer value is still 0. Why?</p>
+
+<p>In python, we have to understand mutable and immutable objects.
+Integers like our answer are <em>immutable</em> which means its value cannot be
+changed once it is declared. Since answer is declared as integer 0, we can’t
+change that. However, <em>lists</em> are mutable so we can update answer value if it
+is stored in a list like</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Use a mutable list to store the answer count
+</span>
+    <span class="nf">dfs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">numbers</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">answer</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">answer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">curr_sum</span><span class="p">,</span> <span class="n">numbers</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">answer</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="nf">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">curr_sum</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+            <span class="n">answer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span>
+
+    <span class="nf">dfs</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">curr_sum</span> <span class="o">+</span> <span class="n">numbers</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">numbers</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">answer</span><span class="p">)</span>
+    <span class="nf">dfs</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">curr_sum</span> <span class="o">-</span> <span class="n">numbers</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">numbers</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">answer</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>There is a more common way like</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nf">dfs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">numbers</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">curr_sum</span><span class="p">,</span> <span class="n">numbers</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="nf">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">curr_sum</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+    
+    <span class="n">count</span> <span class="o">+=</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">curr_sum</span> <span class="o">+</span> <span class="n">numbers</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">numbers</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">curr_sum</span> <span class="o">-</span> <span class="n">numbers</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">numbers</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">count</span>
+</code></pre></div></div>
+
+<p>We can also use <code class="language-plaintext highlighter-rouge">global</code> keyword like here to modify a global variable inside
+and outside our function. In Python, integers are indeed immutable, which means their values cannot be changed once they are created. However, when you use the global keyword inside a function, it allows you to modify the value of a global variable from within that function.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">answer</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="nf">dfs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">numbers</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">answer</span>
+
+<span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">curr_sum</span><span class="p">,</span> <span class="n">numbers</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">answer</span>
+    <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="nf">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">curr_sum</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+            <span class="n">answer</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> 
+    <span class="nf">dfs</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">curr_sum</span> <span class="o">+</span> <span class="n">numbers</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">numbers</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+    <span class="nf">dfs</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">curr_sum</span> <span class="o">-</span> <span class="n">numbers</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">numbers</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>You can also use <code class="language-plaintext highlighter-rouge">nonlocal</code> like</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+  <span class="n">answer</span> <span class="o">=</span> <span class="mi">0</span>
+
+  <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">curr_sum</span><span class="p">):</span>
+    <span class="k">nonlocal</span> <span class="n">answer</span>
+    <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="nf">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+      <span class="k">if</span> <span class="n">curr_sum</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+        <span class="n">answer</span> <span class="o">+=</span> <span class="mi">1</span>
+      <span class="k">return</span>
+    <span class="nf">dfs</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">curr_sum</span> <span class="o">+</span> <span class="n">numbers</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+    <span class="nf">dfs</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">curr_sum</span> <span class="o">-</span> <span class="n">numbers</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+
+  <span class="nf">dfs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="nf">print</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">answer</span>
+</code></pre></div></div>
+
+<h4 id="bfs-version">BFS version</h4>
+<p>Taking note of DFS version, I tried thinking of BFS version</p>
+
+<p>Wrong inital code</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+  <span class="n">queue</span> <span class="o">=</span><span class="nf">deque</span><span class="p">()</span>
+  <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+  <span class="n">count</span> <span class="o">=</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">queue</span><span class="p">,</span><span class="n">numbers</span><span class="p">,</span><span class="n">target</span><span class="p">)</span>
+  <span class="nf">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">count</span>
+
+<span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">queue</span><span class="p">,</span><span class="n">numbers</span><span class="p">,</span><span class="n">target</span><span class="p">):</span>
+  <span class="n">count</span> <span class="o">=</span><span class="mi">0</span>
+  <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+    <span class="n">curr_index</span><span class="p">,</span><span class="n">curr_sum</span> <span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">curr_index</span><span class="o">==</span><span class="nf">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+      <span class="k">if</span> <span class="n">curr_sum</span><span class="o">==</span><span class="n">target</span><span class="p">:</span>
+        <span class="n">count</span><span class="o">+=</span><span class="mi">1</span>
+      <span class="k">break</span>
+    <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">curr_index</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">curr_sum</span><span class="o">+</span><span class="n">numbers</span><span class="p">[</span><span class="n">curr_index</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">curr_index</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">curr_sum</span><span class="o">-</span><span class="n">numbers</span><span class="p">[</span><span class="n">curr_index</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
+</code></pre></div></div>
+
+<p>Again im getting index out of range error.</p>
+
+<p>Now firstly, we shouldnt be using
+break because that means all the elements waiting in our queue will be processed
+once we meet that curr_index==len(numbers) condition cuz it breaks out of
+the loop completely. Instead, we should use continue to process the other
+data waiting in our queue.</p>
+
+<p>Secondly, index out of range error.While we are intercepting well the first parameter 
+of queue.append((curr_index+1,curr_sum+numbers[curr_index+1])), the second parameter
+is the issue. Why? numbers[curr_index+1]. This surely will go beyond the
+length of our nums list.</p>
+
+<p>Finally, we should be returning count in our bfs function because we want that
+count value</p>
+
+<p>So correct solution is</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">()</span>
+    <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">queue</span><span class="p">,</span> <span class="n">numbers</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">count</span>
+
+<span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">queue</span><span class="p">,</span> <span class="n">numbers</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+        <span class="n">curr_index</span><span class="p">,</span> <span class="n">curr_sum</span> <span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">curr_index</span> <span class="o">==</span> <span class="nf">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">curr_sum</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">continue</span>
+        <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">curr_index</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">curr_sum</span><span class="o">+</span><span class="n">numbers</span><span class="p">[</span><span class="n">curr_index</span><span class="p">]))</span>
+        <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">curr_index</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">curr_sum</span><span class="o">-</span><span class="n">numbers</span><span class="p">[</span><span class="n">curr_index</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">count</span>
+</code></pre></div></div>
+
+<h3 id="전력망을-둘로-나누기">전력망을 둘로 나누기</h3>
+<p>https://school.programmers.co.kr/learn/courses/30/lessons/86971
+This was similiar to 네트워크 problem so I tried solving it through dfs
+where I remove that wire from graph and do dfs search on that modified
+graph.</p>
+
+<p>my wrong code</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span><span class="p">,</span><span class="n">defaultdict</span>
+<span class="kn">import</span> <span class="n">math</span>
+
+
+<span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">wires</span><span class="p">):</span>
+  <span class="n">graph</span> <span class="o">=</span> <span class="nf">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">wire</span> <span class="ow">in</span> <span class="n">wires</span><span class="p">:</span>
+    <span class="n">graph</span><span class="p">[</span><span class="n">wire</span><span class="p">[</span><span class="mi">0</span><span class="p">]].</span><span class="nf">append</span><span class="p">(</span><span class="n">wire</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">graph</span><span class="p">[</span><span class="n">wire</span><span class="p">[</span><span class="mi">1</span><span class="p">]].</span><span class="nf">append</span><span class="p">(</span><span class="n">wire</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+  <span class="nf">print</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+  <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+  <span class="n">count</span> <span class="o">=</span><span class="n">n</span>
+  <span class="k">for</span> <span class="n">wire</span> <span class="ow">in</span> <span class="n">wires</span><span class="p">:</span>
+    <span class="n">graph</span><span class="p">[</span><span class="n">wire</span><span class="p">[</span><span class="mi">0</span><span class="p">]].</span><span class="nf">remove</span><span class="p">(</span><span class="n">wire</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">graph</span><span class="p">[</span><span class="n">wire</span><span class="p">[</span><span class="mi">1</span><span class="p">]].</span><span class="nf">remove</span><span class="p">(</span><span class="n">wire</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nf">len</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+      <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">and</span> <span class="n">graph</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">visited</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
+      <span class="c1"># Restore the removed edges
+</span>    <span class="n">graph</span><span class="p">[</span><span class="n">wire</span><span class="p">[</span><span class="mi">0</span><span class="p">]].</span><span class="nf">append</span><span class="p">(</span><span class="n">wire</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">graph</span><span class="p">[</span><span class="n">wire</span><span class="p">[</span><span class="mi">1</span><span class="p">]].</span><span class="nf">append</span><span class="p">(</span><span class="n">wire</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+  <span class="nf">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">count</span>
+
+<span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">visited</span><span class="p">,</span><span class="n">graph</span><span class="p">,</span><span class="n">i</span><span class="p">):</span>
+  <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="bp">True</span>
+  <span class="n">count</span><span class="o">=</span><span class="mi">1</span>
+  <span class="k">for</span> <span class="n">next_node</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">next_node</span><span class="p">]:</span>
+      <span class="n">count</span> <span class="o">+=</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">visited</span><span class="p">,</span><span class="n">graph</span><span class="p">,</span><span class="n">next_node</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">count</span>
+</code></pre></div></div>
+
+<p>But the problem is that removing wire from my graph resulted in empty list
+for a given key and dfs still traverses through that. So that is the
+wrong part. I needed a different way to mark the disconnection, apart from
+this remove() way.</p>
+
+<p>Also another problem was using the same visited list each time I iterated
+through wires. I should have instantiated a new one each time for each
+wire.</p>
+
+<p>For the first problem, I googled and some used a 2d list like this check_link. (or you can
+create graph each time you iterate through wires but inefficient)</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 없앤 간선인지 아닌지 체크 값이 들어있는 리스트
+</span><span class="n">check_link</span> <span class="o">=</span> <span class="p">[[</span><span class="bp">True</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+
+<span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">wires</span><span class="p">:</span>
+  <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+  <span class="n">check_link</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">b</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span> <span class="c1"># a-b 간선 끊기
+</span>  <span class="n">cnt_a</span> <span class="o">=</span> <span class="nc">DFS</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">visited</span><span class="p">,</span> <span class="n">check_link</span><span class="p">)</span>
+  <span class="n">cnt_b</span> <span class="o">=</span> <span class="nc">DFS</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">visited</span><span class="p">,</span> <span class="n">check_link</span><span class="p">)</span>
+  <span class="n">check_link</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">b</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span> <span class="c1"># a-b 간선 다시 연결
+</span></code></pre></div></div>
+
+<p>I fixed it like this</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">wires</span><span class="p">):</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="nf">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">wire</span> <span class="ow">in</span> <span class="n">wires</span><span class="p">:</span>
+        <span class="n">graph</span><span class="p">[</span><span class="n">wire</span><span class="p">[</span><span class="mi">0</span><span class="p">]].</span><span class="nf">append</span><span class="p">(</span><span class="n">wire</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">graph</span><span class="p">[</span><span class="n">wire</span><span class="p">[</span><span class="mi">1</span><span class="p">]].</span><span class="nf">append</span><span class="p">(</span><span class="n">wire</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+
+    <span class="n">check_link</span> <span class="o">=</span> <span class="p">[[</span><span class="bp">True</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">n</span>
+    <span class="k">for</span> <span class="n">wire</span> <span class="ow">in</span> <span class="n">wires</span><span class="p">:</span>
+        <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+        <span class="n">check_link</span><span class="p">[</span><span class="n">wire</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">wire</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">count1</span><span class="o">=</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">visited</span><span class="p">,</span><span class="n">check_link</span><span class="p">,</span><span class="n">graph</span><span class="p">,</span><span class="n">wire</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">count2</span><span class="o">=</span><span class="nf">dfs</span><span class="p">(</span><span class="n">visited</span><span class="p">,</span><span class="n">check_link</span><span class="p">,</span><span class="n">graph</span><span class="p">,</span><span class="n">wire</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="n">count1</span><span class="o">-</span><span class="n">count2</span><span class="p">),</span><span class="n">count</span><span class="p">)</span>
+            <span class="c1"># Restore the removed edges
+</span>        <span class="n">check_link</span><span class="p">[</span><span class="n">wire</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">wire</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">count</span>
+
+<span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">visited</span><span class="p">,</span><span class="n">check_link</span><span class="p">,</span><span class="n">graph</span><span class="p">,</span><span class="n">node</span><span class="p">):</span>
+    <span class="n">visited</span><span class="p">[</span><span class="n">node</span><span class="p">]</span><span class="o">=</span><span class="bp">True</span>
+    <span class="n">count</span><span class="o">=</span><span class="mi">1</span>
+    <span class="k">for</span> <span class="n">next_node</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">next_node</span><span class="p">]</span> <span class="ow">and</span> <span class="n">check_link</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="n">next_node</span><span class="p">]:</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">visited</span><span class="p">,</span><span class="n">check_link</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span><span class="n">next_node</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">count</span>
+</code></pre></div></div>
+
+<p>BFS  and union find version (union find problem actually)</p>
+
+<h3 id="모음사전">모음사전</h3>
+<p>https://school.programmers.co.kr/learn/courses/30/lessons/84512</p>
+
+<p>Actually this <em>can</em> be solved via DFS but I learned some useful methods
+like product(), which does cartesian product.</p>
+
+<p>First with just pure looping,</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="n">vowels</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">A</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">E</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">I</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">O</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">U</span><span class="sh">'</span><span class="p">]</span>
+    <span class="n">word_dict</span> <span class="o">=</span> <span class="p">{}</span>  
+    <span class="n">index</span> <span class="o">=</span> <span class="mi">1</span>  
+
+    <span class="k">for</span> <span class="n">w1</span> <span class="ow">in</span> <span class="n">vowels</span><span class="p">:</span>
+        <span class="n">word_dict</span><span class="p">[</span><span class="n">w1</span><span class="p">]</span> <span class="o">=</span> <span class="n">index</span>
+        <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">w1</span> <span class="o">==</span> <span class="n">word</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">word_dict</span><span class="p">[</span><span class="n">w1</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">w2</span> <span class="ow">in</span> <span class="n">vowels</span><span class="p">:</span>
+            <span class="n">word_dict</span><span class="p">[</span><span class="n">w1</span> <span class="o">+</span> <span class="n">w2</span><span class="p">]</span> <span class="o">=</span> <span class="n">index</span>
+            <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">w1</span> <span class="o">+</span> <span class="n">w2</span> <span class="o">==</span> <span class="n">word</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">word_dict</span><span class="p">[</span><span class="n">w1</span> <span class="o">+</span> <span class="n">w2</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">w3</span> <span class="ow">in</span> <span class="n">vowels</span><span class="p">:</span>
+                <span class="n">word_dict</span><span class="p">[</span><span class="n">w1</span> <span class="o">+</span> <span class="n">w2</span> <span class="o">+</span> <span class="n">w3</span><span class="p">]</span> <span class="o">=</span> <span class="n">index</span>
+                <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">w1</span> <span class="o">+</span> <span class="n">w2</span> <span class="o">+</span> <span class="n">w3</span> <span class="o">==</span> <span class="n">word</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">word_dict</span><span class="p">[</span><span class="n">w1</span> <span class="o">+</span> <span class="n">w2</span> <span class="o">+</span> <span class="n">w3</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">w4</span> <span class="ow">in</span> <span class="n">vowels</span><span class="p">:</span>
+                    <span class="n">word_dict</span><span class="p">[</span><span class="n">w1</span> <span class="o">+</span> <span class="n">w2</span> <span class="o">+</span> <span class="n">w3</span> <span class="o">+</span> <span class="n">w4</span><span class="p">]</span> <span class="o">=</span> <span class="n">index</span>
+                    <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="k">if</span> <span class="n">w1</span> <span class="o">+</span> <span class="n">w2</span> <span class="o">+</span> <span class="n">w3</span> <span class="o">+</span> <span class="n">w4</span> <span class="o">==</span> <span class="n">word</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="n">word_dict</span><span class="p">[</span><span class="n">w1</span> <span class="o">+</span> <span class="n">w2</span> <span class="o">+</span> <span class="n">w3</span> <span class="o">+</span> <span class="n">w4</span><span class="p">]</span>
+                    <span class="k">for</span> <span class="n">w5</span> <span class="ow">in</span> <span class="n">vowels</span><span class="p">:</span>
+                        <span class="n">word_dict</span><span class="p">[</span><span class="n">w1</span> <span class="o">+</span> <span class="n">w2</span> <span class="o">+</span> <span class="n">w3</span> <span class="o">+</span> <span class="n">w4</span> <span class="o">+</span> <span class="n">w5</span><span class="p">]</span> <span class="o">=</span> <span class="n">index</span>
+                        <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="k">if</span> <span class="n">w1</span> <span class="o">+</span> <span class="n">w2</span> <span class="o">+</span> <span class="n">w3</span> <span class="o">+</span> <span class="n">w4</span> <span class="o">+</span> <span class="n">w5</span> <span class="o">==</span> <span class="n">word</span><span class="p">:</span>
+                            <span class="k">return</span> <span class="n">word_dict</span><span class="p">[</span><span class="n">w1</span> <span class="o">+</span> <span class="n">w2</span> <span class="o">+</span> <span class="n">w3</span> <span class="o">+</span> <span class="n">w4</span> <span class="o">+</span> <span class="n">w5</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="mi">0</span>  
+</code></pre></div></div>
+
+<p>With product() and repeat parameter, which allows how many repeats of
+same character in the word you are forming. Here we varied that repeat
+parameter via a for loop</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+
+<span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nf">product</span><span class="p">([</span><span class="sh">'</span><span class="s">A</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">E</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">I</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">O</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">U</span><span class="sh">'</span><span class="p">],</span> <span class="n">repeat</span><span class="o">=</span><span class="n">i</span><span class="p">):</span>
+            <span class="nf">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+            <span class="n">words</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">c</span><span class="p">)))</span>
+
+    <span class="n">words</span><span class="p">.</span><span class="nf">sort</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">words</span><span class="p">.</span><span class="nf">index</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="nf">solution</span><span class="p">(</span><span class="sh">"</span><span class="s">AAAE</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Lastly, via DFS</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">cnt</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">word_list</span><span class="p">,</span> <span class="n">words</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">cnt</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">words</span><span class="p">)):</span>
+        <span class="n">word_list</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">w</span> <span class="o">+</span> <span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="nf">dfs</span><span class="p">(</span><span class="n">cnt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">w</span> <span class="o">+</span> <span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">word_list</span><span class="p">,</span> <span class="n">words</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">word_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="sh">'</span><span class="s">AEIOU</span><span class="sh">'</span>
+    <span class="nf">dfs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="sh">""</span><span class="p">,</span> <span class="n">word_list</span><span class="p">,</span> <span class="n">words</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">word_list</span><span class="p">.</span><span class="nf">index</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="nf">solution</span><span class="p">(</span><span class="sh">"</span><span class="s">AAAE</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="숫자-변환하기">숫자 변환하기</h3>
+<p>https://school.programmers.co.kr/learn/courses/30/lessons/154538</p>
+
+<p>initial inefficient code that had runtime issues</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span><span class="p">,</span> <span class="n">deque</span><span class="p">,</span> <span class="n">Counter</span>
+<span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">queue</span> <span class="o">=</span><span class="nf">deque</span><span class="p">()</span>
+    <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+        <span class="n">cur_val</span><span class="p">,</span><span class="n">cur_count</span><span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">cur_val</span><span class="o">==</span><span class="n">y</span><span class="p">:</span>
+            <span class="c1"># print(cur_count)
+</span>            <span class="k">return</span> <span class="n">cur_count</span>
+        <span class="k">if</span> <span class="n">cur_val</span><span class="o">&gt;</span><span class="n">y</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">cur_val</span><span class="p">,</span><span class="n">cur_count</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="mi">3</span><span class="o">*</span><span class="n">cur_val</span><span class="p">,</span><span class="n">cur_count</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">cur_val</span><span class="o">+</span><span class="n">n</span><span class="p">,</span><span class="n">cur_count</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+</code></pre></div></div>
+<p>improvement would be to use a visited list or memoisation so that
+we don’t calculate the same value twice</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1000001</span>
+
+    <span class="n">q</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">()</span>
+    <span class="n">q</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">visited</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">q</span><span class="p">:</span>
+        <span class="n">num</span><span class="p">,</span> <span class="n">cnt</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="n">y</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">cnt</span>
+        <span class="k">for</span> <span class="n">next_num</span> <span class="ow">in</span> <span class="p">(</span><span class="n">num</span> <span class="o">+</span> <span class="n">n</span><span class="p">,</span> <span class="n">num</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">num</span> <span class="o">*</span> <span class="mi">3</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">next_num</span> <span class="o">&lt;=</span> <span class="n">y</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">next_num</span><span class="p">]:</span>
+                <span class="n">visited</span><span class="p">[</span><span class="n">next_num</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="n">q</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">next_num</span><span class="p">,</span> <span class="n">cnt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+</code></pre></div></div>
+
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/12/04/backtracking.html" title="General approach to backtracking + template">General approach to backtracking + template...</a><a class="next" href="/jekyll-theme-yat/java/2022/12/10/javathread.html" title="What is thread in Java? (feat. process)">What is thread in Java? (feat....</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/jekyll-theme-yat/linux/2022/12/01/lns.html" title="What is thread in Java? (feat. process)">Linux ln -s (Symbolic link)</a></li>
+<li><a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/07/04/%EC%A7%95%EA%B2%80%EB%8B%A4%EB%A6%AC%EA%B1%B4%EB%84%88%EA%B8%B0.html" title="What is thread in Java? (feat. process)">Programmers 선입 선출 스케줄링</a></li>
+<li><a class="post-link" href="/jekyll-theme-yat/querydsl/2023/03/06/nosuchmethodexceptionQueryDsl.html" title="What is thread in Java? (feat. process)">Querydsl noSuchMethodException</a></li>
+<li><a class="post-link" href="/jekyll-theme-yat/redis/2022/10/14/AuthroisationwithRedis.html" title="What is thread in Java? (feat. process)">Authorisation with Redis</a></li>
+</ul>
+    </div>
+<div class="post-comments"></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/jekyll-theme-yat/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Brian <span class="copyleft">©</span> 2021-2023 Brian</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/jekyll-theme-yat/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

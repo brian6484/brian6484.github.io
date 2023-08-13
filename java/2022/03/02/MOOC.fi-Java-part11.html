@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>MOOC.fi Java Programming I Part 11 | Brian’s Dev Blog</title>
+<meta name="generator" content="Jekyll v4.3.2">
+<meta property="og:title" content="MOOC.fi Java Programming I Part 11">
+<meta name="author" content="Jeonghwan Lee">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="Fundamentals of Java">
+<meta property="og:description" content="Fundamentals of Java">
+<link rel="canonical" href="/jekyll-theme-yat/java/2022/03/02/MOOC.fi-Java-part11.html">
+<meta property="og:url" content="/jekyll-theme-yat/java/2022/03/02/MOOC.fi-Java-part11.html">
+<meta property="og:site_name" content="Brian’s Dev Blog">
+<meta property="og:image" content="https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2022-03-02T14:35:23+00:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="twitter:image" content="https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg">
+<meta property="twitter:title" content="MOOC.fi Java Programming I Part 11">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Jeonghwan Lee"},"dateModified":"2022-03-02T14:35:23+00:00","datePublished":"2022-03-02T14:35:23+00:00","description":"Fundamentals of Java","headline":"MOOC.fi Java Programming I Part 11","image":"https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll-theme-yat/java/2022/03/02/MOOC.fi-Java-part11.html"},"url":"/jekyll-theme-yat/java/2022/03/02/MOOC.fi-Java-part11.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="shortcut icon" href="">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/jekyll-theme-yat/assets/css/main.css">
+  <script src="/jekyll-theme-yat/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="/jekyll-theme-yat/feed.xml" title="Brian's Dev Blog">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/jekyll-theme-yat/">
+  <img class="site-favicon" title="Brian's Dev Blog" src="" onerror="this.style.display='none'">
+  Brian's Dev Blog
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/jekyll-theme-yat/about.html">ABOUT</a><a class="page-link" href="/jekyll-theme-yat/archives.html">ARCHIVES</a><a class="page-link" href="/jekyll-theme-yat/categories.html">CATEGORIES</a><a class="page-link" href="/jekyll-theme-yat/">HOME</a><a class="page-link" href="/jekyll-theme-yat/tags.html">TAGS</a>
+
+
+
+
+
+
+
+
+
+<span class="page-link">
+
+
+
+<div id="google_translate_element" style="display: none;">
+</div>
+
+<span class="ct-language">
+  <ul class="list-unstyled ct-language-dropdown">
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="en">
+          
+          <img src="https://cdn.countryflags.com/thumbs/united-states-of-america/flag-400.png" title="English">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="fr">
+          
+          <img src="https://cdn.countryflags.com/thumbs/france/flag-400.png" title="French">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="zh-CN">
+          
+          <img src="https://cdn.countryflags.com/thumbs/china/flag-400.png" title="Chinese(Simple)">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ja">
+          
+          <img src="https://cdn.countryflags.com/thumbs/japan/flag-400.png" title="Japanese">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ko">
+          
+          <img src="https://cdn.countryflags.com/thumbs/south-korea/flag-400.png" title="Korean">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ru">
+          
+          <img src="https://cdn.countryflags.com/thumbs/russia/flag-400.png" title="Russian">
+          
+        </a>
+      </li>
+    
+  </ul>
+</span>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    autoDisplay: false,
+    layout: google.translate.TranslateElement.InlineLayout.VERTICAL
+  }, 'google_translate_element');
+
+  // Links to cross-origin destinations are unsafe
+  var gll = document.getElementsByClassName('goog-logo-link')[0];
+  if (gll) {
+    gll.setAttribute('rel', 'noopener');
+  }
+
+  function restoreLang() {
+    var iframe = document.getElementsByClassName('goog-te-banner-frame')[0];
+    if (!iframe) return;
+
+    var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+    var restore_el = innerDoc.getElementsByTagName("button");
+
+    for (var i = 0; i < restore_el.length; i++) {
+      if (restore_el[i].id.indexOf("restore") >= 0) {
+        restore_el[i].click();
+        var close_el = innerDoc.getElementsByClassName("goog-close-link");
+        close_el[0].click();
+        return;
+      }
+    }
+  }
+
+  function triggerHtmlEvent(element, eventName) {
+    var event;
+    if (document.createEvent) {
+      event = document.createEvent('HTMLEvents');
+      event.initEvent(eventName, true, true);
+      element.dispatchEvent(event);
+    } else {
+      event = document.createEventObject();
+      event.eventType = eventName;
+      element.fireEvent('on' + event.eventType, event);
+    }
+  }
+
+  var googleCombo = document.querySelector("select.goog-te-combo");
+  var langSelect = document.querySelector('.ct-language');
+  langSelect.addEventListener('click', function(event) {
+    if (!event.target) {
+      return;
+    }
+
+    var selected = document.querySelector('.ct-language .ct-language-selected');
+    if (selected) {
+      selected.classList.remove('ct-language-selected');
+    }
+
+    var target = event.target;
+    while (target && target !== langSelect ) {
+      if (target.matches('.lang-select')) {
+        break;
+      }
+      target = target.parentElement;
+    }
+
+    if (target && target.matches('.lang-select')) {
+      var lang = target.getAttribute('data-lang');
+      if (googleCombo.value == lang) {
+        restoreLang();
+      } else {
+        target.parentElement.classList.add('ct-language-selected');
+        googleCombo.value = lang;
+        triggerHtmlEvent(googleCombo, 'change');
+      }
+    }
+
+    event.preventDefault();
+  });
+}
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</span>
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">MOOC.fi Java Programming I Part 11</h1>
+  <h2 class="post-subtitle">Fundamentals of Java</h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2022-03-02T14:35:23+00:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Mar 02, 2022
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 26 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/jekyll-theme-yat/tags.html#Java">#Java</a><a class="post-tag" href="/jekyll-theme-yat/tags.html#MOOC.fi">#MOOC.fi</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <p>Part 11!</p>
+
+<ol>
+  <li>Class diagrams
+    <ul>
+      <li>
+        <p>A class diagram is a diagram used in designing and modeling software to describe classes and their relationships. Class diagrams enable us to model software in a high level of abstraction and without having to look at the source code.</p>
+      </li>
+      <li>
+        <p>commonly use Unified Modelling Language (UML) so that class diagrams drawn by different people can be read and understood by everyone familiar with the language.</p>
+      </li>
+      <li>
+    </li>
+</ul>
+
+    <div class="language-java highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Engine</span> <span class="kd">extends</span> <span class="nc">Part</span> <span class="o">{</span>
+
+     <span class="kd">private</span> <span class="nc">String</span> <span class="n">engineType</span><span class="o">;</span>
+
+     <span class="kd">public</span> <span class="nf">Engine</span><span class="o">(</span><span class="nc">String</span> <span class="n">engineType</span><span class="o">,</span> <span class="nc">String</span> <span class="n">identifier</span><span class="o">,</span> <span class="nc">String</span> <span class="n">manufacturer</span><span class="o">,</span> <span class="nc">String</span> <span class="n">description</span><span class="o">)</span> <span class="o">{</span>
+         <span class="kd">super</span><span class="o">(</span><span class="n">identifier</span><span class="o">,</span> <span class="n">manufacturer</span><span class="o">,</span> <span class="n">description</span><span class="o">);</span>
+         <span class="k">this</span><span class="o">.</span><span class="na">engineType</span> <span class="o">=</span> <span class="n">engineType</span><span class="o">;</span>
+     <span class="o">}</span>
+
+     <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getEngineType</span><span class="o">()</span> <span class="o">{</span>
+         <span class="k">return</span> <span class="n">engineType</span><span class="o">;</span>
+     <span class="o">}</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p>public class Engine extends Part indicates that the class Engine inherits the functionality of the class Part. We also define an object variable engineType in the class Engine.</p>
+      </li>
+      <li>
+        <p>Use the keyword <strong>super</strong> to call the constructor of the superclass. The call <em>super(identifier, manufacturer, description)</em> calls the constructor <em>public Part(String identifier, String manufacturer, String description)</em> which is defined in the class Part. Through this process the object variables defined in the superclass are initiated with their initial values. After calling the superclass constructor, we also set the proper value for the object variable <em>engineType</em>.</p>
+      </li>
+      <li>
+        <p>The <em>super</em> call bears some resemblance to the <em>this</em> call in a constructor; <em>this</em> is used to call a constructor of this class, while <em>super</em> is used to call a constructor of the superclass. If a constructor uses the constructor of the superclass by calling <em>super</em> in it, the super call must be on the first line of the constructor. This is similar to the case with calling this (must also be the first line of the constructor).</p>
+      </li>
+      <li>
+        <p>Since the class Engine extends the class Part, it has all the methods that the class Part offers. You can create instances of the class Engine the same way you can of any other class.</p>
+      </li>
+      <li>
+        <p>If a method or variable has the access modifier <em>private</em>, it is visible only to the internal methods of that class. Subclasses will not see it, and a subclass has no direct means to access it. So, from the Engine class there is no way to directly access the variables identifier, manufacturer, and description, which are defined in the superclass Part. The programmer cannot access the variables of the superclass that have been defined with the access modifier private.</p>
+      </li>
+      <li>
+        <p>A subclass sees everything that is defined with the <em>public</em> modifier in the superclass. If we want to define some variables or methods that are visible to the subclasses but invisible to everything else, we can use the access modifier <em>protected</em> to achieve this.</p>
+      </li>
+      <li>
+        <p>use <em>super</em> to call the constructor of the superclass. The call receives the types of values that the superclass constructor requires as parameters. If there are multiple constructors in the superclass, the parameters of the super call dictate which of them is used.</p>
+      </li>
+      <li>
+        <p>When the constructor (of the subclass) is called, the variables defined in the superclass are initialized. The events that occur during the constructor call are practically identical to what happens with a normal constructor call. If the superclass doesn’t provide a non-parameterized constructor, there must always be an explicit call to the constructor of the superclass in the constructors of the subclass.</p>
+      </li>
+      <li>
+        <p>Calling a superclass method: call the methods defined in the superclass by prefixing the call with <em>super</em>, just as you can call the methods defined in this class by prefixing the call with <em>this</em>.</p>
+      </li>
+    </ul>
+
+    <div class="language-java highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+     <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">toString</span><span class="o">()</span> <span class="o">+</span> <span class="s">"\n  And let's add my own message to it!"</span><span class="o">;</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>Person and subclass exercise is useful to understand</li>
+    </ul>
+
+    <div class="language-java highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+
+     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+         <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Person</span><span class="o">&gt;</span> <span class="n">persons</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Person</span><span class="o">&gt;();</span>
+         <span class="n">persons</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Teacher</span><span class="o">(</span><span class="s">"Ada Lovelace"</span><span class="o">,</span> <span class="s">"24 Maddox St. London W1S 2QN"</span><span class="o">,</span> <span class="mi">1200</span><span class="o">));</span>
+         <span class="n">persons</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Student</span><span class="o">(</span><span class="s">"Ollie"</span><span class="o">,</span> <span class="s">"6381 Hollywood Blvd. Los Angeles 90028"</span><span class="o">));</span>
+
+         <span class="n">printPersons</span><span class="o">(</span><span class="n">persons</span><span class="o">);</span>
+     <span class="o">}</span>
+     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">printPersons</span><span class="o">(</span><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Person</span><span class="o">&gt;</span> <span class="n">persons</span><span class="o">){</span>
+         <span class="k">for</span><span class="o">(</span><span class="nc">Person</span> <span class="nl">i:</span><span class="n">persons</span><span class="o">){</span>
+             <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+         <span class="o">}</span>
+     <span class="o">}</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <div class="language-java highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+     <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">,</span><span class="n">address</span><span class="o">;</span>
+        
+     <span class="kd">public</span> <span class="nf">Person</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span><span class="nc">String</span> <span class="n">address</span><span class="o">){</span>
+         <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+         <span class="k">this</span><span class="o">.</span><span class="na">address</span><span class="o">=</span> <span class="n">address</span><span class="o">;</span>
+     <span class="o">}</span>
+     <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">(){</span>
+         <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">+</span> <span class="s">"\n  "</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">address</span><span class="o">;</span>
+            
+     <span class="o">}</span>
+        
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <div class="language-java highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Student</span> <span class="kd">extends</span> <span class="nc">Person</span> <span class="o">{</span>
+     <span class="kd">private</span> <span class="kt">int</span> <span class="n">credit</span><span class="o">;</span>
+        
+     <span class="kd">public</span> <span class="nf">Student</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">String</span> <span class="n">address</span><span class="o">){</span>
+         <span class="kd">super</span><span class="o">(</span><span class="n">name</span><span class="o">,</span><span class="n">address</span><span class="o">);</span>
+            
+     <span class="o">}</span>
+     <span class="kd">public</span> <span class="kt">int</span> <span class="nf">credits</span><span class="o">(){</span>
+         <span class="k">return</span> <span class="n">credit</span><span class="o">;</span>
+     <span class="o">}</span>
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">study</span><span class="o">(){</span>
+         <span class="n">credit</span> <span class="o">+=</span><span class="mi">1</span><span class="o">;</span>
+     <span class="o">}</span>
+     <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">(){</span>
+         <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">toString</span><span class="o">()</span> <span class="o">+</span> <span class="s">"  \n"</span><span class="o">+</span> <span class="s">"  Study credits  "</span><span class="o">+</span><span class="k">this</span><span class="o">.</span><span class="na">credit</span><span class="o">;</span>
+     <span class="o">}</span>
+        
+ <span class="o">}</span>
+
+</code></pre></div>    </div>
+
+    <div class="language-java highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Teacher</span> <span class="kd">extends</span> <span class="nc">Person</span> <span class="o">{</span>
+     <span class="kd">private</span> <span class="kt">int</span> <span class="n">salary</span><span class="o">;</span>
+        
+     <span class="kd">public</span> <span class="nf">Teacher</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">String</span> <span class="n">address</span><span class="o">,</span> <span class="kt">int</span> <span class="n">salary</span><span class="o">){</span>
+         <span class="kd">super</span><span class="o">(</span><span class="n">name</span><span class="o">,</span><span class="n">address</span><span class="o">);</span>
+         <span class="k">this</span><span class="o">.</span><span class="na">salary</span><span class="o">=</span><span class="n">salary</span><span class="o">;</span>
+     <span class="o">}</span>
+     <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">(){</span>
+         <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">toString</span><span class="o">()</span> <span class="o">+</span><span class="s">"\n  "</span> <span class="o">+</span> <span class="s">"salary "</span> <span class="o">+</span> <span class="n">salary</span><span class="o">+</span><span class="s">" euro/month"</span><span class="o">;</span>
+     <span class="o">}</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p>The actual type of an object dictates which method is executed: An object’s type decides what the methods provided by the object are. For instance, we implemented the class Student earlier. <strong>If a reference to a Student type object is stored in a Person type variable, only the methods defined in the Person class (and its superclass and interfaces) are available. Cannot use Student methods</strong></p>
+      </li>
+      <li>
+        <p>In the last exercise we wrote a new toString implementation for Student to override the method that it inherits from Person. The class Person had already overriden the toString method it inherited from the class Object. If we handle an object by some other type than its actual type, which version of the object’s method is called?</p>
+      </li>
+      <li>
+        <p>The method to be executed is chosen based on the actual type of the object, which means the class whose constructor is called when the object is created. If the method has no definition in that class, the version of the method is chosen from the class that is closest to the actual type in the inheritance hierarchy.</p>
+      </li>
+      <li>
+        <p>Polymorphism: Regardless of the type of the variable, the method that is executed is always chosen based on the actual type of the object. Objects are polymorphic, which means that they can be used via many different variable types. The executed method always relates to the actual type of the object. This phenomenon is called polymorphism.</p>
+      </li>
+      <li>
+        <p>If there is no String toString method in subclass, code looks for toString method in superclass. Methods mentioned in toString method in superclass are looked in subclass and definitions are taken.</p>
+      </li>
+      <li>
+        <p>Inheritance is a tool for building and specializing hierarchies of concepts; a subclass is always a special case of the superclass. If the class to be created is a special case of an existing class, this new class could be created by extending the existing class. For example, in the previously discussed car part scenario an engine is a part, but an engine has extra functionality that not all parts have.</p>
+      </li>
+      <li>
+        <p>When inheriting, the subclass receives the functionality of the superclass. If the subclass doesn’t need or use some of the inherited functionality, <strong>inheritance is not justifiable</strong>. Classes that inherit will inherit all the methods and interfaces from the superclass, so the subclass can be used in place of the superclass wherever the superclass is used. It’s a good idea to keep the inheritance hierarchy shallow, since maintaining and further developing the hierarchy becomes more difficult as it grows larger. (not more than 2 or 3 levels deep)</p>
+      </li>
+      <li>
+        <p>Inheritance is not useful in every scenario. For instance, extending the class Car with the class Part (or Engine) would be incorrect. A car includes an engine and parts, but an engine or a part is not a car. <strong>If an object owns or is composed of other objects, inheritance should not be used</strong>.</p>
+      </li>
+      <li>
+        <p>When using inheritance, take care to ensure that the <em>Single Responsibility Principle</em> holds true. There should only be one reason for each class to change. If you notice that inheriting adds more responsibilities to a class, you should form multiple classes of the class.</p>
+      </li>
+      <li>
+        <p>in subclass, dont declare variables metioned in superclass (important)</p>
+      </li>
+      <li>
+        <p>string representation provided by the ArrayList class is .toString()</p>
+      </li>
+      <li>
+        <p>Abstract class: Combines interfaces and inheritance. You cannot create instances of them — you can only create instances of subclasses of an abstract class. They can include normal methods which have a method body, but it’s also possible to define abstract methods that only contain the method definition. Implementing the abstract methods is the responsibility of subclasses.</p>
+      </li>
+      <li>
+        <p>The greatest difference between interfaces and abstract classes is that abstract classes can contain object variables and constructors in addition to methods. Since you can also define functionality in abstract classes, you can use them to define e.g. default behavior.</p>
+      </li>
+    </ul>
+  </li>
+  <li>Interface
+    <ul>
+      <li>
+        <p>The classes that implement the interface decide how the methods defined in the interface are implemented. A class implements the interface by adding the keyword <em>implements</em> after the class name followed by the name of the interface being implemented.</p>
+      </li>
+      <li>
+        <p>Implementations of methods defined in the interface must always have public as their visibility attribute.</p>
+      </li>
+      <li>
+        <p>When a class implements an interface, it signs an agreement. The agreement dictates that the class will implement the methods defined by the interface. If those methods are not implemented in the class, the program will not function.</p>
+      </li>
+      <li>
+        <p>The interface defines only the names, parameters, and return values ​​of the required methods. The interface, however, does not have a say on the internal implementation of its methods. It is the responsibility of the programmer to define the internal functionality for the methods.</p>
+      </li>
+      <li>
+      </li>
+<li>
+        <p>.put(some key, some value) adds key-value pair to HashMap object</p>
+      </li>
+      <li>
+        <p>.get(some key) gets value of that key, returns null if there is not such key. This method passes key as parameter and returns its value.</p>
+      </li>
+      <li>.values() gets set of values of that key</li>
+    </ul>
+
+    <div class="language-java highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="kd">public</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Book</span><span class="o">&gt;</span> <span class="nf">getBookByPart</span><span class="o">(</span><span class="nc">String</span> <span class="n">titlePart</span><span class="o">)</span> <span class="o">{</span>
+     <span class="n">titlePart</span> <span class="o">=</span> <span class="n">sanitizedString</span><span class="o">(</span><span class="n">titlePart</span><span class="o">);</span>
+
+     <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Book</span><span class="o">&gt;</span> <span class="n">books</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+     <span class="k">for</span><span class="o">(</span><span class="nc">Book</span> <span class="n">book</span> <span class="o">:</span> <span class="k">this</span><span class="o">.</span><span class="na">directory</span><span class="o">.</span><span class="na">values</span><span class="o">())</span> <span class="o">{</span>
+         <span class="k">if</span><span class="o">(!</span><span class="n">book</span><span class="o">.</span><span class="na">getName</span><span class="o">().</span><span class="na">contains</span><span class="o">(</span><span class="n">titlePart</span><span class="o">))</span> <span class="o">{</span>
+             <span class="k">continue</span><span class="o">;</span>
+         <span class="o">}</span>
+
+         <span class="n">books</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">book</span><span class="o">);</span>
+     <span class="o">}</span>
+
+     <span class="k">return</span> <span class="n">books</span><span class="o">;</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p>.keySet(some value) gets key of that value</p>
+      </li>
+      <li>
+        <p>.containsKey(some key) is a boolean method that checks existence of some key</p>
+      </li>
+      <li>
+        <p>Going through Hash map’s values using keySet() method (but inefficient):</p>
+      </li>
+    </ul>
+
+    <div class="language-java highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="kd">public</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Book</span><span class="o">&gt;</span> <span class="nf">getBookByPart</span><span class="o">(</span><span class="nc">String</span> <span class="n">titlePart</span><span class="o">)</span> <span class="o">{</span>
+     <span class="n">titlePart</span> <span class="o">=</span> <span class="n">sanitizedString</span><span class="o">(</span><span class="n">titlePart</span><span class="o">);</span>
+
+     <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Book</span><span class="o">&gt;</span> <span class="n">books</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+     <span class="k">for</span><span class="o">(</span><span class="nc">String</span> <span class="n">bookTitle</span> <span class="o">:</span> <span class="k">this</span><span class="o">.</span><span class="na">directory</span><span class="o">.</span><span class="na">keySet</span><span class="o">())</span> <span class="o">{</span>
+         <span class="k">if</span><span class="o">(!</span><span class="n">bookTitle</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">titlePart</span><span class="o">))</span> <span class="o">{</span>
+             <span class="k">continue</span><span class="o">;</span>
+         <span class="o">}</span>
+
+         <span class="c1">// if the key contains the given string</span>
+         <span class="c1">// we retrieve the value related to it</span>
+         <span class="c1">// and add it tot the set of books to be returned</span>
+
+         <span class="n">books</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">directory</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">bookTitle</span><span class="o">));</span>
+     <span class="o">}</span>
+
+     <span class="k">return</span> <span class="n">books</span><span class="o">;</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p>Two type parameters are required when creating a hash map - the type of the key and the type of the value added. Like HashMap&lt;String, Integer&gt; hashmap = new HashMap&lt;&gt;();</p>
+      </li>
+      <li>
+        <p>The hash map has a <strong>maximum of one value per key</strong>. If a new key-value pair is added to the hash map, but the key has already been associated with some other value stored in the hash map, the <strong>old value is deleted</strong> from the hash map.</p>
+      </li>
+      <li>
+        <p>A Reference Type Variable as a Hash Map Value:</p>
+      </li>
+    </ul>
+
+    <div class="language-java highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nc">Book</span> <span class="n">senseAndSensibility</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Book</span><span class="o">(</span><span class="s">"Sense and Sensibility"</span><span class="o">,</span> <span class="mi">1811</span><span class="o">,</span> <span class="s">"..."</span><span class="o">);</span>
+ <span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Book</span><span class="o">&gt;</span> <span class="n">directory</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+ <span class="n">directory</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">senseAndSensibility</span><span class="o">.</span><span class="na">getName</span><span class="o">(),</span> <span class="n">senseAndSensibility</span><span class="o">);</span>
+ <span class="c1">// directory.get("Sense and Sensibility").getContent() or some method in object</span>
+
+ <span class="nc">Book</span> <span class="n">match</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+ <span class="c1">//or just match=null;</span>
+ <span class="k">for</span> <span class="o">(</span><span class="nc">Book</span> <span class="nl">book:</span> <span class="n">books</span><span class="o">)</span> <span class="o">{</span>
+     <span class="k">if</span> <span class="o">(</span><span class="n">book</span><span class="o">.</span><span class="na">getName</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="s">"Sense and Sensibility"</span><span class="o">)</span> <span class="o">{</span>
+         <span class="n">match</span> <span class="o">=</span> <span class="n">book</span><span class="o">;</span>
+         <span class="k">break</span><span class="o">;</span>
+     <span class="o">}</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p>The difference in performance is due to the fact that when a book is searched for in a list, the worst-case scenario involves going through all the books in the list. In a hash map, it isn’t necessary to check all of the books as the key determines the location of a given book in a hash map.</p>
+      </li>
+      <li>
+        <p>Limitations of HashMap are that although they work well when we know exactly what we are looking for but if we wanted to identify books whose title contains a particular string, the hash map cannot. The hash maps also have no internal order, and it is not possible to search the hash map based on the indexes. The items in a list are in the order they were added to the list.</p>
+      </li>
+      <li>
+        <p>.toLowerCase() creates new string of all letters to lower case</p>
+      </li>
+      <li>
+        <p>.trim() creates new string that removes space at start and end</p>
+      </li>
+      <li>
+        <p>Library class encapsulating hash map containing books</p>
+      </li>
+    </ul>
+
+    <div class="language-java highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Library</span> <span class="o">{</span>
+     <span class="kd">private</span> <span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Book</span><span class="o">&gt;</span> <span class="n">directory</span><span class="o">;</span>
+
+     <span class="kd">public</span> <span class="nf">Library</span><span class="o">()</span> <span class="o">{</span>
+         <span class="k">this</span><span class="o">.</span><span class="na">directory</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+     <span class="o">}</span>
+
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addBook</span><span class="o">(</span><span class="nc">Book</span> <span class="n">book</span><span class="o">)</span> <span class="o">{</span>
+         <span class="nc">String</span> <span class="n">name</span> <span class="o">=</span> <span class="n">sanitizedString</span><span class="o">(</span><span class="n">book</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+
+         <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">directory</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">name</span><span class="o">))</span> <span class="o">{</span>
+             <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Book is already in the library!"</span><span class="o">);</span>
+         <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+             <span class="n">directory</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">book</span><span class="o">);</span>
+         <span class="o">}</span>
+     <span class="o">}</span>
+
+     <span class="kd">public</span> <span class="nc">Book</span> <span class="nf">getBook</span><span class="o">(</span><span class="nc">String</span> <span class="n">bookTitle</span><span class="o">)</span> <span class="o">{</span>
+         <span class="n">bookTitle</span> <span class="o">=</span> <span class="n">sanitizedString</span><span class="o">(</span><span class="n">bookTitle</span><span class="o">);</span>
+         <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">directory</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">bookTitle</span><span class="o">);</span>
+     <span class="o">}</span>
+
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">removeBook</span><span class="o">(</span><span class="nc">String</span> <span class="n">bookTitle</span><span class="o">)</span> <span class="o">{</span>
+         <span class="n">bookTitle</span> <span class="o">=</span> <span class="n">sanitizedString</span><span class="o">(</span><span class="n">bookTitle</span><span class="o">);</span>
+
+         <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">directory</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">bookTitle</span><span class="o">))</span> <span class="o">{</span>
+             <span class="k">this</span><span class="o">.</span><span class="na">directory</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">bookTitle</span><span class="o">);</span>
+         <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+             <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Book was not found, cannot be removed!"</span><span class="o">);</span>
+         <span class="o">}</span>
+     <span class="o">}</span>
+
+     <span class="kd">public</span> <span class="kd">static</span> <span class="nc">String</span> <span class="nf">sanitizedString</span><span class="o">(</span><span class="nc">String</span> <span class="n">string</span><span class="o">)</span> <span class="o">{</span>
+         <span class="k">if</span> <span class="o">(</span><span class="n">string</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+             <span class="k">return</span> <span class="s">""</span><span class="o">;</span>
+         <span class="o">}</span>
+
+         <span class="n">string</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="na">toLowerCase</span><span class="o">();</span>
+         <span class="k">return</span> <span class="n">string</span><span class="o">.</span><span class="na">trim</span><span class="o">();</span>
+     <span class="o">}</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>A hash map expects that only reference-variables are added to it (in the same way that ArrayList does). Java converts primitive variables to their corresponding reference-types when using any Java’s built in data structures (such as ArrayList and HashMap). Although the value 1 can be represented as a value of the primitive int variable, its type should be defined as Integer when using ArrayLists and HashMaps.</li>
+    </ul>
+
+    <div class="language-java highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">hashmap</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span> <span class="c1">// works</span>
+ <span class="n">hashmap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">"Ole!"</span><span class="o">);</span>
+ <span class="nc">HashMap</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">map2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span> <span class="c1">// doesn't work</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p>A hash map’s key and the object to be stored are always reference-type variables. Java converts primitive variables to reference-types automatically as they are added to either a HashMap or an ArrayList. This automatic conversion to a reference-type variable is called <strong>auto-boxing</strong> in Java, i.e. putting something in a box automatically.</p>
+      </li>
+      <li>
+        <p>When performing automatic conversion, ensure that the value to be converted is not null. Or there will be java.lang.reflect.InvocationTargetException error.</p>
+      </li>
+      <li>
+        <p>.getOrDefault(some key to be found, if key is not found, return this value normally 0) method of the HashMap searches for the key passed to it as a parameter from the HashMap. If the key is not found, it returns the value of the second parameter passed to it.</p>
+      </li>
+    </ul>
+  </li>
+  <li>Similarity of objects
+    <ul>
+      <li>.equals() was used to check similarity of strings but can also be used for references. It checks whether the object given as a parameter has the same reference as the object it is being compared to. In other words, the default behaviour checks whether the two objects are the same.</li>
+    </ul>
+
+    <div class="language-java highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nc">Book</span> <span class="n">bookObject</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Book</span><span class="o">(</span><span class="s">"Book object"</span><span class="o">,</span> <span class="mi">2000</span><span class="o">,</span> <span class="s">"..."</span><span class="o">);</span>
+ <span class="nc">Book</span> <span class="n">anotherBookObject</span> <span class="o">=</span> <span class="n">bookObject</span><span class="o">;</span>
+
+ <span class="k">if</span> <span class="o">(</span><span class="n">bookObject</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">anotherBookObject</span><span class="o">))</span> <span class="o">{</span>
+     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"The books are the same"</span><span class="o">);</span>
+ <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"The books aren't the same"</span><span class="o">);</span>
+ <span class="o">}</span>
+
+ <span class="c1">// we now create an object with the same content that's nonetheless its own object</span>
+ <span class="n">anotherBookObject</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Book</span><span class="o">(</span><span class="s">"Book object"</span><span class="o">,</span> <span class="mi">2000</span><span class="o">,</span> <span class="s">"..."</span><span class="o">);</span>
+
+ <span class="k">if</span> <span class="o">(</span><span class="n">bookObject</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">anotherBookObject</span><span class="o">))</span> <span class="o">{</span>
+     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"The books are the same"</span><span class="o">);</span>
+ <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"The books aren't the same"</span><span class="o">);</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p>The internal structure of the book objects (i.e., the values of their instance variables ) in the previous example is the same, but only the first comparison prints “The books are the same”. This is because the references are the same in the first case, i.e., the object is compared to itself. The second comparison is about two different entities, even though the variables have the same values and thus prints “aren’t the same”.</p>
+      </li>
+      <li>
+        <p>If we want to compare our own classes using the equals method, then it must be created and defined inside the class. The method created accepts an Object-type reference as a parameter, which can be any object. The comparison first looks at the references. This is followed by checking the parameter object’s type with the <strong>instanceof</strong> operation - if the object type does not match the type of our class, the object cannot be the same. We then create a version of the object that is of the same type as our class, after which the object variables are compared against each other.</p>
+      </li>
+    </ul>
+
+    <div class="language-java highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="nc">Object</span> <span class="n">comparedObject</span><span class="o">)</span> <span class="o">{</span>
+     <span class="c1">// if the variables are located in the same place, they're the same</span>
+     <span class="k">if</span> <span class="o">(</span><span class="k">this</span> <span class="o">==</span> <span class="n">comparedObject</span><span class="o">)</span> <span class="o">{</span>
+         <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+     <span class="o">}</span>
+
+ <span class="c1">// if comparedObject is not of type Book, the objects aren't the same</span>
+ <span class="k">if</span> <span class="o">(!(</span><span class="n">comparedObject</span> <span class="k">instanceof</span> <span class="nc">Book</span><span class="o">))</span> <span class="o">{</span>
+         <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+     <span class="o">}</span>
+
+     <span class="c1">// let's convert the object to a Book-olioksi</span>
+     <span class="nc">Book</span> <span class="n">comparedBook</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Book</span><span class="o">)</span> <span class="n">comparedObject</span><span class="o">;</span>
+
+     <span class="c1">// if the instance variables of the objects are the same, so are the objects</span>
+     <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">name</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">comparedBook</span><span class="o">.</span><span class="na">name</span><span class="o">)</span> <span class="o">&amp;&amp;</span>
+         <span class="k">this</span><span class="o">.</span><span class="na">published</span> <span class="o">==</span> <span class="n">comparedBook</span><span class="o">.</span><span class="na">published</span> <span class="o">&amp;&amp;</span>
+         <span class="k">this</span><span class="o">.</span><span class="na">content</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">comparedBook</span><span class="o">.</span><span class="na">content</span><span class="o">))</span> <span class="o">{</span>
+         <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+     <span class="o">}</span>
+
+     <span class="c1">// otherwise, the objects aren't the same</span>
+     <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>Similarly for ArrayList:</li>
+    </ul>
+
+    <div class="language-java highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Book</span><span class="o">&gt;</span> <span class="n">books</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+ <span class="nc">Book</span> <span class="n">bookObject</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Book</span><span class="o">(</span><span class="s">"Book Object"</span><span class="o">,</span> <span class="mi">2000</span><span class="o">,</span> <span class="s">"..."</span><span class="o">);</span>
+ <span class="n">books</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">bookObject</span><span class="o">);</span>
+
+ <span class="k">if</span> <span class="o">(</span><span class="n">books</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">bookObject</span><span class="o">))</span> <span class="o">{</span>
+     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Book Object was found."</span><span class="o">);</span>
+ <span class="o">}</span>
+
+ <span class="n">bookObject</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Book</span><span class="o">(</span><span class="s">"Book Object"</span><span class="o">,</span> <span class="mi">2000</span><span class="o">,</span> <span class="s">"..."</span><span class="o">);</span>
+
+ <span class="k">if</span> <span class="o">(!</span><span class="n">books</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">bookObject</span><span class="o">))</span> <span class="o">{</span>
+     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Book Object was not found."</span><span class="o">);</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p>In addition to equals, the hashCode method can also be used for approximate comparison of objects. The method creates from the object a “hash code”, i.e, a number, that tells a bit about the object’s content. If two objects have the same hash value, they may be equal. On the other hand, if two objects have different hash values, they are certainly unequal.</p>
+      </li>
+      <li>
+        <p>HashMap’s internal behavior is based on the fact that key-value pairs are stored in an array of lists based on the key’s hash value. Each array index points to a list. The hash value identifies the array index, whereby the list located at the array index is traversed. The value associated with the key will be returned if, and only if, the exact same value is found in the list (equality comparison is done using the equals method). This way, the search only needs to consider a fraction of the keys stored in the hash map.</p>
+      </li>
+      <li>
+        <p>redo notes here and exercises</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Grouping data using hash maps</p>
+
+    <ul>
+      <li>HashMap can only have 1 value per key. But we sometimes want to assign multiple values to 1 key. Since keys and values ​​in a hash map can be any variable, it is also possible to <strong>use lists as values</strong> in a hash map. You can add more values ​​to a single key by attaching a list to the key.</li>
+    </ul>
+
+    <div class="language-java highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;&gt;</span> <span class="n">phoneNumbers</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>Each key of the hash map now has a list attached to it. Although the new command creates a hash map, the hash map initially does not contain a single list. They need to be created separately as needed as so:</li>
+    </ul>
+
+    <div class="language-java highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;&gt;</span> <span class="n">phoneNumbers</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+
+ <span class="c1">// let's initially attatch an empty list to the name Pekka</span>
+ <span class="n">phoneNumbers</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Pekka"</span><span class="o">,</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;());</span>
+
+ <span class="c1">// and add a phone number to the list at Pekka</span>
+ <span class="n">phoneNumbers</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"Pekka"</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="s">"040-12348765"</span><span class="o">);</span>
+ <span class="c1">// and let's add another phone number</span>
+ <span class="n">phoneNumbers</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"Pekka"</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="s">"09-111333"</span><span class="o">);</span>
+
+ <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Pekka's numbers: "</span> <span class="o">+</span> <span class="n">phoneNumbers</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"Pekka"</span><span class="o">));</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/jekyll-theme-yat/spring/2022/03/01/PathVariable.html" title="PathVariable annotation">PathVariable annotation</a><a class="next" href="/jekyll-theme-yat/spring/2022/03/03/Enumerated.html" title="Enumerated annotation and its EnumType types">Enumerated annotation and its EnumType types...</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/jekyll-theme-yat/spring/2022/04/25/EffectiveAPIwithDTO.html" title="Enumerated annotation and its EnumType types">How to create effective APIs with DTO?</a></li>
+<li><a class="post-link" href="/jekyll-theme-yat/java/2022/01/17/DiffBetweenLocalAndInstanceVariables.html" title="Enumerated annotation and its EnumType types">Difference between local and instance variables</a></li>
+<li><a class="post-link" href="/jekyll-theme-yat/java/2022/03/02/MOOC.fi-Java-part11.html" title="Enumerated annotation and its EnumType types">MOOC.fi Java Programming I Part 11</a></li>
+<li><a class="post-link" href="/jekyll-theme-yat/java/2022/05/26/Finalkeyword.html" title="Enumerated annotation and its EnumType types">Final keyword on variable, method and class</a></li>
+</ul>
+    </div>
+<div class="post-comments"></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/jekyll-theme-yat/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Brian <span class="copyleft">©</span> 2021-2023 Brian</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/jekyll-theme-yat/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

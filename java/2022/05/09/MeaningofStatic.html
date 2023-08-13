@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Meaning of static variable and method and how to initialise them | Brian’s Dev Blog</title>
+<meta name="generator" content="Jekyll v4.3.2">
+<meta property="og:title" content="Meaning of static variable and method and how to initialise them">
+<meta name="author" content="Brian">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="Java">
+<meta property="og:description" content="Java">
+<link rel="canonical" href="/jekyll-theme-yat/java/2022/05/09/MeaningofStatic.html">
+<meta property="og:url" content="/jekyll-theme-yat/java/2022/05/09/MeaningofStatic.html">
+<meta property="og:site_name" content="Brian’s Dev Blog">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2022-05-09T14:35:23+00:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="Meaning of static variable and method and how to initialise them">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Brian"},"dateModified":"2022-05-09T14:35:23+00:00","datePublished":"2022-05-09T14:35:23+00:00","description":"Java","headline":"Meaning of static variable and method and how to initialise them","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll-theme-yat/java/2022/05/09/MeaningofStatic.html"},"url":"/jekyll-theme-yat/java/2022/05/09/MeaningofStatic.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="shortcut icon" href="">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/jekyll-theme-yat/assets/css/main.css">
+  <script src="/jekyll-theme-yat/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="/jekyll-theme-yat/feed.xml" title="Brian's Dev Blog">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/jekyll-theme-yat/">
+  <img class="site-favicon" title="Brian's Dev Blog" src="" onerror="this.style.display='none'">
+  Brian's Dev Blog
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/jekyll-theme-yat/about.html">ABOUT</a><a class="page-link" href="/jekyll-theme-yat/archives.html">ARCHIVES</a><a class="page-link" href="/jekyll-theme-yat/categories.html">CATEGORIES</a><a class="page-link" href="/jekyll-theme-yat/">HOME</a><a class="page-link" href="/jekyll-theme-yat/tags.html">TAGS</a>
+
+
+
+
+
+
+
+
+
+<span class="page-link">
+
+
+
+<div id="google_translate_element" style="display: none;">
+</div>
+
+<span class="ct-language">
+  <ul class="list-unstyled ct-language-dropdown">
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="en">
+          
+          <img src="https://cdn.countryflags.com/thumbs/united-states-of-america/flag-400.png" title="English">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="fr">
+          
+          <img src="https://cdn.countryflags.com/thumbs/france/flag-400.png" title="French">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="zh-CN">
+          
+          <img src="https://cdn.countryflags.com/thumbs/china/flag-400.png" title="Chinese(Simple)">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ja">
+          
+          <img src="https://cdn.countryflags.com/thumbs/japan/flag-400.png" title="Japanese">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ko">
+          
+          <img src="https://cdn.countryflags.com/thumbs/south-korea/flag-400.png" title="Korean">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ru">
+          
+          <img src="https://cdn.countryflags.com/thumbs/russia/flag-400.png" title="Russian">
+          
+        </a>
+      </li>
+    
+  </ul>
+</span>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    autoDisplay: false,
+    layout: google.translate.TranslateElement.InlineLayout.VERTICAL
+  }, 'google_translate_element');
+
+  // Links to cross-origin destinations are unsafe
+  var gll = document.getElementsByClassName('goog-logo-link')[0];
+  if (gll) {
+    gll.setAttribute('rel', 'noopener');
+  }
+
+  function restoreLang() {
+    var iframe = document.getElementsByClassName('goog-te-banner-frame')[0];
+    if (!iframe) return;
+
+    var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+    var restore_el = innerDoc.getElementsByTagName("button");
+
+    for (var i = 0; i < restore_el.length; i++) {
+      if (restore_el[i].id.indexOf("restore") >= 0) {
+        restore_el[i].click();
+        var close_el = innerDoc.getElementsByClassName("goog-close-link");
+        close_el[0].click();
+        return;
+      }
+    }
+  }
+
+  function triggerHtmlEvent(element, eventName) {
+    var event;
+    if (document.createEvent) {
+      event = document.createEvent('HTMLEvents');
+      event.initEvent(eventName, true, true);
+      element.dispatchEvent(event);
+    } else {
+      event = document.createEventObject();
+      event.eventType = eventName;
+      element.fireEvent('on' + event.eventType, event);
+    }
+  }
+
+  var googleCombo = document.querySelector("select.goog-te-combo");
+  var langSelect = document.querySelector('.ct-language');
+  langSelect.addEventListener('click', function(event) {
+    if (!event.target) {
+      return;
+    }
+
+    var selected = document.querySelector('.ct-language .ct-language-selected');
+    if (selected) {
+      selected.classList.remove('ct-language-selected');
+    }
+
+    var target = event.target;
+    while (target && target !== langSelect ) {
+      if (target.matches('.lang-select')) {
+        break;
+      }
+      target = target.parentElement;
+    }
+
+    if (target && target.matches('.lang-select')) {
+      var lang = target.getAttribute('data-lang');
+      if (googleCombo.value == lang) {
+        restoreLang();
+      } else {
+        target.parentElement.classList.add('ct-language-selected');
+        googleCombo.value = lang;
+        triggerHtmlEvent(googleCombo, 'change');
+      }
+    }
+
+    event.preventDefault();
+  });
+}
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</span>
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">Meaning of static variable and method and how to initialise them</h1>
+  <h2 class="post-subtitle">Java</h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2022-05-09T14:35:23+00:00" itemprop="datePublished"><i class="fa fa-calendar"></i> May 09, 2022
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/jekyll-theme-yat/tags.html#Java">#Java</a><a class="post-tag" href="/jekyll-theme-yat/tags.html#Head%20First%20Java">#Head First Java</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h2 id="intro">Intro</h2>
+<blockquote>
+  <p>Methods in the Math class don’t use any instance variable values. And because the methods are
+“static,” you don’t need to have an instance of Math. All you need is the Math class.</p>
+</blockquote>
+
+<p>Java is object-oriented, but once in a while you have a special case,
+typically a utility method (like the Math methods), where there is no need to
+have an instance of the class. The keyword <strong>static</strong> lets a method run
+<strong>without any instance of the class</strong>. A static method means “behavior not
+dependent on an instance variable, so no instance/object is required. Just the
+class.”</p>
+
+<p><img src="/assets/images/posts/java/Static/1_static.png" title="제목" alt="아무거나" width="400"></p>
+
+<h2 id="calling-static-method-using-class-name">Calling static method (using class name)</h2>
+<p>So for normal non-static methods, we have been using a reference
+variable name.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Song</span> <span class="n">t2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Song</span><span class="o">();</span>
+<span class="n">t2</span><span class="o">.</span><span class="na">play</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>But for static method, we call it via a class name.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="mi">4</span><span class="o">,</span><span class="mi">6</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h2 id="similarity-between-class-with-static-method-and-abstract-class">Similarity between class with static method and abstract class</h2>
+<p>Often (although not always), a class with static methods is
+<strong>not meant to be instantiated</strong>. This is similar to <strong>abstract class</strong>
+that does not allow to say “new” on that class type. In more technical
+terms, it is impossible to instantiate an abstract class.</p>
+
+<p>But you can restrict other code from instantiating a non-abstract class by
+marking the constructor private. Remember, a method marked private
+means that only code from within the class can invoke the method. A
+constructor marked private means essentially the same thing—only code
+from within the class can invoke the constructor. Nobody can say “new” from
+outside the class. That’s how it works with the Math class, for example. The
+constructor is private; you cannot make a new instance of Math. The
+compiler knows that your code doesn’t have access to that private
+constructor.</p>
+
+<p>This does not mean that a class with one or more static methods should never
+be instantiated. In fact, every class you put a main() method in is a class with
+a static method in it!</p>
+
+<h2 id="static-methods-cant-use-non-static-instance-variables-and-methods">Static methods can’t use non-static (instance) variables and methods</h2>
+<p>Static methods run without knowing about any particular instance of the static
+method’s class. There might not even
+be any instances of that class. Since a static method is called using the class
+(Math.random()) as opposed to an instance reference (t2.play()), a static
+method can’t refer to any instance variables of the class. The static method
+doesn’t know which instance’s variable value to use.</p>
+
+<p>Also, non-static <em>methods</em> use instance variable state to affect the
+behaviour of the method.</p>
+
+<p>For example,</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Duck</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="kt">int</span> <span class="n">size</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">//this is not static because we don't know which duck and whose size</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"size of duck is"</span> <span class="o">+</span> <span class="n">size</span><span class="o">);</span>
+
+    <span class="c1">//invoking non-static method doesnt work because it uses instance</span>
+    <span class="c1">//variable (size)</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"size of duck is"</span><span class="o">+</span> <span class="n">getSize</span><span class="o">());</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getSize</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">size</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Error is “non-static variable size cannot be referenced from a 
+static context”</p>
+
+<blockquote>
+  <p>If you try to use an instance variable from inside a static method, the compiler thinks, “I don’t know
+which object’s instance variable you’re talking about!” If you have ten Duck objects on the heap, a
+static method doesn’t know about any of them</p>
+</blockquote>
+
+<p>Even if a non-static method does not use <strong>any</strong> instance variable and
+you call that method from a static method, it still does not work.</p>
+
+<h2 id="very-important-static-variable-value-is-same-for-all-instances-of-class">Very important: Static variable value is same for ALL instances of class</h2>
+<p>I have been very confused about this so let’s clear this up.</p>
+
+<p>For example, we want to count number of Duck instances being created.
+Maybe an instance variable that is set to increment in the constructor?</p>
+
+<p>Will this work??</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Duck</span><span class="o">{</span>
+    <span class="kt">int</span> <span class="n">duckCount</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nf">Duck</span><span class="o">(){</span>
+        <span class="n">duckCount</span><span class="o">++;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>NOOO because duckCount is an <strong>instance variable</strong> and it starts
+at 0 for each Duck. This constructor just sets duckCount to 1 each
+time a Duck instance is made.</p>
+
+<p>What we need is a static variable - value shared by <em>all</em> instances
+of a class. It is 1 value <strong>per class</strong>, instead of 1 value <strong>per
+instance</strong>.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Duck</span><span class="o">{</span>
+    <span class="c1">//static variable is initialised ONLY when class is first loaded</span>
+  <span class="c1">//NOT EACH TIME A NEW INSTANCE IS MADE</span>
+  <span class="c1">// btw no need to =0 cuz default is 0</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">duckCount</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nf">Duck</span><span class="o">(){</span>
+        <span class="c1">//now this works cuz duckCount is static and won't be reset to 0</span>
+        <span class="n">duckCount</span><span class="o">++;</span>
+    <span class="o">}</span>
+    <span class="c1">//rmb to access static variable with class name</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Duck</span><span class="o">.</span><span class="na">duckCount</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts/java/Static/2_static.png" title="제목" alt="아무거나" width="400"></p>
+
+<blockquote>
+  <p>Static variables are shared.
+All instances of the same class share a single copy of the static variables.</p>
+</blockquote>
+
+<blockquote>
+  <p>instance variables: 1 per instance</p>
+</blockquote>
+
+<blockquote>
+  <p>static variables: 1 per class</p>
+</blockquote>
+
+<h2 id="2-ways-of-static-initalisation">2 ways of static initalisation</h2>
+<blockquote>
+  <p>Static variables in a class are initialized before <em>any object</em> of that class
+can be created.</p>
+</blockquote>
+
+<blockquote>
+  <p>Static variables in a class are initialized before <em>any static method</em> of the
+class runs.</p>
+</blockquote>
+
+<h3 id="1-static--final">1) static + final</h3>
+<p>A variable marked <em>final</em> means that—once initialized—it can never
+change. In other words, the value of the static final variable will stay the
+same as long as the class is loaded. Look up Math.PI in the API, and you’ll
+find:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">double</span> <span class="no">PI</span> <span class="o">=</span> <span class="mf">3.141592653589793</span><span class="o">;</span>
+</code></pre></div></div>
+
+<h3 id="2-static-initialiser">2) static initialiser</h3>
+<p>I saw this done in Spring Boot but didn’t understand. Let’s see.</p>
+
+<blockquote>
+  <p>A static initializer is a block of code that runs when a class is loaded,
+before any other code can use the class, so it’s a great place to
+initialize a static final variable.</p>
+</blockquote>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">ConstantInit1</span> <span class="o">{</span>
+  <span class="kd">final</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">double</span> <span class="no">X</span><span class="o">;</span>
+  
+  <span class="kd">static</span> <span class="o">{</span>
+    <span class="no">X</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">random</span><span class="o">();</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="handy-example">Handy example</h2>
+<p>What would compiler print for this example?</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">StaticSuper</span> <span class="o">{</span>
+    <span class="kd">static</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"super static block"</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+    <span class="nc">StaticSuper</span> <span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"super constructor"</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">StaticTests</span> <span class="kd">extends</span> <span class="nc">StaticSuper</span> <span class="o">{</span>
+        <span class="kd">static</span> <span class="kt">int</span> <span class="n">rand</span><span class="o">;</span>
+        
+        <span class="kd">static</span> <span class="o">{</span>
+          <span class="n">rand</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="nc">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()</span> <span class="o">*</span> <span class="mi">6</span><span class="o">);</span>
+          <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"static block "</span> <span class="o">+</span> <span class="n">rand</span><span class="o">);</span>
+        <span class="o">}</span>
+        
+        <span class="nc">StaticTests</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"constructor"</span><span class="o">);</span>
+        <span class="o">}</span>
+        
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"in main"</span><span class="o">);</span>
+            <span class="nc">StaticTests</span> <span class="n">st</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StaticTests</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Compiler prints:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//super static block</span>
+<span class="c1">//static block 3</span>
+<span class="c1">//in main</span>
+<span class="c1">//super constructor</span>
+<span class="c1">//constructor</span>
+</code></pre></div></div>
+<p>Notice that as the output below demonstrates, the static blocks for both classes run before
+either of the constructors run.</p>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/jekyll-theme-yat/general%20knowledge/2022/05/05/HowLongDoesObjectLive.html" title="How long does object live?">How long does object live?</a><a class="next" href="/jekyll-theme-yat/jpa/2022/05/12/JPAp6spy.html" title="JPA p6spy dependency to fill JPA ? gaps">JPA p6spy dependency to fill JPA...</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/jekyll-theme-yat/spring/2022/09/01/SpringMVCdiagram.html" title="JPA p6spy dependency to fill JPA ? gaps">How does Spring MVC work?</a></li>
+<li><a class="post-link" href="/jekyll-theme-yat/java/2022/09/19/JPArepo.saveNullPointerException.html" title="JPA p6spy dependency to fill JPA ? gaps">JPA repository.save is Null (NullPointerException) - feat. @RunWith &amp; @SpringBootTest &amp; @DataJpaTest...</a></li>
+<li><a class="post-link" href="/jekyll-theme-yat/java/2022/01/14/CircuitOperators.html" title="JPA p6spy dependency to fill JPA ? gaps">Short-Circuit Operators ( &amp;&amp; , || ) vs Non-Short-Circuit Operators ( &amp;,...</a></li>
+<li><a class="post-link" href="/jekyll-theme-yat/linux/2022/12/01/lns.html" title="JPA p6spy dependency to fill JPA ? gaps">Linux ln -s (Symbolic link)</a></li>
+</ul>
+    </div>
+<div class="post-comments"></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/jekyll-theme-yat/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Brian <span class="copyleft">©</span> 2021-2023 Brian</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/jekyll-theme-yat/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

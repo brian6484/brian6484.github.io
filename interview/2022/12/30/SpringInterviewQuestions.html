@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Spring Interview Questions | Brian’s Dev Blog</title>
+<meta name="generator" content="Jekyll v4.3.2">
+<meta property="og:title" content="Spring Interview Questions">
+<meta name="author" content="Brian">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="Let’s go">
+<meta property="og:description" content="Let’s go">
+<link rel="canonical" href="/jekyll-theme-yat/interview/2022/12/30/SpringInterviewQuestions.html">
+<meta property="og:url" content="/jekyll-theme-yat/interview/2022/12/30/SpringInterviewQuestions.html">
+<meta property="og:site_name" content="Brian’s Dev Blog">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2022-12-30T00:00:00+00:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="Spring Interview Questions">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Brian"},"dateModified":"2022-12-30T00:00:00+00:00","datePublished":"2022-12-30T00:00:00+00:00","description":"Let’s go","headline":"Spring Interview Questions","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll-theme-yat/interview/2022/12/30/SpringInterviewQuestions.html"},"url":"/jekyll-theme-yat/interview/2022/12/30/SpringInterviewQuestions.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="shortcut icon" href="">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/jekyll-theme-yat/assets/css/main.css">
+  <script src="/jekyll-theme-yat/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="/jekyll-theme-yat/feed.xml" title="Brian's Dev Blog">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/jekyll-theme-yat/">
+  <img class="site-favicon" title="Brian's Dev Blog" src="" onerror="this.style.display='none'">
+  Brian's Dev Blog
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/jekyll-theme-yat/about.html">ABOUT</a><a class="page-link" href="/jekyll-theme-yat/archives.html">ARCHIVES</a><a class="page-link" href="/jekyll-theme-yat/categories.html">CATEGORIES</a><a class="page-link" href="/jekyll-theme-yat/">HOME</a><a class="page-link" href="/jekyll-theme-yat/tags.html">TAGS</a>
+
+
+
+
+
+
+
+
+
+<span class="page-link">
+
+
+
+<div id="google_translate_element" style="display: none;">
+</div>
+
+<span class="ct-language">
+  <ul class="list-unstyled ct-language-dropdown">
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="en">
+          
+          <img src="https://cdn.countryflags.com/thumbs/united-states-of-america/flag-400.png" title="English">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="fr">
+          
+          <img src="https://cdn.countryflags.com/thumbs/france/flag-400.png" title="French">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="zh-CN">
+          
+          <img src="https://cdn.countryflags.com/thumbs/china/flag-400.png" title="Chinese(Simple)">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ja">
+          
+          <img src="https://cdn.countryflags.com/thumbs/japan/flag-400.png" title="Japanese">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ko">
+          
+          <img src="https://cdn.countryflags.com/thumbs/south-korea/flag-400.png" title="Korean">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ru">
+          
+          <img src="https://cdn.countryflags.com/thumbs/russia/flag-400.png" title="Russian">
+          
+        </a>
+      </li>
+    
+  </ul>
+</span>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    autoDisplay: false,
+    layout: google.translate.TranslateElement.InlineLayout.VERTICAL
+  }, 'google_translate_element');
+
+  // Links to cross-origin destinations are unsafe
+  var gll = document.getElementsByClassName('goog-logo-link')[0];
+  if (gll) {
+    gll.setAttribute('rel', 'noopener');
+  }
+
+  function restoreLang() {
+    var iframe = document.getElementsByClassName('goog-te-banner-frame')[0];
+    if (!iframe) return;
+
+    var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+    var restore_el = innerDoc.getElementsByTagName("button");
+
+    for (var i = 0; i < restore_el.length; i++) {
+      if (restore_el[i].id.indexOf("restore") >= 0) {
+        restore_el[i].click();
+        var close_el = innerDoc.getElementsByClassName("goog-close-link");
+        close_el[0].click();
+        return;
+      }
+    }
+  }
+
+  function triggerHtmlEvent(element, eventName) {
+    var event;
+    if (document.createEvent) {
+      event = document.createEvent('HTMLEvents');
+      event.initEvent(eventName, true, true);
+      element.dispatchEvent(event);
+    } else {
+      event = document.createEventObject();
+      event.eventType = eventName;
+      element.fireEvent('on' + event.eventType, event);
+    }
+  }
+
+  var googleCombo = document.querySelector("select.goog-te-combo");
+  var langSelect = document.querySelector('.ct-language');
+  langSelect.addEventListener('click', function(event) {
+    if (!event.target) {
+      return;
+    }
+
+    var selected = document.querySelector('.ct-language .ct-language-selected');
+    if (selected) {
+      selected.classList.remove('ct-language-selected');
+    }
+
+    var target = event.target;
+    while (target && target !== langSelect ) {
+      if (target.matches('.lang-select')) {
+        break;
+      }
+      target = target.parentElement;
+    }
+
+    if (target && target.matches('.lang-select')) {
+      var lang = target.getAttribute('data-lang');
+      if (googleCombo.value == lang) {
+        restoreLang();
+      } else {
+        target.parentElement.classList.add('ct-language-selected');
+        googleCombo.value = lang;
+        triggerHtmlEvent(googleCombo, 'change');
+      }
+    }
+
+    event.preventDefault();
+  });
+}
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</span>
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">Spring Interview Questions</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2022-12-30T00:00:00+00:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Dec 30, 2022
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
+  </p>
+<div class="post-tags"><a class="post-tag" href="/jekyll-theme-yat/tags.html#Interview">#Interview</a></div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <p>Let’s go</p>
+
+<h2 id="what-is-spring-framework">What is Spring framework?</h2>
+<p>It is an open-source framework that allows convenient Java 
+programming.</p>
+
+<p>1) Can maintain Java objects (beans) as a lightweight container</p>
+
+<p>Each object(bean)’s lifecycle like creation and destruction is
+maintained and a wanted object can be received from Spring.</p>
+
+<p>2) Through IoC, allows decoupling of application</p>
+
+<p>Control authority is issued not to the user, but the framework.
+Thus, according to 필요, Spring calls user’s code accordingly</p>
+
+<p>3) Supports DI</p>
+
+<p>If there is a 의존성 in between layers or services, the Spring
+framework connects those 의존성s</p>
+
+<p>4) Supports Aspect-Oriented Programming (AOP)</p>
+
+<p>Where several modules share a certain feature like <strong>transaction,
+logging and security</strong>, these features can be 분리 and maintained
+(모듈화).</p>
+
+<p>In case an additional feature that a module allocates to a 
+core business logic overlaps amongst others, can use AOP.</p>
+
+<p>AOP advantages:
+1) Remove repetitive code
+2) Increase code reusability
+3) Easy to adapt to change</p>
+
+<h2 id="difference-between-spring-and-spring-boot">Difference between Spring and Spring boot</h2>
+<p>1) Auto Configuration feature</p>
+
+<p>Spring is known as “xml hell” because 
+at the start of Spring project, you need to do a variety of 
+environment settings. But Spring Boot automates this process,
+we just have to add “spring boot starter dependency” to finish
+setting up and can use internal Tomcat server.</p>
+
+<h2 id="dependency-injection-di">Dependency Injection DI</h2>
+<p>DI refers to instead of creating a needed object, get this
+object externally and use it. This allows object’s decoupling 
+and increases code reusability.</p>
+
+<p>3 ways - constructor, field injection (@Autowired) and setter
+but we all know constructor is best right? ^^ cuz it 1) avoids
+circular references 2) ensures immutability 3) suitable for test 
+cases</p>
+
+<h2 id="제어의-역전-ioc">제어의 역전 IOC</h2>
+<p>IOC refers to the control 제어권 of all objects’ lifecycle is
+not to the coder, but to the IOC container. When Spring creates 
+these objects in its IOC container, it gives DI within objects and
+registers these objects as “beans”.</p>
+
+<h2 id="how-to-register-bean">How to register Bean</h2>
+<p>1) Easy way is to use <strong>@Component</strong> annotation, that is detected
+through component scan. @Controller, @Service and @Repository
+all includes this @Component annotation.</p>
+
+<p>2) Create a 설정 클래스 separately and add @Configuration annotation
+to it. In that class, create method that registers bean, and add
+<strong>@Bean</strong> annotation, which automatically generates bean object.</p>
+
+<blockquote>
+  <p>1-liner: @Component or @Bean</p>
+</blockquote>
+
+<h2 id="springs-singleton-pattern">Spring’s singleton pattern</h2>
+<p>When Spring creates beans, default is singleton. Spring generates
+and manages this singleton object through its container so that 
+whenever a request comes, it does not create an object each time. 
+Instead, it shares this already-made singleton object for 
+efficient usage.</p>
+
+<p>Advantage:
+1) no need static method or private constructor to code OOP way
+2) easy to test</p>
+
+<h2 id="springs-prototype-pattern">Spring’s prototype pattern</h2>
+<p>Unlike singleton, prototype bean is whenever there is request
+for bean, container creates an object each time and returns that.
+As you can see, advantage of Spring is we can just change bean
+scope easily. The setting for bean scope is @Scope annotation and
+if you want to set prototype, do @Scope(“prototype”).</p>
+
+<h2 id="about-beans-lifecycle">About bean’s lifecycle</h2>
+<p>Creation of IOC Container -&gt; Spring bean created -&gt; DI -&gt;
+초귀화 콜백 method called -&gt; use bean -&gt; 소멸 전 콜백 method called
+-&gt; Spring exits</p>
+
+<h2 id="bean-생명주기-콜백-ways">Bean 생명주기 콜백 ways</h2>
+<p>1) Interface implementation (InitialsingBean, DisposableBean)
+2) At setting, allocate 초기화 and 종료 methods
+3) @PostConstruct and @PreDestroy annotation</p>
+
+<h2 id="difference-between-requestbody-requestparam-and-modelattribute">Difference between @RequestBody, @RequestParam and @ModelAttribute</h2>
+<p>@RequestBody converts incoming client’s HTTP body’s content in 
+JSON format to java object through MessageConverter. The value
+is not injected but converted (using Reflection) so without
+constructor, getter and setter, variables are normally 할당ed.</p>
+
+<p>@RequestParam is to get just <strong>one</strong> HTTP parameter. The default
+is true (default=true) so you MUST have a parameter. If not,
+can cause Error 400 and if it is optional parameter, need to
+set required=false.</p>
+
+<p>@ModelAttribute is to inject HTTP Body content and HTTP parameters
+through constructor, getter or setter. The value, unlike @RequestBody,
+is not converted but injected, so variables without constructor,
+getter or setter are not updated.</p>
+
+<h2 id="when-are-the-methods-generated-by-lombok-actually-created">When are the methods generated by Lombok actually created?</h2>
+<p>Lombok creates additional code when methods are at the
+compilation stage. This is called <strong>annotation processing</strong>,
+which is a technique that Java compiler analyses annotations and 
+takes care of them during compilation stage.</p>
+
+<p>(This is why when we add Lombok library, CompileOnly and
+AnnotationProcessor are also added)</p>
+
+<h2 id="vo-bo-dao-dto">VO, BO, DAO, DTO</h2>
+<p>Data Access Object (DAO) - object to approach DB’s data
+(Repository or Mapper)</p>
+
+<p>Business Object (B0) - object that uses several DAO to handle
+business logic (Service)</p>
+
+<p>Data Transfer Object (DTO) - object for data transfer between
+layers (layers mean Controler, Repository, View, etc)</p>
+
+<p>Value Object (VO) - object that saves actual real data</p>
+
+<h2 id="transactional">Transactional</h2>
+<p>Adding @Transactional on method or class, through AOP a proxy
+object that inherits Target object, or interface
+that Target inherits, is created.</p>
+
+<p>When proxy method is called, transaction is done before and
+after target method.</p>
+
+<h2 id="transactional-is-applied-on-beans-method-a-when-beans-method-b-is-called-that-internally-calls-method-a-what-is-the-flow">@Transactional is applied on Bean’s method A. When Bean’s method B is called that internally calls method A, what is the flow?</h2>
+<p>Proxy only happens when <strong>client</strong> calls a <strong>Target object</strong>.
+So if target object’s method calls its other method, proxy
+does not work. (client should call to make proxy work) So
+since method A is not 프록시로 감싸진 method, normal code instead
+of transaction is executed.</p>
+
+<h2 id="method-a-exisis-in-service-and-in-that-method-calls-3-local-transactions-if-we-add-transactional-to-method-a-what-is-the-flow">method A exisis in Service and in that method, calls 3 local transactions. If we add @Transactional to method A, what is the flow?</h2>
+<p>calling local transaction means call transactional methods from 
+<strong>another Service object</strong>.</p>
+
+<p>It depends on transaction’s spread level but if the default of
+Required is applied, all local 3 transactions are combined with
+the parent transaction A.</p>
+
+<p>This makes sense cuz if there is a problem in parent transaction A
+or any of the 3 local transactions, they are all in 1 same
+transaction so can all rollback changes.</p>
+
+<h2 id="why-do-we-use-transactionals-readonly-property">Why do we use @Transactional’s readOnly property</h2>
+<p>In transaction where it is not used for edit or delete but 
+just for ReadOnly purposes.</p>
+
+<p>It is used cuz Persistence Context does not need to manage 
+this entity so can increase memory efficiency and also 
+can mark it as “데어터 변경 불가능” logic, which increases code
+reusability.</p>
+
+<p>For transactions that have no readOnly property, 데이터 조회 결과
+entity is managed by PC, so 1차 caching and dirty checking is
+possible and done. But when querying, instance snapshot (to 
+see if there is any changes) is generated and saved so this
+unfortunately increases memory usage.</p>
+
+<h2 id="n-1-issue-and-solution">N +1 issue and solution</h2>
+<p>For 1 query, N additional unwanted queries are done.
+Problem arises cuz when querying an entity that has 연관관계,
+it queries that table and then, queries all joined tables separately.
+Use “fetch join”. This 미리 combines and joins these 2 tables
+so that it brings all the data at once.</p>
+
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/jekyll-theme-yat/interview/2022/12/30/JavaInterviewQuestions.html" title="Java Interview Questions">Java Interview Questions</a><a class="next" href="/jekyll-theme-yat/spring/2023/01/03/changeMultimoduleConfigurationRun.html" title="How to change and run different configurations in multi-module Spring project?">How to change and run different...</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/12/23/sldingwindow.html" title="How to change and run different configurations in multi-module Spring project?">Sliding window</a></li>
+<li><a class="post-link" href="/jekyll-theme-yat/java/2022/03/14/InheritanceTreeConstructor.html" title="How to change and run different configurations in multi-module Spring project?">Role of superclass constructors in an object’s life</a></li>
+<li><a class="post-link" href="/jekyll-theme-yat/java/2022/01/20/MOOC.fi-Java-part4.html" title="How to change and run different configurations in multi-module Spring project?">MOOC.fi Java Programming I Part 4</a></li>
+<li><a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/11/04/XOR.html" title="How to change and run different configurations in multi-module Spring project?">XOR in Leetcode string or character</a></li>
+</ul>
+    </div>
+<div class="post-comments"></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/jekyll-theme-yat/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Brian <span class="copyleft">©</span> 2021-2023 Brian</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/jekyll-theme-yat/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

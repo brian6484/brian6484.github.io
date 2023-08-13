@@ -1,0 +1,3485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Archives | Brian’s Dev Blog</title>
+<meta name="generator" content="Jekyll v4.3.2">
+<meta property="og:title" content="Archives">
+<meta name="author" content="Brian">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="“Any fool can write code that a computer can understand. Good programmers write code that humans can understand.” – Martin Fowler">
+<meta property="og:description" content="“Any fool can write code that a computer can understand. Good programmers write code that humans can understand.” – Martin Fowler">
+<link rel="canonical" href="/jekyll-theme-yat/archives.html">
+<meta property="og:url" content="/jekyll-theme-yat/archives.html">
+<meta property="og:site_name" content="Brian’s Dev Blog">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="Archives">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Brian"},"description":"“Any fool can write code that a computer can understand. Good programmers write code that humans can understand.” – Martin Fowler","headline":"Archives","url":"/jekyll-theme-yat/archives.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="shortcut icon" href="">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/jekyll-theme-yat/assets/css/main.css">
+  <script src="/jekyll-theme-yat/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="/jekyll-theme-yat/feed.xml" title="Brian's Dev Blog">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/jekyll-theme-yat/">
+  <img class="site-favicon" title="Brian's Dev Blog" src="" onerror="this.style.display='none'">
+  Brian's Dev Blog
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/jekyll-theme-yat/about.html">ABOUT</a><a class="page-link" href="/jekyll-theme-yat/archives.html">ARCHIVES</a><a class="page-link" href="/jekyll-theme-yat/categories.html">CATEGORIES</a><a class="page-link" href="/jekyll-theme-yat/">HOME</a><a class="page-link" href="/jekyll-theme-yat/tags.html">TAGS</a>
+
+
+
+
+
+
+
+
+
+<span class="page-link">
+
+
+
+<div id="google_translate_element" style="display: none;">
+</div>
+
+<span class="ct-language">
+  <ul class="list-unstyled ct-language-dropdown">
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="en">
+          
+          <img src="https://cdn.countryflags.com/thumbs/united-states-of-america/flag-400.png" title="English">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="fr">
+          
+          <img src="https://cdn.countryflags.com/thumbs/france/flag-400.png" title="French">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="zh-CN">
+          
+          <img src="https://cdn.countryflags.com/thumbs/china/flag-400.png" title="Chinese(Simple)">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ja">
+          
+          <img src="https://cdn.countryflags.com/thumbs/japan/flag-400.png" title="Japanese">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ko">
+          
+          <img src="https://cdn.countryflags.com/thumbs/south-korea/flag-400.png" title="Korean">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ru">
+          
+          <img src="https://cdn.countryflags.com/thumbs/russia/flag-400.png" title="Russian">
+          
+        </a>
+      </li>
+    
+  </ul>
+</span>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    autoDisplay: false,
+    layout: google.translate.TranslateElement.InlineLayout.VERTICAL
+  }, 'google_translate_element');
+
+  // Links to cross-origin destinations are unsafe
+  var gll = document.getElementsByClassName('goog-logo-link')[0];
+  if (gll) {
+    gll.setAttribute('rel', 'noopener');
+  }
+
+  function restoreLang() {
+    var iframe = document.getElementsByClassName('goog-te-banner-frame')[0];
+    if (!iframe) return;
+
+    var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+    var restore_el = innerDoc.getElementsByTagName("button");
+
+    for (var i = 0; i < restore_el.length; i++) {
+      if (restore_el[i].id.indexOf("restore") >= 0) {
+        restore_el[i].click();
+        var close_el = innerDoc.getElementsByClassName("goog-close-link");
+        close_el[0].click();
+        return;
+      }
+    }
+  }
+
+  function triggerHtmlEvent(element, eventName) {
+    var event;
+    if (document.createEvent) {
+      event = document.createEvent('HTMLEvents');
+      event.initEvent(eventName, true, true);
+      element.dispatchEvent(event);
+    } else {
+      event = document.createEventObject();
+      event.eventType = eventName;
+      element.fireEvent('on' + event.eventType, event);
+    }
+  }
+
+  var googleCombo = document.querySelector("select.goog-te-combo");
+  var langSelect = document.querySelector('.ct-language');
+  langSelect.addEventListener('click', function(event) {
+    if (!event.target) {
+      return;
+    }
+
+    var selected = document.querySelector('.ct-language .ct-language-selected');
+    if (selected) {
+      selected.classList.remove('ct-language-selected');
+    }
+
+    var target = event.target;
+    while (target && target !== langSelect ) {
+      if (target.matches('.lang-select')) {
+        break;
+      }
+      target = target.parentElement;
+    }
+
+    if (target && target.matches('.lang-select')) {
+      var lang = target.getAttribute('data-lang');
+      if (googleCombo.value == lang) {
+        restoreLang();
+      } else {
+        target.parentElement.classList.add('ct-language-selected');
+        googleCombo.value = lang;
+        triggerHtmlEvent(googleCombo, 'change');
+      }
+    }
+
+    event.preventDefault();
+  });
+}
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</span>
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  <div class="page-segments">
+  <ul class="page-segments-list">
+    
+    <h2 id="2023" class="segment-name">2023</h2>
+      
+      
+        
+        <li> 
+<span class="post-meta">Jul 08, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/07/08/2%EC%B0%A8%EC%9B%90%EB%8F%99%EC%A0%84%EB%92%A4%EC%A7%91%EA%B8%B0.html">
+    Programmers 2차원 동전 뒤집기
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jul 07, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/07/07/2%EA%B0%9C%EC%9D%B4%ED%95%98%EB%A1%9C%EB%8B%A4%EB%A5%B8%EB%B9%84%ED%8A%B8.html">
+    Programmers 2개 이하로 다른 비트
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jul 06, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/07/06/%EA%B8%B0%EB%8A%A5%EA%B0%9C%EB%B0%9C.html">
+    Programmers 기능개발
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jul 05, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/07/05/%EA%B0%99%EC%9D%80%EC%88%AB%EC%9E%90%EB%8A%94%EC%8B%AB%EC%96%B4.html">
+    Programmers 같은 숫자는 싫어
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jul 04, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/07/04/%EC%A7%95%EA%B2%80%EB%8B%A4%EB%A6%AC%EA%B1%B4%EB%84%88%EA%B8%B0.html">
+    Programmers 선입 선출 스케줄링
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jul 03, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/07/03/%EC%84%A0%EC%9E%85%EC%84%A0%EC%B6%9C%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81.html">
+    Programmers 선입 선출 스케줄링
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jul 02, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/07/02/%EC%A7%95%EA%B2%80%EB%8B%A4%EB%A6%AC.html">
+    Programmers 징검다리
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jul 01, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/07/01/%EC%9E%85%EA%B5%AD%EC%8B%AC%EC%82%AC.html">
+    Programmers 입국심사
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jun 16, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/querydsl/2023/06/16/subqueryInQuerydsl.html">
+    Limitations of subquery in Querydsl
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jun 14, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/linux/2023/06/14/setJDKinBashProfile.html">
+    How to set JDK in bash profile in linux
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jun 12, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/querydsl/2023/06/12/ExpressionUtilsSumNotAllowedinQuerydsl.html">
+    ExpressionUtils.sum() not allowed in querydsl
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jun 08, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/querydsl/2023/06/08/noPropertyFoundForEntity.html">
+    error no property "some_method_name" not found for type "entity"
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jun 06, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/database/2023/06/06/Coalesce.html">
+    What and how to use SQL coalesce
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jun 03, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/ajax/2023/06/03/ajaxButtonNotShowing.html">
+    Ajax button not showing up
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jun 01, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/querydsl/2023/06/01/whenddlautoIsNone.html">
+    OracleDatabaseException table or view does not exist error when generate-ddl is set to none
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">May 31, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/database/2023/05/31/sqlTrigger.html">
+    SQL Trigger and a possible error
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">May 27, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/database/2023/05/27/insertionTypeAndSelectTypeNotCompatible.html">
+    Solve insertion type and select type at position 9 are not compatible error
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">May 24, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/linux/2023/05/24/setEnvironmentVariableInBashProfile.html">
+    How to set environment variable in bash profile in linux
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">May 22, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/querydsl/2023/05/22/UseBooleanExpressionOverBooleanBuilder.html">
+    BooleanExpression in Querydsl and use booleanexpression over booleanbuilder
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">May 19, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/aws/2023/05/19/Permissions0777forxxx.pemtooOpen.html">
+    Permissions 0777 for 'your_key.pem' are too open
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">May 17, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2023/05/17/SpringLegacy.html">
+    Spring Legacy and some precautions
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">May 15, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/jpa/2023/05/15/differentStrategiesOfMappingPK.html">
+    Different strategies of mapping PK (identity, sequence, automatic)
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">May 12, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/jpa/2023/05/12/setMultipleColumnsofEntityWithUniqueConditions.html">
+    UniqueConstraints annotation and for multiple column conditions(제약조건) where Column annotation is insufficient
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">May 10, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/database/2023/05/10/OracleUniqueConstraintError.html">
+    Unique constraint error in Oracle db
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">May 08, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/05/08/String.html">
+    String and methods in Python and practice questions
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">May 05, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/05/05/SplitVSStrip.html">
+    Difference between split() and strip() in Python
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">May 03, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2023/05/03/ThreadLocal.html">
+    ThreadLocal to change Hibernate's query manually
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">May 01, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/database/2023/05/01/SQLtruncate.html">
+    What is SQL truncate? What is its use?
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Apr 28, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/04/28/FloydWarshall.html">
+    Floyd Warshall algorithm
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Apr 25, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/04/25/greedy.html">
+    Greedy algorithms and practice questions
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Apr 21, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/04/21/kruskal.html">
+    Kruskal algorithm for minimal spanning tree (MST)
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Apr 19, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/04/19/defaultdictVSjustDict.html">
+    defaultdict(list) vs just dictionary
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Apr 16, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/04/16/Sorting.html">
+    Sorting and practice questions
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Apr 14, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/04/14/List.html">
+    List and practice questions
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Apr 10, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/04/10/Queue.html">
+    Queue and practice questions
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Apr 07, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/04/07/Stack.html">
+    Stack (with deque) and practice questions
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Apr 05, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/04/05/Dijkstra.html">
+    Dijkstra template and practice questions
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Apr 03, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/jpa/2023/04/03/JPAcannotResolveColumnOrTable.html">
+    JPA cannot resolve column or table
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Mar 31, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2023/03/31/whatIfNoColumnAnnotation.html">
+    What if we don't add @Column annotation to our fields? How are they mapped then?
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Mar 29, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2023/03/29/roleInSecurityFilterChain.html">
+    Declaring role in SecurityFilterChain (I struggled with this a lot)
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Mar 27, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/03/27/Dictionary.html">
+    Dictionary (+Counter) and practice questions
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Mar 24, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2023/03/24/stringCharArray.html">
+    return new String(array) when you modified array
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Mar 22, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/python/2023/03/22/helperFunctionInPython.html">
+    Using helper functions in python and updating return value
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Mar 20, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/python/2023/03/20/listIndexOutOfRange.html">
+    List index out of range (list initialised wrong!)
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Mar 17, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2023/03/17/convertDtoToEntityWithMapStruct.html">
+    Convert dto to entity and vice versa with MapStruct
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Mar 14, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/python/2023/03/14/listAsMethodArgument.html">
+    List as method argument and parameter in Python
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Mar 12, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/python/2023/03/12/appendReturnValueToList.html">
+    Appending return value to list in Python
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Mar 10, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/03/10/JavaToPython.html">
+    Python coding test prep for Java main users
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Mar 08, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/querydsl/2023/03/08/querydslRepoSupport.html">
+    When should your repoImpl extend Querydsl querydslrepositorysupport?
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Mar 08, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/python/2023/03/08/appendListToList.html">
+    Appending list to list in Python will not work
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Mar 06, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/querydsl/2023/03/06/nosuchmethodexceptionQueryDsl.html">
+    Querydsl noSuchMethodException
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Mar 03, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/querydsl/2023/03/03/numberOfSelectTypesDidNotMatchThoseForInsert.html">
+    insert number does not match select in Querydsl JPA
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Mar 01, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/querydsl/2023/03/01/querydslSetting.html">
+    How to set up Querydsl in your Spring Boot gradle project
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Feb 27, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2023/02/27/noParameterResolverRegistered.html">
+    Error - no ParameterResolver registered for parameter error
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Feb 24, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2023/02/24/Mockito.html">
+    Mockito
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Feb 22, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2023/02/22/SpringSecurityloadUserByUsername.html">
+    NullPointer with Spring Security's loadUserByUsername
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Feb 20, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2023/02/20/SpringSecurityFilterChain.html">
+    Careful with Spring Security's SecurityFilterChain (front slash for url!)
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Feb 17, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/thymeleaf/2023/02/17/comparing2strings.html">
+    Comparing 2 strings in thymeleaf
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Feb 15, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2023/02/15/errorNeitherBindingResultNorPlainTargetAvailableAsRequestAttribute.html">
+    Error Neither BindingResult nor plain target object for bean name '...' available as request attribute
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Feb 13, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2023/02/13/SpringSecurityDefaultLoginPageFeature.html">
+    Spring Security's default Login page feature
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Feb 10, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2023/02/10/errorPreparingSQLstatement.html">
+    Error - preparing SQL statement
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Feb 08, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2023/02/08/settingUpSpringProject.html">
+    Set up directories in your Spring project properly
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Feb 06, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/database/2023/02/06/h2setUp.html">
+    Setting up H2 database
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Feb 02, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2023/02/02/dtoToEntityandViceVersa.html">
+    How to cleanly convert Dtos to Entities and vice versa
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jan 31, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/jpa/2023/01/31/JPA%EC%97%B0%EA%B4%80%EA%B4%80%EA%B3%84%ED%8E%B8%EC%9D%98%EB%A9%94%EC%86%8C%EB%93%9C.html">
+    JPA 양방향 연관관계 편의 메소드
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jan 28, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/01/28/arrayofArrayList.html">
+    What is ArrayList&lt;Integer&gt;[] or StringBuilder[]? What is this square bracket's role?
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jan 16, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/01/16/javaREGEX.html">
+    Java regex
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jan 12, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2023/01/12/deductionofTernaryOperator.html">
+    Deducing ternary operator in Java
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jan 09, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/01/09/javaDataConversions.html">
+    Useful Java data conversion tricks
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jan 06, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/01/06/bucketSort.html">
+    Bucket sort
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jan 04, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2023/01/04/doublebraceInitialisation.html">
+    Double brace initialisation in Java
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jan 03, 2023</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2023/01/03/changeMultimoduleConfigurationRun.html">
+    How to change and run different configurations in multi-module Spring project?
+  </a>
+</span>
+ </li>
+        
+      
+    
+    <h2 id="2022" class="segment-name">2022</h2>
+      
+      
+        
+        <li> 
+<span class="post-meta">Dec 30, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/interview/2022/12/30/SpringInterviewQuestions.html">
+    Spring Interview Questions
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Dec 30, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/interview/2022/12/30/JavaInterviewQuestions.html">
+    Java Interview Questions
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Dec 30, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/12/30/javaCodingtestFunctions.html">
+    Useful Java data type functions for coding test
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Dec 28, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/application.yml/2022/12/28/ymlforMultiModule.html">
+    application.yml for Multi-Module (feat. AWS RDS settings)
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Dec 23, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/12/23/sldingwindow.html">
+    Sliding window
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Dec 23, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/jpa/2022/12/23/SpringTransactional.html">
+    JPA's Transactional and precautions
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Dec 22, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/12/22/UnionFind.html">
+    Quick union (not quick find)
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Dec 20, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/2022/12/20/BFS.html">
+    Bfs
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Dec 17, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/12/17/String.html">
+    String useful methods and practice questions
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Dec 17, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/aws/2022/12/17/route53linkdomain.html">
+    How to link domain's name server to AWS Route 53
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Dec 14, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/12/14/threadDeadlock.html">
+    What is deadlock?
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Dec 13, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/12/13/DequeOverStack.html">
+    Use Deque over Stack in Java!
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Dec 10, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/12/10/javathread.html">
+    What is thread in Java? (feat. process)
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Dec 08, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/12/08/DFS.html">
+    DFS and practice questions
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Dec 04, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/12/04/backtracking.html">
+    General approach to backtracking + template
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Dec 02, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/general%20knowledge/2022/12/02/GarbageCollection.html">
+    GarbageCollection in Java (feat. stack and Heap)
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Dec 01, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/12/01/ConstraintViolationExceptionsolution.html">
+    Spring ConstraintViolationException error solution
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Dec 01, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/linux/2022/12/01/lns.html">
+    Linux ln -s (Symbolic link)
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Dec 01, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/12/01/savingtimeinForloop.html">
+    How to save time in for loop?
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Nov 29, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/11/29/referencevariableAddtoList.html">
+    How does reference variable work when adding it to list
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Nov 29, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/http%20and%20network/2022/11/29/SSLonALB.html">
+    Applying SSL cert on AWS Load Balancer
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Nov 26, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/11/26/protected.html">
+    Protected annotation
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Nov 25, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/11/25/buildingGraphwithLambda.html">
+    How to build graph with lambda?
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Nov 21, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/11/21/DPconfusion.html">
+    Dynamic Programming error
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Nov 18, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/11/18/HashMapduplicatekey.html">
+    Does HashMap allow duplicate keys when putting same key with different value?
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Nov 15, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/11/15/convertlistToArray.html">
+    How to convert ArrayList to array?
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Nov 14, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/general%20knowledge/2022/11/14/ASCIIvalue.html">
+    ASCII value in Java and how to store in array of size 128 or 256?
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Nov 12, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/11/12/WhatisDTO.html">
+    What is DTO and its difference between VO?
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Nov 04, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/11/04/XOR.html">
+    XOR in Leetcode string or character
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Nov 03, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/thymeleaf/2022/11/03/NoOperation.html">
+    Classappend and No-operation (_) in Thymeleaf
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Nov 02, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/11/02/EntityInsideDto.html">
+    How to handle entity inside DTO?
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Nov 01, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/thymeleaf/2022/11/01/SafeNavigationOperator.html">
+    Safe Navigation Operator (?) in Thymeleaf to prevent NullPointerException
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Nov 01, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/11/01/HashMapmistake.html">
+    Mistake in dealing with HashMap
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Oct 30, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/application.yml/2022/10/30/CouldnotResolvePlaceholderinValue.html">
+    Could not resolve placeholder 'test.name' in value "${test.name}"
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Oct 30, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/10/30/DPpattern.html">
+    5 main Dynamic Programming patterns and templates
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Oct 28, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/10/28/binarySearch.html">
+    Binary Search explained
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Oct 25, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/10/25/dependencyinjectiondi.html">
+    What is Dependency Injection and how to do it via constructor?
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Oct 25, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/aws/2022/10/25/S3setupSpringBoot.html">
+    How to upload files to S3 on Spring Boot project (from set-up to controller)
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Oct 23, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/10/23/Declaringvariablesin1line.html">
+    Error in declaring variables in 1 line
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Oct 17, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/10/17/differencespringfilterinterceptor.html">
+    Difference between Spring filter and interceptor?
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Oct 17, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/git/2022/10/17/initialisingGitRepo.html">
+    Uploading your local source code to Github repo
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Oct 17, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/10/17/SpringEvent.html">
+    Spring Events and what are they?
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Oct 15, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/git/2022/10/15/gitignore.html">
+    How to use .gitignore to hide sensitive files in Spring Boot
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Oct 14, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/redis/2022/10/14/AuthroisationwithRedis.html">
+    Authorisation with Redis
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Oct 12, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/git/2022/10/12/GitUpstream.html">
+    Git upstream
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Oct 11, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/10/11/DPtemplate.html">
+    Dynamic Programming explained
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Oct 07, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/10/07/OrderofOperator.html">
+    Order of operator in Java (e.g. order matters in &amp;&amp;)
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Oct 05, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/general%20knowledge/2022/10/05/OOPinJava.html">
+    What is Object-oriented programming (OOP)?
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Oct 03, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/general%20knowledge/2022/10/03/SOLIDprinciples.html">
+    SOLID principles of object-oriented design
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Oct 02, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/10/02/ModelMappererror.html">
+    Error with ModelMapper and solution - Parameter 1 of constructor in Service class required a bean of type 'org.modelmapper.ModelMapper' that could not be found.
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Sep 29, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/09/29/carefulTernaryOperator.html">
+    Careful with ternary operator
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Sep 28, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/aws/2022/09/28/RDSMUSTcheck.html">
+    A MUST check when setting up AWS RDS (or you will get Fatal Error 3000:0 - No such database found)
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Sep 27, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/09/27/DiffArrayListLinkedList.html">
+    Difference between ArrayList and LinkedList
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Sep 26, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/09/26/JPAannotation.html">
+    Basic JPA annotations you should know (e.g. PersistenceContext, Transactional, etc)
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Sep 26, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/09/26/ListNode.html">
+    Java's ListNode in Leetcode
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Sep 23, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/application.yml/2022/09/23/applicationYML.html">
+    H2 db connection with application.yml
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Sep 22, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/09/22/OverloadingMethod.html">
+    Overloading method
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Sep 22, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/09/22/overflowLambda.html">
+    Problem of overflow with lambda
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Sep 21, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/09/21/Error-BeanCreationException.html">
+    Error-BeanCreationException at AbstractAutowireCapableBeanFactory
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Sep 21, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/nginx/2022/09/21/nginxBasicCommands.html">
+    Nginx Basic commands
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Sep 20, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/09/20/Lombok@Builder.html">
+    Can we have 2 Lombok's @Builder in 1 class?
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Sep 19, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/09/19/JPArepo.saveNullPointerException.html">
+    JPA repository.save is Null (NullPointerException) - feat. @RunWith &amp; @SpringBootTest &amp; @DataJpaTest
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Sep 19, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/aws/2022/09/19/DeploySpringJartoAWS.html">
+    How to deploy Spring jar app to AWS
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Sep 17, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/09/17/comparatorVSlambda.html">
+    Comparator VS Lambda
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Sep 15, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/docker/2022/09/15/DeployingSpringAppwithDocker.html">
+    How to deploy Spring app (jar file) with Docker
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Sep 14, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/09/14/DTOprecautions.html">
+    NEVER put LocalDateTime into DTOs!
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Sep 12, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/docker/2022/09/12/pusherror.html">
+    docker push denied - requested access to the resource is denied
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Sep 12, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/09/12/multidimensionalArray.html">
+    2 different ways to create 2D array (List vs ArrayList?)
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Sep 08, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/09/08/NotBlankNotNullNotEmpty.html">
+    Difference between NotBlank, NotEmpty and NotNull when validating DTOs
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Sep 04, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/09/04/SpringMVC1.html">
+    Spring MVC Basic Knowledge
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Sep 01, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/09/01/SpringMVCdiagram.html">
+    How does Spring MVC work?
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Sep 01, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/jpa/2022/09/01/JPA%EC%97%B0%EA%B4%80%EA%B4%80%EA%B3%84%ED%8E%B8%EC%9D%98method.html">
+    JPA 연관관계 편의 메서드
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Aug 31, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/jpa/2022/08/31/JPADBquery.html">
+    JPA force DB query when entity is already saved in 1st cache
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Aug 29, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/2022/08/29/JPAwithoutEntityRelationship.html">
+    Jpawithoutentityrelationship
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Aug 25, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/jpa/2022/08/25/JPATableIndex.html">
+    JPA Table indexing
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Aug 22, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/jpa/2022/08/22/JPANamingFieldinDB.html">
+    Spring Boot + JPA following Java's camelCase or DB's underscore when naming fields
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Aug 19, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/jpa/2022/08/19/JPAinMultiModule.html">
+    JPA relationships in multi-module architecture (MSA)
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Aug 16, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/08/16/HandleDTOsin1file.html">
+    How to manage DTOs in Spring Boot well
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Aug 14, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/08/14/NestedClass.html">
+    Java nested class
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Aug 10, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/08/10/SpringMultiModule.html">
+    Spring Multi-module structure
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Aug 07, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/08/07/LombokBuilder.html">
+    What is Lombok's Builder and why do we use it?
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Aug 04, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/http%20and%20network/2022/08/04/TCP.html">
+    TCP port
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Aug 04, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/docker/2022/08/04/Docker.html">
+    Docker's basic commands
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Aug 02, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/general%20knowledge/2022/08/02/WarJar.html">
+    Spring JAR vs WAR
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Aug 01, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/08/01/TryCatchflowControl.html">
+    try/catch finally flow control
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jul 28, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/07/28/Exception.html">
+    Java's Exception handling
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jul 25, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/07/25/Optional.html">
+    Java's Optional
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jul 21, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/07/21/LambdaMethodReference.html">
+    Method reference to replace lambda expressions
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jul 17, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/07/17/ModelAttribute.html">
+    Difference between ModelAttribute and Model annotations
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jul 17, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/general%20knowledge/2022/07/17/IntelliJShortcut.html">
+    IntelliJ Shortcut Windows
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jul 14, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/07/14/StreamMethodsPractical.html">
+    Java Stream operation methods with examples
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jul 11, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/07/11/StreamLambda.html">
+    Java Stream with Lambda
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jul 07, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/07/07/StreamMatching.html">
+    Java Stream Matching its values
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jul 04, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/07/04/goodSpringrules.html">
+    Good Spring practice to follow
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jul 04, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/07/04/Streams.html">
+    Java's Stream theory explained
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jul 01, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/07/01/ConvenienceFactoryMethods.html">
+    Java's Convenience factory methods
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jun 27, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/06/27/TreeSet.html">
+    TreeSet- HashSet with sorting capability
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jun 23, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/06/23/HashSet.html">
+    HashSet - Reference equality vs Object equality
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jun 20, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/06/20/RequestMappingannotation.html">
+    Controller VS RestController
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jun 20, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/06/20/ListSetMap.html">
+    Java's list, set and map
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jun 13, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/06/13/Lambda.html">
+    Java Lambda
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jun 09, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/06/09/ComparableGenerics.html">
+    Comparable, Comparator generics and Intro to Lambda
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jun 06, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/06/06/Generics.html">
+    What is generics?
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jun 05, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/06/05/Logging.html">
+    Logging with Lombok's @Slf4j
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jun 02, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/06/02/NumberFormattinginJava.html">
+    How to format numbers in Java (feat "%")
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jun 02, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/jpa/2022/06/02/JPAentity.html">
+    What is entity and its precautions when designing in JPA?
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jun 01, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/06/01/ControllerVSRestCont.html">
+    Spring Controller and difference between Controller VS RestController
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">May 30, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/05/30/PrimitiveWrappingandUnwrapping.html">
+    Primitive and how to wrap and unwrap (feat. ArrayList&lt;Object&gt;)
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">May 30, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/05/30/StringBuilder.html">
+    Java's StringBuilder
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">May 26, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/05/26/Finalkeyword.html">
+    Final keyword on variable, method and class
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">May 23, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/05/23/applicationYML%ED%99%98%EA%B2%BDsetting.html">
+    yml file for setting up local, dev, production environment
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">May 12, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/jpa/2022/05/12/JPAp6spy.html">
+    JPA p6spy dependency to fill JPA ? gaps
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">May 09, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/05/09/MeaningofStatic.html">
+    Meaning of static variable and method and how to initialise them
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">May 05, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/general%20knowledge/2022/05/05/HowLongDoesObjectLive.html">
+    How long does object live?
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">May 05, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/05/05/diffStringBufferStringBuilder.html">
+    Difference between StringBuffer and StringBuilder
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">May 02, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/jpa/2022/05/02/JPAapplicationYML.html">
+    JPA application.yml Hibernate settings explained
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Apr 29, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/04/29/CRUDapi.html">
+    Make good CRUD APIs (feat. DTO)
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Apr 27, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/04/27/JsonIgnore.html">
+    JsonIgnore annotation
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Apr 25, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/04/25/EffectiveAPIwithDTO.html">
+    How to create effective APIs with DTO?
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Apr 19, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/04/19/PreventMultipleWaysToCreateObject.html">
+    Prevent multiple ways to initialise/create Object
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Apr 17, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/http%20and%20network/2022/04/17/HTTP.html">
+    All about HTTP
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Mar 21, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/jpa/2022/03/21/JPACascade.html">
+    JPA cascade
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Mar 17, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/03/17/CallingConstructorFromAnotherWithinSameClass.html">
+    How to call a constructor from another constructor within the same class (not from subclass)
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Mar 14, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/03/14/InheritanceTreeConstructor.html">
+    Role of superclass constructors in an object’s life
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Mar 11, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/03/11/WhenToAddBusinessLogicToDomain.html">
+    When to add business logic to domain class, not service
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Mar 09, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/03/09/TestCaseException.html">
+    How to test exception in test cases
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Mar 07, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/03/07/DifferenceBetweensizeandlengthMethod.html">
+    Difference between method size() and length()
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Mar 05, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/jpa/2022/03/05/JPAFetchType.html">
+    JPA FetchType
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Mar 03, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/03/03/Enumerated.html">
+    Enumerated annotation and its EnumType types
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Mar 02, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/03/02/MOOC.fi-Java-part11.html">
+    MOOC.fi Java Programming I Part 11
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Mar 01, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/03/01/PathVariable.html">
+    PathVariable annotation
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Feb 28, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/jpa/2022/02/28/JPAInheritance.html">
+    Java inheritance in JPA
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Feb 26, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/02/26/MOOC.fi-Java-part10.html">
+    MOOC.fi Java Programming I Part 10
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Feb 25, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/02/25/applicationYML.html">
+    Tips on application.yml
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Feb 23, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/general%20knowledge/2022/02/23/CQSpattern.html">
+    Command Query Separation
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Feb 21, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/02/21/Constructor.html">
+    Constructor
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Feb 19, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/02/19/MOOC.fi-Java-part9.html">
+    MOOC.fi Java Programming I Part 9
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Feb 18, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/general%20knowledge/2022/02/18/GarbageHeapAndStack.html">
+    The Stack and the Heap - where things live
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Feb 16, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/02/16/InvokeSuperClassMethod.html">
+    Invoking the superclass version of a method
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Feb 14, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/02/14/ClassSubclassAbstractClassInterface.html">
+    How to differentiate class, a subclass, an abstract class or an interface?
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Feb 13, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/02/13/MOOC.fi-Java-part8.html">
+    MOOC.fi Java Programming I Part 8
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Feb 10, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/02/10/Interface.html">
+    Interface
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Feb 08, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/spring/2022/02/08/SpringDevtools.html">
+    Spring Devtools
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Feb 08, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/02/08/MOOC.fi-Java-part7.html">
+    MOOC.fi Java Programming I Part 7
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Feb 07, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/02/07/CastingPolymorphism.html">
+    Casting Polymorphism
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Feb 03, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/02/03/ObjectClassPolymorphism.html">
+    Object Class polymorphism
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Feb 03, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/02/03/MOOC.fi-Java-part6.html">
+    MOOC.fi Java Programming I Part 6
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jan 27, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/01/27/DeeperPolymorphism.html">
+    Deeper knowledge on Polymorphism
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jan 27, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/01/27/MOOC.fi-Java-part5.html">
+    MOOC.fi Java Programming I Part 5
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jan 24, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/01/24/Polymorphism.html">
+    Polymorphism
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jan 21, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/01/21/Inheritance.html">
+    Inheritance
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jan 20, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/01/20/MOOC.fi-Java-part4.html">
+    MOOC.fi Java Programming I Part 4
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jan 19, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/01/19/Encapsulation.html">
+    Encapsulation in Java
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jan 17, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/01/17/DiffBetweenLocalAndInstanceVariables.html">
+    Difference between local and instance variables
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jan 14, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/01/14/CircuitOperators.html">
+    Short-Circuit Operators ( &amp;&amp; , || ) vs Non-Short-Circuit Operators ( &amp;, | )
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jan 14, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/01/14/MOOC.fi-Java-part3.html">
+    MOOC.fi Java Programming I Part 3
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jan 12, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/general%20knowledge/2022/01/12/JavaCompilerJVM.html">
+    How does Java code run? (feat. Compiler &amp; JVM)
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jan 10, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/general%20knowledge/2022/01/10/DifferenceBetweenForandWhile.html">
+    Difference between for and while loop
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jan 10, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/01/10/MOOC.fi-Java-part2.html">
+    MOOC.fi Java Programming I Part 2
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jan 07, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/01/07/DifferenceBetweenArrayAndArrayList.html">
+    Difference between Array and ArrayList
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jan 05, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2022/01/05/ArrayList.html">
+    ArrayList
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jan 05, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/java/2022/01/05/MOOC.fi-Java-part1.html">
+    MOOC.fi Java Programming I Part 1
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jan 01, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/markdown/2022/01/01/an-exhibit-of-markdown.html">
+    An exhibit of Markdown
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jan 01, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/markdown/2022/01/01/table-example.html">
+    Table example
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jan 01, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/markdown/2022/01/01/mermaid-example.html">
+    Mermaid example
+  </a>
+</span>
+ </li>
+        
+      
+        
+        <li> 
+<span class="post-meta">Jan 01, 2022</span>
+<span>
+  <a class="post-link" href="/jekyll-theme-yat/markdown/2022/01/01/quick-mardown-example.html">
+    Quick markdown example
+  </a>
+</span>
+ </li>
+        
+      
+    
+  </ul>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="common-list">
+  <ul>
+    <li>
+      <a href="/jekyll-theme-yat/index.html">
+        All<span>238</span>
+      </a>
+    </li>
+
+    
+      <li>
+        <a href="/jekyll-theme-yat/archives.html#h-2022">
+          2022 <span>166</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/jekyll-theme-yat/archives.html#h-2023">
+          2023 <span>72</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/jekyll-theme-yat/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Brian <span class="copyleft">©</span> 2021-2023 Brian</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/jekyll-theme-yat/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

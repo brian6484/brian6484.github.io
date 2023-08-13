@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>All about HTTP | Brian’s Dev Blog</title>
+<meta name="generator" content="Jekyll v4.3.2">
+<meta property="og:title" content="All about HTTP">
+<meta name="author" content="Jeonghwan Lee">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="Internet Network IP protocol has several fall-offs. Even if the receiver is out of service or non-existent, the packet is still delivered. Also, packet might not be delivered in sequence as intended because it is too big and so it is cut into pieces and delivered separately. Also, in the middle of this packet delivery, some nodes might be closed so it may cause a loss of packet. Finally, if there are 2 applications using the same IP address, there is no way to differentiate the 2.">
+<meta property="og:description" content="Internet Network IP protocol has several fall-offs. Even if the receiver is out of service or non-existent, the packet is still delivered. Also, packet might not be delivered in sequence as intended because it is too big and so it is cut into pieces and delivered separately. Also, in the middle of this packet delivery, some nodes might be closed so it may cause a loss of packet. Finally, if there are 2 applications using the same IP address, there is no way to differentiate the 2.">
+<link rel="canonical" href="/jekyll-theme-yat/http%20and%20network/2022/04/17/HTTP.html">
+<meta property="og:url" content="/jekyll-theme-yat/http%20and%20network/2022/04/17/HTTP.html">
+<meta property="og:site_name" content="Brian’s Dev Blog">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2022-04-17T00:00:00+00:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="All about HTTP">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Jeonghwan Lee"},"dateModified":"2022-04-17T00:00:00+00:00","datePublished":"2022-04-17T00:00:00+00:00","description":"Internet Network IP protocol has several fall-offs. Even if the receiver is out of service or non-existent, the packet is still delivered. Also, packet might not be delivered in sequence as intended because it is too big and so it is cut into pieces and delivered separately. Also, in the middle of this packet delivery, some nodes might be closed so it may cause a loss of packet. Finally, if there are 2 applications using the same IP address, there is no way to differentiate the 2.","headline":"All about HTTP","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll-theme-yat/http%20and%20network/2022/04/17/HTTP.html"},"url":"/jekyll-theme-yat/http%20and%20network/2022/04/17/HTTP.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="shortcut icon" href="">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/jekyll-theme-yat/assets/css/main.css">
+  <script src="/jekyll-theme-yat/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="/jekyll-theme-yat/feed.xml" title="Brian's Dev Blog">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/jekyll-theme-yat/">
+  <img class="site-favicon" title="Brian's Dev Blog" src="" onerror="this.style.display='none'">
+  Brian's Dev Blog
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/jekyll-theme-yat/about.html">ABOUT</a><a class="page-link" href="/jekyll-theme-yat/archives.html">ARCHIVES</a><a class="page-link" href="/jekyll-theme-yat/categories.html">CATEGORIES</a><a class="page-link" href="/jekyll-theme-yat/">HOME</a><a class="page-link" href="/jekyll-theme-yat/tags.html">TAGS</a>
+
+
+
+
+
+
+
+
+
+<span class="page-link">
+
+
+
+<div id="google_translate_element" style="display: none;">
+</div>
+
+<span class="ct-language">
+  <ul class="list-unstyled ct-language-dropdown">
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="en">
+          
+          <img src="https://cdn.countryflags.com/thumbs/united-states-of-america/flag-400.png" title="English">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="fr">
+          
+          <img src="https://cdn.countryflags.com/thumbs/france/flag-400.png" title="French">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="zh-CN">
+          
+          <img src="https://cdn.countryflags.com/thumbs/china/flag-400.png" title="Chinese(Simple)">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ja">
+          
+          <img src="https://cdn.countryflags.com/thumbs/japan/flag-400.png" title="Japanese">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ko">
+          
+          <img src="https://cdn.countryflags.com/thumbs/south-korea/flag-400.png" title="Korean">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ru">
+          
+          <img src="https://cdn.countryflags.com/thumbs/russia/flag-400.png" title="Russian">
+          
+        </a>
+      </li>
+    
+  </ul>
+</span>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    autoDisplay: false,
+    layout: google.translate.TranslateElement.InlineLayout.VERTICAL
+  }, 'google_translate_element');
+
+  // Links to cross-origin destinations are unsafe
+  var gll = document.getElementsByClassName('goog-logo-link')[0];
+  if (gll) {
+    gll.setAttribute('rel', 'noopener');
+  }
+
+  function restoreLang() {
+    var iframe = document.getElementsByClassName('goog-te-banner-frame')[0];
+    if (!iframe) return;
+
+    var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+    var restore_el = innerDoc.getElementsByTagName("button");
+
+    for (var i = 0; i < restore_el.length; i++) {
+      if (restore_el[i].id.indexOf("restore") >= 0) {
+        restore_el[i].click();
+        var close_el = innerDoc.getElementsByClassName("goog-close-link");
+        close_el[0].click();
+        return;
+      }
+    }
+  }
+
+  function triggerHtmlEvent(element, eventName) {
+    var event;
+    if (document.createEvent) {
+      event = document.createEvent('HTMLEvents');
+      event.initEvent(eventName, true, true);
+      element.dispatchEvent(event);
+    } else {
+      event = document.createEventObject();
+      event.eventType = eventName;
+      element.fireEvent('on' + event.eventType, event);
+    }
+  }
+
+  var googleCombo = document.querySelector("select.goog-te-combo");
+  var langSelect = document.querySelector('.ct-language');
+  langSelect.addEventListener('click', function(event) {
+    if (!event.target) {
+      return;
+    }
+
+    var selected = document.querySelector('.ct-language .ct-language-selected');
+    if (selected) {
+      selected.classList.remove('ct-language-selected');
+    }
+
+    var target = event.target;
+    while (target && target !== langSelect ) {
+      if (target.matches('.lang-select')) {
+        break;
+      }
+      target = target.parentElement;
+    }
+
+    if (target && target.matches('.lang-select')) {
+      var lang = target.getAttribute('data-lang');
+      if (googleCombo.value == lang) {
+        restoreLang();
+      } else {
+        target.parentElement.classList.add('ct-language-selected');
+        googleCombo.value = lang;
+        triggerHtmlEvent(googleCombo, 'change');
+      }
+    }
+
+    event.preventDefault();
+  });
+}
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</span>
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">All about HTTP</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2022-04-17T00:00:00+00:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Apr 17, 2022
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 13 mins</span>
+  </p>
+<div class="post-tags"><a class="post-tag" href="/jekyll-theme-yat/tags.html#Http%20and%20Network">#Http and Network</a></div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <ol>
+  <li>Internet Network
+    <ul>
+      <li>
+        <p>IP protocol has several fall-offs. Even if the receiver is out of service or non-existent, the packet is still delivered. Also, packet might not be delivered in sequence as intended because it is too big and so it is cut into pieces and delivered separately. Also, in the middle of this packet delivery, some nodes might be closed so it may cause a loss of packet. Finally, if there are 2 applications using the same IP address, there is no way to differentiate the 2.</p>
+      </li>
+      <li>
+        <p>There is IP, TCP (3 way handshake), UDP</p>
+      </li>
+      <li>
+        <p>IP is hotel. Port is hotel room number.</p>
+      </li>
+      <li>
+        <p>DNS solves problems of remembering long IP addresses and when IP addresses change.</p>
+      </li>
+      <li>
+        <p>Uniform Resource Locator(URL) or Uniform Resource Name(URN)</p>
+      </li>
+      <li>
+        <p>URL is made up of scheme, user info(not rly used), host (either domain name or ip address), port, resource path (hierarchial structure), ?query parameter (in key-value format) and #fragment (normally in html).</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>HTTP basic</p>
+
+    <ul>
+      <li>
+        <p>HyperText Transfer Protocol (HTTP)</p>
+      </li>
+      <li>
+        <p>Stateless means server does not contain the client’s condition/details at that point of time. Stateful is problem because each server serves a specific purpose and if one goes down, the others cannot serve the purpose that the down server was serving. Stateless is good for like when 6pm chicken discount even, thousands of people connect at same time. But still hard to resolve this issue so maybe display a static HTML page first for them to read and play around first before the event connect button.</p>
+      </li>
+      <li>
+        <p>Connectionless means cuts TCP/IP connection once client request has processed. But TCP/IP connections needs to be made again for another request, so extra time is taken for 3 way handshake. This is solved by HTTP Persistent Connections.</p>
+      </li>
+      <li>
+        <p>HTTP message is either request or response.</p>
+      </li>
+      <li>
+        <p>HTTP message structure is made up of start-line, header, empty line (CRLF) and message body.</p>
+      </li>
+      <li>
+        <p>For HTTP request by client, start-line is also called request-line. request-line = method + request-target (path) + HTTP version.</p>
+      </li>
+      <li>
+        <p>HTTP methods - GET is searching or asking for resource in server while POST is giving some data to server for server to do something about it.</p>
+      </li>
+      <li>
+        <p>Path, or absolute path, starts with / (backslash) right after the HTTP methods. absolute-path?query</p>
+      </li>
+      <li>
+        <p>For HTTP response by server, start-line is called status-line. status-line = HTTP-version + space + status-code + space + reason-phrase + CRLF</p>
+      </li>
+      <li>
+        <p>200 is success, 400 is client request is wrong, 500 is server error</p>
+      </li>
+      <li>
+        <p>reason-phrase like OK after status-code is just for humans to easily understand it better than the number status-code</p>
+      </li>
+      <li>
+        <p>HTTP header: header-field = field-name + “:” + OWS field-value OWS (OWS means allows space in between)</p>
+      </li>
+      <li>
+        <p>field-name can be caps on or off. There should <strong>not</strong> be a space between field-name and “:”</p>
+      </li>
+      <li>
+        <p>Message body can be HTML document, image, video, JSON, or basically anything byte can display</p>
+      </li>
+    </ul>
+  </li>
+  <li>HTTP method
+    <ul>
+      <li>
+        <p>For naming URI, need to differentiate resources/concepts like members. Finding members by id is not resource but member itself is a resource. The method of resource will be taken care of by HTTP methods</p>
+      </li>
+      <li>
+        <p>GET - data that client wants to get from server is through <em>?query</em></p>
+      </li>
+      <li>
+        <p>POST - data delivered through <em>message body</em>, It is for starting a new process, making new resource or changing resource</p>
+      </li>
+      <li>
+        <p>PUT is substitute resource and if there is no resource, make it (e.g. putting file in folder and if there is no such file, make it and if there is an existing file, new file substitutes/overrides 덮어버려 the old one). Diff between PUT and POST is that PUT client knows the resource location and sets the URI but for POST, client does not know. However, if there is a missing member detail like PUT id only instead of id and age, the resulting change deletes the age condition as well and only the id remains. So if certain features of resource need to be changed, PATCH is better.</p>
+      </li>
+      <li>
+        <p>PATCH is changing a part of resource (e.g. changing member’s id). But some very few servers don’t accept PATCH so in those cases, use the ultimate solution POST</p>
+      </li>
+      <li>
+        <p>DELETE is deleting a resource</p>
+      </li>
+      <li>
+        <p>Safe - resource doesn’t change when it is called like GET, not POST. Doesn’t consider overloading logs in server</p>
+      </li>
+      <li>
+        <p>Idempotent - f(f(x)) = f(x) call once or 100 times the result is the same like GET, PUT , DELETE, not POST. When client wants DELETE but server gives TIMEOUT and is unable to give a response, can the client re-request it? Yes because it is idempotent. Doesn’t consider external changes made (e.g. GET something but there is a PUT that changes that, GET will get that changed details)</p>
+      </li>
+      <li>
+        <p>Cacheable - Storing large data like images in browser cache. GET, HEAD normally used. POST, PATCH also can but caches require matching to specific keys and these 2 methods are hard to do that</p>
+      </li>
+      <li>
+        <p>Client sends data server through 2 main methods: 1) Query parameter (?query) with GET 2) Message bodies (POST,PUT,PATCH)</p>
+      </li>
+      <li>
+        <p>For static content, no need query parameter so just URL with GET works.</p>
+      </li>
+      <li>
+        <p>For non-static content, need query parameter.</p>
+      </li>
+      <li>
+        <p>HTML Form generates HTTP message via POST (GET also can) and the FORM’s data is sent through message body in key-value format (query parameter) and is url encoded (abc김 -&gt;abc%EAFSAF%&amp;)</p>
+      </li>
+      <li>
+        <p>Content-TYPE:multipart/form-data can send binary data like file upload and other forms of data</p>
+      </li>
+      <li>
+        <p>HTTP API - POST, PUT, PATCH, GET and Content-Type:application/json</p>
+      </li>
+      <li>
+        <p>In HTTP API (Collection), Resource = Collection in member system, where server takes care of resource directory. When POST, server MAKES a URL like members/100 and gives it as response to client</p>
+      </li>
+      <li>
+        <p>in HTTP API (Store), Resource = Store in file uploading system, where client takes care of the resource storage. When uploading file via PUT, client knows URL file/{filename}</p>
+      </li>
+      <li>
+        <p>Since HTML FORM can only use GET and POST, need to use controller URI like /new, /edit, /delete</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>HTTP status code</p>
+
+    <ul>
+      <li>
+        <p>1xx(Informational) - request being processed (but not rl used)</p>
+      </li>
+      <li>
+        <p>2xx(Successful) - request successful</p>
+      </li>
+      <li>
+        <p>3xx(Redirection) - Need more info by user agent (client) to complete request</p>
+      </li>
+      <li>
+        <p>4xx(Client Error) - Client error, client at fault</p>
+      </li>
+      <li>
+        <p>5xx(Server Error) - Server at fault</p>
+      </li>
+      <li>
+        <p>2xx(Successful): 200 OK, 201 Created (POST), 202 Accepted, 204 No Content. For 201, created resource is in response’s header field like Location: /members/100. For 202, request is accepted but has not been processed yet by server. For 204, saving button when editing document and server completes request successfully but does not give response of any other data cuz not needed.</p>
+      </li>
+      <li>
+        <p>3xx(Redirection): 300 Multiple Choices but not used, 301 Moved Permanently when a resource’s URI is permanently moved like /members to /users or /event to /new-event but if user uses POST, the message is lost as 301 redirects the request to GET the new page so may have to fill up the messsage again on the new page (info lost)</p>
+      </li>
+      <li>
+        <p>302 Found is like 301 that when redirects, request method may be changed to GET but in most cases, it is changed to GET</p>
+      </li>
+      <li>
+        <p>303 See Other is like 301 , but request method is ALWAYS changed to GET  instead of maybe like 302</p>
+      </li>
+      <li>
+        <p>304 Not modified (very much used) - redirects to cache stored in local PC. Tells client that resource that it is seeking is not changed so client uses the cache stored in local PC. Response does not invlove message body because it must use local cache</p>
+      </li>
+      <li>
+        <p>307 Temporary Redirect is like 302 but does not change the request method (POST remains POST), when after purchase, go to purchase details,</p>
+      </li>
+      <li>
+        <p>308 Permanent Redirect when same as 301 but POST is redirected with POST so that it conserves the client’s info/message to the new page</p>
+      </li>
+      <li>
+        <p>According to 3xx, if there is a location in the header, it redirects to that location</p>
+      </li>
+      <li>
+        <p>PRG: Post/Redirect/Get - when I made a purchase via POST and reload the web browser purchase page, browser requests POST again so may purchase double again</p>
+      </li>
+      <li>
+        <p>After purchasing with POST, the purchase result page is redirected with GET. Even after reloading, the purchase result page is displayed again with GET</p>
+      </li>
+      <li>
+        <p>400 Bad Request - Client sends wrong request parameter or API data format is wrong so client has to resend the correct one</p>
+      </li>
+      <li>
+        <p>401 Unauthorsed - Client needs to authenticate onself (login), returns this WWWW-Authenticate header that lists info of client needed for the authentication</p>
+      </li>
+      <li>
+        <p>403 Forbidden - Server understands the client request but the client is not authorised to access that particular resource</p>
+      </li>
+      <li>
+        <p>404 Not Found - That resource is not in the server or if want to hide that resource from the client but dont want to send the 403 Forbidden message</p>
+      </li>
+      <li>
+        <p>500 Internal Server Error - for general server problems</p>
+      </li>
+      <li>
+        <p>503 Service Unavailable - For temporary shut-down of server due to upgrades/work so requests cannot be carried out at that time</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>HTTP Basic Header</p>
+
+    <ul>
+      <li>
+        <p>header-field = field-name + “:” + OWS field-value OWS (OWS means space allowed)</p>
+      </li>
+      <li>
+        <p>header-field contains all info required for HTTP methods, custom header-fields can be made too</p>
+      </li>
+      <li>
+        <p>Representation = representation metadata (that describes the representation data) + representation data</p>
+      </li>
+      <li>
+        <p>Content-Type: representation data’s type</p>
+      </li>
+      <li>
+        <p>Content-Length: byte length of the representation data. Cannot use this when using Transfer-Encoding</p>
+      </li>
+      <li>
+        <p>Content Negotation: Providing what preferred representation client is requesting to server</p>
+      </li>
+      <li>
+        <p>Accept: client’s preferred media type</p>
+      </li>
+      <li>
+        <p>Quality values(q) in Content Negotiation: Value from 0 to 1 where 1 is the highest priority. If value is 1, no need write number 1 for ko-KR. E.g. Accept-Language: ko-KR,ko;q=0.9,en-US;q=0.8. Also, if q is long, it is higher in priority. (e.g.text/palin;format=flowed)</p>
+      </li>
+      <li>
+        <p>Content-Length, Content-Type, Transfer-Encoding, Content-Range</p>
+      </li>
+      <li>
+        <p>Referer - it gives the previous URL of current request (e.g. moving A to B, referer is A)</p>
+      </li>
+      <li>
+        <p>User-Agent - client application (user application)’s information like web browser</p>
+      </li>
+      <li>
+        <p>Host: this header (e.g. google.com) is a MUST to be included and if multiple domains are registered to 1 same IP address, this host header helps differentiate</p>
+      </li>
+      <li>
+        <p>Allow: this displays HTTP methods that are allowed and if a banned method is tried, 405 Method Not Allowed should be responded by server</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Cookie</p>
+
+    <ul>
+      <li>
+        <p>2 types of Cookie: Set-Cookie is cookie that server sends to client as response. Cookie is one that client gets from the server and saves it and when client requests HTTP, this cookie is sent to server.</p>
+      </li>
+      <li>
+        <p>HTTP is stateless protocol, whose connection ends when client and server is done with request and response. When client requests again, server does not remember the previous request.</p>
+      </li>
+      <li>
+        <p>Set-cookie:user=leejh and this cookie is saved in cookie storage in web browser</p>
+      </li>
+      <li>
+        <p>expires, max-age (in seconds)</p>
+      </li>
+      <li>
+        <p>Session cookie: if expires date is not inputted, this session cookie exists until browser exit</p>
+      </li>
+      <li>
+        <p>If domain is mentioned in cookie, the subdomain can also be entered. But if domain is not mentioned, only the domain can be entered.</p>
+      </li>
+      <li>
+        <p>Root path is normally assigned.</p>
+      </li>
+      <li>
+        <p>Secure,HttpOnly,SameSite = security features of cookie</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Cache</p>
+
+    <ul>
+      <li>
+        <p>Big data files like image are stored in browser cache.</p>
+      </li>
+      <li>
+        <p>Last-Modified or ETag header (both are called Validator) tells when data has last been changed by server</p>
+      </li>
+      <li>
+        <p>304 Not Modified is sent by server and there is no HTTP body, which saves a lot of data since only the HTTP header is sent by server. 304 redirection to cache</p>
+      </li>
+      <li>
+        <p>If-Modified-Since/If-Unmodified-Since is used with Last-Modified</p>
+      </li>
+      <li>
+        <p>If there indeed is data change, 200 OK with header body is sent by server</p>
+      </li>
+      <li>
+        <p>Entity Tag (ETag) stores a version instead of date into the cache data</p>
+      </li>
+      <li>
+        <p>If-None-Match/If-Match is used with ETag</p>
+      </li>
+      <li>
+        <p>Cache-Control, Pragma, Expires</p>
+      </li>
+      <li>
+        <p>Cache-Control: max-age (in seconds how long this cache will last), no-cache (can cache data but always must check with origin server (not proxy server) with Last-Modified or If-None-Match), no-store(sensitive data so save in memory and delete ASAP)</p>
+      </li>
+      <li>
+        <p>If absolutely don’t want cache, Cache-Control: no-cache, no-store, must-revalidate and Pragma:no-cache</p>
+      </li>
+      <li>
+        <p>When no-cache + ETag and checking with origin server, if the origin server is suddenly down or sudden network disconnection between proxy and origin server, the proxy server may just send Error 200 OK instead of saying origin server is down</p>
+      </li>
+      <li>
+        <p>must-revalidate + ETag prevents this by always getting the error 504 Gateway Timeout as response</p>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/jekyll-theme-yat/jpa/2022/03/21/JPACascade.html" title="JPA cascade">JPA cascade</a><a class="next" href="/jekyll-theme-yat/spring/2022/04/19/PreventMultipleWaysToCreateObject.html" title="Prevent multiple ways to initialise/create Object">Prevent multiple ways to initialise/create Object...</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/jekyll-theme-yat/spring/2022/06/01/ControllerVSRestCont.html" title="Prevent multiple ways to initialise/create Object">Spring Controller and difference between Controller VS RestController</a></li>
+<li><a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/04/14/List.html" title="Prevent multiple ways to initialise/create Object">List and practice questions</a></li>
+<li><a class="post-link" href="/jekyll-theme-yat/docker/2022/09/15/DeployingSpringAppwithDocker.html" title="Prevent multiple ways to initialise/create Object">How to deploy Spring app (jar file) with Docker</a></li>
+<li><a class="post-link" href="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/07/07/2%EA%B0%9C%EC%9D%B4%ED%95%98%EB%A1%9C%EB%8B%A4%EB%A5%B8%EB%B9%84%ED%8A%B8.html" title="Prevent multiple ways to initialise/create Object">Programmers 2개 이하로 다른 비트</a></li>
+</ul>
+    </div>
+<div class="post-comments"></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/jekyll-theme-yat/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Brian <span class="copyleft">©</span> 2021-2023 Brian</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/jekyll-theme-yat/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<p>gi—
+layout: post
+title: JPA without entity relationships
+description: 
+category: JPA
+tags:</p>
+<ul>
+  <li>
+    <h2 id="jpa">JPA</h2>
+  </li>
+</ul>
+
+<h2 id="intro">Intro</h2>
+<p>JPA without 연관관계 (entity relationships) like @ManyToOne ultimately
+cannot product object-orientated code. This is because we search up 
+entities and update them on their primary keys.</p>
+
+<h2 id="without-연관관계">Without 연관관계</h2>
+<p>Let’s look at this example</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Entity</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Patient</span><span class="o">{</span>
+    <span class="nd">@Id</span> <span class="nd">@GeneratedValue</span>
+    <span class="nd">@Column</span><span class="o">(</span><span class="n">name</span><span class="o">=</span><span class="s">"patient_id"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">;</span>
+    
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    
+    <span class="c1">//remember JPA (latest versions) automatically changes</span>
+    <span class="c1">//java's camelCase name to preferred DB naming convention</span>
+    <span class="c1">//hospitalId -&gt; hospital_id</span>
+    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">hospitalId</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="nd">@Entity</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Hospital</span><span class="o">{</span>
+    <span class="nd">@Id</span> <span class="nd">@GeneratedValue</span>
+    <span class="nd">@Column</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"hospital_id"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">;</span>
+    
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Without 연관관계, we need to use FK of entities.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">EntityManagerFactory</span> <span class="n">emf</span> <span class="o">=</span> <span class="nc">Persistence</span><span class="o">.</span><span class="na">createEntityManagerFactory</span><span class="o">(</span><span class="s">"hokla"</span><span class="o">);</span>
+<span class="nc">EntityManager</span> <span class="n">em</span> <span class="o">=</span> <span class="n">emf</span><span class="o">.</span><span class="na">createEntityManager</span><span class="o">();</span>
+
+<span class="nc">EntityTransaction</span> <span class="n">tx</span> <span class="o">=</span> <span class="n">em</span><span class="o">.</span><span class="na">getTransaction</span><span class="o">();</span>
+<span class="n">tx</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+
+<span class="k">try</span><span class="o">{</span>
+    <span class="nc">Hospital</span> <span class="n">hospital</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Hospital</span><span class="o">();</span>
+    <span class="n">hospital</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Hospital Hola"</span><span class="o">);</span>
+    <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">hospital</span><span class="o">);</span>
+
+    <span class="nc">Patient</span> <span class="n">patient</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Patient</span><span class="o">();</span>
+    <span class="n">patient</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Wally"</span><span class="o">);</span>
+    <span class="n">patient</span><span class="o">.</span><span class="na">setHospitalId</span><span class="o">(</span><span class="n">hospital</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>
+    <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">patient</span><span class="o">);</span>
+    <span class="n">tx</span><span class="o">.</span><span class="na">commit</span><span class="o">();</span>
+  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">){</span>
+    <span class="n">tx</span><span class="o">.</span><span class="na">rollback</span><span class="o">();</span>
+  <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+    <span class="n">em</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>This is not very object-oriented because we optimally want to 
+somehow get patient.getHosptial() like getting objects, not FKs.</p>
+
+<h2 id="with-연관관계">With 연관관계</h2>
+<p>Let’s add @ManyToOne to map entities’ relationship</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Entity</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Patient</span><span class="o">{</span>
+    <span class="nd">@Id</span> <span class="nd">@GeneratedValue</span>
+    <span class="nd">@Column</span><span class="o">(</span><span class="n">name</span><span class="o">=</span><span class="s">"patient_id"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">;</span>
+    
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    
+    <span class="c1">//remember JPA (latest versions) automatically changes</span>
+    <span class="c1">//java's camelCase name to preferred DB naming convention</span>
+    <span class="c1">//hospitalId -&gt; hospital_id</span>
+    <span class="nd">@ManyToOne</span>
+    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">hospitalId</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="nd">@Entity</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Hospital</span><span class="o">{</span>
+    <span class="nd">@Id</span> <span class="nd">@GeneratedValue</span>
+    <span class="nd">@Column</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"hospital_id"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">;</span>
+    
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Then we can call it the OO way:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">EntityManagerFactory</span> <span class="n">emf</span> <span class="o">=</span> <span class="nc">Persistence</span><span class="o">.</span><span class="na">createEntityManagerFactory</span><span class="o">(</span><span class="s">"hokla"</span><span class="o">);</span>
+<span class="nc">EntityManager</span> <span class="n">em</span> <span class="o">=</span> <span class="n">emf</span><span class="o">.</span><span class="na">createEntityManager</span><span class="o">();</span>
+
+<span class="nc">EntityTransaction</span> <span class="n">tx</span> <span class="o">=</span> <span class="n">em</span><span class="o">.</span><span class="na">getTransaction</span><span class="o">();</span>
+<span class="n">tx</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+
+<span class="k">try</span><span class="o">{</span>
+    <span class="nc">Hospital</span> <span class="n">hospital</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Hospital</span><span class="o">();</span>
+    <span class="n">hospital</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Hospital Hola"</span><span class="o">);</span>
+    <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">hospital</span><span class="o">);</span>
+
+    <span class="nc">Patient</span> <span class="n">patient</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Patient</span><span class="o">();</span>
+    <span class="n">patient</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">"Wally"</span><span class="o">);</span>
+    <span class="n">patient</span><span class="o">.</span><span class="na">setHospital</span><span class="o">(</span><span class="n">hospital</span><span class="o">);</span>
+    <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">patient</span><span class="o">);</span>
+    <span class="n">tx</span><span class="o">.</span><span class="na">commit</span><span class="o">();</span>
+  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">){</span>
+    <span class="n">tx</span><span class="o">.</span><span class="na">rollback</span><span class="o">();</span>
+  <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+    <span class="n">em</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+</body></html>

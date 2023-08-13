@@ -1,0 +1,1236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<hr>
+<p>layout: post
+title: BFS template and practice questions
+category: Data structure &amp; Algorithms
+tags:</p>
+<ul>
+  <li>
+    <h2 id="data-structure--algorithms">Data structure &amp; Algorithms</h2>
+    <h2 id="intro">Intro</h2>
+    <p>Use queue for BFS to find <strong>the shortest something</strong> and when weight to travel
+nodes is constant like one. Dijkstra is also finding the shortest something
+but when weights are not constant for each node.</p>
+  </li>
+</ul>
+
+<h2 id="precautions">Precautions</h2>
+<p>Btw if input is given like [“X591X”,”X1X5X”,”X231X”, “1XXX1”] and we should
+convert it to 2d graph representation like</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">convert_to_graph</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
+        <span class="n">graph</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">row</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">graph</span>
+
+</code></pre></div></div>
+
+<p>Also <strong>really important</strong> for the boundary check of 2x2 graph.</p>
+
+<p><code class="language-plaintext highlighter-rouge">The problem lies in the condition next_x &gt;= len(graph) when checking the bounds for next_x in the BFS loop. It should be next_x &gt;= len(graph[0]) since the length of each row in graph represents the number of columns.</code></p>
+
+<h2 id="practice-questions">Practice questions</h2>
+<h3 id="그림">그림</h3>
+
+<p>My intitial wrong code. As you can see, it is really messy and I dont really
+know the exact way to implement BFS. Actually in a simple grid question
+like this, instead of creating a separate visited 2d list, you can instead just
+mark the board graph itself by making the value 0. We do bfs on grid that is 
+1 anyways so when we are doing with bfs, just mark that as 0 and future bfs 
+searches will not search that grid anymore.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="nf">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nf">input</span><span class="p">().</span><span class="nf">split</span><span class="p">())</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">graph</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nf">input</span><span class="p">().</span><span class="nf">split</span><span class="p">())))</span>
+
+<span class="n">visited</span><span class="o">=</span> <span class="p">[[</span><span class="bp">False</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">m</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">area</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">moves</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+
+<span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="n">visited</span><span class="p">,</span><span class="n">queue</span><span class="p">):</span>
+    <span class="n">area</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+        <span class="n">curr_x</span><span class="p">,</span><span class="n">curr_y</span><span class="p">,</span><span class="n">curr_area</span> <span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+        <span class="n">area</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">area</span><span class="p">,</span><span class="n">curr_area</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="n">moves</span><span class="p">:</span>
+            <span class="n">next_x</span><span class="p">,</span><span class="n">next_y</span> <span class="o">=</span> <span class="n">move</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">curr_x</span><span class="p">,</span><span class="n">move</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">curr_y</span>
+            <span class="k">if</span> <span class="n">next_x</span><span class="o">&lt;</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">next_x</span><span class="o">&gt;=</span><span class="n">n</span> <span class="ow">or</span> <span class="n">next_y</span><span class="o">&lt;</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">next_y</span><span class="o">&gt;=</span><span class="n">m</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">graph</span><span class="p">[</span><span class="n">next_x</span><span class="p">][</span><span class="n">next_y</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">graph</span><span class="p">[</span><span class="n">next_x</span><span class="p">][</span><span class="n">next_y</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">next_x</span><span class="p">][</span><span class="n">next_y</span><span class="p">]:</span>
+                    <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">next_x</span><span class="p">,</span><span class="n">next_y</span><span class="p">,</span><span class="n">curr_area</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+                    <span class="n">visited</span><span class="p">[</span><span class="n">next_x</span><span class="p">][</span><span class="n">next_y</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+                    <span class="c1"># graph[next_x][next_y]=0
+</span>    <span class="k">return</span> <span class="n">area</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">graph</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">graph</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+        <span class="k">if</span> <span class="n">graph</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">queue</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">()</span>
+            <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+            <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="bp">True</span>
+            <span class="c1"># graph[i][j]=0
+</span>            <span class="n">hola</span> <span class="o">=</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="n">visited</span><span class="p">,</span><span class="n">queue</span><span class="p">)</span>
+            <span class="n">area</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">area</span><span class="p">,</span><span class="n">hola</span><span class="p">)</span>
+            <span class="n">count</span><span class="o">+=</span><span class="mi">1</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">area</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>But you can still use visited 2d list anyways like this
+Correct code:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="nf">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nf">input</span><span class="p">().</span><span class="nf">split</span><span class="p">())</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">graph</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nf">input</span><span class="p">().</span><span class="nf">split</span><span class="p">())))</span>
+
+<span class="n">visited</span> <span class="o">=</span> <span class="p">[[</span><span class="bp">False</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">m</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">area</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">moves</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+
+
+<span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">visited</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">()</span>
+    <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+    <span class="n">visited</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">b</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="n">moves</span><span class="p">:</span>
+            <span class="n">nx</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">move</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">ny</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">move</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">nx</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">nx</span> <span class="o">&gt;=</span> <span class="n">n</span> <span class="ow">or</span> <span class="n">ny</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">ny</span> <span class="o">&gt;=</span> <span class="n">m</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">graph</span><span class="p">[</span><span class="n">nx</span><span class="p">][</span><span class="n">ny</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">nx</span><span class="p">][</span><span class="n">ny</span><span class="p">]:</span>
+                <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">))</span>
+                <span class="n">visited</span><span class="p">[</span><span class="n">nx</span><span class="p">][</span><span class="n">ny</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">count</span>
+
+
+<span class="n">paint</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">graph</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]:</span>
+            <span class="n">paint</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">bfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">visited</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">paint</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">paint</span><span class="p">))</span>
+    <span class="nf">print</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">paint</span><span class="p">))</span>
+    <span class="nf">print</span><span class="p">(</span><span class="nf">max</span><span class="p">(</span><span class="n">paint</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>Without a separate 2d list and marking grid as 0:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="nf">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nf">input</span><span class="p">().</span><span class="nf">split</span><span class="p">())</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">graph</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nf">input</span><span class="p">().</span><span class="nf">split</span><span class="p">())))</span>
+
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">area</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">moves</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+
+
+<span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">()</span>
+    <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+    <span class="n">graph</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">b</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="n">moves</span><span class="p">:</span>
+            <span class="n">nx</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">move</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">ny</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">move</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">nx</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">nx</span> <span class="o">&gt;=</span> <span class="n">n</span> <span class="ow">or</span> <span class="n">ny</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">ny</span> <span class="o">&gt;=</span> <span class="n">m</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">graph</span><span class="p">[</span><span class="n">nx</span><span class="p">][</span><span class="n">ny</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">))</span>
+                <span class="n">graph</span><span class="p">[</span><span class="n">nx</span><span class="p">][</span><span class="n">ny</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Mark the cell as visited by setting it to 0
+</span>                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">count</span>
+
+
+<span class="n">paint</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">graph</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">paint</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">bfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">paint</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">paint</span><span class="p">))</span>
+    <span class="nf">print</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">paint</span><span class="p">))</span>
+    <span class="nf">print</span><span class="p">(</span><span class="nf">max</span><span class="p">(</span><span class="n">paint</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>My STILL WRONG CODE:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="nf">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nf">input</span><span class="p">().</span><span class="nf">split</span><span class="p">())</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+  <span class="n">graph</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nf">input</span><span class="p">().</span><span class="nf">split</span><span class="p">())))</span>
+
+<span class="n">visited</span><span class="o">=</span> <span class="p">[[</span><span class="bp">False</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">m</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">area</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">moves</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+
+<span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
+  <span class="n">queue</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">()</span>
+  <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">))</span>
+  <span class="c1"># omitting this line caused the error!
+</span>  <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="bp">True</span>
+  <span class="n">area</span> <span class="o">=</span> <span class="mi">1</span>
+  <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+    <span class="n">curr_x</span><span class="p">,</span><span class="n">curr_y</span><span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="n">moves</span><span class="p">:</span>
+      <span class="n">next_x</span><span class="p">,</span><span class="n">next_y</span> <span class="o">=</span> <span class="n">move</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">curr_x</span><span class="p">,</span><span class="n">move</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">curr_y</span>
+      <span class="k">if</span> <span class="n">next_x</span><span class="o">&lt;</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">next_x</span><span class="o">&gt;=</span><span class="n">n</span> <span class="ow">or</span> <span class="n">next_y</span><span class="o">&lt;</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">next_y</span><span class="o">&gt;=</span><span class="n">m</span><span class="p">:</span>
+        <span class="k">continue</span>
+      <span class="c1"># this can be omitted too for simplicity
+</span>      <span class="c1"># if graph[next_x][next_y]==0:
+</span>      <span class="c1">#     continue
+</span>      <span class="k">if</span> <span class="n">graph</span><span class="p">[</span><span class="n">next_x</span><span class="p">][</span><span class="n">next_y</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">next_x</span><span class="p">][</span><span class="n">next_y</span><span class="p">]:</span>
+          <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">next_x</span><span class="p">,</span><span class="n">next_y</span><span class="p">))</span>
+          <span class="n">visited</span><span class="p">[</span><span class="n">next_x</span><span class="p">][</span><span class="n">next_y</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+          <span class="n">area</span> <span class="o">+=</span><span class="mi">1</span>
+          <span class="c1"># graph[next_x][next_y]=0
+</span>  <span class="k">return</span> <span class="n">area</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">graph</span><span class="p">)):</span>
+  <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">graph</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+    <span class="k">if</span> <span class="n">graph</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]:</span>
+      <span class="n">hola</span> <span class="o">=</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+      <span class="n">area</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">area</span><span class="p">,</span><span class="n">hola</span><span class="p">)</span>
+      <span class="n">count</span><span class="o">+=</span><span class="mi">1</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">area</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Oh!! Turns out i wasnt marking the start of bfs search as visited! So in
+my bfs function, at the very starting point, i should have marked it as visited!!
+Oops!</p>
+
+<h3 id="부대복귀">부대복귀</h3>
+<p>https://school.programmers.co.kr/learn/courses/30/lessons/132266</p>
+
+<p>Let’s start with a typical DFS question that picks a starting point and spreads
+out in 4 directions grid to search for end point.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+<span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">roads</span><span class="p">,</span> <span class="n">sources</span><span class="p">,</span> <span class="n">destination</span><span class="p">):</span>
+    <span class="c1"># or just graph = defaultdict(list) 
+</span>    <span class="n">graph</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">road</span> <span class="ow">in</span> <span class="n">roads</span><span class="p">:</span>
+        <span class="n">start</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="n">road</span>
+        <span class="n">graph</span><span class="p">[</span><span class="n">start</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">end</span><span class="p">)</span>
+        <span class="n">graph</span><span class="p">[</span><span class="n">end</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">source</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+        <span class="n">answer</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">bfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="n">destination</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">source</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">answer</span>
+
+<span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="n">destination</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">source</span><span class="p">):</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">()</span>
+    <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">source</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+    <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+    <span class="n">visited</span><span class="p">[</span><span class="n">source</span><span class="p">]</span><span class="o">=</span><span class="bp">True</span>
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+        <span class="n">cur_node</span><span class="p">,</span><span class="n">cur_cost</span> <span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+        <span class="c1"># you dont need this line here, do it when you are appending it to queue
+</span>        <span class="c1"># visited[cur_node]=True
+</span>        <span class="k">if</span> <span class="n">cur_node</span> <span class="o">==</span> <span class="n">destination</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">cur_cost</span>
+        <span class="k">for</span> <span class="n">next_node</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">cur_node</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">next_node</span><span class="p">]:</span>
+                <span class="c1"># do it here 
+</span>                <span class="n">visited</span><span class="p">[</span><span class="n">next_node</span><span class="p">]</span><span class="o">=</span><span class="bp">True</span>
+                <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">next_node</span><span class="p">,</span><span class="n">cur_cost</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+</code></pre></div></div>
+
+<p>My bfs is correct but it has runtime error for some large cases.</p>
+
+<p>So how about instead of calculating distance from starting source to destination,
+we do the other way around? My initial code will calculate distance
+to destination multiple times if starting sources take the same shortest route
+to destination. But if we do vice versa, we just calculate the distance from
+destination to starting sources <strong>once</strong>.</p>
+
+<p>Again my wrong code</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+<span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">roads</span><span class="p">,</span> <span class="n">sources</span><span class="p">,</span> <span class="n">destination</span><span class="p">):</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">road</span> <span class="ow">in</span> <span class="n">roads</span><span class="p">:</span>
+        <span class="n">start</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="n">road</span>
+        <span class="n">graph</span><span class="p">[</span><span class="n">start</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">end</span><span class="p">)</span>
+        <span class="n">graph</span><span class="p">[</span><span class="n">end</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+    <span class="n">distance</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+    <span class="n">distance</span><span class="p">[</span><span class="n">destination</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">ans</span> <span class="o">=</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="n">destination</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">distance</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">]</span>
+        
+
+<span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="n">destination</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">distance</span><span class="p">):</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">()</span>
+    <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">destination</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+    
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+        <span class="n">cur_node</span><span class="p">,</span><span class="n">cur_cost</span> <span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+        <span class="c1"># u dont need this line, mark it when you are appending it to queue
+</span>        <span class="c1"># distance[cur_node]=cur_cost
+</span>        <span class="k">for</span> <span class="n">next_node</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">cur_node</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">distance</span><span class="p">[</span><span class="n">next_node</span><span class="p">]</span><span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">next_node</span><span class="p">,</span><span class="n">cur_cost</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+    <span class="c1">#             need this line
+</span>                <span class="n">distance</span><span class="p">[</span><span class="n">next_node</span><span class="p">]</span> <span class="o">=</span> <span class="n">cur_cost</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">distance</span>
+
+</code></pre></div></div>
+
+<p>This 1 line makes the difference. I thought you don’t have to update distance
+of next_node’s cost because we do that in the queue via distance[cur_node]=cur_cost.</p>
+
+<h3 id="거리두기-확인하기">거리두기 확인하기</h3>
+<p>https://school.programmers.co.kr/learn/courses/30/lessons/81302</p>
+
+<p>This question needs BFS search multiple times on the same board itself.
+I didn’t know how to get the value of BFS search result and if abnormal, append
+to answer list. To do this, we can use <strong>flag</strong>. We first set flag as True
+or value 1 and when BFS search comes out abnormal, we can set flag as False
+based on that BFS search result condition.</p>
+
+<p>Also, it is smart to optimise the movement loop like instead of</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">movements</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
+</code></pre></div></div>
+
+<p>We can use a dictionary like</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dic</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">:[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">2</span><span class="p">:[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]}</span>
+</code></pre></div></div>
+
+<p>Also be very careful with difference on number 0 and alphabet O. I put it like
+if place at dx,dy =’0’ but it should have been alphabet O.</p>
+
+<p>My attempt, which is wrong</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">nx</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">dic</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">ny</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dic</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">nd</span> <span class="o">=</span> <span class="n">d</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="c1"># if dx&lt;0 or dy &lt;0 or dx&gt;=5 or dy &gt;=5:
+</span>    <span class="c1">#     continue
+</span>    <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">dx</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">dy</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">dx</span><span class="p">][</span><span class="n">dy</span><span class="p">]:</span>
+        <span class="n">visited</span><span class="p">[</span><span class="n">dx</span><span class="p">][</span><span class="n">dy</span><span class="p">]</span><span class="o">=</span> <span class="bp">True</span>
+        <span class="k">if</span> <span class="n">place</span><span class="p">[</span><span class="n">dx</span><span class="p">][</span><span class="n">dy</span><span class="p">]</span><span class="o">==</span><span class="sh">'</span><span class="s">P</span><span class="sh">'</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">dist</span><span class="o">&lt;=</span><span class="mi">2</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">elif</span> <span class="n">place</span><span class="p">[</span><span class="n">dx</span><span class="p">][</span><span class="n">dy</span><span class="p">]</span> <span class="o">==</span><span class="sh">'</span><span class="s">0</span><span class="sh">'</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">dist</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">([</span><span class="n">dx</span><span class="p">,</span><span class="n">dy</span><span class="p">,</span><span class="n">dist</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>Correct</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+<span class="n">ans</span><span class="o">=</span><span class="p">[]</span>
+
+<span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">place</span><span class="p">,</span><span class="n">pos</span><span class="p">):</span>
+  <span class="n">queue</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">([</span><span class="n">pos</span><span class="p">])</span>
+  <span class="n">visited</span> <span class="o">=</span> <span class="p">[[</span><span class="bp">False</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+  <span class="n">dic</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">:[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">2</span><span class="p">:[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]}</span>
+
+  <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+    <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">d</span> <span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+    <span class="n">visited</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+      <span class="n">dx</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">dic</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+      <span class="n">dy</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dic</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+      <span class="n">dist</span> <span class="o">=</span> <span class="n">d</span><span class="o">+</span><span class="mi">1</span>
+      <span class="k">if</span> <span class="n">dx</span><span class="o">&lt;</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">dy</span> <span class="o">&lt;</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">dx</span><span class="o">&gt;=</span><span class="mi">5</span> <span class="ow">or</span> <span class="n">dy</span> <span class="o">&gt;=</span><span class="mi">5</span><span class="p">:</span>
+        <span class="k">continue</span>
+      <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">dx</span><span class="p">][</span><span class="n">dy</span><span class="p">]:</span>
+        <span class="n">visited</span><span class="p">[</span><span class="n">dx</span><span class="p">][</span><span class="n">dy</span><span class="p">]</span><span class="o">=</span> <span class="bp">True</span>
+        <span class="k">if</span> <span class="n">place</span><span class="p">[</span><span class="n">dx</span><span class="p">][</span><span class="n">dy</span><span class="p">]</span><span class="o">==</span><span class="sh">'</span><span class="s">P</span><span class="sh">'</span> <span class="ow">and</span> <span class="n">dist</span><span class="o">&lt;=</span><span class="mi">2</span><span class="p">:</span>
+          <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">elif</span> <span class="n">place</span><span class="p">[</span><span class="n">dx</span><span class="p">][</span><span class="n">dy</span><span class="p">]</span> <span class="o">==</span><span class="sh">'</span><span class="s">O</span><span class="sh">'</span> <span class="ow">and</span> <span class="n">dist</span><span class="o">&lt;=</span><span class="mi">1</span><span class="p">:</span>
+          <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">([</span><span class="n">dx</span><span class="p">,</span><span class="n">dy</span><span class="p">,</span><span class="n">dist</span><span class="p">])</span>
+  <span class="k">return</span> <span class="mi">1</span>
+
+
+<span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">places</span><span class="p">):</span>
+  <span class="c1"># global ans
+</span>  <span class="k">for</span> <span class="n">place</span> <span class="ow">in</span> <span class="n">places</span><span class="p">:</span>
+    <span class="n">flag</span> <span class="o">=</span><span class="mi">1</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">places</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+      <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">places</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">place</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span><span class="o">==</span><span class="sh">'</span><span class="s">P</span><span class="sh">'</span><span class="p">:</span>
+          <span class="n">val</span> <span class="o">=</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">place</span><span class="p">,[</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+          <span class="k">if</span> <span class="n">val</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+            <span class="n">flag</span> <span class="o">=</span><span class="mi">0</span>
+    <span class="n">ans</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="n">flag</span><span class="o">==</span><span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">ans</span>
+</code></pre></div></div>
+
+<h3 id="경주로-건설">경주로 건설</h3>
+<p>https://school.programmers.co.kr/learn/courses/30/lessons/67259
+In my queue, the parameters that I store will lead to wrong answer. I store
+the previous direction as well</p>
+
+<p>My solution</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+<span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">board</span><span class="p">):</span>
+    <span class="n">visited</span><span class="o">=</span> <span class="p">[[</span><span class="bp">False</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="mi">0</span><span class="p">]))]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">board</span><span class="p">))]</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">()</span>
+    <span class="c1"># queue.append((0, 0, 0, dir))
+</span>    <span class="n">answer</span><span class="o">=</span><span class="p">[]</span>
+
+    <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+    <span class="n">visited</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+        <span class="n">moves</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">prevX</span><span class="p">,</span><span class="n">prevY</span><span class="p">,</span> <span class="n">cost</span> <span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="n">moves</span><span class="p">:</span>
+            <span class="n">dx</span><span class="p">,</span><span class="n">dy</span><span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="n">move</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">y</span><span class="o">+</span><span class="n">move</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">dx</span><span class="o">&lt;</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">dx</span><span class="o">&gt;=</span><span class="nf">len</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">or</span> <span class="n">dy</span><span class="o">&lt;</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">dy</span><span class="o">&gt;=</span><span class="n">length</span> <span class="ow">or</span> <span class="n">board</span><span class="p">[</span><span class="n">dx</span><span class="p">][</span><span class="n">dy</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">dx</span> <span class="o">==</span> <span class="nf">len</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">dy</span> <span class="o">==</span> <span class="n">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">answer</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">cost</span><span class="p">)</span>
+
+            <span class="n">cost</span> <span class="o">+=</span> <span class="nf">check_direction</span><span class="p">(</span><span class="n">move</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">move</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">prevX</span><span class="p">,</span><span class="n">prevY</span><span class="p">,</span><span class="n">cost</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="n">cost</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">dx</span><span class="p">][</span><span class="n">dy</span><span class="p">]:</span>
+                <span class="n">visited</span><span class="p">[</span><span class="n">dx</span><span class="p">][</span><span class="n">dy</span><span class="p">]</span><span class="o">=</span> <span class="bp">True</span>
+                <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">dx</span><span class="p">,</span><span class="n">dy</span><span class="p">,</span><span class="n">move</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">move</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">cost</span><span class="p">))</span>
+                <span class="nf">print</span><span class="p">((</span><span class="n">dx</span><span class="p">,</span><span class="n">dy</span><span class="p">,</span><span class="n">move</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">move</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">cost</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="nf">min</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">check_direction</span><span class="p">(</span><span class="n">nextX</span><span class="p">,</span><span class="n">nextY</span><span class="p">,</span><span class="n">prevX</span><span class="p">,</span><span class="n">prevY</span><span class="p">,</span><span class="n">cost</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">prevX</span> <span class="o">==</span> <span class="n">nextX</span> <span class="ow">and</span> <span class="n">prevY</span><span class="o">==</span><span class="n">nextY</span><span class="p">:</span>
+        <span class="n">cost</span><span class="o">+=</span><span class="mi">100</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">cost</span><span class="o">+=</span><span class="mi">500</span>
+    <span class="k">return</span> <span class="n">cost</span>
+
+<span class="nf">solution</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
+</code></pre></div></div>
+
+<p>But this will that when bfs starts on starting point 0,0, we can move both
+directions - right and down. So in this case, we use a little trick that marks
+a custom direction just for this edge case. We mark the direction as integer 5.</p>
+
+<p>I tried fixing code like this but still didnt work. I think its cuz this
+visited is not allowing other paths stored in my queue to explore properly.
+Also my cost is mega huge idk why</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+<span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">board</span><span class="p">):</span>
+    <span class="n">visited</span><span class="o">=</span> <span class="p">[[</span><span class="bp">False</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="mi">0</span><span class="p">]))]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">board</span><span class="p">))]</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">()</span>
+    <span class="n">answer</span><span class="o">=</span><span class="p">[]</span>
+
+    <span class="c1"># current x, current y, direction, cost
+</span>    <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">visited</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+        <span class="n">moves</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">prevDirection</span><span class="p">,</span> <span class="n">cost</span> <span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">moves</span><span class="p">)):</span>
+            <span class="n">dx</span><span class="p">,</span><span class="n">dy</span><span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="n">moves</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">y</span><span class="o">+</span><span class="n">moves</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">dx</span><span class="o">&lt;</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">dx</span><span class="o">&gt;=</span><span class="nf">len</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">or</span> <span class="n">dy</span><span class="o">&lt;</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">dy</span><span class="o">&gt;=</span><span class="n">length</span> <span class="ow">or</span> <span class="n">board</span><span class="p">[</span><span class="n">dx</span><span class="p">][</span><span class="n">dy</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">dx</span> <span class="o">==</span> <span class="nf">len</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">dy</span> <span class="o">==</span> <span class="n">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">answer</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">cost</span><span class="p">)</span>
+
+            <span class="n">cost</span> <span class="o">+=</span> <span class="nf">check_direction</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">prevDirection</span><span class="p">,</span><span class="n">cost</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="n">cost</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">dx</span><span class="p">][</span><span class="n">dy</span><span class="p">]:</span>
+                <span class="n">visited</span><span class="p">[</span><span class="n">dx</span><span class="p">][</span><span class="n">dy</span><span class="p">]</span><span class="o">=</span> <span class="bp">True</span>
+                <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">dx</span><span class="p">,</span><span class="n">dy</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">cost</span><span class="p">))</span>
+                <span class="nf">print</span><span class="p">((</span><span class="n">dx</span><span class="p">,</span><span class="n">dy</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">cost</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="nf">min</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">check_direction</span><span class="p">(</span><span class="n">currentDirection</span><span class="p">,</span> <span class="n">prevDirection</span><span class="p">,</span><span class="n">cost</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">prevDirection</span> <span class="o">==</span><span class="mi">5</span><span class="p">:</span>
+        <span class="n">cost</span><span class="o">+=</span><span class="mi">100</span>
+    <span class="k">elif</span> <span class="n">currentDirection</span><span class="o">==</span><span class="n">prevDirection</span><span class="p">:</span>
+        <span class="n">cost</span><span class="o">+=</span><span class="mi">100</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">cost</span><span class="o">+=</span><span class="mi">500</span>
+    <span class="k">return</span> <span class="n">cost</span>
+
+<span class="nf">solution</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
+</code></pre></div></div>
+
+<p>But official solution is here. We actually dont create a visited list because
+other paths stored in queue will not be able to visit the already-visited points
+by another path that has been processed earlier. So instead, we allow possibility
+that other paths will go back and forth and back and forth because there
+is no mark of visited points. But we create a price 2d list that record
+the smallest price of any path that visits that point.</p>
+
+<p>Ok my explanation above is wrong (June 11th fix) So even though there is no
+visited list, we have this condition that stop unnecessary paths from being
+added to our queue. The condition is if the point that we are visiting has
+a cost that is recorded and is higher than our current cost to visit it,
+we override that value. So if our current cost is higher, that means there
+is a path that has lower cost that has been already added to our queue. So,
+we don’t visit that point and try other path.</p>
+
+<p>Like this:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">nc</span> <span class="o">&lt;=</span> <span class="n">price</span><span class="p">[</span><span class="n">nx</span><span class="p">][</span><span class="n">ny</span><span class="p">]:</span>
+    <span class="n">price</span><span class="p">[</span><span class="n">nx</span><span class="p">][</span><span class="n">ny</span><span class="p">]</span> <span class="o">=</span> <span class="n">nc</span>
+    <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nc</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="n">dx</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">dy</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">board</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+    <span class="n">price</span> <span class="o">=</span> <span class="p">[[</span><span class="nf">int</span><span class="p">(</span><span class="mf">1e9</span><span class="p">)]</span> <span class="o">*</span> <span class="n">n</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+    <span class="n">price</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">queue</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">()</span>
+    <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>  <span class="c1"># (시작X, 시작Y, 시작Cost, 시작방향)
+</span>
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">y</span> <span class="o">==</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+            <span class="n">nx</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">dx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">ny</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">nz</span> <span class="o">=</span> <span class="n">i</span>
+
+            <span class="k">if</span> <span class="n">nx</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">nx</span> <span class="o">&gt;=</span> <span class="n">n</span> <span class="ow">or</span> <span class="n">ny</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">ny</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">board</span><span class="p">[</span><span class="n">nx</span><span class="p">][</span><span class="n">ny</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">continue</span>
+            
+            <span class="k">if</span> <span class="n">z</span><span class="o">==</span><span class="mi">5</span><span class="p">:</span>
+                <span class="n">nc</span> <span class="o">=</span> <span class="n">c</span> <span class="o">+</span> <span class="mi">100</span>
+
+            <span class="k">elif</span> <span class="n">nz</span> <span class="o">==</span> <span class="n">z</span><span class="p">:</span>
+                <span class="n">nc</span> <span class="o">=</span> <span class="n">c</span> <span class="o">+</span> <span class="mi">100</span>
+                
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">nc</span> <span class="o">=</span> <span class="n">c</span> <span class="o">+</span> <span class="mi">600</span>
+
+            <span class="k">if</span> <span class="n">nc</span> <span class="o">&lt;=</span> <span class="n">price</span><span class="p">[</span><span class="n">nx</span><span class="p">][</span><span class="n">ny</span><span class="p">]:</span>
+                <span class="n">price</span><span class="p">[</span><span class="n">nx</span><span class="p">][</span><span class="n">ny</span><span class="p">]</span> <span class="o">=</span> <span class="n">nc</span>
+                <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nc</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">price</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">board</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">answer</span>
+</code></pre></div></div>
+
+<p>Actually this is Dijskstra question</p>
+
+<h3 id="미로-탈출">미로 탈출</h3>
+<p>https://school.programmers.co.kr/learn/courses/30/lessons/159993</p>
+
+<p>My wrong code</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+<span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">maps</span><span class="p">):</span>
+    <span class="c1">#     why is test cas3 -1??
+#     cuz my bfs search marks visited as True for an answerpath that needs to be visited later, but cannot be visited cuz it is already visited
+</span>    <span class="n">row</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">maps</span><span class="p">)</span>
+    <span class="n">col</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">maps</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="p">[[</span><span class="sh">'</span><span class="s">1</span><span class="sh">'</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">col</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">row</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">maps</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">maps</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+            <span class="k">if</span> <span class="n">maps</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">==</span><span class="sh">'</span><span class="s">S</span><span class="sh">'</span><span class="p">:</span>
+                <span class="n">start_pos</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">maps</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">==</span><span class="sh">'</span><span class="s">L</span><span class="sh">'</span><span class="p">:</span>
+                <span class="n">lever_pos</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">maps</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">E</span><span class="sh">'</span><span class="p">:</span>
+                <span class="n">end_pos</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+            <span class="n">graph</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">maps</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+    <span class="n">visited</span> <span class="o">=</span> <span class="p">[[</span><span class="bp">False</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">col</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">row</span><span class="p">)]</span>
+    <span class="n">visited</span><span class="p">[</span><span class="n">start_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">start_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="n">moves</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
+
+    <span class="n">queue</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">()</span>
+    <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">(((</span><span class="n">start_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">start_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span><span class="mi">0</span><span class="p">,</span><span class="bp">False</span><span class="p">))</span>
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+        <span class="n">cur_pos</span><span class="p">,</span> <span class="n">cur_cost</span><span class="p">,</span> <span class="n">flag</span> <span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+        <span class="n">cur_x</span><span class="p">,</span> <span class="n">cur_y</span> <span class="o">=</span> <span class="n">cur_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cur_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">cur_x</span> <span class="o">==</span> <span class="n">end_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">cur_y</span> <span class="o">==</span> <span class="n">end_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="n">flag</span> <span class="o">==</span><span class="bp">True</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">cur_cost</span>
+        <span class="c1"># if cur_x == lever_pos[0] and cur_y == lever_pos[1]:
+</span>        <span class="c1">#     flag = True
+</span>        <span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="n">moves</span><span class="p">:</span>
+            <span class="n">next_x</span><span class="p">,</span> <span class="n">next_y</span> <span class="o">=</span> <span class="n">cur_x</span> <span class="o">+</span><span class="n">move</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cur_y</span><span class="o">+</span><span class="n">move</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">next_x</span><span class="o">&lt;</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">next_x</span> <span class="o">&gt;=</span><span class="n">row</span> <span class="ow">or</span> <span class="n">next_y</span> <span class="o">&lt;</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">next_y</span> <span class="o">&gt;=</span><span class="n">col</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">graph</span><span class="p">[</span><span class="n">next_x</span><span class="p">][</span><span class="n">next_y</span><span class="p">]</span> <span class="o">==</span><span class="sh">'</span><span class="s">X</span><span class="sh">'</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">next_x</span> <span class="o">==</span> <span class="n">lever_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">next_y</span> <span class="o">==</span> <span class="n">lever_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">flag</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">next_x</span><span class="p">][</span><span class="n">next_y</span><span class="p">]:</span>
+                <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">(((</span><span class="n">next_x</span><span class="p">,</span><span class="n">next_y</span><span class="p">),</span><span class="n">cur_cost</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">flag</span><span class="p">))</span>
+                <span class="n">visited</span><span class="p">[</span><span class="n">next_x</span><span class="p">][</span><span class="n">next_y</span><span class="p">]</span><span class="o">=</span><span class="bp">True</span>
+
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+</code></pre></div></div>
+
+<p>Instead, you need to do 2 bfs search - 1 from start to lever and 1 from
+lever to end point. Another important note is that I don’t pass visited
+list as parameter to my bfs function because visited list <strong>needs to be 
+renewed</strong> for each bfs search. So visited list needs to be freshly instantiated
+within the function, not passes as a parameter because we are gonna
+reuse it over and over again.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="n">moves</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
+<span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">maps</span><span class="p">):</span>
+    <span class="c1">#     why is test cas3 -1??
+</span>    <span class="c1">#     cuz my bfs search marks visited as True for an answerpath that needs to be visited later, but cannot be visited cuz it is already visited
+</span>    <span class="n">row</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">maps</span><span class="p">)</span>
+    <span class="n">col</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">maps</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="p">[[</span><span class="sh">'</span><span class="s">1</span><span class="sh">'</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">col</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">row</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">maps</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">maps</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+            <span class="k">if</span> <span class="n">maps</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">==</span><span class="sh">'</span><span class="s">S</span><span class="sh">'</span><span class="p">:</span>
+                <span class="n">start_pos</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">maps</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">==</span><span class="sh">'</span><span class="s">L</span><span class="sh">'</span><span class="p">:</span>
+                <span class="n">lever_pos</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">maps</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">E</span><span class="sh">'</span><span class="p">:</span>
+                <span class="n">end_pos</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+            <span class="n">graph</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">maps</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+
+
+    <span class="n">val1</span>  <span class="o">=</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">start_pos</span><span class="p">,</span><span class="n">lever_pos</span><span class="p">,</span><span class="n">graph</span><span class="p">,</span><span class="n">maps</span><span class="p">)</span>
+    <span class="n">val2</span> <span class="o">=</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">lever_pos</span><span class="p">,</span><span class="n">end_pos</span><span class="p">,</span><span class="n">graph</span><span class="p">,</span><span class="n">maps</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">val1</span><span class="o">+</span><span class="n">val2</span> <span class="k">if</span> <span class="n">val1</span><span class="o">&gt;</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">val2</span><span class="o">&gt;</span><span class="mi">0</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">start_pos</span><span class="p">,</span><span class="n">end_pos</span><span class="p">,</span><span class="n">graph</span><span class="p">,</span><span class="n">maps</span><span class="p">):</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">maps</span><span class="p">)</span>
+    <span class="n">col</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">maps</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">()</span>
+    <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">(((</span><span class="n">start_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">start_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span><span class="mi">0</span><span class="p">))</span>
+    <span class="n">visited</span> <span class="o">=</span> <span class="p">[[</span><span class="bp">False</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">col</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">row</span><span class="p">)]</span>
+    <span class="n">visited</span><span class="p">[</span><span class="n">start_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">start_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+        <span class="n">cur_pos</span><span class="p">,</span> <span class="n">cur_cost</span> <span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+        <span class="n">cur_x</span><span class="p">,</span> <span class="n">cur_y</span> <span class="o">=</span> <span class="n">cur_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cur_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">cur_x</span> <span class="o">==</span> <span class="n">end_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">cur_y</span> <span class="o">==</span> <span class="n">end_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="n">cur_cost</span>
+        <span class="c1"># if cur_x == lever_pos[0] and cur_y == lever_pos[1]:
+</span>        <span class="c1">#     flag = True
+</span>        <span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="n">moves</span><span class="p">:</span>
+            <span class="n">next_x</span><span class="p">,</span> <span class="n">next_y</span> <span class="o">=</span> <span class="n">cur_x</span> <span class="o">+</span><span class="n">move</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cur_y</span><span class="o">+</span><span class="n">move</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">next_x</span><span class="o">&lt;</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">next_x</span> <span class="o">&gt;=</span><span class="n">row</span> <span class="ow">or</span> <span class="n">next_y</span> <span class="o">&lt;</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">next_y</span> <span class="o">&gt;=</span><span class="n">col</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">graph</span><span class="p">[</span><span class="n">next_x</span><span class="p">][</span><span class="n">next_y</span><span class="p">]</span> <span class="o">==</span><span class="sh">'</span><span class="s">X</span><span class="sh">'</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">next_x</span><span class="p">][</span><span class="n">next_y</span><span class="p">]:</span>
+                <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">(((</span><span class="n">next_x</span><span class="p">,</span><span class="n">next_y</span><span class="p">),</span><span class="n">cur_cost</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+                <span class="n">visited</span><span class="p">[</span><span class="n">next_x</span><span class="p">][</span><span class="n">next_y</span><span class="p">]</span><span class="o">=</span><span class="bp">True</span>
+
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+</code></pre></div></div>
+
+<h3 id="단어-변환">단어 변환</h3>
+<p>https://school.programmers.co.kr/learn/courses/30/lessons/43163</p>
+
+<p>First, my wrong code. While I was correctly checking for every word in words
+list and if there is just one char difference, I add that new_word and
+curr_count+1 to my queue. However, my code is going to infinite recursion.
+That is strange. I just wanted word in words list that matches this condition
+to be added to my queue and that was it.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">words</span><span class="p">):</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">()</span>
+    <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">begin</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">queue</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">words</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">count</span>
+
+<span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">queue</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">words</span><span class="p">):</span>
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+        <span class="n">curr_word</span><span class="p">,</span> <span class="n">curr_count</span> <span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">curr_word</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">curr_count</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+            <span class="n">match_count</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">word</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">word</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">curr_word</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                    <span class="n">match_count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">match_count</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">word</span><span class="p">,</span> <span class="n">curr_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+                 <span class="c1"># Remove the visited word from the list to avoid revisiting
+</span>                <span class="c1"># words.remove(word) 
+</span>    <span class="k">return</span> <span class="mi">0</span>
+</code></pre></div></div>
+
+<p>But look at my implementation.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+</code></pre></div></div>
+
+<p>While I was looping through word in words,
+I am not adding a stop condition like a visited list to mark the current
+word as “visited”. So it goes on an infinite loop on the same word over and over
+and over again.</p>
+
+<p>So if we want to avoid revisiting the same node again and again, we can
+remove current word from our words list by adding</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">match_count</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">word</span><span class="p">,</span> <span class="n">curr_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+     <span class="c1"># Remove the visited word from the list to avoid revisiting
+</span>    <span class="n">words</span><span class="p">.</span><span class="nf">remove</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> 
+</code></pre></div></div>
+
+<p>But ideally we do not want to change or modify the input parameter of words
+list so we have 2 alternate ways - make visited list or loop through word
+<strong>by index</strong>.</p>
+
+<p>First with a visited list</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># in your solution as we dont want to instantiate a new one when bfs is executed
+# want to keep using this visited list for all queue elements
+</span><span class="n">visited</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># List to track visited words
+</span>
+<span class="c1"># in your bfs 
+</span><span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+  <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>  <span class="c1"># Check if the word is not visited
+</span>    <span class="n">match_count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">word</span><span class="p">)):</span>
+      <span class="k">if</span> <span class="n">word</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">curr_word</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+        <span class="n">match_count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">match_count</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+      <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">word</span><span class="p">,</span> <span class="n">curr_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+      <span class="n">visited</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> 
+</code></pre></div></div>
+
+<p>Secondly you can really easily loop through like</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">words</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+</code></pre></div></div>
+
+<p>This ensures that we don’t revisit the element in the list again cuz
+the index keeps increasing and we get a new word each time.</p>
+
+<h3 id="여행경로">여행경로</h3>
+<p>https://school.programmers.co.kr/learn/courses/30/lessons/43164</p>
+
+<p>MY initial code i think does not backtrack like if there are tickets
+ICN-AAA, ICN-BBB, BBB-ICN, my route should not finish at ICN-AAA just because
+it is lexicogrphically smaller. Instead it should be ICN - BBB - ICN -AAA.</p>
+
+<p>[Fix 28th June] Actually that is not the issue with my code. My code 
+does not account for duplicate tickets given as parameter. Continued on
+next paragraph</p>
+
+<p>This does not work for duplicate keys</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span><span class="p">,</span> <span class="n">deque</span>
+
+<span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">tickets</span><span class="p">):</span>
+  <span class="n">graph</span> <span class="o">=</span> <span class="nf">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">ticket</span> <span class="ow">in</span> <span class="n">tickets</span><span class="p">:</span>
+    <span class="n">graph</span><span class="p">[</span><span class="n">ticket</span><span class="p">[</span><span class="mi">0</span><span class="p">]].</span><span class="nf">append</span><span class="p">(</span><span class="n">ticket</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+  <span class="n">queue</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">()</span>
+  <span class="n">ans</span> <span class="o">=</span> <span class="p">[]</span>
+
+  <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="sh">'</span><span class="s">ICN</span><span class="sh">'</span><span class="p">,</span> <span class="p">[</span><span class="sh">'</span><span class="s">ICN</span><span class="sh">'</span><span class="p">],</span> <span class="nf">set</span><span class="p">()))</span>
+  <span class="n">ans</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">bfs</span><span class="p">(</span><span class="n">queue</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">tickets</span><span class="p">))</span>
+  <span class="nf">print</span><span class="p">(</span><span class="nf">sorted</span><span class="p">(</span><span class="n">ans</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+  <span class="k">return</span> <span class="nf">sorted</span><span class="p">(</span><span class="n">ans</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">queue</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">tickets</span><span class="p">):</span>
+  <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+    <span class="n">cur_node</span><span class="p">,</span> <span class="n">curr_path</span><span class="p">,</span> <span class="n">used</span> <span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">used</span><span class="p">)</span> <span class="o">==</span> <span class="nf">len</span><span class="p">(</span><span class="n">tickets</span><span class="p">):</span>
+      <span class="k">return</span> <span class="n">curr_path</span>
+    <span class="k">for</span> <span class="n">next_node</span> <span class="ow">in</span> <span class="nf">sorted</span><span class="p">(</span><span class="n">graph</span><span class="p">[</span><span class="n">cur_node</span><span class="p">]):</span>
+      <span class="nf">if </span><span class="p">(</span><span class="n">cur_node</span><span class="p">,</span> <span class="n">next_node</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">used</span><span class="p">:</span>
+        <span class="n">next_used</span> <span class="o">=</span> <span class="n">used</span><span class="p">.</span><span class="nf">copy</span><span class="p">()</span>
+        <span class="n">next_used</span><span class="p">.</span><span class="nf">add</span><span class="p">((</span><span class="n">cur_node</span><span class="p">,</span> <span class="n">next_node</span><span class="p">))</span>
+        <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">next_node</span><span class="p">,</span> <span class="n">curr_path</span> <span class="o">+</span> <span class="p">[</span><span class="n">next_node</span><span class="p">],</span> <span class="n">next_used</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>Since I am using a set I cannot use a duplicate ticket and store it in my
+set as visited.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">solution</span><span class="p">([[</span><span class="sh">"</span><span class="s">ICN</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">AAA</span><span class="sh">"</span><span class="p">],</span> <span class="p">[</span><span class="sh">"</span><span class="s">ICN</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">CCC</span><span class="sh">"</span><span class="p">],</span> <span class="p">[</span><span class="sh">"</span><span class="s">CCC</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">DDD</span><span class="sh">"</span><span class="p">],</span> <span class="p">[</span><span class="sh">"</span><span class="s">AAA</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">BBB</span><span class="sh">"</span><span class="p">],</span> <span class="p">[</span><span class="sh">"</span><span class="s">AAA</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">BBB</span><span class="sh">"</span><span class="p">],</span> <span class="p">[</span><span class="sh">"</span><span class="s">DDD</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">ICN</span><span class="sh">"</span><span class="p">],</span> <span class="p">[</span><span class="sh">"</span><span class="s">BBB</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">AAA</span><span class="sh">"</span><span class="p">]])</span>
+<span class="c1"># ans should be
+</span><span class="p">[</span><span class="sh">"</span><span class="s">ICN</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">CCC</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">DDD</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">ICN</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">AAA</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">BBB</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">AAA</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">BBB</span><span class="sh">"</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>or you can use stack like</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span><span class="p">,</span> <span class="n">defaultdict</span>
+
+<span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">tickets</span><span class="p">):</span>
+    <span class="n">ans</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="nf">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">ticket</span> <span class="ow">in</span> <span class="n">tickets</span><span class="p">:</span>
+        <span class="n">graph</span><span class="p">[</span><span class="n">ticket</span><span class="p">[</span><span class="mi">0</span><span class="p">]].</span><span class="nf">append</span><span class="p">(</span><span class="n">ticket</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">.</span><span class="nf">keys</span><span class="p">():</span>
+        <span class="n">graph</span><span class="p">[</span><span class="n">key</span><span class="p">].</span><span class="nf">sort</span><span class="p">()</span>
+    <span class="n">stack</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">()</span>
+    <span class="n">stack</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sh">'</span><span class="s">ICN</span><span class="sh">'</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">stack</span><span class="p">:</span>
+        <span class="n">from_city</span> <span class="o">=</span> <span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">from_city</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">graph</span> <span class="ow">or</span> <span class="nf">len</span><span class="p">(</span><span class="n">graph</span><span class="p">[</span><span class="n">from_city</span><span class="p">])</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">path</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">stack</span><span class="p">.</span><span class="nf">pop</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">stack</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">graph</span><span class="p">[</span><span class="n">from_city</span><span class="p">].</span><span class="nf">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+    
+    <span class="k">return</span> <span class="n">path</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h3 id="가장-먼-노드">가장 먼 노드</h3>
+<p>https://school.programmers.co.kr/learn/courses/30/lessons/49189</p>
+
+<p>previous wrong code</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span><span class="p">,</span> <span class="n">deque</span><span class="p">,</span> <span class="n">Counter</span>
+
+<span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">edge</span><span class="p">):</span>
+    <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="nf">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="ow">in</span> <span class="n">edge</span><span class="p">:</span>
+        <span class="n">temp</span><span class="p">[</span><span class="n">start</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">end</span><span class="p">)</span>
+        <span class="n">temp</span><span class="p">[</span><span class="n">end</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+    
+    <span class="n">queue</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">()</span>
+    <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    
+    <span class="n">ans</span> <span class="o">=</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">queue</span><span class="p">,</span> <span class="n">visited</span><span class="p">,</span> <span class="n">temp</span><span class="p">)</span>
+    
+    <span class="n">distances</span> <span class="o">=</span> <span class="p">[</span><span class="n">distance</span> <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">distance</span> <span class="ow">in</span> <span class="n">ans</span><span class="p">]</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="nc">Counter</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+    <span class="n">highest_distance</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">counter</span><span class="p">.</span><span class="nf">keys</span><span class="p">())</span>
+    
+    <span class="k">return</span> <span class="n">counter</span><span class="p">[</span><span class="n">highest_distance</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">queue</span><span class="p">,</span> <span class="n">visited</span><span class="p">,</span> <span class="n">temp</span><span class="p">):</span>
+    <span class="n">ans</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+        <span class="n">cur_node</span><span class="p">,</span> <span class="n">cur_dist</span> <span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+        <span class="n">ans</span><span class="p">.</span><span class="nf">append</span><span class="p">([</span><span class="n">cur_node</span><span class="p">,</span> <span class="n">cur_dist</span><span class="p">])</span>
+        <span class="n">visited</span><span class="p">[</span><span class="n">cur_node</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+        
+        <span class="k">for</span> <span class="n">next_node</span> <span class="ow">in</span> <span class="n">temp</span><span class="p">[</span><span class="n">cur_node</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">next_node</span><span class="p">]:</span>
+                <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">next_node</span><span class="p">,</span> <span class="n">cur_dist</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    
+    <span class="k">return</span> <span class="n">ans</span>
+</code></pre></div></div>
+
+<p>Oh the error was that I was marking visited node in my while loop 
+like visited[cur_node] in my while loop but it should be marked at the 
+point when it is added to queue like visited[next_node] = True.</p>
+
+<p>But why?</p>
+
+<p>It should be marked as visited at the point when it is enqueued 
+because when I debugged, if we dont do that then it will marked as 
+visited only when it is dequeed. But the problem is that the other paths 
+may explore that node which should have been marked as visited but 
+hasnt been popped off and thus is wrongly marked as not visited.</p>
+
+<p>So fix that and I got</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span><span class="p">,</span> <span class="n">deque</span><span class="p">,</span> <span class="n">Counter</span>
+<span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">edge</span><span class="p">):</span>
+    <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="nf">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="ow">in</span> <span class="n">edge</span><span class="p">:</span>
+        <span class="n">temp</span><span class="p">[</span><span class="n">start</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">end</span><span class="p">)</span>
+        <span class="n">temp</span><span class="p">[</span><span class="n">end</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+    
+    <span class="n">queue</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">()</span>
+    <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">visited</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="bp">True</span>
+    
+    <span class="n">ans</span> <span class="o">=</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">queue</span><span class="p">,</span> <span class="n">visited</span><span class="p">,</span> <span class="n">temp</span><span class="p">)</span>
+    <span class="c1"># print(ans)
+</span>    
+    <span class="n">distances</span> <span class="o">=</span> <span class="p">[</span><span class="n">distance</span> <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">distance</span> <span class="ow">in</span> <span class="n">ans</span><span class="p">]</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="nc">Counter</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+    <span class="n">highest_distance</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">counter</span><span class="p">.</span><span class="nf">keys</span><span class="p">())</span>
+
+    <span class="c1"># print(counter[highest_distance])
+</span>    <span class="k">return</span> <span class="n">counter</span><span class="p">[</span><span class="n">highest_distance</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">queue</span><span class="p">,</span> <span class="n">visited</span><span class="p">,</span> <span class="n">temp</span><span class="p">):</span>
+    <span class="n">ans</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+        <span class="n">cur_node</span><span class="p">,</span> <span class="n">cur_dist</span> <span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+        <span class="n">ans</span><span class="p">.</span><span class="nf">append</span><span class="p">([</span><span class="n">cur_node</span><span class="p">,</span> <span class="n">cur_dist</span><span class="p">])</span>
+        <span class="c1"># visited[cur_node] = True
+</span>        
+        <span class="k">for</span> <span class="n">next_node</span> <span class="ow">in</span> <span class="n">temp</span><span class="p">[</span><span class="n">cur_node</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">next_node</span><span class="p">]:</span>
+                <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">next_node</span><span class="p">,</span> <span class="n">cur_dist</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+                <span class="n">visited</span><span class="p">[</span><span class="n">next_node</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+    
+    <span class="k">return</span> <span class="n">ans</span>
+</code></pre></div></div>
+
+<p>chat gpt sensei code</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span><span class="p">,</span> <span class="n">deque</span>
+
+<span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">edge</span><span class="p">):</span>
+    <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="nf">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="ow">in</span> <span class="n">edge</span><span class="p">:</span>
+        <span class="n">temp</span><span class="p">[</span><span class="n">start</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">end</span><span class="p">)</span>
+        <span class="n">temp</span><span class="p">[</span><span class="n">end</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+    
+    <span class="n">queue</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">()</span>
+    <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">visited</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">max_distance</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+        <span class="n">cur_node</span><span class="p">,</span> <span class="n">cur_dist</span> <span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+        
+        <span class="k">if</span> <span class="n">cur_dist</span> <span class="o">&gt;</span> <span class="n">max_distance</span><span class="p">:</span>
+            <span class="n">max_distance</span> <span class="o">=</span> <span class="n">cur_dist</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">cur_dist</span> <span class="o">==</span> <span class="n">max_distance</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+        <span class="k">for</span> <span class="n">next_node</span> <span class="ow">in</span> <span class="n">temp</span><span class="p">[</span><span class="n">cur_node</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">next_node</span><span class="p">]:</span>
+                <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">next_node</span><span class="p">,</span> <span class="n">cur_dist</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+                <span class="n">visited</span><span class="p">[</span><span class="n">next_node</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+    
+    <span class="k">return</span> <span class="n">count</span>
+</code></pre></div></div>
+
+<h3 id="무인도-여행">무인도 여행</h3>
+<p>https://school.programmers.co.kr/learn/courses/30/lessons/154540</p>
+
+<p>ok so 2 things when ur adding to queue, the last marked grid to X might 
+be explored in the last element in the queue so i need to check if that 
+is x or not and if not we add it to sum. secondly my next x and next y 
+range limit was wrong. next_x is not mathematical x it is the row so 
+len(graph)</p>
+
+<p>Also, instead of just marking visited grid as X, a separate visited list will be more helpful because then i wont need as many checks</p>
+
+<p>my initial wrong code:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">maps</span><span class="p">):</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">maps</span><span class="p">)</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">maps</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">maps</span><span class="p">:</span>
+        <span class="n">graph</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">row</span><span class="p">))</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+    <span class="c1"># visited = [[False for _ in range(cols)] for _ in range(rows)]
+</span>    <span class="n">moves</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+      <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">cols</span><span class="p">):</span>
+        <span class="nf">if</span><span class="p">(</span><span class="n">graph</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">!=</span><span class="sh">'</span><span class="s">X</span><span class="sh">'</span><span class="p">):</span>
+          <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">))</span>
+          <span class="n">answer</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">bfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="n">queue</span><span class="p">,</span><span class="n">moves</span><span class="p">))</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">answer</span><span class="p">.</span><span class="nf">sort</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">answer</span><span class="p">.</span><span class="nf">sort</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="n">queue</span><span class="p">,</span><span class="n">moves</span><span class="p">):</span>
+    <span class="nb">sum</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+      <span class="n">cur_x</span><span class="p">,</span><span class="n">cur_y</span> <span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+      <span class="n">cur_cost</span> <span class="o">=</span> <span class="n">graph</span><span class="p">[</span><span class="n">cur_x</span><span class="p">][</span><span class="n">cur_y</span><span class="p">]</span>
+      <span class="nb">sum</span><span class="o">+=</span> <span class="nf">int</span><span class="p">(</span><span class="n">cur_cost</span><span class="p">)</span>
+      <span class="n">graph</span><span class="p">[</span><span class="n">cur_x</span><span class="p">][</span><span class="n">cur_y</span><span class="p">]</span><span class="o">=</span><span class="sh">'</span><span class="s">X</span><span class="sh">'</span>
+      <span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="n">moves</span><span class="p">:</span>
+        <span class="n">next_x</span><span class="o">=</span><span class="n">move</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">cur_x</span>
+        <span class="n">next_y</span><span class="o">=</span><span class="n">move</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">cur_y</span>
+        <span class="k">if</span> <span class="n">next_x</span><span class="o">&lt;</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">next_x</span><span class="o">&gt;=</span><span class="nf">len</span><span class="p">(</span><span class="n">graph</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">or</span> <span class="n">next_y</span><span class="o">&lt;</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">next_y</span><span class="o">&gt;=</span><span class="nf">len</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span> <span class="ow">or</span> <span class="n">graph</span><span class="p">[</span><span class="n">next_x</span><span class="p">][</span><span class="n">next_y</span><span class="p">]</span><span class="o">==</span><span class="sh">'</span><span class="s">X</span><span class="sh">'</span><span class="p">:</span>
+          <span class="k">continue</span>
+        <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">next_x</span><span class="p">,</span><span class="n">next_y</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nb">sum</span>
+
+<span class="nf">solution</span><span class="p">([</span><span class="sh">"</span><span class="s">X591X</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">X1X5X</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">X231X</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">1XXX1</span><span class="sh">"</span><span class="p">])</span>  
+</code></pre></div></div>
+
+<p>Then I still have an error like</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">maps</span><span class="p">):</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">maps</span><span class="p">)</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">maps</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">maps</span><span class="p">:</span>
+        <span class="n">graph</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">row</span><span class="p">))</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+    <span class="c1"># visited = [[False for _ in range(cols)] for _ in range(rows)]
+</span>    <span class="n">moves</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+      <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">cols</span><span class="p">):</span>
+        <span class="nf">if</span><span class="p">(</span><span class="n">graph</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">!=</span><span class="sh">'</span><span class="s">X</span><span class="sh">'</span><span class="p">):</span>
+          <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">))</span>
+          <span class="n">answer</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">bfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="n">queue</span><span class="p">,</span><span class="n">moves</span><span class="p">))</span>
+    <span class="n">answer</span><span class="p">.</span><span class="nf">sort</span><span class="p">()</span>
+    <span class="c1"># print(answer)
+</span>    <span class="k">return</span> <span class="n">answer</span> <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span> <span class="k">else</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="n">queue</span><span class="p">,</span><span class="n">moves</span><span class="p">):</span>
+    <span class="nb">sum</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+      <span class="n">cur_x</span><span class="p">,</span><span class="n">cur_y</span> <span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+      <span class="n">cur_cost</span> <span class="o">=</span> <span class="n">graph</span><span class="p">[</span><span class="n">cur_x</span><span class="p">][</span><span class="n">cur_y</span><span class="p">]</span>
+      <span class="k">if</span> <span class="n">cur_cost</span><span class="o">!=</span><span class="sh">'</span><span class="s">X</span><span class="sh">'</span><span class="p">:</span>
+        <span class="nb">sum</span><span class="o">+=</span> <span class="nf">int</span><span class="p">(</span><span class="n">cur_cost</span><span class="p">)</span>
+    <span class="n">graph</span><span class="p">[</span><span class="n">cur_x</span><span class="p">][</span><span class="n">cur_y</span><span class="p">]</span><span class="o">=</span><span class="sh">'</span><span class="s">X</span><span class="sh">'</span>
+    <span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="n">moves</span><span class="p">:</span>
+        <span class="n">next_x</span><span class="o">=</span><span class="n">move</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">cur_x</span>
+        <span class="n">next_y</span><span class="o">=</span><span class="n">move</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">cur_y</span>
+        <span class="k">if</span> <span class="n">next_x</span><span class="o">&lt;</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">next_x</span><span class="o">&gt;=</span><span class="nf">len</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span> <span class="ow">or</span> <span class="n">next_y</span><span class="o">&lt;</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">next_y</span><span class="o">&gt;=</span><span class="nf">len</span><span class="p">(</span><span class="n">graph</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">or</span> <span class="n">graph</span><span class="p">[</span><span class="n">next_x</span><span class="p">][</span><span class="n">next_y</span><span class="p">]</span><span class="o">==</span><span class="sh">'</span><span class="s">X</span><span class="sh">'</span><span class="p">:</span>
+          <span class="k">continue</span>
+        <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">next_x</span><span class="p">,</span><span class="n">next_y</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nb">sum</span>
+
+</code></pre></div></div>
+
+<p>The error is that we should only go on with the dfs search if 
+cur_cost!=’x’ so we need to <strong>indent properly</strong>. And also just use 
+a separate visited list like</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">maps</span><span class="p">):</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">maps</span><span class="p">)</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">maps</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">maps</span><span class="p">:</span>
+        <span class="n">graph</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">row</span><span class="p">))</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+    <span class="c1"># visited = [[False for _ in range(cols)] for _ in range(rows)]
+</span>    <span class="n">moves</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+      <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">cols</span><span class="p">):</span>
+        <span class="nf">if</span><span class="p">(</span><span class="n">graph</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">!=</span><span class="sh">'</span><span class="s">X</span><span class="sh">'</span><span class="p">):</span>
+          <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">))</span>
+          <span class="n">answer</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">bfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="n">queue</span><span class="p">,</span><span class="n">moves</span><span class="p">))</span>
+    <span class="n">answer</span><span class="p">.</span><span class="nf">sort</span><span class="p">()</span>
+    <span class="c1"># print(answer)
+</span>    <span class="k">return</span> <span class="n">answer</span> <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span> <span class="k">else</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="n">queue</span><span class="p">,</span><span class="n">moves</span><span class="p">):</span>
+    <span class="nb">sum</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+      <span class="n">cur_x</span><span class="p">,</span><span class="n">cur_y</span> <span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+      <span class="n">cur_cost</span> <span class="o">=</span> <span class="n">graph</span><span class="p">[</span><span class="n">cur_x</span><span class="p">][</span><span class="n">cur_y</span><span class="p">]</span>
+      <span class="k">if</span> <span class="n">cur_cost</span><span class="o">!=</span><span class="sh">'</span><span class="s">X</span><span class="sh">'</span><span class="p">:</span>
+        <span class="nb">sum</span><span class="o">+=</span> <span class="nf">int</span><span class="p">(</span><span class="n">cur_cost</span><span class="p">)</span>
+        <span class="n">graph</span><span class="p">[</span><span class="n">cur_x</span><span class="p">][</span><span class="n">cur_y</span><span class="p">]</span><span class="o">=</span><span class="sh">'</span><span class="s">X</span><span class="sh">'</span>
+        <span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="n">moves</span><span class="p">:</span>
+            <span class="n">next_x</span><span class="o">=</span><span class="n">move</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">cur_x</span>
+            <span class="n">next_y</span><span class="o">=</span><span class="n">move</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">cur_y</span>
+            <span class="k">if</span> <span class="n">next_x</span><span class="o">&lt;</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">next_x</span><span class="o">&gt;=</span><span class="nf">len</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span> <span class="ow">or</span> <span class="n">next_y</span><span class="o">&lt;</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">next_y</span><span class="o">&gt;=</span><span class="nf">len</span><span class="p">(</span><span class="n">graph</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">or</span> <span class="n">graph</span><span class="p">[</span><span class="n">next_x</span><span class="p">][</span><span class="n">next_y</span><span class="p">]</span><span class="o">==</span><span class="sh">'</span><span class="s">X</span><span class="sh">'</span><span class="p">:</span>
+              <span class="k">continue</span>
+            <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">next_x</span><span class="p">,</span><span class="n">next_y</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nb">sum</span>
+</code></pre></div></div>
+
+<h2 id="리코체-로봇">리코체 로봇</h2>
+<p>https://school.programmers.co.kr/learn/courses/30/lessons/169199</p>
+
+<p>Original my wrong code:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">board</span><span class="p">):</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">board</span><span class="p">:</span>
+        <span class="n">graph</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">row</span><span class="p">))</span>
+    
+    <span class="n">row</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+    <span class="n">col</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">graph</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">col</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">graph</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">R</span><span class="sh">'</span><span class="p">:</span>
+                <span class="n">val</span> <span class="o">=</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">val</span>
+                
+<span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">()</span>
+    <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">moves</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+    <span class="n">col</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">graph</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+        <span class="n">cur_x</span><span class="p">,</span> <span class="n">cur_y</span><span class="p">,</span> <span class="n">cur_cost</span> <span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="nf">popleft</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">graph</span><span class="p">[</span><span class="n">cur_x</span><span class="p">][</span><span class="n">cur_y</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">G</span><span class="sh">'</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">cur_cost</span>
+            
+        <span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="n">moves</span><span class="p">:</span>
+            <span class="n">next_x</span><span class="p">,</span> <span class="n">next_y</span><span class="p">,</span> <span class="n">next_cost</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">row</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">move</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="n">cur_x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">move</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="n">cur_x</span> <span class="o">&gt;=</span> <span class="n">row</span> <span class="ow">or</span> <span class="n">move</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="n">cur_y</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">move</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="n">cur_y</span> <span class="o">&gt;=</span> <span class="n">col</span><span class="p">:</span>
+                    <span class="n">next_x</span> <span class="o">=</span> <span class="n">move</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="n">cur_x</span>
+                    <span class="n">next_y</span> <span class="o">=</span> <span class="n">move</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="n">cur_y</span>
+                    <span class="n">next_cost</span> <span class="o">=</span> <span class="n">cur_cost</span> <span class="o">+</span> <span class="mi">1</span>
+                    <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">next_x</span><span class="p">,</span> <span class="n">next_y</span><span class="p">,</span> <span class="n">next_cost</span><span class="p">))</span>
+                    <span class="k">break</span>
+                <span class="k">elif</span> <span class="n">graph</span><span class="p">[</span><span class="n">move</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="n">cur_x</span><span class="p">][</span><span class="n">move</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="n">cur_y</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">D</span><span class="sh">'</span><span class="p">:</span>
+                    <span class="n">next_x</span> <span class="o">=</span> <span class="n">move</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">cur_x</span>
+                    <span class="n">next_y</span> <span class="o">=</span> <span class="n">move</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">cur_y</span>
+                    <span class="n">next_cost</span> <span class="o">=</span> <span class="n">cur_cost</span> <span class="o">+</span> <span class="mi">1</span>
+                    <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">next_x</span><span class="p">,</span> <span class="n">next_y</span><span class="p">,</span> <span class="n">next_cost</span><span class="p">))</span>
+                    <span class="k">break</span>
+
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="nf">solution</span><span class="p">([</span><span class="sh">"</span><span class="s">...D..R</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">.D.G...</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">....D.D</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">D....D.</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">..D....</span><span class="sh">"</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<p>If I implement this way where I am adding 1 up to max row or column, 
+the implementation is very complicated. An improvement would be to 
+use a while loop to check as long as the next position of x and y when 
+move is added doesnt go out of bounds, we keep updating next position 
+of x and y.</p>
+
+<p>V important. For this question I was wrongly adding invalid next_x and 
+next_y to my queue that went beyond the boundary of the board.</p>
+
+<p>Wrong:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="n">moves</span><span class="p">:</span>
+    <span class="n">next_x</span><span class="p">,</span> <span class="n">next_y</span> <span class="o">=</span> <span class="n">cur_x</span><span class="p">,</span> <span class="n">cur_y</span>
+    <span class="k">while</span> <span class="mi">0</span><span class="o">&lt;=</span><span class="n">next_x</span> <span class="o">&lt;</span> <span class="n">row</span> <span class="ow">and</span> <span class="mi">0</span><span class="o">&lt;=</span><span class="n">next_y</span><span class="o">&lt;</span> <span class="n">col</span> <span class="ow">and</span> <span class="n">graph</span><span class="p">[</span><span class="n">next_x</span><span class="p">][</span><span class="n">next_y</span><span class="p">]</span> <span class="o">!=</span> <span class="sh">'</span><span class="s">D</span><span class="sh">'</span><span class="p">:</span>
+        <span class="n">next_x</span><span class="o">+=</span><span class="n">move</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">next_y</span><span class="o">+=</span><span class="n">move</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">distance</span><span class="p">[</span><span class="n">next_x</span><span class="p">][</span><span class="n">next_y</span><span class="p">]</span><span class="o">&gt;</span><span class="n">cur_cost</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">distance</span><span class="p">[</span><span class="n">next_x</span><span class="p">][</span><span class="n">next_y</span><span class="p">]</span><span class="o">=</span><span class="n">cur_cost</span><span class="o">+</span><span class="mi">1</span>
+        <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">next_x</span><span class="p">,</span><span class="n">next_y</span><span class="p">,</span><span class="n">cur_cost</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+
+</code></pre></div></div>
+
+<p>Correct:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="n">moves</span><span class="p">:</span>
+    <span class="n">next_x</span><span class="p">,</span> <span class="n">next_y</span> <span class="o">=</span> <span class="n">cur_x</span> <span class="p">,</span> <span class="n">cur_y</span> 
+    <span class="k">while</span> <span class="mi">0</span><span class="o">&lt;=</span><span class="n">next_x</span><span class="o">+</span><span class="n">move</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">row</span> <span class="ow">and</span> <span class="mi">0</span><span class="o">&lt;=</span><span class="n">next_y</span><span class="o">+</span><span class="n">move</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;</span> <span class="n">col</span> <span class="ow">and</span> <span class="n">graph</span><span class="p">[</span><span class="n">next_x</span><span class="o">+</span><span class="n">move</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">next_y</span><span class="o">+</span><span class="n">move</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">!=</span> <span class="sh">'</span><span class="s">D</span><span class="sh">'</span><span class="p">:</span>
+        <span class="n">next_x</span><span class="o">+=</span><span class="n">move</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">next_y</span><span class="o">+=</span><span class="n">move</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">distance</span><span class="p">[</span><span class="n">next_x</span><span class="p">][</span><span class="n">next_y</span><span class="p">]</span><span class="o">&gt;</span><span class="n">cur_cost</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">distance</span><span class="p">[</span><span class="n">next_x</span><span class="p">][</span><span class="n">next_y</span><span class="p">]</span><span class="o">=</span><span class="n">cur_cost</span><span class="o">+</span><span class="mi">1</span>
+        <span class="n">queue</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">next_x</span><span class="p">,</span><span class="n">next_y</span><span class="p">,</span><span class="n">cur_cost</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+
+</code></pre></div></div>
+
+<p>In my wrong code, there is actually no point checking that boundary 
+condition cuz we are essentially checking current position and not 
+the next position. WTF. We should be checking the <strong>next</strong> position 
+like while 0&lt;=cur_x+move[0]&lt;row then we update next position via 
+next_x +=move[0]</p>
+
+<p>Gpt improvement:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">move</span> <span class="ow">in</span> <span class="n">moves</span><span class="p">:</span>
+    <span class="n">next_x</span><span class="p">,</span> <span class="n">next_y</span> <span class="o">=</span> <span class="n">cur_x</span><span class="p">,</span> <span class="n">cur_y</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">next_x</span> <span class="o">+=</span> <span class="n">move</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">next_y</span> <span class="o">+=</span> <span class="n">move</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">next_x</span> <span class="o">&lt;</span> <span class="n">row</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">next_y</span> <span class="o">&lt;</span> <span class="n">col</span><span class="p">)</span> <span class="ow">or</span> <span class="n">graph</span><span class="p">[</span><span class="n">next_x</span><span class="p">][</span><span class="n">next_y</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">D</span><span class="sh">'</span><span class="p">:</span>
+            <span class="k">break</span>
+
+</code></pre></div></div>
+
+<p>Ok that is good but you can use a visited set instead of distance 2d 
+list. I had some doubts of using visited set here because</p>
+
+<p>for visited set what if we have visited a position before but greater 
+distance is taken but the this visit has a shorter distance but since 
+it is a set we cant explore this path. or does this possibility not occur?</p>
+
+<p>Gpt sensei explained it well:</p>
+
+<p>this is not an issue because of the nature of the problem and the way the BFS is implemented.
+Since the robot can only move in four directions (up, down, left, right) and the board contains walls (‘D’) that block the path, the shortest path from the robot to the goal can always be found correctly by using BFS without the need to revisit a position with a different distance.
+The reason is that BFS always explores all possible paths layer by layer. When a position is first visited, it is guaranteed that the shortest distance to reach that position has been found. Any subsequent visits to the same position with longer distances will be discovered in later iterations, and they won’t affect the correctness of the result because BFS guarantees that it explores all possible paths systematically.
+In other words, the shortest path from the robot to the goal will always be found and explored first, and any other longer paths to the same position won’t affect the final result. Therefore, using a set for the visited container is sufficient and efficient for this specific problem</p>
+
+<p>BFS search is layer by layer so if that positon is visited, it is a guarantee that a shortest distance has been used to visit that position. Other future visits to that same positon will be longer distance because BFS is layer by layer.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">board</span><span class="p">):</span>
+    <span class="n">que</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">board</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">y</span><span class="p">,</span> <span class="n">each</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">board</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">R</span><span class="sh">'</span><span class="p">:</span>
+                <span class="n">que</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">visited</span> <span class="o">=</span> <span class="nf">set</span><span class="p">()</span>
+    <span class="k">while</span> <span class="n">que</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">length</span> <span class="o">=</span> <span class="n">que</span><span class="p">.</span><span class="nf">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="nf">if </span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">board</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">G</span><span class="sh">'</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">length</span>
+        <span class="n">visited</span><span class="p">.</span><span class="nf">add</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">diff_x</span><span class="p">,</span> <span class="n">diff_y</span> <span class="ow">in</span> <span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)):</span>
+            <span class="n">now_x</span><span class="p">,</span> <span class="n">now_y</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+            <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+                <span class="n">next_x</span><span class="p">,</span> <span class="n">next_y</span> <span class="o">=</span> <span class="n">now_x</span> <span class="o">+</span> <span class="n">diff_x</span><span class="p">,</span> <span class="n">now_y</span> <span class="o">+</span> <span class="n">diff_y</span>
+                <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">next_x</span> <span class="o">&lt;</span> <span class="nf">len</span><span class="p">(</span><span class="n">board</span><span class="p">)</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">next_y</span> <span class="o">&lt;</span> <span class="nf">len</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">and</span> <span class="n">board</span><span class="p">[</span><span class="n">next_x</span><span class="p">][</span><span class="n">next_y</span><span class="p">]</span> <span class="o">!=</span> <span class="sh">'</span><span class="s">D</span><span class="sh">'</span><span class="p">:</span>
+                    <span class="n">now_x</span><span class="p">,</span> <span class="n">now_y</span> <span class="o">=</span> <span class="n">next_x</span><span class="p">,</span> <span class="n">next_y</span>
+                    <span class="k">continue</span>
+                <span class="n">que</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">now_x</span><span class="p">,</span> <span class="n">now_y</span><span class="p">,</span> <span class="n">length</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+                <span class="k">break</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+</code></pre></div></div>
+</body></html>

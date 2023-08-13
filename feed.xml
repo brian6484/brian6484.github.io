@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="/jekyll-theme-yat/feed.xml" rel="self" type="application/atom+xml" /><link href="/jekyll-theme-yat/" rel="alternate" type="text/html" /><updated>2023-08-13T11:38:37+00:00</updated><id>/jekyll-theme-yat/feed.xml</id><title type="html">Brian’s Dev Blog</title><subtitle>“Any fool can write code that a computer can understand. Good programmers write code that humans can understand.” – Martin Fowler</subtitle><author><name>Brian</name></author><entry><title type="html">Programmers 2차원 동전 뒤집기</title><link href="/jekyll-theme-yat/data%20structure%20&%20algorithms/2023/07/08/2%EC%B0%A8%EC%9B%90%EB%8F%99%EC%A0%84%EB%92%A4%EC%A7%91%EA%B8%B0.html" rel="alternate" type="text/html" title="Programmers 2차원 동전 뒤집기" /><published>2023-07-08T00:00:00+00:00</published><updated>2023-07-08T00:00:00+00:00</updated><id>/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/07/08/2%EC%B0%A8%EC%9B%90%EB%8F%99%EC%A0%84%EB%92%A4%EC%A7%91%EA%B8%B0</id><content type="html" xml:base="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/07/08/2%EC%B0%A8%EC%9B%90%EB%8F%99%EC%A0%84%EB%92%A4%EC%A7%91%EA%B8%B0.html"><![CDATA[<h2 id="question">Question</h2>
+<p>https://school.programmers.co.kr/learn/courses/30/lessons/77885</p>
+
+<h3 id="explanation">Explanation</h3>
+<p>For 2차원 동전, bitmask iterating through just 1«rows does not travel all 
+the possibilities. 1«rows is just a single bitmask where leftmost bit is 
+1 and to its right is all 0. We should instead do range(1«rows) which now 
+considers all bitmasks with row bits.</p>
+
+<p>Also for this question, do a test case as to whether doing row then col or 
+col then row matters (does order matter)? Turns out order doesn’t matter 
+but let’s just do row then col.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">flipColumn</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+
+<span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="sh">"</span><span class="s">inf</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">begin</span><span class="p">)</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">begin</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="c1"># Initialize the flipped matrix with the correct size
+</span>    <span class="n">flipped</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">cols</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">rows</span><span class="p">)]</span>
+
+    <span class="c1"># Fill the flipped matrix with the flipped values of the begin matrix
+</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">cols</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">begin</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">flipped</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">flipped</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">unit</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">rows</span><span class="p">):</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">rowsFlipped</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+            <span class="n">comp</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span>
+            <span class="k">if</span> <span class="n">unit</span> <span class="o">&amp;</span> <span class="n">comp</span><span class="p">:</span>
+                <span class="n">rowsFlipped</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">flipped</span><span class="p">[</span><span class="n">i</span><span class="p">][:])</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">rowsFlipped</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">begin</span><span class="p">[</span><span class="n">i</span><span class="p">][:])</span>
+
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">cols</span><span class="p">):</span>
+            <span class="n">curCol</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">targetCol</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+                <span class="n">curCol</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">rowsFlipped</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
+                <span class="n">targetCol</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">target</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
+
+            <span class="c1"># 현재 column과 target column이 다르면 뒤집기
+</span>            <span class="k">if</span> <span class="n">curCol</span> <span class="o">!=</span> <span class="n">targetCol</span><span class="p">:</span>
+                <span class="nf">flipColumn</span><span class="p">(</span><span class="n">rowsFlipped</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">rowsFlipped</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+            <span class="n">answer</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">answer</span> <span class="o">==</span> <span class="nf">float</span><span class="p">(</span><span class="sh">"</span><span class="s">inf</span><span class="sh">"</span><span class="p">):</span>
+        <span class="n">answer</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">answer</span>
+</code></pre></div></div>]]></content><author><name>Brian</name></author><category term="Data structure &amp; Algorithms" /><category term="Data structure &amp; Algorithms" /><category term="Bitmask" /><summary type="html"><![CDATA[Question https://school.programmers.co.kr/learn/courses/30/lessons/77885]]></summary></entry><entry><title type="html">Programmers 2개 이하로 다른 비트</title><link href="/jekyll-theme-yat/data%20structure%20&%20algorithms/2023/07/07/2%EA%B0%9C%EC%9D%B4%ED%95%98%EB%A1%9C%EB%8B%A4%EB%A5%B8%EB%B9%84%ED%8A%B8.html" rel="alternate" type="text/html" title="Programmers 2개 이하로 다른 비트" /><published>2023-07-07T00:00:00+00:00</published><updated>2023-07-07T00:00:00+00:00</updated><id>/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/07/07/2%EA%B0%9C%EC%9D%B4%ED%95%98%EB%A1%9C%EB%8B%A4%EB%A5%B8%EB%B9%84%ED%8A%B8</id><content type="html" xml:base="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/07/07/2%EA%B0%9C%EC%9D%B4%ED%95%98%EB%A1%9C%EB%8B%A4%EB%A5%B8%EB%B9%84%ED%8A%B8.html"><![CDATA[<h2 id="question">Question</h2>
+<p>https://school.programmers.co.kr/learn/courses/30/lessons/77885</p>
+
+<h3 id="first-try">First try</h3>
+<p>I did just like the question example where I incremented each number by 1 
+and counted bit difference. This worked for most except 2 test cases which 
+I assume is a very long list and thus caused runtime error.</p>
+
+<h3 id="improvement">Improvement</h3>
+<p>I googled and there is a pattern.</p>
+
+<p>https://velog.io/@sem/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4-LEVEL2-2%EA%B0%9C-%EC%9D%B4%ED%95%98%EB%A1%9C-%EB%8B%A4%EB%A5%B8-%EB%B9%84%ED%8A%B8-Python</p>
+
+<p>Firstly for even numbers, adding value 1 (the next odd number) is already 
+the answer cuz even numbers look like 110 or 100 so adding 1 will just 
+increase the least significant bit.</p>
+
+<p>However, for odd numbers, this is when we need to find a pattern. Actually,
+we just need to find the rightmost 0 and all the leftmost bits to that 0 
+do not matter. If we change that rightmost 0 to 1, we know that new number 
+has a bit difference of less than 3 for sure. But we cannot guarantee that 
+it would be the smallest number. So we need to change the 1 to the right 
+of the rightmost 0 as 0 to ensure it is smallest.</p>
+
+<p>You can do via converting to binary via bin() and converting back to 
+int(,2) or you can do really a pure 100% bit like in that link.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+    <span class="n">answer</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">num</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">answer</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">num</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># slice cuz bin() makes it 0b blabla so want to remove 0b
+</span>            <span class="n">y</span><span class="o">=</span><span class="sh">'</span><span class="s">0</span><span class="sh">'</span><span class="o">+</span><span class="nf">bin</span><span class="p">(</span><span class="n">num</span><span class="p">)[</span><span class="mi">2</span><span class="p">:]</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">y</span><span class="p">.</span><span class="nf">rfind</span><span class="p">(</span><span class="sh">'</span><span class="s">0</span><span class="sh">'</span><span class="p">)</span>
+            <span class="n">y</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+            <span class="n">y</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">=</span><span class="sh">'</span><span class="s">1</span><span class="sh">'</span>
+            <span class="n">y</span><span class="p">[</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="sh">'</span><span class="s">0</span><span class="sh">'</span>
+            <span class="n">answer</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">int</span><span class="p">(</span><span class="sh">''</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="mi">2</span><span class="p">))</span>
+            
+    <span class="k">return</span> <span class="n">answer</span>
+</code></pre></div></div>]]></content><author><name>Brian</name></author><category term="Data structure &amp; Algorithms" /><category term="Data structure &amp; Algorithms" /><category term="Bitmask" /><summary type="html"><![CDATA[Question https://school.programmers.co.kr/learn/courses/30/lessons/77885]]></summary></entry><entry><title type="html">Programmers 기능개발</title><link href="/jekyll-theme-yat/data%20structure%20&%20algorithms/2023/07/06/%EA%B8%B0%EB%8A%A5%EA%B0%9C%EB%B0%9C.html" rel="alternate" type="text/html" title="Programmers 기능개발" /><published>2023-07-06T00:00:00+00:00</published><updated>2023-07-06T00:00:00+00:00</updated><id>/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/07/06/%EA%B8%B0%EB%8A%A5%EA%B0%9C%EB%B0%9C</id><content type="html" xml:base="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/07/06/%EA%B8%B0%EB%8A%A5%EA%B0%9C%EB%B0%9C.html"><![CDATA[<h2 id="기능개발">기능개발</h2>
+<p>https://school.programmers.co.kr/learn/courses/30/lessons/42586</p>
+
+<h3 id="explanation">Explanation</h3>
+<p>Well, technically it is a stack question but zipping through the list is 
+easier. We first set the first progress count with the first element in the
+progress list. If we see a value less than this count, we just increment <code class="language-plaintext highlighter-rouge">count</code>
+but when we have a greater value, then we set this original progress count
+as this greater value and append our <code class="language-plaintext highlighter-rouge">count</code> to our answer list. Lastly,
+don’t forget to reset the <code class="language-plaintext highlighter-rouge">count</code> to one.</p>
+
+<p>Once we finished iterating, the last <code class="language-plaintext highlighter-rouge">count</code> need to be appended.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">math</span>
+
+<span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">progresses</span><span class="p">,</span> <span class="n">speeds</span><span class="p">):</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="n">answer</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">progress</span><span class="p">,</span> <span class="n">speed</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">progresses</span><span class="p">,</span> <span class="n">speeds</span><span class="p">):</span>
+        <span class="n">hola</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">day</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="nf">ceil</span><span class="p">((</span><span class="mi">100</span> <span class="o">-</span> <span class="n">progress</span><span class="p">)</span> <span class="o">/</span> <span class="n">speed</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">day</span> <span class="o">&lt;=</span> <span class="n">count</span><span class="p">:</span>
+            <span class="n">hola</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="n">day</span>
+            <span class="k">if</span> <span class="n">hola</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">answer</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">hola</span><span class="p">)</span>
+            <span class="n">hola</span> <span class="o">=</span> <span class="mi">1</span>
+    
+    <span class="n">answer</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">hola</span><span class="p">)</span>  <span class="c1"># Append the count of the last set
+</span>    
+    <span class="k">return</span> <span class="n">answer</span>
+</code></pre></div></div>]]></content><author><name>Brian</name></author><category term="Data structure &amp; Algorithms" /><category term="Data structure &amp; Algorithms" /><category term="Stack" /><summary type="html"><![CDATA[기능개발 https://school.programmers.co.kr/learn/courses/30/lessons/42586]]></summary></entry><entry><title type="html">Programmers 같은 숫자는 싫어</title><link href="/jekyll-theme-yat/data%20structure%20&%20algorithms/2023/07/05/%EA%B0%99%EC%9D%80%EC%88%AB%EC%9E%90%EB%8A%94%EC%8B%AB%EC%96%B4.html" rel="alternate" type="text/html" title="Programmers 같은 숫자는 싫어" /><published>2023-07-05T00:00:00+00:00</published><updated>2023-07-05T00:00:00+00:00</updated><id>/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/07/05/%EA%B0%99%EC%9D%80%EC%88%AB%EC%9E%90%EB%8A%94%EC%8B%AB%EC%96%B4</id><content type="html" xml:base="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/07/05/%EA%B0%99%EC%9D%80%EC%88%AB%EC%9E%90%EB%8A%94%EC%8B%AB%EC%96%B4.html"><![CDATA[<h2 id="같은-숫자는-싫어">같은 숫자는 싫어</h2>
+<p>https://school.programmers.co.kr/learn/courses/30/lessons/12906</p>
+
+<h3 id="explanation">Explanation</h3>
+<p>I first thought since there are no duplicates allowed, we can use set but
+we have to preserve the order. So let’s use stack</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+<span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+    <span class="n">stack</span> <span class="o">=</span><span class="nf">deque</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">stack</span> <span class="ow">and</span> <span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="n">i</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">stack</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nf">list</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span>
+</code></pre></div></div>]]></content><author><name>Brian</name></author><category term="Data structure &amp; Algorithms" /><category term="Data structure &amp; Algorithms" /><category term="Stack" /><summary type="html"><![CDATA[같은 숫자는 싫어 https://school.programmers.co.kr/learn/courses/30/lessons/12906]]></summary></entry><entry><title type="html">Programmers 선입 선출 스케줄링</title><link href="/jekyll-theme-yat/data%20structure%20&%20algorithms/2023/07/04/%EC%A7%95%EA%B2%80%EB%8B%A4%EB%A6%AC%EA%B1%B4%EB%84%88%EA%B8%B0.html" rel="alternate" type="text/html" title="Programmers 선입 선출 스케줄링" /><published>2023-07-04T00:00:00+00:00</published><updated>2023-07-04T00:00:00+00:00</updated><id>/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/07/04/%EC%A7%95%EA%B2%80%EB%8B%A4%EB%A6%AC%EA%B1%B4%EB%84%88%EA%B8%B0</id><content type="html" xml:base="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/07/04/%EC%A7%95%EA%B2%80%EB%8B%A4%EB%A6%AC%EA%B1%B4%EB%84%88%EA%B8%B0.html"><![CDATA[<h2 id="징검다리-건너기">징검다리 건너기</h2>
+<p>https://school.programmers.co.kr/learn/courses/30/lessons/64062</p>
+
+<h3 id="explanation">Explanation</h3>
+<p>initial wrong solution where  I was setting wrong condition for if</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">stones</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="mi">200000000</span>
+
+    <span class="k">while</span> <span class="n">start</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">:</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="n">end</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">if</span> <span class="n">i</span> <span class="o">-</span> <span class="n">mid</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">i</span> <span class="o">-</span> <span class="n">mid</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">stones</span><span class="p">]</span>
+        <span class="n">hola</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">temp</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">num</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">hola</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">hola</span> <span class="o">&gt;</span> <span class="n">k</span><span class="p">:</span>
+                    <span class="n">flag</span> <span class="o">=</span> <span class="bp">True</span>
+                    <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">hola</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">flag</span><span class="p">:</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="nf">print</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">start</span>
+</code></pre></div></div>
+
+<p>It should be if hola &gt;= k. This is because let’s say if we have k=3,
+once we encounter 3 consecutive 0s, then our hola value is 3 and greater
+and that is condition for our flag. It is not hola&gt;3 just look at the
+question diagram. Flag should be raised when we see k or more times of
+consecutive 0s.</p>
+
+<p>Also, don’t forget to make a copy of stones list each time you do the binary
+search or else if you keep using the same stones list on and on, at the
+start of the search it is all full of 0s. So your search will be wrong
+as you will be searching with list of 0s.</p>
+
+<h2 id="improve-time-complexity">Improve time complexity</h2>
+<p>Also!! To reduce runtime, you should not blindly copy the maximum boundary
+that the question gives to you like if it is <code class="language-plaintext highlighter-rouge">stones 배열 각 원소들의 값은 1 이상 200,000,000 이하인 자연수입니다.</code>
+then your end shouldn’t blindly be 200,000,000. We can just take max(stones)
+because that is the highest we can get for any given stones list.</p>
+
+<p>If that still doesn’t fix runtime, look at your time complexity.
+My original code had some runtime issues so let’s see</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">stones</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">start</span><span class="o">=</span><span class="mi">1</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="mi">200000000</span>
+    <span class="k">while</span> <span class="n">start</span><span class="o">&lt;=</span><span class="n">end</span><span class="p">:</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">end</span><span class="o">+</span><span class="n">start</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span>
+        <span class="n">stones_copy</span> <span class="o">=</span> <span class="p">[</span><span class="n">stone</span> <span class="o">-</span> <span class="n">mid</span> <span class="k">if</span> <span class="n">stone</span><span class="o">-</span><span class="n">mid</span> <span class="o">&gt;=</span><span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">stone</span> <span class="ow">in</span> <span class="n">stones</span><span class="p">]</span>
+        <span class="n">count</span><span class="o">=</span><span class="mi">0</span>
+        <span class="n">flag</span><span class="o">=</span><span class="bp">False</span>
+        <span class="k">for</span> <span class="n">stone</span> <span class="ow">in</span> <span class="n">stones_copy</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">stone</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">count</span><span class="o">+=</span><span class="mi">1</span>
+                <span class="k">if</span> <span class="n">count</span><span class="o">&gt;=</span><span class="n">k</span><span class="p">:</span>
+                    <span class="n">flag</span><span class="o">=</span><span class="bp">True</span>
+                    <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">count</span><span class="o">=</span><span class="mi">0</span>
+        <span class="k">if</span> <span class="n">flag</span><span class="p">:</span>
+            <span class="n">end</span><span class="o">=</span><span class="n">mid</span><span class="o">-</span><span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">start</span><span class="o">=</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">start</span>
+</code></pre></div></div>
+
+<p>Notice for very long stones list, I need to make a stones_copy each time
+for each search (O(n) time complexity) and iterating each element in that
+stones_copy again (O(n) time complexity). So it is actually O(2n) time
+complexity.</p>
+
+<p>So how can I make this just O(n) time complexity? Well we actually don’t
+need to make a stones_copy list each time for a cycle of binary search.
+We can straight away iterate each stone in stones list and if that stone
+minus our guess of number of friends is less than or equal to 0, we increment
+count.</p>
+
+<p>my fixed solution</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">stones</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="mi">200000000</span>
+
+    <span class="k">while</span> <span class="n">start</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">:</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="n">end</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">if</span> <span class="n">i</span> <span class="o">-</span> <span class="n">mid</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">i</span> <span class="o">-</span> <span class="n">mid</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">stones</span><span class="p">]</span>
+        <span class="n">hola</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">temp</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">num</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">hola</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">hola</span> <span class="o">&gt;=</span> <span class="n">k</span><span class="p">:</span>
+                    <span class="n">flag</span> <span class="o">=</span> <span class="bp">True</span>
+                    <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">hola</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">flag</span><span class="p">:</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="nf">print</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">start</span>
+</code></pre></div></div>
+
+<h2 id="countk-or-count-k">count&gt;k or count &gt;=k??</h2>
+<p>And then, there is this issue of is it count&gt;k or count &gt;=k.</p>
+
+<p>my question to gpt</p>
+
+<p><code class="language-plaintext highlighter-rouge">ah ok so the way that i was count hola is that if k is 3 and hola is incremented until value 3, that means there are 3 consecutive 0s already which means we cannot continue </code></p>
+
+<p>reply back was</p>
+
+<p>Yes, exactly! In this problem, <code class="language-plaintext highlighter-rouge">hola</code> represents the number of consecutive 0s encountered in <code class="language-plaintext highlighter-rouge">temp</code>. When <code class="language-plaintext highlighter-rouge">hola</code> becomes equal to or greater than <code class="language-plaintext highlighter-rouge">k</code>, it means that you have found a position where it is not possible to continue jumping <code class="language-plaintext highlighter-rouge">k</code> consecutive stones, as there are already <code class="language-plaintext highlighter-rouge">k</code> or more consecutive 0s.</p>
+
+<p>By checking <code class="language-plaintext highlighter-rouge">hola &gt;= k</code>, you ensure that you detect this condition correctly and stop the loop when it is not possible to continue jumping <code class="language-plaintext highlighter-rouge">k</code> consecutive stones.</p>]]></content><author><name>Brian</name></author><category term="Data structure &amp; Algorithms" /><category term="Data structure &amp; Algorithms" /><category term="Binary Search" /><summary type="html"><![CDATA[징검다리 건너기 https://school.programmers.co.kr/learn/courses/30/lessons/64062]]></summary></entry><entry><title type="html">Programmers 선입 선출 스케줄링</title><link href="/jekyll-theme-yat/data%20structure%20&%20algorithms/2023/07/03/%EC%84%A0%EC%9E%85%EC%84%A0%EC%B6%9C%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81.html" rel="alternate" type="text/html" title="Programmers 선입 선출 스케줄링" /><published>2023-07-03T00:00:00+00:00</published><updated>2023-07-03T00:00:00+00:00</updated><id>/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/07/03/%EC%84%A0%EC%9E%85%EC%84%A0%EC%B6%9C%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81</id><content type="html" xml:base="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/07/03/%EC%84%A0%EC%9E%85%EC%84%A0%EC%B6%9C%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81.html"><![CDATA[<h2 id="선입-선출-스케줄링">선입 선출 스케줄링</h2>
+<p>https://school.programmers.co.kr/learn/courses/30/lessons/12920</p>
+
+<h3 id="explanation">Explanation</h3>
+<p>Firstly, before we do anything, if n is less than length than length of cores, than
+we can just return n. But the problem is finding when n is bigger and we have
+to find the index. I think it is binary search but how do I know what to guess?
+Surely I cannot guess the index?</p>
+
+<p>In this example, what we need to guess is the hard part - we can guess 
+the time for all n processes to be done. But how do we get the index then?
+We get the time not when all n processes are done, but just 1 time frame back 
+before. Then, for the last iteration, we iterate core by core for the 
+remaining n jobs and find the index.</p>
+
+<p>So in this example, which I took very long to understand, we can find 
+the perfect minimum time that all cores can run and complete n tasks. But 
+the question is not asking for the minimum time. We want to find the index 
+of core that completes the last job. So we need to take a step back and 
+go back 1 time frame back from that minimum time and see how many jobs
+are completed up to 1 time frame before that minimum time. That is why 
+we use start-1 to get the previous time and minus all the jobs that cores 
+completed within that time. That will result in x remaining jobs to be 
+completed left for the final iteration. We iterate manually through the 
+index of cores for time frame = start (minimum time).</p>
+
+<p>When start%cores[i]==0, we decrement n by 1 and once n reaches 0, that 
+is when that index of core will be the one that takes this job so return 
+that index+1 (+1 cuz not 0-indexed).</p>
+
+<p>correct solution</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">cores</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="nf">len</span><span class="p">(</span><span class="n">cores</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">n</span>
+    
+    <span class="n">n</span> <span class="o">-=</span> <span class="nf">len</span><span class="p">(</span><span class="n">cores</span><span class="p">)</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">cores</span><span class="p">)</span> <span class="o">*</span> <span class="n">n</span>
+    <span class="k">while</span> <span class="n">start</span><span class="o">&lt;=</span> <span class="n">end</span><span class="p">:</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">start</span><span class="o">+</span><span class="n">end</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span>
+        <span class="n">jobs_completed</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">mid</span><span class="o">//</span><span class="n">core</span> <span class="k">for</span> <span class="n">core</span> <span class="ow">in</span> <span class="n">cores</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">jobs_completed</span> <span class="o">&gt;=</span><span class="n">n</span><span class="p">:</span>
+            <span class="n">end</span><span class="o">=</span><span class="n">mid</span><span class="o">-</span><span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">mid</span><span class="o">+</span><span class="mi">1</span>
+        
+    <span class="k">for</span> <span class="n">core</span> <span class="ow">in</span> <span class="n">cores</span><span class="p">:</span>
+        <span class="n">n</span><span class="o">-=</span> <span class="p">(</span><span class="n">start</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">//</span><span class="n">core</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">cores</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">start</span><span class="o">%</span><span class="n">cores</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">n</span><span class="o">-=</span><span class="mi">1</span>
+            <span class="k">if</span> <span class="n">n</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span>
+</code></pre></div></div>]]></content><author><name>Brian</name></author><category term="Data structure &amp; Algorithms" /><category term="Data structure &amp; Algorithms" /><category term="Binary Search" /><summary type="html"><![CDATA[선입 선출 스케줄링 https://school.programmers.co.kr/learn/courses/30/lessons/12920]]></summary></entry><entry><title type="html">Programmers 징검다리</title><link href="/jekyll-theme-yat/data%20structure%20&%20algorithms/2023/07/02/%EC%A7%95%EA%B2%80%EB%8B%A4%EB%A6%AC.html" rel="alternate" type="text/html" title="Programmers 징검다리" /><published>2023-07-02T00:00:00+00:00</published><updated>2023-07-02T00:00:00+00:00</updated><id>/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/07/02/%EC%A7%95%EA%B2%80%EB%8B%A4%EB%A6%AC</id><content type="html" xml:base="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/07/02/%EC%A7%95%EA%B2%80%EB%8B%A4%EB%A6%AC.html"><![CDATA[<h2 id="징검다리">징검다리</h2>
+<p>https://school.programmers.co.kr/learn/courses/30/lessons/43236</p>
+
+<h3 id="explanation">Explanation</h3>
+<p>This was my first attempt at binary search on a question that is not as
+simple as finding a value in a sorted list.</p>
+
+<p>Binary search is basically guessing the answer value by putting your guess
+as mid. There are 2 points you need to know. After sorting, we append the 
+distance value, which is the final end because we are gonna calculate if 
+we can reach that end from our previous prev_rock position.</p>
+
+<p>Now we have guessed the minimum distance between rocks. Logically, if we
+encounter a rock (current_rock) where the distance between current_rock and
+prev_rock is <strong>less than</strong> what we have guessed for the minimum distance between
+rocks, that logically doesn’t make sense. Because that means our guess 
+is invalid as there is a distance less than our guess. So we remove our current_rock
+so that hopefully the next rock will have a greater distance from our 
+prev_rock. But if distance between cur_rock and prev_rock is greater, that
+is perfectly fine but we just need to set prev_rock as the current rock.</p>
+
+<p>The second point that is <strong>really</strong> important is that notice I returned
+start -1, not just start. start is the bare minimum value among the distances 
+between stones when n stones are removed.</p>
+
+<p>In the stone example, we return start - 1 because start represents the 
+smallest distance that allows removing n rocks, so the maximum value for 
+the minimum distance would be start - 1.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="n">rocks</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">start</span><span class="o">=</span><span class="mi">1</span>
+    <span class="n">end</span><span class="o">=</span> <span class="n">distance</span>
+    <span class="n">rocks</span><span class="p">.</span><span class="nf">sort</span><span class="p">()</span>
+    <span class="n">rocks</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">distance</span><span class="p">)</span>
+  
+    <span class="k">while</span> <span class="n">start</span><span class="o">&lt;=</span><span class="n">end</span><span class="p">:</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">end</span><span class="o">+</span><span class="n">start</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span>
+        <span class="n">count</span><span class="o">=</span><span class="mi">0</span>
+        <span class="n">prev_rock</span><span class="o">=</span><span class="mi">0</span>
+        <span class="k">for</span> <span class="n">rock</span> <span class="ow">in</span> <span class="n">rocks</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">rock</span><span class="o">-</span><span class="n">prev_rock</span> <span class="o">&gt;=</span><span class="n">mid</span><span class="p">:</span>
+                <span class="n">prev_rock</span><span class="o">=</span><span class="n">rock</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">count</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="n">count</span><span class="o">&gt;</span><span class="n">n</span><span class="p">:</span>
+            <span class="n">end</span><span class="o">=</span><span class="n">mid</span><span class="o">-</span><span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">start</span><span class="o">=</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span>
+  <span class="k">return</span> <span class="n">start</span><span class="o">-</span><span class="mi">1</span>
+</code></pre></div></div>]]></content><author><name>Brian</name></author><category term="Data structure &amp; Algorithms" /><category term="Data structure &amp; Algorithms" /><category term="Binary Search" /><summary type="html"><![CDATA[징검다리 https://school.programmers.co.kr/learn/courses/30/lessons/43236]]></summary></entry><entry><title type="html">Programmers 입국심사</title><link href="/jekyll-theme-yat/data%20structure%20&%20algorithms/2023/07/01/%EC%9E%85%EA%B5%AD%EC%8B%AC%EC%82%AC.html" rel="alternate" type="text/html" title="Programmers 입국심사" /><published>2023-07-01T00:00:00+00:00</published><updated>2023-07-01T00:00:00+00:00</updated><id>/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/07/01/%EC%9E%85%EA%B5%AD%EC%8B%AC%EC%82%AC</id><content type="html" xml:base="/jekyll-theme-yat/data%20structure%20&amp;%20algorithms/2023/07/01/%EC%9E%85%EA%B5%AD%EC%8B%AC%EC%82%AC.html"><![CDATA[<h2 id="입국심사">입국심사</h2>
+<p>https://school.programmers.co.kr/learn/courses/30/lessons/43238</p>
+
+<h3 id="explanation">Explanation</h3>
+
+<p>Remember I said binary search is literally guessing the answer value and 
+seeing if all of the logic and condition can be processed within that 
+answer value.</p>
+
+<p>Now we are guessing the time for all tasks to be completed and for a given
+guess of time, if more tasks than n are completed, we lower the upper boundary
+via end = mid -1. Otherwise, we move the lower boundary up via start = mid -1.</p>
+
+<p>But be careful of the limits that the question gave. The waiting time is
+huuuge (Donald Trump’s yuuge). It can be 1,000,000,000 so set end to accomadate
+this. I did <code class="language-plaintext highlighter-rouge">int(10e9)</code> and I got some test cases wrong because my 
+upper boundary is smaller than what the time can be.</p>
+
+<p>My correct solution</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">times</span><span class="p">):</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="mf">10e18</span><span class="p">)</span>
+
+    <span class="k">while</span> <span class="n">start</span><span class="o">&lt;=</span><span class="n">end</span><span class="p">:</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">end</span><span class="o">+</span><span class="n">start</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">mid</span><span class="o">//</span><span class="n">time</span> <span class="k">for</span> <span class="n">time</span> <span class="ow">in</span> <span class="n">times</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">count</span><span class="o">&gt;=</span><span class="n">n</span><span class="p">:</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">mid</span><span class="o">-</span><span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">start</span><span class="o">=</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">start</span>
+</code></pre></div></div>
+
+<p>Notice here we are returning start instead of start-1 unlike our
+징검다리. We return start because start represents the smallest 
+possible time that allows processing n people, which is what we were 
+searching for.</p>]]></content><author><name>Brian</name></author><category term="Data structure &amp; Algorithms" /><category term="Data structure &amp; Algorithms" /><category term="Binary Search" /><summary type="html"><![CDATA[입국심사 https://school.programmers.co.kr/learn/courses/30/lessons/43238]]></summary></entry><entry><title type="html">Limitations of subquery in Querydsl</title><link href="/jekyll-theme-yat/querydsl/2023/06/16/subqueryInQuerydsl.html" rel="alternate" type="text/html" title="Limitations of subquery in Querydsl" /><published>2023-06-16T00:00:00+00:00</published><updated>2023-06-16T00:00:00+00:00</updated><id>/jekyll-theme-yat/querydsl/2023/06/16/subqueryInQuerydsl</id><content type="html" xml:base="/jekyll-theme-yat/querydsl/2023/06/16/subqueryInQuerydsl.html"><![CDATA[<h2 id="issue">Issue</h2>
+<p>insert into select can ~ be done via querydsl with JPAExpressions
+https://www.inflearn.com/questions/34751/%EC%84%9C%EB%B8%8C%EC%BF%BC%EB%A6%AC-insert%EC%97%90-%EB%8C%80%ED%95%9C-%EC%B2%98%EB%A6%AC</p>
+
+<p>BUT insert into with <strong>group by</strong> functionality + select CANNOT be done via 
+querydsl. So as recommended in link, try with JPQL and if cannot, no 
+choice but to write a sql query and execute via JDBC template</p>
+
+<p>Both approaches were using scheduling cron.</p>
+
+<h2 id="with-native-sql-without-querydsl">With native sql (without querydsl)</h2>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//Pure native sql:</span>
+<span class="nc">String</span> <span class="n">sql</span> <span class="o">=</span>
+    <span class="s">"INSERT INTO STATS( "</span> <span class="o">+</span>
+    <span class="s">"NAME_HOLA , "</span> <span class="o">+</span>
+    <span class="s">"CAN_COLA ” +
+    "</span><span class="o">)</span> <span class="s">" +
+    "</span><span class="no">SELECT</span> <span class="s">" +
+    "</span><span class="no">LOG</span><span class="o">.</span><span class="na">NAME_HOLA</span> <span class="o">,</span><span class="err">”</span> <span class="o">+</span>
+    <span class="s">"TRUNC (LOG.CREATED_AT) , "</span><span class="o">+</span>
+    <span class="s">"SYSDATE , "</span> <span class="o">+</span>
+    <span class="s">"SUM (CASE WHEN LOG.CODE LIKE ‘CCIR%’ THEN 1 ELSE 0 END) AS BITCH_COUNT "</span> <span class="o">+</span>
+    <span class="s">"FROM "</span> <span class="o">+</span>
+    <span class="s">"BITCH_LOG LOG "</span> <span class="o">+</span>
+    
+    <span class="c1">//for getting data for yesterday</span>
+    <span class="s">"WHERE "</span> <span class="o">+</span>
+    <span class="s">"TRUNC(LOG.CREATED_AT) = TRUNC(SYSDATE) -1 "</span> <span class="o">+</span>
+    <span class="s">"GROUP BY "</span> <span class="o">+</span>
+    <span class="c1">//group by ALL non-aggregate fields</span>
+    <span class="s">"LOG.NAME, ” +
+    "</span><span class="no">TRUNC</span><span class="o">(</span><span class="no">LOG</span><span class="o">.</span><span class="na">CREATED_AT</span><span class="o">)</span><span class="err">”</span> <span class="o">;</span>
+    
+    <span class="n">jdbcTemplate</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="n">sql</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>** ALWAYS end the pure sql query with semicolon or it will result in error**</p>
+
+<h2 id="with-querydsl">with querydsl</h2>
+<p>What I tried with querydsl:
+All worked EXCEPT the subquery included groupBy expression, which I needed.
+The query is in the link above where I posted the question</p>
+
+<p>Integer successCount = 0</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">JPQLQuery</span><span class="o">&lt;</span><span class="nc">Tuple</span><span class="o">&gt;</span> <span class="n">subQuery</span> <span class="o">=</span> <span class="nc">JPAExpressions</span><span class="o">.</span><span class="na">select</span><span class="o">(</span>
+    <span class="n">log</span><span class="o">.</span><span class="na">name</span><span class="o">,</span>
+    <span class="n">log</span><span class="o">.</span><span class="na">content</span><span class="o">,</span>
+    <span class="k">new</span> <span class="nf">CaseBuilder</span><span class="o">()</span>
+    <span class="o">.</span><span class="na">when</span><span class="o">(</span><span class="n">log</span><span class="o">.</span><span class="na">statusCode</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="s">"0"</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">then</span><span class="o">(</span><span class="n">sucessCount</span><span class="o">+</span><span class="mi">1</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">otherwise</span><span class="o">(</span><span class="n">successCount</span><span class="o">),</span>
+    <span class="n">client</span><span class="o">.</span><span class="na">id</span>
+<span class="o">)</span>
+<span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">log</span><span class="o">)</span>
+<span class="o">.</span><span class="na">leftJoin</span><span class="o">(</span><span class="n">client</span><span class="o">)</span>
+<span class="o">.</span><span class="na">on</span><span class="o">(</span><span class="n">client</span><span class="o">.</span><span class="na">name</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">log</span><span class="o">.</span><span class="na">name</span><span class="o">))</span>
+<span class="c1">//이 group by가 문제</span>
+<span class="o">.</span><span class="na">groupBy</span><span class="o">(</span><span class="n">log</span><span class="o">.</span><span class="na">name</span><span class="o">,</span> <span class="n">log</span><span class="o">.</span><span class="na">content</span><span class="o">,</span> <span class="n">client</span><span class="o">.</span><span class="na">id</span><span class="o">);</span>
+
+<span class="n">queryFactory</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">stats</span><span class="o">)</span>
+<span class="o">.</span><span class="na">columns</span><span class="o">(</span>
+    <span class="n">stats</span><span class="o">.</span><span class="na">name</span><span class="o">,</span>
+    <span class="n">stats</span><span class="o">.</span><span class="na">content</span><span class="o">,</span>
+    <span class="n">stats</span><span class="o">.</span><span class="na">successCount</span><span class="o">,</span>
+    <span class="n">stats</span><span class="o">.</span><span class="na">clientId</span>
+<span class="o">)</span>
+<span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="n">subQuery</span><span class="o">)</span>
+<span class="o">.</span><span class="na">execute</span><span class="o">();</span>
+</code></pre></div></div>]]></content><author><name>Brian</name></author><category term="Querydsl" /><category term="Querydsl" /><summary type="html"><![CDATA[Issue insert into select can ~ be done via querydsl with JPAExpressions https://www.inflearn.com/questions/34751/%EC%84%9C%EB%B8%8C%EC%BF%BC%EB%A6%AC-insert%EC%97%90-%EB%8C%80%ED%95%9C-%EC%B2%98%EB%A6%AC]]></summary></entry><entry><title type="html">How to set JDK in bash profile in linux</title><link href="/jekyll-theme-yat/linux/2023/06/14/setJDKinBashProfile.html" rel="alternate" type="text/html" title="How to set JDK in bash profile in linux" /><published>2023-06-14T00:00:00+00:00</published><updated>2023-06-14T00:00:00+00:00</updated><id>/jekyll-theme-yat/linux/2023/06/14/setJDKinBashProfile</id><content type="html" xml:base="/jekyll-theme-yat/linux/2023/06/14/setJDKinBashProfile.html"><![CDATA[<h2 id="solution">Solution</h2>
+
+<p>I was confused with how to set jdk in my bash profile. Do I find a 
+specific .jdk file or just a jdk folder?</p>
+
+<h2 id="solution-1">Solution</h2>
+<p>When I depressed my compressed jdk files with tz format, some folders 
+looked like openlogic-openjdk-bla but the official jdk that I downloaded 
+from Oracle looked like jdk1.8.0_371. This is the valid one and we just 
+need to set the entire folder as the environment variable in the 
+bash profile like</p>
+
+<p><code class="language-plaintext highlighter-rouge">Export JAVA_HOME=/home/brian/jdk/jdk1.8.0_371</code></p>]]></content><author><name>Brian</name></author><category term="Linux" /><category term="Linux" /><summary type="html"><![CDATA[Solution]]></summary></entry></feed>

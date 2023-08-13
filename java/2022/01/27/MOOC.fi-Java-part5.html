@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>MOOC.fi Java Programming I Part 5 | Brian’s Dev Blog</title>
+<meta name="generator" content="Jekyll v4.3.2">
+<meta property="og:title" content="MOOC.fi Java Programming I Part 5">
+<meta name="author" content="Jeonghwan Lee">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="Fundamentals of Java">
+<meta property="og:description" content="Fundamentals of Java">
+<link rel="canonical" href="/jekyll-theme-yat/java/2022/01/27/MOOC.fi-Java-part5.html">
+<meta property="og:url" content="/jekyll-theme-yat/java/2022/01/27/MOOC.fi-Java-part5.html">
+<meta property="og:site_name" content="Brian’s Dev Blog">
+<meta property="og:image" content="https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2022-01-27T14:35:23+00:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="twitter:image" content="https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg">
+<meta property="twitter:title" content="MOOC.fi Java Programming I Part 5">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Jeonghwan Lee"},"dateModified":"2022-01-27T14:35:23+00:00","datePublished":"2022-01-27T14:35:23+00:00","description":"Fundamentals of Java","headline":"MOOC.fi Java Programming I Part 5","image":"https://res.cloudinary.com/dm7h7e8xj/image/upload/v1559825145/theme16_o0seet.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll-theme-yat/java/2022/01/27/MOOC.fi-Java-part5.html"},"url":"/jekyll-theme-yat/java/2022/01/27/MOOC.fi-Java-part5.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="shortcut icon" href="">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/jekyll-theme-yat/assets/css/main.css">
+  <script src="/jekyll-theme-yat/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="/jekyll-theme-yat/feed.xml" title="Brian's Dev Blog">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/jekyll-theme-yat/">
+  <img class="site-favicon" title="Brian's Dev Blog" src="" onerror="this.style.display='none'">
+  Brian's Dev Blog
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/jekyll-theme-yat/about.html">ABOUT</a><a class="page-link" href="/jekyll-theme-yat/archives.html">ARCHIVES</a><a class="page-link" href="/jekyll-theme-yat/categories.html">CATEGORIES</a><a class="page-link" href="/jekyll-theme-yat/">HOME</a><a class="page-link" href="/jekyll-theme-yat/tags.html">TAGS</a>
+
+
+
+
+
+
+
+
+
+<span class="page-link">
+
+
+
+<div id="google_translate_element" style="display: none;">
+</div>
+
+<span class="ct-language">
+  <ul class="list-unstyled ct-language-dropdown">
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="en">
+          
+          <img src="https://cdn.countryflags.com/thumbs/united-states-of-america/flag-400.png" title="English">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="fr">
+          
+          <img src="https://cdn.countryflags.com/thumbs/france/flag-400.png" title="French">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="zh-CN">
+          
+          <img src="https://cdn.countryflags.com/thumbs/china/flag-400.png" title="Chinese(Simple)">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ja">
+          
+          <img src="https://cdn.countryflags.com/thumbs/japan/flag-400.png" title="Japanese">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ko">
+          
+          <img src="https://cdn.countryflags.com/thumbs/south-korea/flag-400.png" title="Korean">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="ru">
+          
+          <img src="https://cdn.countryflags.com/thumbs/russia/flag-400.png" title="Russian">
+          
+        </a>
+      </li>
+    
+  </ul>
+</span>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    autoDisplay: false,
+    layout: google.translate.TranslateElement.InlineLayout.VERTICAL
+  }, 'google_translate_element');
+
+  // Links to cross-origin destinations are unsafe
+  var gll = document.getElementsByClassName('goog-logo-link')[0];
+  if (gll) {
+    gll.setAttribute('rel', 'noopener');
+  }
+
+  function restoreLang() {
+    var iframe = document.getElementsByClassName('goog-te-banner-frame')[0];
+    if (!iframe) return;
+
+    var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+    var restore_el = innerDoc.getElementsByTagName("button");
+
+    for (var i = 0; i < restore_el.length; i++) {
+      if (restore_el[i].id.indexOf("restore") >= 0) {
+        restore_el[i].click();
+        var close_el = innerDoc.getElementsByClassName("goog-close-link");
+        close_el[0].click();
+        return;
+      }
+    }
+  }
+
+  function triggerHtmlEvent(element, eventName) {
+    var event;
+    if (document.createEvent) {
+      event = document.createEvent('HTMLEvents');
+      event.initEvent(eventName, true, true);
+      element.dispatchEvent(event);
+    } else {
+      event = document.createEventObject();
+      event.eventType = eventName;
+      element.fireEvent('on' + event.eventType, event);
+    }
+  }
+
+  var googleCombo = document.querySelector("select.goog-te-combo");
+  var langSelect = document.querySelector('.ct-language');
+  langSelect.addEventListener('click', function(event) {
+    if (!event.target) {
+      return;
+    }
+
+    var selected = document.querySelector('.ct-language .ct-language-selected');
+    if (selected) {
+      selected.classList.remove('ct-language-selected');
+    }
+
+    var target = event.target;
+    while (target && target !== langSelect ) {
+      if (target.matches('.lang-select')) {
+        break;
+      }
+      target = target.parentElement;
+    }
+
+    if (target && target.matches('.lang-select')) {
+      var lang = target.getAttribute('data-lang');
+      if (googleCombo.value == lang) {
+        restoreLang();
+      } else {
+        target.parentElement.classList.add('ct-language-selected');
+        googleCombo.value = lang;
+        triggerHtmlEvent(googleCombo, 'change');
+      }
+    }
+
+    event.preventDefault();
+  });
+}
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</span>
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">MOOC.fi Java Programming I Part 5</h1>
+  <h2 class="post-subtitle">Fundamentals of Java</h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2022-01-27T14:35:23+00:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Jan 27, 2022
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 27 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/jekyll-theme-yat/tags.html#Java">#Java</a><a class="post-tag" href="/jekyll-theme-yat/tags.html#MOOC.fi">#MOOC.fi</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <p>Part 5</p>
+
+<h2 id="learning-object-oriented-programming">Learning object-oriented programming</h2>
+<ul>
+  <li>
+    <p>Object-oriented programming is primarily about isolating concepts into their own entities or, in other words, <strong>creating abstractions</strong>.</p>
+  </li>
+  <li>
+    <p>Separating a concept into its own class has advantages. Firstly, certain details (such as the rotation of a hand) can be hidden inside the class (i.e., abstracted). Instead of typing an if-statement and an assignment operation, it’s simple and enough to just call a clearly-named method advance(). Secondly, a class created from a distinct concept can serve multiple purposes. The resulting clock hand may be used as a building block for other programs as well - the class could be named CounterLimitedFromTop, for example. Lastly, since the details of the implementation of the clock hand are not visible to its user, they can be changed if desired.</p>
+  </li>
+  <li>
+    <p>Clock with OOP:</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClockHand</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">value</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">limit</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">ClockHand</span><span class="o">(</span><span class="kt">int</span> <span class="n">limit</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">limit</span> <span class="o">=</span> <span class="n">limit</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">advance</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">&gt;=</span> <span class="k">this</span><span class="o">.</span><span class="na">limit</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">value</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">value</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="s">"0"</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">value</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="s">""</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">value</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Clock</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">ClockHand</span> <span class="n">hours</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">ClockHand</span> <span class="n">minutes</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">ClockHand</span> <span class="n">seconds</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Clock</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">hours</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ClockHand</span><span class="o">(</span><span class="mi">24</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">minutes</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ClockHand</span><span class="o">(</span><span class="mi">60</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">seconds</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ClockHand</span><span class="o">(</span><span class="mi">60</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">advance</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">seconds</span><span class="o">.</span><span class="na">advance</span><span class="o">();</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">seconds</span><span class="o">.</span><span class="na">value</span><span class="o">()</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">minutes</span><span class="o">.</span><span class="na">advance</span><span class="o">();</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">minutes</span><span class="o">.</span><span class="na">value</span><span class="o">()</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">this</span><span class="o">.</span><span class="na">hours</span><span class="o">.</span><span class="na">advance</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">hours</span> <span class="o">+</span> <span class="s">":"</span> <span class="o">+</span> <span class="n">minutes</span> <span class="o">+</span> <span class="s">":"</span> <span class="o">+</span> <span class="n">seconds</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="nc">Clock</span> <span class="n">clock</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Clock</span><span class="o">();</span>
+
+<span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">clock</span><span class="o">);</span>
+    <span class="n">clock</span><span class="o">.</span><span class="na">advance</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>Review OneMinute exercise. Note</p>
+  </li>
+  <li>
+    <p>Object refers to an independent entity that contains both data (instance variables) and behavior (methods). Objects can come in different forms, like some describe problem-domain concepts and some help coordinate the interaction between objects. Objects interact through method calls that both request info from objects and give instructions to them.</p>
+  </li>
+  <li>
+    <p>Generally, each object has clearly defined boundaries and behaviors and is only aware of the objects that it needs to perform its task. In other words, the object hides its internal operations, providing access to its functionality through clearly defined methods. Moreover, the object is independent of any other object that it doesn’t require to accomplish its task.</p>
+  </li>
+  <li>
+    <p>The state of an object is the value of its internal variables at any given point in time.</p>
+  </li>
+  <li>
+    <p>A class is a blueprint that defines the types of objects that can be created from it. It contains instance variables describing the object’s data, a constructor or constructors used to create it, and methods that define its behavior.</p>
+  </li>
+</ul>
+
+<h2 id="removing-repetitive-code-overloading-methods-and-constructors">Removing repetitive code (overloading methods and constructors)</h2>
+<ul>
+  <li>Class can have multiple constructors (i.e. alternative ways to create objects). Having 2 or more constructors in a class is known as <strong>constructor overloading</strong>. A class can have multiple constructors that differ in the number and/or type of their parameters. But It’s <strong>not possible</strong> to have <strong>two constructors with the exact same parameters</strong>.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nf">Person</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">weight</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">height</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="o">}</span>
+
+<span class="kd">public</span> <span class="nf">Person</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">weight</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">height</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="o">}</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Person</span> <span class="n">paul</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Paul"</span><span class="o">,</span> <span class="mi">24</span><span class="o">);</span>
+    <span class="nc">Person</span> <span class="n">ada</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">(</span><span class="s">"Ada"</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>Calling constructor within constructor: The first constructor - the one that receives a name as a parameter - is in fact a special case of the second constructor - the one that’s given both name and age. What if the first constructor could call the second constructor?</p>
+  </li>
+  <li>
+    <p>A constructor can be called from another constructor using the <strong>this</strong> keyword, which refers to <em>this</em> object.  this() is used for calling the default constructor from parameterised constructor.</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nf">Person</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+    <span class="c1">//here the code of the second constructor is run, and the age is set to 0</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="nf">Person</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">weight</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">height</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>The constructor call this(name, 0); might seem a bit weird. A way to think about it is to imagine that the call is automatically replaced with “copy-paste” of the second constructor in such a way that the age parameter is set to 0. NB! If a constructor calls another constructor, the constructor call must be the <em>first command</em> in the constructor.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nf">Product</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">String</span> <span class="n">location</span><span class="o">,</span> <span class="kt">int</span> <span class="n">weight</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">location</span> <span class="o">=</span> <span class="n">location</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">weight</span> <span class="o">=</span> <span class="n">weight</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="nf">Product</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">){</span>
+    <span class="k">this</span><span class="o">(</span><span class="n">name</span><span class="o">,</span><span class="s">"shelf"</span><span class="o">,</span><span class="mi">1</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="kd">public</span> <span class="nf">Product</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">String</span> <span class="n">location</span><span class="o">){</span>
+    <span class="k">this</span><span class="o">(</span><span class="n">name</span><span class="o">,</span><span class="n">location</span><span class="o">,</span><span class="mi">1</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="kd">public</span> <span class="nf">Product</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">weight</span><span class="o">){</span>
+    <span class="k">this</span><span class="o">(</span><span class="n">name</span><span class="o">,</span><span class="s">"shelf"</span><span class="o">,</span><span class="n">weight</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>The first constructor does not do anything by itself, but instead calls the second constructor and asks it to set the age to 0. <strong>this(name, 0)</strong> means that call is automatically replaced with “copy-paste” of the second constructor in such a way that the age parameter is set to 0. Also, if a constructor calls another constructor, the constructor call, this(), <strong>must be the first command</strong> in the constructor. But order of constructors don’t matter like second constructor can be before first and vice versa.</p>
+  </li>
+  <li>
+    <p><strong>Method overloading</strong> in same way as <strong>constructor overloading</strong>: Once again, the parameters of the different versions must be different.</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">growOlder</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">growOlder</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+    <span class="c1">//same as below code, u can do either</span>
+    <span class="c1">//this.age = this.age + 1;</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">growOlder</span><span class="o">(</span><span class="kt">int</span> <span class="n">years</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">+</span> <span class="n">years</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>A Person now has two methods, both called growOlder. The one that gets executed depends on the number of parameters provided.</li>
+</ul>
+
+<h2 id="primitive-and-reference-variables">Primitive and reference variables</h2>
+<ul>
+  <li>
+    <p>Primitive variable’s information is stored as the value of that variable, whereas a reference variable holds a reference to information related to that variable. reference variables are practically always objects in Java.</p>
+  </li>
+  <li>
+    <p>Primitive variable example:</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">value</span><span class="o">);</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Reference variable example:</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Name</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Name</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="nc">Name</span> <span class="n">luke</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Name</span><span class="o">(</span><span class="s">"Luke"</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">luke</span><span class="o">);</span>
+<span class="c1">//prints Name@4aa298b7</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>In above example, we create a primitive int variable, and the number 10 is stored as its value. We create a reference variable called luke. A <em>reference</em> to an object is <em>returned by the constructor</em> of the Name class when we call it, and this reference is stored as the value of the variable.</p>
+  </li>
+  <li>
+    <p>The value of a primitive variable is concrete, whereas the value of a reference variable is a reference. When we attempt to print the value of a reference variable, the output contains the type of the variable and an identifier created for it by Java: the string <strong>Name@4aa298b7</strong> tells us that the given variable is of <strong>type</strong> Name and its <strong>identifier</strong> is 4aa298b7.</p>
+  </li>
+  <li>
+    <p>Java has eight different primitive variables. These are: boolean (a truth value: either true or false), byte (a byte containing 8 bits, between the values -128 and 127), char (a 16-bit value representing a single character), short (a 16-bit value that represents a small integer, between the values -32768 and 32767), int (a 32-bit value that represents a medium-sized integer, between the values -231 and 231-1), long (a 64-bit value that represents a large integer, between values -263 and 263-1), float (a floating-point number that uses 32 bits), and double (a floating-point number that uses 64 bits).</p>
+  </li>
+  <li>
+    <p>Declaring a primitive variable causes the computer to reserve some memory where the value assigned to the variable can be stored. The size of the storage container reserved depends on type of the primitive.</p>
+  </li>
+  <li>
+    <p>The name of the variable tells the memory location where its value is stored. When you assign a value to a primitive variable with an equality sign, the value on the right side is copied to the memory location indicated by the name of the variable. For example, int first = 10 reserves a location called first for the variable, and then copies the value 10 into it. Similarly, int second = first; reserves in memory a location called second for the variable being created and then copies into it the value stored in the location of variable first.</p>
+  </li>
+  <li>
+    <p>The values of variables are also copied whenever they’re used in method calls. What this means is that the value of a variable that’s passed as a parameter during a method call is not mutated in the calling method by the method called. Remember the stack simulation?</p>
+  </li>
+  <li>
+    <p>Reference variable: Except the above 8 primitive variables, all other variables are reference type. We can also create our own variable types by defining new classes. Any object instanced from a class is a reference variable. E.g.</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Name</span> <span class="n">leevi</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Name</span><span class="o">(</span><span class="s">"Leevi"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>Whenever a new variable is declared, its <strong>type must be stated first</strong>. We declare a variable of type Name below. For the program to execute successfully, there must be a Name class available for the program to use.</p>
+  </li>
+  <li>
+    <p>We state the name of the variable as its declared. You can reference the value of the variable later on by its name. Here, the variable name is leevi.</p>
+  </li>
+  <li>
+    <p>new Name(“Leevi”) =&gt; Values can be assigned to variables. Objects are created from classes by calling the class constructor. This constructor defines the values assigned to the instance variables of the object being created. We’re assuming in the example below that the class Name has a constructor that takes a string as parameter.</p>
+  </li>
+  <li>
+    <p>The constructor call returns a value that is a reference to the newly-created object. The equality sign (=) tells the program that the value of the right-hand side expression is to be copied as the value of the variable on the left-hand side. The reference to the newly-created object, returned by the constructor call, is copied as the value of the variable leevi. <strong>A variable of type Name is declared, and the value returned by the Name class constructor is copied as its value.</strong></p>
+  </li>
+  <li>
+    <p>Difference between primitive and reference variables is that primitive variables are immutable while internal state of reference variables can typically be mutated. This is because value of a primitive variable is stored directly in the variable, whereas the value of a reference variable is a reference to the variable’s data, i.e., its internal state.</p>
+  </li>
+  <li>
+    <p>Arithmetic operations can be used with primitive variables but these operations do not change the original values of the variables. Arithmetic operations create new values that can be stored in variables as needed. On the contrary, the values of reference variables cannot be changed by these arithmetic expressions.</p>
+  </li>
+  <li>
+    <p>The value of a reference variable — i.e., the reference — points to a location that contains information relating to the given variable. Let’s assume that we have a Person class, containing an instance variable ‘age’. If we’ve instantiated a person object from the class, we can access age variable by following the object’s reference. The value of this age variable can then be changed.</p>
+  </li>
+  <li>
+    <p>Assigning a value with the equality sign copies the value (possibly of some variable) on the right-hand side and stores it as the value of the left-hand side variable.</p>
+  </li>
+  <li>
+    <p>A similar kind of copying occurs during a method call. Regardless of whether the variable is primitive or reference type, the value passed to the method as an argument is copied for the called method to use. With primitive variables, the value of the variable is conveyed to the method. With reference variables, it’s a reference.</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">year</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Person</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">year</span> <span class="o">=</span> <span class="mi">1996</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getYear</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">year</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setYear</span><span class="o">(</span><span class="kt">int</span> <span class="n">year</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">year</span> <span class="o">=</span> <span class="n">year</span><span class="o">;</span>
+    <span class="o">}</span>   
+<span class="o">}</span>
+
+<span class="o">-------------------------------</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TimeMachine</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">Person</span> <span class="n">traveler</span><span class="o">;</span>
+    
+    <span class="kd">public</span> <span class="nf">TimeMachine</span><span class="o">(</span><span class="nc">Person</span> <span class="n">person</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">traveler</span> <span class="o">=</span> <span class="n">person</span><span class="o">;</span>
+        <span class="c1">// per</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">travelInTime</span><span class="o">(</span><span class="kt">int</span> <span class="n">years</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">traveler</span><span class="o">.</span><span class="na">setYear</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">traveler</span><span class="o">.</span><span class="na">getYear</span><span class="o">()</span> <span class="o">+</span> <span class="n">years</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+
+<span class="o">}</span>
+
+<span class="o">------------------------</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Person</span> <span class="n">lorraine</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">();</span>
+    <span class="nc">TimeMachine</span> <span class="n">tardis</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TimeMachine</span><span class="o">(</span><span class="n">lorraine</span><span class="o">);</span>
+    <span class="n">tardis</span><span class="o">.</span><span class="na">travelInTime</span><span class="o">(</span><span class="mi">6</span><span class="o">);</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">lorraine</span><span class="o">.</span><span class="na">getYear</span><span class="o">());</span>
+    <span class="c1">//2002</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Revisit Variables and Computer Memory in this last part. I don’t get it now lol</li>
+</ul>
+
+<h2 id="objects-and-references-revisit-v-useful-use-moocfis-notes">Objects and references (Revisit! V. useful. Use Mooc.fi’s notes)</h2>
+<ul>
+  <li>
+    <p>Calling a constructor with the command new causes several things to happen. First, space is reserved in the computer memory for storing object variables. Then default or initial values are set to object variables (e.g. an int type variable receives an initial value of 0). Lastly, the source code in the constructor is executed.</p>
+  </li>
+  <li>
+    <p>A constructor call returns a <em>reference</em> to an object. A reference is information about the location of object data.</p>
+  </li>
+  <li>
+    <p>Object as a method parameter: Since objects are reference variables, any type of object can be defined to be a method parameter.</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AmusementParkRide</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">lowestHeight</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">AmusementParkRide</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">lowestHeight</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">lowestHeight</span> <span class="o">=</span> <span class="n">lowestHeight</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">allowedToRide</span><span class="o">(</span><span class="nc">Person</span> <span class="n">person</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">person</span><span class="o">.</span><span class="na">getHeight</span><span class="o">()</span> <span class="o">&lt;</span> <span class="k">this</span><span class="o">.</span><span class="na">lowestHeight</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">+</span> <span class="s">", minimum height: "</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">lowestHeight</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>So the method allowedToRide of an AmusementParkRide object is given a Person object as a parameter. Like earlier, the value of the variable — in this case, a reference — is copied for the method to use. The method handles a copied reference, and it calls the getHeight method of the person passed as a parameter.</p>
+  </li>
+  <li>
+    <p>Review HealthStation and CardPayments exercise</p>
+  </li>
+  <li>
+    <p>Every already-made Java class or any class we create inherits class Object.</p>
+  </li>
+  <li>
+    <p><strong>Object as object variable</strong>: (object containing references to other object) the thing I am struggling with</p>
+  </li>
+  <li>
+    <p>return String.format(“%s, has a friend called %s (%s)”, this.name, this.pet.getName(), this.pet.getBreed());</p>
+  </li>
+  <li>
+    <p><strong>Abstraction</strong> is to conceptualize the programming code so that each concept has its own clear responsibilities.</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SimpleDate</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">day</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">month</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">year</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">SimpleDate</span><span class="o">(</span><span class="kt">int</span> <span class="n">day</span><span class="o">,</span> <span class="kt">int</span> <span class="n">month</span><span class="o">,</span> <span class="kt">int</span> <span class="n">year</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">day</span> <span class="o">=</span> <span class="n">day</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">month</span> <span class="o">=</span> <span class="n">month</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">year</span> <span class="o">=</span> <span class="n">year</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">day</span> <span class="o">+</span> <span class="s">"."</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">month</span> <span class="o">+</span> <span class="s">"."</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">year</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="c1">// used to check if this date object (`this`) is before</span>
+    <span class="c1">// the date object given as the parameter (`compared`)</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">before</span><span class="o">(</span><span class="nc">SimpleDate</span> <span class="n">compared</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// first compare years</span>
+        <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">year</span> <span class="o">&lt;</span> <span class="n">compared</span><span class="o">.</span><span class="na">year</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">year</span> <span class="o">&gt;</span> <span class="n">compared</span><span class="o">.</span><span class="na">year</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Even though the object variables year, month, and day are encapsulated (private) object variables, we can read their values by writing compared.<strong>variableName</strong>. This is because private variable can be accessed from all the methods contained by that class. Notice that the syntax here matches calling some object method. Unlike when calling a method, we refer to a field of an object, so the parentheses that indicate a method call are not written.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">olderThan</span><span class="o">(</span><span class="nc">Person</span> <span class="n">compared</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">birthday</span><span class="o">.</span><span class="na">before</span><span class="o">(</span><span class="n">compared</span><span class="o">.</span><span class="na">getBirthday</span><span class="o">()))</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+
+        <span class="c1">// or return more directly:</span>
+        <span class="c1">// return this.birthday.before(compared.getBirthday());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>Why we use .equals() to compare strings and cannot use equal sign: With primitive variables such as int, comparing two variables can be done with two equality signs. This is because the value of a primitive variable is stored directly in the “variable’s box”. The value of reference variables, in contrast, is an address of the object that is referenced; so the “box” contains a reference to the memory location. Using two equality signs compares the equality of the values stored in the “boxes of the variables” — with reference variables, such comparisons would examine the equality of the memory references.</p>
+  </li>
+  <li>
+    <p>.equals() doesnt work really well for strings so need to implement design ourselves if want to compare 2 objects</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SimpleDate</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">day</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">month</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">year</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">SimpleDate</span><span class="o">(</span><span class="kt">int</span> <span class="n">day</span><span class="o">,</span> <span class="kt">int</span> <span class="n">month</span><span class="o">,</span> <span class="kt">int</span> <span class="n">year</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">day</span> <span class="o">=</span> <span class="n">day</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">month</span> <span class="o">=</span> <span class="n">month</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">year</span> <span class="o">=</span> <span class="n">year</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getDay</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">day</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getMonth</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">month</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getYear</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">year</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="nc">Object</span> <span class="n">compared</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// if the variables are located in the same position, they are equal</span>
+        <span class="k">if</span> <span class="o">(</span><span class="k">this</span> <span class="o">==</span> <span class="n">compared</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="c1">// if the type of the compared object is not SimpleDate, the objects are not equal</span>
+        <span class="k">if</span> <span class="o">(!(</span><span class="n">compared</span> <span class="k">instanceof</span> <span class="nc">SimpleDate</span><span class="o">))</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="c1">// convert the Object type compared object</span>
+        <span class="c1">// into a SimpleDate type object called comparedSimpleDate</span>
+        <span class="nc">SimpleDate</span> <span class="n">comparedSimpleDate</span> <span class="o">=</span> <span class="o">(</span><span class="nc">SimpleDate</span><span class="o">)</span> <span class="n">compared</span><span class="o">;</span>
+
+        <span class="c1">// if the values of the object variables are the same, the objects are equal</span>
+        <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">day</span> <span class="o">==</span> <span class="n">comparedSimpleDate</span><span class="o">.</span><span class="na">day</span> <span class="o">&amp;&amp;</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">month</span> <span class="o">==</span> <span class="n">comparedSimpleDate</span><span class="o">.</span><span class="na">month</span> <span class="o">&amp;&amp;</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">year</span> <span class="o">==</span> <span class="n">comparedSimpleDate</span><span class="o">.</span><span class="na">year</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="c1">// or return this.day == comparedSimpleDate.day &amp;&amp; this.month == comparedSimpleDate.month &amp;&amp; this.year == comparedSimpleDate.year</span>
+
+        <span class="c1">// otherwise the objects are not equal</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">day</span> <span class="o">+</span> <span class="s">"."</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">month</span> <span class="o">+</span> <span class="s">"."</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">year</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>The <em>contains()</em> method of a list uses the <em>equals()</em> method that is defined for the objects in its search for objects.</p>
+  </li>
+  <li>
+    <p>The equals method is implemented in such a way that it can be used to compare the current object with any other object. The method receives an Object-type object as its single parameter — all objects are Object-type, in addition to their own type. The equals method first compares if the addresses are equal. After this, we examine if the types of the objects are the same. Next, the Object-type object passed as the parameter is converted to the type of the object that is being examined by using a type cast, so that the values of the object variables can be compared.</p>
+  </li>
+  <li>
+    <p>Object as a method’s return value: For example below, factory object could also be used to create and return new Car objects</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Factory</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">make</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Factory</span><span class="o">(</span><span class="nc">String</span> <span class="n">make</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">make</span> <span class="o">=</span> <span class="n">make</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">Car</span> <span class="nf">procuceCar</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">Car</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">make</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+<strong>final</strong> keyword means values of these object variables cannot be modified after they have been set in the constructor. The objects of Money class are unchangeable so immutable — if we want to e.g. increase the amount of money, we must create a new object to represent that new amount of money.</li>
+</ul>
+
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/jekyll-theme-yat/java/2022/01/24/Polymorphism.html" title="Polymorphism">Polymorphism</a><a class="next" href="/jekyll-theme-yat/java/2022/01/27/DeeperPolymorphism.html" title="Deeper knowledge on Polymorphism">Deeper knowledge on Polymorphism</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/jekyll-theme-yat/java/2022/07/04/Streams.html" title="Deeper knowledge on Polymorphism">Java's Stream theory explained</a></li>
+<li><a class="post-link" href="/jekyll-theme-yat/java/2022/07/25/Optional.html" title="Deeper knowledge on Polymorphism">Java's Optional</a></li>
+<li><a class="post-link" href="/jekyll-theme-yat/spring/2023/05/03/ThreadLocal.html" title="Deeper knowledge on Polymorphism">ThreadLocal to change Hibernate's query manually</a></li>
+<li><a class="post-link" href="/jekyll-theme-yat/java/2022/12/10/javathread.html" title="Deeper knowledge on Polymorphism">What is thread in Java? (feat. process)</a></li>
+</ul>
+    </div>
+<div class="post-comments"></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/jekyll-theme-yat/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Brian <span class="copyleft">©</span> 2021-2023 Brian</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/jekyll-theme-yat/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
